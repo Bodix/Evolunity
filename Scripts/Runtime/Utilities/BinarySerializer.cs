@@ -1,9 +1,6 @@
-﻿/*
- * Copyright (C) 2020 by Evolutex - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Written by Bogdan Nikolaev <bodix321@gmail.com>
-*/
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
 
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
