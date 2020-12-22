@@ -8,19 +8,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Evolunity.Collections
+namespace Evolutex.Evolunity.Collections
 {
     public class WeightQueue<T> : IEnumerable<T>
     {
         private readonly Queue<T> queue;
 
-        public WeightQueue(IEnumerable<T> collection, Func<T, float> weightSelector, int count)
+        /// <summary>
+        /// Fills the queue with items, with the amount of each item determined by its weight.
+        /// </summary>
+        public WeightQueue(IEnumerable<T> items, Func<T, float> weightSelector, int count)
         {
             queue = new Queue<T>(count);
 
-            float weightSum = collection.Select(weightSelector).Sum();
+            float weightSum = items.Select(weightSelector).Sum();
 
-            foreach (T item in collection)
+            foreach (T item in items)
                 for (int i = 0; i < Mathf.Round(count * (weightSelector(item) / weightSum)); i++)
                     queue.Enqueue(item);
         }

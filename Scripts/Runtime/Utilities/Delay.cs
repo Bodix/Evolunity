@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Evolunity.Utilities
+namespace Evolutex.Evolunity.Utilities
 {
     public static class Delay
     {

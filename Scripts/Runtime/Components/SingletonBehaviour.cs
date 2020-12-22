@@ -4,9 +4,9 @@
 
 using UnityEngine;
 
-namespace Evolunity
+namespace Evolutex.Evolunity.Components
 {
-    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
+    public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
     {
         [SerializeField]
         protected bool dontDestroyOnLoad = true;

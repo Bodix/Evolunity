@@ -5,12 +5,12 @@
 using System;
 using Random = UnityEngine.Random;
 
-namespace Evolunity
+namespace Evolutex.Evolunity.Structs
 {
     [Serializable]
-    public struct IntRange
+    public struct FloatRange
     {
-        public IntRange(int min, int max)
+        public FloatRange(float min, float max)
         {
             Min = min;
             Max = max;
@@ -18,6 +18,6 @@ namespace Evolunity
 
         public float Min;
         public float Max;
-        public float RandomWithin => Random.Range(Min, Max + 1);
+        public float RandomWithin => Random.Range(Min, Max);
     }
 }

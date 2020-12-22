@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolunity.Attributes
+namespace Evolutex.Evolunity.Attributes
 {
     public class LayerAttribute : PropertyAttribute { }
 }

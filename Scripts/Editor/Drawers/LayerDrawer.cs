@@ -2,44 +2,37 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolunity.Attributes;
+using Evolutex.Evolunity.Attributes;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
     [CustomPropertyDrawer(typeof(LayerAttribute))]
-    public class LayerDrawer : PropertyDrawer
+    public class LayerDrawer : AttributePropertyDrawer<LayerAttribute>
     {
-        private const string TypeErrorMessage = "Use " + nameof(LayerAttribute) + " with int";
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override SerializedPropertyType[] SupportedTypes => new[]
         {
-            Assert.IsTrue(property.propertyType == SerializedPropertyType.Integer, TypeErrorMessage);
+            SerializedPropertyType.Integer
+        };
 
-            if (property.propertyType == SerializedPropertyType.Integer)
+        protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            int index = property.intValue;
+            if (index < 0)
             {
-                int index = property.intValue;
-                if (index < 0)
-                {
-                    Debug.LogError("Layer index is too low '" + index + "', was set to '0'");
+                Debug.LogError("Layer index is too low '" + index + "', was set to '0'");
 
-                    index = 0;
-                }
-                else if (index > 31)
-                {
-                    Debug.LogError("Layer index is too high '" + index + "', was set to '31'");
-
-                    index = 31;
-                }
-
-                property.intValue = EditorGUI.LayerField(position, label, index);
+                index = 0;
             }
-            else
+            else if (index > 31)
             {
-                EditorGUI.LabelField(position, TypeErrorMessage);
+                Debug.LogError("Layer index is too high '" + index + "', was set to '31'");
+
+                index = 31;
             }
+
+            property.intValue = EditorGUI.LayerField(position, label, index);
         }
     }
 }

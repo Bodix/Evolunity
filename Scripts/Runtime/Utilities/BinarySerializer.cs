@@ -5,7 +5,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Evolunity.Utilities
+namespace Evolutex.Evolunity.Utilities
 {
     public static class BinarySerializer
     {

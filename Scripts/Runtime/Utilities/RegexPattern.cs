@@ -2,7 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-namespace Evolunity.Utilities
+namespace Evolutex.Evolunity.Utilities
 {
     public static class RegexPattern {
         public const string EmptyOrWhiteSpace = @"^[A-Z\s]*$";

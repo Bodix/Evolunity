@@ -171,15 +171,24 @@ namespace Evolutex.Evolunity.Extensions
 
         public static string AsString<T>(this IEnumerable<T> enumerable)
         {
-            return AsString(enumerable, x => x?.ToString());
+            return AsString(enumerable, x => x?.ToString(), ", ");
         }
-
+        
         public static string AsString<T>(this IEnumerable<T> enumerable, Func<T, string> selector)
         {
-            if (enumerable.IsEmpty())
-                return "[ ]";
+            return AsString(enumerable, selector, ", ");
+        }
+        
+        public static string AsString<T>(this IEnumerable<T> enumerable, string separator)
+        {
+            return AsString(enumerable, x => x?.ToString(), separator);
+        }
 
-            return "[ " + string.Join(", ", enumerable.Select(x => selector(x) ?? "null")) + " ]";
+        public static string AsString<T>(this IEnumerable<T> enumerable, Func<T, string> selector, string separator)
+        {
+            return enumerable.IsEmpty() 
+                ? string.Empty 
+                : string.Join(separator, enumerable.Select(x => selector(x) ?? "null"));
         }
     }
 }

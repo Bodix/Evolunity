@@ -2,7 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-namespace Evolunity.Components
+namespace Evolutex.Evolunity.Components
 {
     public enum DisableMethod
     {

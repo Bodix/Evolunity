@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evolunity.Components.Spawners
+namespace Evolutex.Evolunity.Components
 {
     public abstract class BaseSpawner<T> : PeriodicBehaviour where T : UnityEngine.Object
     {

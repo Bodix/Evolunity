@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Evolunity.Components
+namespace Evolutex.Evolunity.Components
 {
     // TO DO:
     //

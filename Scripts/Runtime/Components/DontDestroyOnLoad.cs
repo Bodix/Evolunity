@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolunity.Components
+namespace Evolutex.Evolunity.Components
 {
     [AddComponentMenu("Toolkit/Don't Destroy On Load", 10000)]
     [DisallowMultipleComponent]

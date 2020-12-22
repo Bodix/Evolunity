@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-namespace Evolunity.Utilities
+namespace Evolutex.Evolunity.Utilities
 {
     public static class Performance
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Evolunity.Components.Input
+namespace Evolutex.Evolunity.Components
 {
     [AddComponentMenu("UI/Input Reader")]
     [RequireComponent(typeof(Graphic))]

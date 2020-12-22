@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Evolunity.Components.Input
+namespace Evolutex.Evolunity.Components
 {
     [AddComponentMenu("UI/Long Press Reader")]
     [RequireComponent(typeof(Graphic))]
