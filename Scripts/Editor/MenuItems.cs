@@ -10,31 +10,15 @@ namespace Evolutex.Evolunity.Editor
     public class MenuItems
     {
         [MenuItem("Edit/Toggle Inspector Lock %l", priority = 143)]
-        [MenuItem("Tools/Toolkit/Toggle Inspector Lock %l")]
+        [MenuItem("Tools/Evolunity/Toggle Inspector Lock %l")]
         public static void ToggleInspectorLock()
         {
             ActiveEditorTracker.sharedTracker.isLocked = !ActiveEditorTracker.sharedTracker.isLocked;
             ActiveEditorTracker.sharedTracker.ForceRebuild();
         }
 
-#if DEVELOPMENT
-        [MenuItem("Edit/Defines/" + Define.DEVELOPMENT + "/Remove", priority = 269)]
-        [MenuItem("Tools/Toolkit/Defines/" + Define.DEVELOPMENT + "/Remove")]
-        private static void RemoveDevelopmentDefine()
-        {
-            Define.Set(Define.DEVELOPMENT, false);
-        }
-#else
-        [MenuItem("Edit/Defines/" + Define.DEVELOPMENT + "/Add", priority = 269)]
-        [MenuItem("Tools/Toolkit/Defines/" + Define.DEVELOPMENT + "/Add")]
-        private static void AddDevelopmentDefine()
-        {
-            Define.Set(Define.DEVELOPMENT, true);
-        }
-#endif
-
         [MenuItem("Edit/Clear AssetBundles Cache", priority = 270)]
-        [MenuItem("Tools/Toolkit/Clear AssetBundles Cache")]
+        [MenuItem("Tools/Evolunity/Clear AssetBundles Cache")]
         private static void ClearAssetBundlesCache()
         {
             Caching.ClearCache();
@@ -42,17 +26,26 @@ namespace Evolutex.Evolunity.Editor
         }
 
         [MenuItem("Assets/Open Persistent Data Folder", priority = 111)]
-        [MenuItem("Tools/Toolkit/Open Persistent Data Folder")]
+        [MenuItem("Tools/Evolunity/Open Persistent Data Folder")]
         private static void OpenPersistentDataFolder()
         {
             OpenInFileManager.Open(Application.persistentDataPath);
         }
-
-        [MenuItem("Assets/Take Screenshot &s")]
-        [MenuItem("Tools/Toolkit/Take Screenshot &s")]
-        private static void TakeScreenshot()
+        
+#if DEVELOPMENT
+        [MenuItem("Edit/Defines/" + Define.DEVELOPMENT + "/Remove", priority = 269)]
+        [MenuItem("Tools/Evolunity/Defines/" + Define.DEVELOPMENT + "/Remove")]
+        private static void RemoveDevelopmentDefine()
         {
-            CameraScreenshot.Take();
+            Define.Set(Define.DEVELOPMENT, false);
         }
+#else
+        [MenuItem("Edit/Defines/" + Define.DEVELOPMENT + "/Add", priority = 269)]
+        [MenuItem("Tools/Evolunity/Defines/" + Define.DEVELOPMENT + "/Add")]
+        private static void AddDevelopmentDefine()
+        {
+            Define.Set(Define.DEVELOPMENT, true);
+        }
+#endif
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor
@@ -34,6 +35,13 @@ namespace Evolutex.Evolunity.Editor
             File.WriteAllBytes(path + filename, texture.EncodeToPNG());
             
             Debug.Log("Screenshot saved as \"" + path + filename + "\"");
+        }
+        
+        [MenuItem("Assets/Take Screenshot &s")]
+        [MenuItem("Tools/Evolunity/Take Screenshot &s")]
+        private static void TakeScreenshot()
+        {
+            Take();
         }
     }
 }

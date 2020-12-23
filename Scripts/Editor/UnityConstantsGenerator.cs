@@ -15,6 +15,7 @@ namespace Evolutex.Evolunity.Editor
         public const string FileName = "UnityConstants.cs";
 
         [MenuItem("Assets/Generate " + FileName, priority = 800)]
+        [MenuItem("Tools/Evolunity/Generate " + FileName)]
         public static void Generate()
         {
             // Try to find an existing file in the project.
