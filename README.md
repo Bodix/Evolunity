@@ -1,4 +1,4 @@
-﻿# 🌿 Evolunity
+# 🌿 Evolunity
 
 ![Unity version](https://img.shields.io/badge/unity-2018.4%2B-blue?logo=unity)
 [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
@@ -77,7 +77,6 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 * #### Unity 2019.3 and above:
 
   Use the following URL in the **Package Manager**:
-
   `https://github.com/Bodix/Evolunity.git`
 
   [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)

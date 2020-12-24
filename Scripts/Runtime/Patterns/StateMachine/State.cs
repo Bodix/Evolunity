@@ -4,7 +4,7 @@
 
 namespace Evolutex.Evolunity.Patterns.StateMachine
 {
-    public abstract class State : SerializableType
+    public abstract class State
     {
         /// <summary>
         /// If the time equals -1, then the state is inactive.
