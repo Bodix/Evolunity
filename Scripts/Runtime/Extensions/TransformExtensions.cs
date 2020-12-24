@@ -80,7 +80,9 @@ namespace Evolutex.Evolunity.Extensions
         {
             return (RectTransform) transform;
         }
-
+        
+        // Also may be useful:
+        // GUIUtility.GUIToScreenPoint
         public static Rect ToScreenRect(this RectTransform rectTransform, Camera camera = null)
         {
             if (!camera)

@@ -74,16 +74,29 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 
 ## Install
 
-Open `{ProjectFolder}/Packages/manifest.json` and add the following line:
-```
-{
-  "dependencies":
-  {
-    "com.evolutex.evolunity": "https://github.com/Bodix/Evolunity.git",
-    ...
-  }
-}
-```
+* #### Unity 2019.3 and above:
+
+  Use the following URL in the **Package Manager**:
+
+  `https://github.com/Bodix/Evolunity.git`
+
+  [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)
+
+* #### Before Unity 2019.3:
+
+  Open `{ProjectFolder}/Packages/manifest.json` and add the following line:
+
+    ```
+    {
+      "dependencies":
+      {
+        "com.evolutex.evolunity": "https://github.com/Bodix/Evolunity.git",
+        ...
+      }
+    }
+    ```
+
+###
 
 ## Requirements
 

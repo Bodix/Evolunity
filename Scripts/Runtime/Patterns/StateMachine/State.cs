@@ -4,13 +4,13 @@
 
 namespace Evolutex.Evolunity.Patterns.StateMachine
 {
-    public abstract class State
+    public abstract class State : SerializableType
     {
         /// <summary>
         /// If the time equals -1, then the state is inactive.
         /// </summary>
         public float TimeSinceEnter { get; private set; } = -1;
-        
+
         protected StateMachine StateMachine { get; private set; }
 
         /// <summary>
@@ -22,37 +22,37 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
 
             OnInitialize();
         }
-        
+
         /// <summary>
         /// Don't call this method manually. It will be called automatically from the state machine.
         /// </summary>
         public void Enter()
         {
             TimeSinceEnter = 0;
-            
+
             OnEnter();
         }
-        
+
         /// <summary>
         /// Don't call this method manually. It will be called automatically from the state machine.
         /// </summary>
         public void Update(float deltaTime)
         {
             OnUpdate(deltaTime);
-            
+
             TimeSinceEnter += deltaTime;
         }
-        
+
         /// <summary>
         /// Don't call this method manually. It will be called automatically from the state machine.
         /// </summary>
         public void Exit()
         {
             OnExit();
-            
+
             TimeSinceEnter = -1;
         }
-        
+
         protected virtual void OnInitialize() { }
 
         protected virtual void OnEnter() { }

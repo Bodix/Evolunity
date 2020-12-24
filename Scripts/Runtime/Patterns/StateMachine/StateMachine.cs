@@ -12,7 +12,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
 {
     // TO DO:
     // EnterPreviousState method.
-    
+
     public class StateMachine : IEnumerable<State>
     {
         private readonly Dictionary<Type, State> states = new Dictionary<Type, State>();
@@ -27,6 +27,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
         }
 
         public delegate void StateChangeHandler(State previousState, State currentState);
+
         public StateChangeHandler StateChanged;
 
         public State CurrentState { get; private set; }
@@ -51,7 +52,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
 
             PreviousState?.Exit();
             CurrentState.Enter();
-            
+
             StateChanged?.Invoke(PreviousState, CurrentState);
         }
 
@@ -59,7 +60,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
         {
             return ContainsState(typeof(TState));
         }
-        
+
         public bool ContainsState(Type stateType)
         {
             return states.ContainsKey(stateType);
@@ -69,7 +70,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
         {
             return (TState) GetState(typeof(TState));
         }
-        
+
         public State GetState(Type stateType)
         {
             return states[stateType];
@@ -93,7 +94,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
             states.Add(stateType, state);
             state.Initialize(this);
         }
-        
+
         public IEnumerator<State> GetEnumerator()
         {
             return states.Select(x => x.Value).GetEnumerator();
