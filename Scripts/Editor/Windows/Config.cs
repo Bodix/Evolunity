@@ -9,6 +9,8 @@ namespace Evolutex.Evolunity.Editor.Windows
 {
     public class Config : EditorWindow
     {
+        private const int MaxDisplayRefreshRate = 240;
+
         [MenuItem("Window/General/Config")]
         private static void ShowWindow()
         {
@@ -16,11 +18,11 @@ namespace Evolutex.Evolunity.Editor.Windows
             window.titleContent = new GUIContent("Config");
             window.Show();
         }
-        
+
         private void OnGUI()
         {
-            Application.targetFrameRate =
-                EditorGUILayout.IntSlider("Target frame rate", Application.targetFrameRate, 0, 300);
+            Application.targetFrameRate = EditorGUILayout.IntSlider(
+                "Target frame rate", Application.targetFrameRate, 0, MaxDisplayRefreshRate);
         }
     }
 }

@@ -11,12 +11,7 @@ namespace Evolutex.Evolunity.Extensions
     {
         public static int Count => Enum.GetValues(typeof(T)).Length;
 
-        public static T Parse(string value)
-        {
-            return Parse(value, true);
-        }
-
-        public static T Parse(string value, bool ignoreCase)
+        public static T Parse(string value, bool ignoreCase = true)
         {
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
         }

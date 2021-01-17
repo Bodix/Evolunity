@@ -46,6 +46,25 @@ namespace Evolutex.Evolunity.Extensions
             transform.localRotation = Quaternion.identity;
             transform.localScale = Vector3.one;
         }
+        
+        public static void SetParentAndAlign(this Transform transform, Transform parent, bool keepLocalTransform = true)
+        {
+            Vector3 localPosition = transform.localPosition;
+            Quaternion localRotation = transform.localRotation;
+            
+            transform.SetParent(parent);
+            
+            if (keepLocalTransform)
+            {
+                transform.localPosition = localPosition;
+                transform.localRotation = localRotation;
+            }
+            else
+            {
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+            }
+        }
 
         public static List<Transform> GetChildren(this Transform transform)
         {

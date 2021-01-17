@@ -6,9 +6,38 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    // http://wiki.unity3d.com/index.php/QuaternionExtensions
     public static class QuaternionExtensions
     {
+        public static Quaternion WithX(this Quaternion quaternion, float x)
+        {
+            quaternion.x = x;
+
+            return quaternion;
+        }
+
+        public static Quaternion WithY(this Quaternion quaternion, float y)
+        {
+            quaternion.y = y;
+
+            return quaternion;
+        }
+
+        public static Quaternion WithZ(this Quaternion quaternion, float z)
+        {
+            quaternion.z = z;
+
+            return quaternion;
+        }
+
+        public static Quaternion WithW(this Quaternion quaternion, float w)
+        {
+            quaternion.w = w;
+
+            return quaternion;
+        }
+        
+        // http://wiki.unity3d.com/index.php/QuaternionExtensions
+
         /// <summary>
         /// Quaternion raised to a power.
         /// This is useful for smoothly multiplying a Quaternion by a given floating-point value.
@@ -23,7 +52,7 @@ namespace Evolutex.Evolunity.Extensions
                 .Exp()
                 .ScalarMultiply(Mathf.Pow(magnitude, power));
         }
-        
+
         /// <summary>
         /// Euler's number raised to quaternion.
         /// </summary>
@@ -37,7 +66,7 @@ namespace Evolutex.Evolunity.Extensions
 
             return new Quaternion(outputVector.x, outputVector.y, outputVector.z, outputScalar);
         }
-        
+
         public static float Magnitude(this Quaternion quaternion)
         {
             return Mathf.Sqrt(quaternion.x * quaternion.x +
