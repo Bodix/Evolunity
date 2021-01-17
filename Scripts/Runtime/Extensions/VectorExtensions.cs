@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using UnityEngine;
+using Evolutex.Evolunity.Utilities;
 
 namespace Evolutex.Evolunity.Extensions
 {

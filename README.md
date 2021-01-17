@@ -3,7 +3,7 @@
 ![Unity version](https://img.shields.io/badge/unity-2018.4%2B-blue?logo=unity)
 [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
 
-Well-designed package with useful scripting tools for Unity development​.
+Well-designed package with useful scripting tools for Unity development.
 
 ## Content
 
@@ -11,6 +11,7 @@ Well-designed package with useful scripting tools for Unity development​.
 - System types:
   - `char`
   - `string`
+  - `byte[]`
   - `IDictionary`
   - `IEnumerable`
   - `IComparable`
@@ -33,6 +34,7 @@ Well-designed package with useful scripting tools for Unity development​.
 - `BinarySerializer` - Utility for serializing objects.
 - `StringEncryptor` - Utility for encrypting strings.
 - `Enum` - Utility for parsing and working with enums.
+- `Angle` - Utility for working with angles.
 - `RegexPatterns` - Set of default regular expression patterns.
 
 ### Unity components
@@ -40,6 +42,7 @@ Well-designed package with useful scripting tools for Unity development​.
 - `Spawner` - Spawns objects one-time or periodically. Based on `PeriodicBehaviour`.
 - `InputReader` - Reads click, drag and zoom (cross-platform).
 - `LongPressReader` - Reads long press (cross-platform).
+- `FPSCounter` - Counts FPS and outputs it to the `Text` component.
 - `Comment` - Contains a comment to the GameObject.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
 - `PlatformDependent` - Destroys/disable the object if the platform specified in it does not match the current one.

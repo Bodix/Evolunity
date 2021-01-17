@@ -10,6 +10,9 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor
 {
+    // TO DO:
+    // Fix '_' character in constant names.
+    
     public static class UnityConstantsGenerator
     {
         public const string FileName = "UnityConstants.cs";

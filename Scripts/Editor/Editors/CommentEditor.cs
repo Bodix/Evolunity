@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Evolutex.Evolunity.Components;
 using Evolutex.Evolunity.Extensions;
+using Evolutex.Evolunity.Utilities;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
