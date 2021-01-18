@@ -60,6 +60,7 @@ Well-designed package with useful scripting tools for Unity development.
 - `OpenInFileManager` - Utility to open the given path in the file manager.
 
 ### Structs
+- `Direction` - Direction given by vector.
 - `FloatRange` - Range given by two floats.
 - `IntRange` - Range given by two ints.
 

@@ -12,6 +12,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
 {
     // TO DO:
     // EnterPreviousState method.
+    // Make property drawer for state type selection.
 
     public class StateMachine : IEnumerable<State>
     {
@@ -28,7 +29,7 @@ namespace Evolutex.Evolunity.Patterns.StateMachine
 
         public delegate void StateChangeHandler(State previousState, State currentState);
 
-        public StateChangeHandler StateChanged;
+        public event StateChangeHandler StateChanged;
 
         public State CurrentState { get; private set; }
         public State PreviousState { get; private set; }
