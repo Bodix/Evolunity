@@ -8,11 +8,12 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Extensions
 {
     // TO DO:
-    // 1. Add stretching.
-    // 2. Replace Split methods with https://github.com/slavniyteo/rect-ex.
-    // 3. Improve Clip method with clamping.
-    // 4. Refactor SplitAndCombine methods with custom struct to improve readability.
-    // 5. Remove redundant creating new Rects (?).
+    // 1. Add cutting.
+    // 2. Add stretching.
+    // 3. Replace Split methods with https://github.com/slavniyteo/rect-ex.
+    // 4. Improve Clip method with clamping.
+    // 5. Refactor SplitAndCombine methods with custom struct to improve readability.
+    // 6. Remove redundant creating new Rects (?).
 
     public static class RectExtensions
     {
@@ -163,12 +164,12 @@ namespace Evolutex.Evolunity.Extensions
             return new Rect(rect.x, rect.y, size.x, size.y);
         }
 
-        public static Rect AddWidth(this Rect rect, int width)
+        public static Rect AddWidth(this Rect rect, float width)
         {
             return new Rect(rect.x, rect.y, rect.width + width, rect.height);
         }
 
-        public static Rect AddHeight(this Rect rect, int height)
+        public static Rect AddHeight(this Rect rect, float height)
         {
             return new Rect(rect.x, rect.y, rect.width, rect.height + height);
         }

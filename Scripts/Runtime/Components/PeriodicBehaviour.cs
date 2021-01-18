@@ -18,7 +18,7 @@ namespace Evolutex.Evolunity.Components
     //
     // 2. Compare performance with PeriodicCoroutineBehaviour.
     
-    [AddComponentMenu("Toolkit/Periodic Behaviour")]
+    [AddComponentMenu("Evolunity/Periodic Behaviour")]
     public class PeriodicBehaviour : MonoBehaviour
     {
         public UnityEvent OnPeriodCallback;

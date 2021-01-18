@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Toolkit/Platform Dependent", 10000)]
+    [AddComponentMenu("Evolunity/Platform Dependent", 10000)]
     [DisallowMultipleComponent]
     public sealed class PlatformDependent : MonoBehaviour
     {
@@ -63,14 +63,14 @@ namespace Evolutex.Evolunity.Components
 
         private void OnDisable()
         {
-            if (disable && disableMethod != DisableMethod.Destroy)
+            if (disable && disableMethod == DisableMethod.Disable)
                 Debug.Log("The GameObject \"" + gameObject.name + "\" was disabled by the PlatformDependent component",
                     this);
         }
 
         private void OnDestroy()
         {
-            if (disable)
+            if (disable && disableMethod == DisableMethod.Destroy)
                 Debug.Log("The GameObject \"" + gameObject.name + "\" was destroyed by the PlatformDependent component");
         }
     }

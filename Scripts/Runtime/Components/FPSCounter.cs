@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace Evolutex.Evolunity.Components
 {
     [RequireComponent(typeof(Text))]
-    public class FPSCounter : MonoBehaviour
+    public class FpsCounter : MonoBehaviour
     {
         public float MeasurementPeriod = 0.5f;
 

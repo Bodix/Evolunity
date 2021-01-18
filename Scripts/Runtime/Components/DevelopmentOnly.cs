@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Toolkit/Development Only")]
+    [AddComponentMenu("Evolunity/Development Only")]
     [DisallowMultipleComponent]
     public sealed class DevelopmentOnly : MonoBehaviour
     {
@@ -34,14 +34,14 @@ namespace Evolutex.Evolunity.Components
 
         private void OnDisable()
         {
-            if (disable && disableMethod != DisableMethod.Destroy)
+            if (disable && disableMethod == DisableMethod.Disable)
                 Debug.Log("The GameObject \"" + gameObject.name + "\" was disabled by the DevelopmentOnly component",
                     this);
         }
 
         private void OnDestroy()
         {
-            if (disable)
+            if (disable && disableMethod == DisableMethod.Destroy)
                 Debug.Log("The GameObject \"" + gameObject.name + "\" was destroyed by the DevelopmentOnly component");
         }
     }

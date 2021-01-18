@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Toolkit/Comment")]
+    [AddComponentMenu("Evolunity/Comment")]
     public class Comment : MonoBehaviour
     {
         public string Message;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Toolkit/Spawner")]
+    [AddComponentMenu("Evolunity/Spawner")]
     public class Spawner : BaseSpawner<GameObject>
     {
     }
