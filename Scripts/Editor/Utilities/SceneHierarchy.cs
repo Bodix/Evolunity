@@ -8,10 +8,10 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Evolutex.Evolunity.Editor.Hierarchy
+namespace Evolutex.Evolunity.Editor.Utilities
 {
     //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Editor/Mono/SceneHierarchyWindow.cs
-    public static class SceneHierarchyUtility
+    public static class SceneHierarchy
     {
         private static Type sceneHierarchyWindowType;
         private static Type SceneHierarchyWindowType
@@ -42,17 +42,17 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
             }
         }
 
-        private static object sceneHierarchy;
-        private static object SceneHierarchy
+        private static object sceneHierarchyObject;
+        private static object SceneHierarchyObject
         {
             get
             {
-                if (sceneHierarchy == null)
-                    sceneHierarchy = SceneHierarchyWindowType
+                if (sceneHierarchyObject == null)
+                    sceneHierarchyObject = SceneHierarchyWindowType
                         .GetProperty("sceneHierarchy")
                         .GetValue(SceneHierarchyWindow);
 
-                return sceneHierarchy;
+                return sceneHierarchyObject;
             }
         }
 
@@ -62,7 +62,7 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
             get
             {
                 if (sceneHierarchyType == null)
-                    sceneHierarchyType = SceneHierarchy.GetType();
+                    sceneHierarchyType = SceneHierarchyObject.GetType();
 
                 return sceneHierarchyType;
             }
@@ -83,7 +83,7 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
 
         public static void SetExpanded(GameObject gameObject, bool isExpanded)
         {
-            ExpandTreeViewItemMethod.Invoke(SceneHierarchy, new object[] { gameObject.GetInstanceID(), isExpanded });
+            ExpandTreeViewItemMethod.Invoke(SceneHierarchyObject, new object[] { gameObject.GetInstanceID(), isExpanded });
         }
     }
 }

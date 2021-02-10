@@ -4,10 +4,11 @@
 
 using UnityEditor;
 using UnityEngine;
+using Evolutex.Evolunity.Editor.Utilities;
 
 namespace Evolutex.Evolunity.Editor
 {
-    public class MenuItems
+    public static class MenuItems
     {
         [MenuItem("Edit/Toggle Inspector Lock %l", priority = 143)]
         [MenuItem("Tools/Evolunity/Toggle Inspector Lock %l")]
@@ -29,7 +30,7 @@ namespace Evolutex.Evolunity.Editor
         [MenuItem("Tools/Evolunity/Open Persistent Data Folder")]
         private static void OpenPersistentDataFolder()
         {
-            OpenInFileManager.Open(Application.persistentDataPath);
+            FileManager.Open(Application.persistentDataPath);
         }
         
 #if DEVELOPMENT
@@ -47,5 +48,12 @@ namespace Evolutex.Evolunity.Editor
             Define.Set(Define.DEVELOPMENT, true);
         }
 #endif
+        
+        [MenuItem("Assets/Take Screenshot &s")]
+        [MenuItem("Tools/Evolunity/Take Screenshot &s")]
+        private static void TakeScreenshot()
+        {
+            CameraScreenshot.Take();
+        }
     }
 }

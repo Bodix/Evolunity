@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-namespace Evolutex.Evolunity.Editor
+namespace Evolutex.Evolunity.Editor.Utilities
 {
     public static class EditorConsole
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-namespace Evolutex.Evolunity.Editor.Hierarchy
+namespace Evolutex.Evolunity.Editor.Utilities
 {
     [InitializeOnLoad]
     public static class AutoExpandHierarchy
@@ -26,7 +26,7 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
                 });
 
                 foreach (GameObject gameObject in gameObjectsBuffer)
-                    SceneHierarchyUtility.SetExpanded(gameObject, true);
+                    SceneHierarchy.SetExpanded(gameObject, true);
 
                 gameObjectsBuffer.Clear();
             };

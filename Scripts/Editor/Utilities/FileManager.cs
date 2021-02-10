@@ -7,9 +7,9 @@ using System.IO;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Evolutex.Evolunity.Editor
+namespace Evolutex.Evolunity.Editor.Utilities
 {
-    public static class OpenInFileManager
+    public static class FileManager
     {
         private static bool IsMacOS => SystemInfo.operatingSystem.Contains("Mac OS");
         private static bool IsWinOS => SystemInfo.operatingSystem.Contains("Windows");
@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Editor
             else if (IsMacOS)
                 OpenInMac(path);
             else
-                Debug.LogWarning($"[{nameof(OpenInFileManager)}] OS is not supported");
+                Debug.LogWarning($"[{nameof(FileManager)}] OS is not supported");
         }
 
         private static void OpenInMac(string path)

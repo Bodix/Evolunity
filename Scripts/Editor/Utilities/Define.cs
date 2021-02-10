@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace Evolutex.Evolunity.Editor
+namespace Evolutex.Evolunity.Editor.Utilities
 {
-    public class Define
+    public static class Define
     {
         public const string DEVELOPMENT = "DEVELOPMENT";
         

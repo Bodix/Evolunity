@@ -12,7 +12,7 @@ namespace Evolutex.Evolunity.Editor.Windows
     // If we create it via constructor or Activator.CreateInstance<T>():
     // ArgumentException: Object at index 0 is null
     //
-    // If we create it via ObjectFactory.CreateInstance<T>()
+    // If we create it (non-abstract object inherited from UnityEngine.Object) via ObjectFactory.CreateInstance<T>():
     // ArgumentException: 'type' parameter is abstract and can't be used in the ObjectFactory : DerivedObject
     //
     // https://forum.unity.com/threads/argumentexception-type-parameter-is-abstract-and-cant-be-used-in-the-objectfactory.1052954/
