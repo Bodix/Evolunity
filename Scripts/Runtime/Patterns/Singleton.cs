@@ -9,7 +9,7 @@ namespace Evolutex.Evolunity.Patterns
     public abstract class Singleton<T> where T : class, new()
     {
         private static readonly Lazy<T> instance = new Lazy<T>(() => new T());
-        
+
         protected Singleton() { }
 
         public static T Instance => instance.Value;

@@ -19,6 +19,7 @@ namespace Evolutex.Evolunity.Editor.Windows
     // https://forum.unity.com/threads/how-do-you-create-a-new-object-instance-from-a-type-that-is-derived-from-unityengine-object.730037/
     //
     // So we will use a custom editor layout instead of SerializedProperty.
+
     public class Config : EditorWindow
     {
         private const int MaxDisplayRefreshRate = 240;

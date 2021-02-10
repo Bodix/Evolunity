@@ -83,7 +83,7 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
 
         public static void SetExpanded(GameObject gameObject, bool isExpanded)
         {
-            ExpandTreeViewItemMethod.Invoke(SceneHierarchy, new object[] {gameObject.GetInstanceID(), isExpanded});
+            ExpandTreeViewItemMethod.Invoke(SceneHierarchy, new object[] { gameObject.GetInstanceID(), isExpanded });
         }
     }
 }

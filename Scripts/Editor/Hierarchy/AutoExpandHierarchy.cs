@@ -3,9 +3,9 @@
 // All Rights Reserved
 
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Hierarchy
 {
@@ -16,28 +16,28 @@ namespace Evolutex.Evolunity.Editor.Hierarchy
 
         static AutoExpandHierarchy()
         {
-            SubscribeToSceneOpened();
+            EditorSceneManager.sceneOpened += (scene, mode) =>
+            {
+                gameObjectsToExpand.ForEach(name =>
+                {
+                    GameObject gameObject = GameObject.Find(name);
+                    if (gameObject)
+                        gameObjectsBuffer.Add(gameObject);
+                });
+
+                foreach (GameObject gameObject in gameObjectsBuffer)
+                    SceneHierarchyUtility.SetExpanded(gameObject, true);
+
+                gameObjectsBuffer.Clear();
+            };
         }
-        
+
         public static readonly List<string> gameObjectsToExpand = new List<string>
         {
             "Player",
             "Logic",
-            "Environment"
+            "Environment",
+            "Test"
         };
-
-        private static void SubscribeToSceneOpened()
-        {
-            EditorSceneManager.sceneOpened += (scene, mode) =>
-            {
-                gameObjectsToExpand.ForEach(x => 
-                    gameObjectsBuffer.Add(GameObject.Find(x)));
-                
-                foreach (GameObject gameObject in gameObjectsBuffer)
-                    SceneHierarchyUtility.SetExpanded(gameObject, true);
-                
-                gameObjectsBuffer.Clear();
-            };
-        }
     }
 }
