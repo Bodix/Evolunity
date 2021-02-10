@@ -10,7 +10,7 @@ namespace Evolutex.Evolunity.Editor
 {
     public static class MenuItems
     {
-        [MenuItem("Edit/Toggle Inspector Lock %l", priority = 143)]
+        [MenuItem("Edit/Toggle Inspector Lock", priority = 143)]
         [MenuItem("Tools/Evolunity/Toggle Inspector Lock %l")]
         public static void ToggleInspectorLock()
         {
@@ -49,7 +49,7 @@ namespace Evolutex.Evolunity.Editor
         }
 #endif
         
-        [MenuItem("Assets/Take Screenshot &s")]
+        [MenuItem("Assets/Take Screenshot")]
         [MenuItem("Tools/Evolunity/Take Screenshot &s")]
         private static void TakeScreenshot()
         {
