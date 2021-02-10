@@ -10,11 +10,11 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Editor.Hierarchy
 {
     [InitializeOnLoad]
-    public static class ExpandHierarchyObjects
+    public static class AutoExpandHierarchy
     {
         private static readonly List<GameObject> gameObjectsBuffer = new List<GameObject>();
 
-        static ExpandHierarchyObjects()
+        static AutoExpandHierarchy()
         {
             SubscribeToSceneOpened();
         }
