@@ -11,6 +11,7 @@ namespace Evolutex.Evolunity.Components
         [SerializeField]
         protected bool dontDestroyOnLoad = true;
 
+        public static bool Logs = true;
         public static bool FindInstanceIfNull = false;
         public static bool CreateInstanceIfNull = false;
 
@@ -25,7 +26,8 @@ namespace Evolutex.Evolunity.Components
             {
                 if (isDestroyed)
                 {
-                    Debug.LogWarning(debugPrefix + "The instance will not be returned because it is already destroyed");
+                    if (Logs)
+                        Debug.LogError(debugPrefix + "The instance will not be returned because it is already destroyed");
 
                     return null;
                 }
@@ -39,14 +41,16 @@ namespace Evolutex.Evolunity.Components
 
                         if (instance != null)
                         {
-                            Debug.Log(debugPrefix + "An instance was found on the scene");
+                            if (Logs)
+                                Debug.Log(debugPrefix + "An instance was found on the scene");
 
                             return instance;
                         }
                         else if (CreateInstanceIfNull)
                         {
-                            Debug.Log(debugPrefix + "An instance is needed on the scene " +
-                                      "and no existing instances were found, so a new instance will be created");
+                            if (Logs)
+                                Debug.Log(debugPrefix + "An instance is needed on the scene " +
+                                          "and no existing instances were found, so a new instance will be created");
 
                             return new GameObject($"{typeof(T).Name} (Singleton)").AddComponent<T>();
                         }
