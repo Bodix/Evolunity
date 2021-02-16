@@ -52,7 +52,7 @@ namespace Evolutex.Evolunity.Components
                                 Debug.Log(debugPrefix + "An instance is needed on the scene " +
                                           "and no existing instances were found, so a new instance will be created");
 
-                            return new GameObject($"{typeof(T).Name} (Singleton)").AddComponent<T>();
+                            return instance = new GameObject($"{typeof(T).Name} (Singleton)").AddComponent<T>();
                         }
                     }
 
@@ -76,7 +76,8 @@ namespace Evolutex.Evolunity.Components
             }
             else if (instance != this)
             {
-                Debug.LogWarning(debugPrefix + "The instance is already exists, so this instance will be destroyed");
+                if (Logs)
+                    Debug.LogWarning(debugPrefix + "The instance is already exists, so this instance will be destroyed");
 
                 Destroy(gameObject);
             }
