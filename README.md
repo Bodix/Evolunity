@@ -8,6 +8,7 @@ Well-designed package with useful scripting tools for Unity development.
 ## Content
 
 ### Extension methods
+
 - System types:
   - `char`
   - `string`
@@ -28,6 +29,7 @@ Well-designed package with useful scripting tools for Unity development.
   - `Vector`
 
 ### Utilities
+
 - `StaticCoroutine` - Static coroutine.
 - `Delay` - Utility for calling functions with a delay. Based on `StaticCoroutine`.
 - `Performance` - Utility for measuring functions performance.
@@ -38,6 +40,7 @@ Well-designed package with useful scripting tools for Unity development.
 - `RegexPatterns` - Set of default regular expression patterns.
 
 ### Unity components
+
 - `PeriodicBehaviour` - Calls the given function periodically.
 - `Spawner` - Spawns objects one-time or periodically. Based on `PeriodicBehaviour`.
 - `InputReader` - Reads click, drag and zoom (cross-platform).
@@ -50,6 +53,7 @@ Well-designed package with useful scripting tools for Unity development.
 - `SingletonBehaviour` - Singleton `MonoBehaviour`.
 
 ### Editor
+
 - `UnityConstantsGenerator` - Tool for generating static classes with tags, layers, scenes, and input axes.
 - `CameraScreenshot` - Tool for taking screenshot from the main camera.
 - `MenuItems` - Useful menu items.
@@ -60,11 +64,13 @@ Well-designed package with useful scripting tools for Unity development.
 - `OpenInFileManager` - Utility to open the given path in the file manager.
 
 ### Structs
+
 - `Direction` - Direction given by vector.
 - `FloatRange` - Range given by two floats.
 - `IntRange` - Range given by two ints.
 
 ### Other
+
 - `StateMachine` - Immutable state machine without using strings, enums or reflections.
 - `WeightQueue` - Queue filled with elements in which the number of each element is determined by its weight.
 
@@ -78,18 +84,18 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 
 ## Install
 
-* #### Unity 2019.3 and above:
+- **Unity 2019.3 and above:**
 
   Use the following URL in the **Package Manager**:
   `https://github.com/Bodix/Evolunity.git`
 
   [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)
 
-* #### Before Unity 2019.3:
+- **Before Unity 2019.3:**
 
   Open `{ProjectFolder}/Packages/manifest.json` and add the following line:
 
-    ```
+    ```json
     {
       "dependencies":
       {
@@ -99,15 +105,13 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
     }
     ```
 
-###
-
 ## Requirements
 
-- Unity 2018.4+
-<br>*(You can try the lower version, but I haven't tested that)*
+- Unity 2018.4+<br>
+  *(You can try the lower version, but I haven't tested that)*
 
-- Git
-<br>*(Must be added to the **PATH** environment variable)*
+- Git<br>
+  *(Must be added to the **PATH** environment variable)*
 
 ## License
 
