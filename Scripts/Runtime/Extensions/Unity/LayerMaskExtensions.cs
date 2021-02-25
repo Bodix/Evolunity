@@ -76,12 +76,12 @@ namespace Evolutex.Evolunity.Extensions
 
         public static string AsString(this LayerMask layerMask)
         {
-            return AsString(layerMask, ", ");
+            return GetLayerNames(layerMask).AsString();
         }
 
         public static string AsString(this LayerMask layerMask, string separator)
         {
-            return string.Join(separator, GetLayerNames(layerMask));
+            return GetLayerNames(layerMask).AsString(separator);
         }
     }
 }
