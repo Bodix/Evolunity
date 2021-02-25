@@ -8,13 +8,18 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class ByteArrayExtensions
     {
-        public static Sprite ToSprite(this byte[] bytes)
+        public static Texture2D ToTexture(this byte[] bytes, bool markNonReadable = false)
         {
             Texture2D texture = new Texture2D(0, 0);
-            texture.LoadImage(bytes);
             
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), 
-                new Vector2(texture.width / 2f, texture.height / 2f));
+            texture.LoadImage(bytes, markNonReadable);
+
+            return texture;
+        }
+
+        public static Sprite ToSprite(this byte[] bytes, bool markNonReadable = false)
+        {
+            return bytes.ToTexture(markNonReadable).ToSprite();
         }
     }
 }
