@@ -11,9 +11,16 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class EnumerableExtensions
     {
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+        private static Random rand = new Random();
+
+        public static IEnumerable<T> ForEachLazy<T>(this IEnumerable<T> source, Action<T> action)
         {
-            foreach (T item in enumerable)
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            foreach (T item in source)
             {
                 action(item);
 
@@ -21,10 +28,15 @@ namespace Evolutex.Evolunity.Extensions
             }
         }
 
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> action)
+        public static IEnumerable<T> ForEachLazy<T>(this IEnumerable<T> source, Action<T, int> action)
         {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (action is null)
+                throw new ArgumentNullException(nameof(action));
+
             int index = 0;
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 action(item, index++);
 
@@ -32,46 +44,105 @@ namespace Evolutex.Evolunity.Extensions
             }
         }
 
-        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> predicate)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            return condition ? enumerable.Where(predicate) : enumerable;
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            foreach (var item in source)
+            {
+                action(item);
+            }
+            return source;
         }
 
-        public static IEnumerable<T> TakeUntil<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
         {
-            return enumerable.TakeWhile(item => !predicate(item));
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            int index = 0;
+            foreach (T item in source)
+            {
+                action(item, index++);
+            }
         }
 
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumerable, T item)
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, bool> predicate)
         {
-            return enumerable.Except(Enumerable.Repeat(item, 1));
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return condition ? source.Where(predicate) : source;
         }
 
-        public static IEnumerable<T> Concat<T>(IEnumerable<T> enumerable, T item)
+        public static IEnumerable<T> TakeUntil<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            return enumerable.Concat(Enumerable.Repeat(item, 1));
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return source.TakeWhile(item => !predicate(item));
         }
 
-        public static IEnumerable<T> OrEmpty<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T item)
         {
-            return enumerable ?? Enumerable.Empty<T>();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (item is null)
+                throw new ArgumentNullException(nameof(item));
+
+            return source.Except(Enumerable.Repeat(item, 1));
         }
 
-        public static IEnumerable<T> Reverse<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Concat<T>(IEnumerable<T> source, T item)
         {
-            T[] array = enumerable.ToArray();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (item is null)
+                throw new ArgumentNullException(nameof(item));
+
+            return source.Concat(Enumerable.Repeat(item, 1));
+        }
+
+        public static IEnumerable<T> OrEmpty<T>(this IEnumerable<T> source)
+        {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source ?? Enumerable.Empty<T>();
+        }
+
+        public static IEnumerable<T> Reverse<T>(this IEnumerable<T> source)
+        {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            T[] array = source.ToArray();
 
             for (int i = array.Length - 1; i >= 0; i--)
                 yield return array[i];
         }
 
-        public static T MinBy<T, TMin>(this IEnumerable<T> enumerable, Func<T, TMin> selector)
+        public static T MinBy<T, TMin>(this IEnumerable<T> source, Func<T, TMin> selector)
             where TMin : IComparable<TMin>
         {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (selector is null)
+                throw new ArgumentNullException(nameof(selector));
+
             T min = default;
             bool first = true;
 
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 if (first)
                 {
@@ -87,13 +158,18 @@ namespace Evolutex.Evolunity.Extensions
             return min;
         }
 
-        public static T MaxBy<T, TMax>(this IEnumerable<T> enumerable, Func<T, TMax> selector)
+        public static T MaxBy<T, TMax>(this IEnumerable<T> source, Func<T, TMax> selector)
             where TMax : IComparable<TMax>
         {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (selector is null)
+                throw new ArgumentNullException(nameof(selector));
+
             T max = default;
             bool first = true;
 
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 if (first)
                 {
@@ -109,25 +185,28 @@ namespace Evolutex.Evolunity.Extensions
             return max;
         }
 
-        public static T FirstOrNull<T>(this IEnumerable<T> enumerable) where T : class
+        public static T Random<T>(this IEnumerable<T> source)
         {
-            return enumerable.DefaultIfEmpty(null).FirstOrDefault();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            T[] array = source.ToArray();
+
+            return array[rand.Next(0, array.Length)];
         }
 
-        public static T Random<T>(this IEnumerable<T> enumerable)
+        public static T Random<T>(this IEnumerable<T> source, Func<T, float> chanceSelector)
         {
-            T[] array = enumerable.ToArray();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (chanceSelector is null)
+                throw new ArgumentNullException(nameof(chanceSelector));
 
-            return array[UnityEngine.Random.Range(0, array.Length)];
-        }
-
-        public static T Random<T>(this IEnumerable<T> enumerable, Func<T, float> chanceSelector)
-        {
-            T[] orderedArray = enumerable.OrderByDescending(chanceSelector).ToArray();
+            T[] orderedArray = source.OrderByDescending(chanceSelector).ToArray();
 
             float[] chances = orderedArray.Select(chanceSelector).ToArray();
             float totalChance = chances.Sum();
-            float chance = UnityEngine.Random.Range(0, totalChance);
+            float chance = rand.Next(0, totalChance);
 
             int index = 0;
             for (int i = 0; i < chances.Length; i++)
@@ -144,46 +223,66 @@ namespace Evolutex.Evolunity.Extensions
             return orderedArray[index];
         }
 
-        public static IEnumerable<T> Random<T>(this IEnumerable<T> enumerable, int amount)
+        public static IEnumerable<T> Random<T>(this IEnumerable<T> source, int amount)
         {
-            return Shuffle(enumerable).Take(amount);
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return Shuffle(source).Take(amount);
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            return enumerable.OrderBy(item => UnityEngine.Random.value);
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.OrderBy(item => rand.Next());
         }
 
-        public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsEmpty<T>(this IEnumerable<T> source)
         {
-            return !enumerable.Any();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return !source.Any();
         }
 
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
         {
-            return enumerable == null || enumerable.IsEmpty();
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return new ObservableCollection<T>(source);
         }
 
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable)
+        public static string AsString<T>(this IEnumerable<T> source)
         {
-            return new ObservableCollection<T>(enumerable);
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            return AsString(source, x => x?.ToString());
         }
 
-        public static string AsString<T>(this IEnumerable<T> enumerable)
+        public static string AsString<T>(this IEnumerable<T> source, string separator)
         {
-            return AsString(enumerable, x => x?.ToString());
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (separator is null)
+                throw new ArgumentNullException(nameof(separator));
+
+            return AsString(source, x => x?.ToString(), separator);
         }
 
-        public static string AsString<T>(this IEnumerable<T> enumerable, string separator)
+        public static string AsString<T>(this IEnumerable<T> source, Func<T, string> selector, string separator = ", ")
         {
-            return AsString(enumerable, x => x?.ToString(), separator);
-        }
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (separator is null)
+                throw new ArgumentNullException(nameof(selector));
 
-        public static string AsString<T>(this IEnumerable<T> enumerable, Func<T, string> selector, string separator = ", ")
-        {
-            return enumerable.IsEmpty() 
+            return source.IsEmpty() 
                 ? string.Empty 
-                : string.Join(separator, enumerable.Select(x => selector(x) ?? "null"));
+                : string.Join(separator, source.Select(x => selector(x) ?? "null"));
         }
     }
 }

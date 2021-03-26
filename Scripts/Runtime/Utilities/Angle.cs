@@ -8,13 +8,7 @@ namespace Evolutex.Evolunity.Utilities
     {
         public static float Normalize(float angle)
         {
-            while (angle > 360)
-                angle -= 360;
-            
-            while (angle < 0)
-                angle += 360;
-            
-            return angle;
+            return (360 + (Math.Sign(angle) * (Math.Abs(angle) % 360))) % 360;
         }
     }
 }
