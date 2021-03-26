@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.Animations
 {
-    [AddComponentMenu("Evolunity/Fade")]
+    [AddComponentMenu("Evolunity/Animations/Fade")]
     [RequireComponent(typeof(Image))]
     public class Fade : InOutBehaviour
     {

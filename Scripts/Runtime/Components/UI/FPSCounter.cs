@@ -5,8 +5,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components
+namespace Evolutex.Evolunity.Components.UI
 {
+    [AddComponentMenu("Evolunity/UI/FPS Counter")]
     [RequireComponent(typeof(Text))]
     public class FpsCounter : MonoBehaviour
     {

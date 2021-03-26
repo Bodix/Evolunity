@@ -9,6 +9,9 @@ using UnityEditor.SceneManagement;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
+    // TODO:
+    // Add UI for adding GameObject's to expand.
+    
     [InitializeOnLoad]
     public static class AutoExpandHierarchy
     {
@@ -18,7 +21,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
         {
             EditorSceneManager.sceneOpened += (scene, mode) =>
             {
-                gameObjectsToExpand.ForEach(name =>
+                GameObjectsToExpand.ForEach(name =>
                 {
                     GameObject gameObject = GameObject.Find(name);
                     if (gameObject)
@@ -31,8 +34,8 @@ namespace Evolutex.Evolunity.Editor.Utilities
                 gameObjectsBuffer.Clear();
             };
         }
-
-        public static readonly List<string> gameObjectsToExpand = new List<string>
+        
+        public static List<string> GameObjectsToExpand { get; } = new List<string>
         {
             "Player",
             "Logic",

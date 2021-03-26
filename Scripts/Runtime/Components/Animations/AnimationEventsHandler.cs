@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.Animations
 {
-    [AddComponentMenu("Evolunity/Animation Events Handler")]
+    [AddComponentMenu("Evolunity/Animations/Animation Events Handler")]
     [RequireComponent(typeof(Animator))]
     public class AnimationEventsHandler : MonoBehaviour
     {

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("UI/Long Press Reader")]
+    [AddComponentMenu("Evolunity/Input/Long Press Reader")]
     [RequireComponent(typeof(Graphic))]
     public sealed class LongPressReader : MonoBehaviour,
         IPointerDownHandler,

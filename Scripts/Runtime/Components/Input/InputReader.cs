@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("UI/Input Reader")]
+    [AddComponentMenu("Evolunity/Input/Input Reader")]
     [RequireComponent(typeof(Graphic))]
     public sealed class InputReader : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
