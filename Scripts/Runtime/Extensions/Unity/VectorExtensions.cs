@@ -9,6 +9,16 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class VectorExtensions
     {
+        public static Vector2 ToVector2(this Vector3 vector)
+        {
+            return vector;
+        }
+        
+        public static Vector3 ToVector3(this Vector2 vector)
+        {
+            return vector;
+        }
+        
         public static Vector2 WithX(this Vector2 vector, float value)
         {
             vector.x = value;

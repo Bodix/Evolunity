@@ -135,23 +135,5 @@ namespace Evolutex.Evolunity.Extensions
         {
             return (RectTransform) transform;
         }
-        
-        // Also may be useful:
-        // GUIUtility.GUIToScreenPoint
-        public static Rect ToScreenRect(this RectTransform rectTransform, Camera camera = null)
-        {
-            if (!camera)
-                camera = Camera.main;
-
-            Vector3[] corners = new Vector3[4];
-            rectTransform.GetWorldCorners(corners);
-            for (int i = 0; i < corners.Length; i++)
-                corners[i] = camera.WorldToScreenPoint(corners[i]);
-
-            Vector3 position = new Vector3(corners[1].x, Screen.height - corners[1].y);
-            Vector3 size = new Vector3(Screen.width - corners[0].x, Screen.height - corners[0].y) - position;
-
-            return new Rect(position, size);
-        }
     }
 }
