@@ -11,7 +11,7 @@ namespace Evolutex.Evolunity.Components
     // Make a covering of the corners.
     
     /// <summary>
-    /// Setups four <see cref="BoxCollider2D"/>'s around a given <see cref="Rect"/>.
+    /// Instantiates four <see cref="BoxCollider2D"/>'s around a given <see cref="Rect"/>.
     /// <para />
     /// <para />If enabled:
     /// <para /> - If the object has a <see cref="RectTransform"/>, this component will create
