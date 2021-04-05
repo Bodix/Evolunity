@@ -15,7 +15,7 @@ namespace Evolutex.Evolunity.Utilities
         {
             if (!component)
             {
-                component = new GameObject("Static Coroutine Object")
+                component = new GameObject("Static Coroutine")
                     {
                         hideFlags = HideFlags.HideAndDontSave
                     }

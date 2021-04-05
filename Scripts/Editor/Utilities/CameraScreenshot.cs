@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
+    // TODO:
+    // Use Screenshoter here (with instant screenshot method).
+    
     public static class CameraScreenshot
     {
         private static readonly string path = Application.dataPath.Replace("/Assets", "/Screenshots");

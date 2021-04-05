@@ -15,18 +15,28 @@ namespace Evolutex.Evolunity.Utilities
             ForFrames(1, onComplete);
         }
 
-        public static void ForFrames(int frames, Action onComplete)
+        public static void ForFrames(int frames, Action onComplete, MonoBehaviour coroutineHolder = null)
         {
+            ThrowIfLessThanZero(frames);
+
             if (frames > 0)
-                StaticCoroutine.Start(FramesDelay(frames, onComplete));
+                if (coroutineHolder)
+                    coroutineHolder.StartCoroutine(FramesDelay(frames, onComplete));
+                else
+                    StaticCoroutine.Start(FramesDelay(frames, onComplete));
             else
                 onComplete();
         }
 
-        public static void ForSeconds(float seconds, Action onComplete)
+        public static void ForSeconds(float seconds, Action onComplete, MonoBehaviour coroutineHolder = null)
         {
+            ThrowIfLessThanZero(seconds);
+
             if (seconds > 0)
-                StaticCoroutine.Start(SecondsDelay(seconds, onComplete));
+                if (coroutineHolder)
+                    coroutineHolder.StartCoroutine(SecondsDelay(seconds, onComplete));
+                else
+                    StaticCoroutine.Start(SecondsDelay(seconds, onComplete));
             else
                 onComplete();
         }
@@ -44,6 +54,12 @@ namespace Evolutex.Evolunity.Utilities
             yield return new WaitForSeconds(seconds);
 
             onComplete();
+        }
+
+        private static void ThrowIfLessThanZero(float delay)
+        {
+            if (delay < 0)
+                throw new ArgumentException("Delay can't be less than zero");
         }
     }
 }

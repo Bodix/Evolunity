@@ -18,7 +18,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
                 {
                     Assembly editorAssembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
                     Type logEntriesType = editorAssembly.GetType("UnityEditor.LogEntries");
-                    
+
                     clearMethod = logEntriesType.GetMethod("Clear");
                 }
 
