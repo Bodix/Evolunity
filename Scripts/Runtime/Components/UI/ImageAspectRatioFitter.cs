@@ -24,7 +24,8 @@ namespace Evolutex.Evolunity.Components.UI
 
         public void Fit()
         {
-            aspectRatioFitter.aspectRatio = (float)image.sprite.texture.width / image.sprite.texture.height;
+            if (image.sprite)
+                aspectRatioFitter.aspectRatio = (float) image.sprite.texture.width / image.sprite.texture.height;
         }
     }
 }
