@@ -11,9 +11,12 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class EnumerableExtensions
     {
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+        // System.Random is used because UnityEngine.Random only works in the main thread.
+        private static readonly Random random = new Random();
+
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 action(item);
 
@@ -21,10 +24,10 @@ namespace Evolutex.Evolunity.Extensions
             }
         }
 
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
         {
             int index = 0;
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 action(item, index++);
 
@@ -32,46 +35,43 @@ namespace Evolutex.Evolunity.Extensions
             }
         }
 
-        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> predicate)
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, bool> predicate)
         {
-            return condition ? enumerable.Where(predicate) : enumerable;
+            return condition ? source.Where(predicate) : source;
         }
 
-        public static IEnumerable<T> TakeUntil<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static IEnumerable<T> TakeUntil<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            return enumerable.TakeWhile(item => !predicate(item));
+            return source.TakeWhile(item => !predicate(item));
         }
 
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumerable, T item)
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T item)
         {
-            return enumerable.Except(Enumerable.Repeat(item, 1));
+            return source.Except(Enumerable.Repeat(item, 1));
         }
 
-        public static IEnumerable<T> Concat<T>(IEnumerable<T> enumerable, T item)
+        public static IEnumerable<T> Concat<T>(IEnumerable<T> source, T item)
         {
-            return enumerable.Concat(Enumerable.Repeat(item, 1));
+            return source.Concat(Enumerable.Repeat(item, 1));
         }
 
-        public static IEnumerable<T> OrEmpty<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> OrEmpty<T>(this IEnumerable<T> source)
         {
-            return enumerable ?? Enumerable.Empty<T>();
+            return source ?? Enumerable.Empty<T>();
         }
 
-        public static IEnumerable<T> Reverse<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Reverse<T>(this IEnumerable<T> source)
         {
-            T[] array = enumerable.ToArray();
-
-            for (int i = array.Length - 1; i >= 0; i--)
-                yield return array[i];
+            return Enumerable.Reverse(source);
         }
 
-        public static T MinBy<T, TMin>(this IEnumerable<T> enumerable, Func<T, TMin> selector)
+        public static T MinBy<T, TMin>(this IEnumerable<T> source, Func<T, TMin> selector)
             where TMin : IComparable<TMin>
         {
             T min = default;
             bool first = true;
 
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 if (first)
                 {
@@ -87,13 +87,13 @@ namespace Evolutex.Evolunity.Extensions
             return min;
         }
 
-        public static T MaxBy<T, TMax>(this IEnumerable<T> enumerable, Func<T, TMax> selector)
+        public static T MaxBy<T, TMax>(this IEnumerable<T> source, Func<T, TMax> selector)
             where TMax : IComparable<TMax>
         {
             T max = default;
             bool first = true;
 
-            foreach (T item in enumerable)
+            foreach (T item in source)
             {
                 if (first)
                 {
@@ -109,25 +109,25 @@ namespace Evolutex.Evolunity.Extensions
             return max;
         }
 
-        public static T FirstOrNull<T>(this IEnumerable<T> enumerable) where T : class
+        public static T FirstOrNull<T>(this IEnumerable<T> source) where T : class
         {
-            return enumerable.DefaultIfEmpty(null).FirstOrDefault();
+            return source.DefaultIfEmpty(null).FirstOrDefault();
         }
 
-        public static T Random<T>(this IEnumerable<T> enumerable)
+        public static T Random<T>(this IEnumerable<T> source)
         {
-            T[] array = enumerable.ToArray();
+            T[] array = source.ToArray();
 
-            return array[UnityEngine.Random.Range(0, array.Length)];
+            return array[random.Next(0, array.Length)];
         }
 
-        public static T Random<T>(this IEnumerable<T> enumerable, Func<T, float> chanceSelector)
+        public static T Random<T>(this IEnumerable<T> source, Func<T, float> chanceSelector)
         {
-            T[] orderedArray = enumerable.OrderByDescending(chanceSelector).ToArray();
+            T[] orderedArray = source.OrderByDescending(chanceSelector).ToArray();
 
             float[] chances = orderedArray.Select(chanceSelector).ToArray();
             float totalChance = chances.Sum();
-            float chance = UnityEngine.Random.Range(0, totalChance);
+            double chance = random.NextDouble() * totalChance;
 
             int index = 0;
             for (int i = 0; i < chances.Length; i++)
@@ -144,46 +144,46 @@ namespace Evolutex.Evolunity.Extensions
             return orderedArray[index];
         }
 
-        public static IEnumerable<T> Random<T>(this IEnumerable<T> enumerable, int amount)
+        public static IEnumerable<T> Random<T>(this IEnumerable<T> source, int amount)
         {
-            return Shuffle(enumerable).Take(amount);
+            return Shuffle(source).Take(amount);
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            return enumerable.OrderBy(item => UnityEngine.Random.value);
+            return source.OrderBy(item => random.Next());
         }
 
-        public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsEmpty<T>(this IEnumerable<T> source)
         {
-            return !enumerable.Any();
+            return !source.Any();
         }
 
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
         {
-            return enumerable == null || enumerable.IsEmpty();
+            return source == null || source.IsEmpty();
         }
 
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable)
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
         {
-            return new ObservableCollection<T>(enumerable);
+            return new ObservableCollection<T>(source);
         }
 
-        public static string AsString<T>(this IEnumerable<T> enumerable)
+        public static string AsString<T>(this IEnumerable<T> source)
         {
-            return AsString(enumerable, x => x?.ToString());
+            return AsString(source, x => x?.ToString());
         }
 
-        public static string AsString<T>(this IEnumerable<T> enumerable, string separator)
+        public static string AsString<T>(this IEnumerable<T> source, string separator)
         {
-            return AsString(enumerable, x => x?.ToString(), separator);
+            return AsString(source, x => x?.ToString(), separator);
         }
 
-        public static string AsString<T>(this IEnumerable<T> enumerable, Func<T, string> selector, string separator = ", ")
+        public static string AsString<T>(this IEnumerable<T> source, Func<T, string> selector, string separator = ", ")
         {
-            return enumerable.IsEmpty() 
-                ? string.Empty 
-                : string.Join(separator, enumerable.Select(x => selector(x) ?? "null"));
+            return source.IsEmpty()
+                ? string.Empty
+                : string.Join(separator, source.Select(x => selector(x) ?? "null"));
         }
     }
 }

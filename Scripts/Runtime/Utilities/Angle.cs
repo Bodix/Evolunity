@@ -6,15 +6,15 @@ namespace Evolutex.Evolunity.Utilities
 {
     public static class Angle
     {
+        /// <summary>
+        /// Normalize angle within [-360, 360].
+        /// </summary>
         public static float Normalize(float angle)
         {
-            while (angle > 360)
-                angle -= 360;
+            if (angle == -360 || angle == 360)
+                return angle;
             
-            while (angle < 0)
-                angle += 360;
-            
-            return angle;
+            return angle % 360;
         }
     }
 }
