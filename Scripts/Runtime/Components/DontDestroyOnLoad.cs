@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Don't Destroy On Load", 10000)]
+    [AddComponentMenu("Evolunity/Don't Destroy On Load")]
     [DisallowMultipleComponent]
     public sealed class DontDestroyOnLoad : MonoBehaviour
     {

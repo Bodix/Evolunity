@@ -11,10 +11,10 @@ namespace Evolutex.Evolunity.Components
     {
         public string Message;
         public CommentType Type = CommentType.Info;
-        
-        private void Awake()
+
+        private void OnValidate()
         {
-            enabled = false;
+            hideFlags = HideFlags.DontSaveInBuild;
         }
 
         public enum CommentType

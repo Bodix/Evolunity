@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Platform Dependent", 10000)]
+    [AddComponentMenu("Evolunity/Platform Dependent")]
     [DisallowMultipleComponent]
     public sealed class PlatformDependent : MonoBehaviour
     {
