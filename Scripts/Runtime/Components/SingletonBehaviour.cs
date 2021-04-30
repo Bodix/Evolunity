@@ -34,12 +34,12 @@ namespace Evolutex.Evolunity.Components
 
                 lock (lockObject)
                 {
-                    if (instance == null)
+                    if (!IsInstanceExists)
                     {
                         if (FindInstanceIfNull)
                             instance = FindObjectOfType<T>();
 
-                        if (instance != null)
+                        if (IsInstanceExists)
                         {
                             if (Logs)
                                 Debug.Log(debugPrefix + "An instance was found on the scene");
@@ -61,9 +61,11 @@ namespace Evolutex.Evolunity.Components
             }
         }
 
+        public static bool IsInstanceExists => instance != null;
+
         protected virtual void Awake()
         {
-            if (instance == null)
+            if (!IsInstanceExists)
             {
                 instance = (T) this;
 
