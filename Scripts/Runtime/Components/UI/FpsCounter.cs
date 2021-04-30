@@ -8,6 +8,7 @@ using UnityEngine.UI;
 namespace Evolutex.Evolunity.Components.UI
 {
     // This makes no sense because the Game window is not updated every frame in the editor.
+    // FPS in the editor can be get for Stats panel.
     // [ExecuteAlways]
     [AddComponentMenu("Evolunity/UI/FPS Counter")]
     [RequireComponent(typeof(Text))]
@@ -29,14 +30,14 @@ namespace Evolutex.Evolunity.Components.UI
         private void Update()
         {
             fpsSinceLastMeasurement++;
-            
+
             if (Time.realtimeSinceStartup >= nextMeasurementTime)
             {
                 CurrentFPS = Mathf.Round(fpsSinceLastMeasurement / MeasurementPeriod);
-                
+
                 nextMeasurementTime += MeasurementPeriod;
                 fpsSinceLastMeasurement = 0;
-                
+
                 text.text = CurrentFPS.ToString();
             }
         }
