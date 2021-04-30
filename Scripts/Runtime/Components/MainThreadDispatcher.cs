@@ -26,6 +26,9 @@
     limitations under the License.
 */
 
+// Author: Pim de Witte (pimdewitte.com) and contributors
+// https://github.com/PimDeWitte/UnityMainThreadDispatcher
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,13 +37,9 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-
     /// <summary>
-    /// Author: Pim de Witte (pimdewitte.com) and contributors, https://github.com/PimDeWitte/UnityMainThreadDispatcher
-    /// <para />
-    /// <para />
-    /// A thread-safe class which holds a queue with actions to execute on the next Update() method. It can be used to make calls to the main thread for
-    /// things such as UI manipulation in Unity. It was developed for use in combination with the Firebase Unity plugin, which uses separate threads for event handling
+    /// A thread-safe class that holds a queue with actions to execute on the next <see cref="Update"/> method.
+    /// It can be used to execute functions in the main thread.
     /// </summary>
     [AddComponentMenu("Evolunity/Main Thread Dispatcher")]
     public class MainThreadDispatcher : SingletonBehaviour<MainThreadDispatcher>
@@ -55,9 +54,8 @@ namespace Evolutex.Evolunity.Components
         }
 
         /// <summary>
-        /// Locks the queue and adds the Action to the queue
+        /// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
         /// </summary>
-        /// <param name="action">function that will be executed from the main thread.</param>
         public void Enqueue(Action action)
         {
             lock (actionQueue)
@@ -65,9 +63,8 @@ namespace Evolutex.Evolunity.Components
         }
 
         /// <summary>
-        /// Locks the queue and adds the IEnumerator to the queue
+        /// Locks the queue and adds the <see cref="IEnumerator"/> to the queue to be executed in the main thread.
         /// </summary>
-        /// <param name="routine">IEnumerator function that will be executed from the main thread.</param>
         public void EnqueueStartCoroutine(IEnumerator routine)
         {
             lock (actionQueue)
@@ -75,10 +72,11 @@ namespace Evolutex.Evolunity.Components
         }
 
         /// <summary>
-        /// Locks the queue and adds the Action to the queue, returning a Task which is completed when the action completes
+        /// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
         /// </summary>
-        /// <param name="action">function that will be executed from the main thread.</param>
-        /// <returns>A Task that can be awaited until the action completes</returns>
+        /// <returns>
+        /// A <see cref="Task"/> that is completed when the action completes.
+        /// </returns>
         public Task EnqueueAsync(Action action)
         {
             TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
