@@ -107,7 +107,7 @@ namespace Evolutex.Evolunity.Extensions
             return transform.Cast<Transform>().ToList();
         }
         
-        public static List<Transform> GetChildrenRecursive(this Transform transform, List<Transform> childrenList = null)
+        public static List<Transform> GetChildrenRecursively(this Transform transform, List<Transform> childrenList = null)
         {
             if (childrenList == null) 
                 childrenList = new List<Transform>();
@@ -116,7 +116,7 @@ namespace Evolutex.Evolunity.Extensions
             {
                 childrenList.Add(child);
                 
-                child.GetChildrenRecursive(childrenList);
+                child.GetChildrenRecursively(childrenList);
             }
 
             return childrenList;

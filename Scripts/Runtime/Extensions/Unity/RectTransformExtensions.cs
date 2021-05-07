@@ -9,7 +9,7 @@ namespace Evolutex.Evolunity.Extensions
     public static class RectTransformExtensions
     {
         private static readonly Vector3[] worldCornersBuffer = new Vector3[4];
-        
+
         // https://answers.unity.com/questions/1100493/convert-recttransformrect-to-rect-world.html
         public static Rect GetWorldRect(this RectTransform rectTransform)
         {
@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Extensions
 
             return new Rect(position, size);
         }
-        
+
         // https://answers.unity.com/questions/1013011/convert-recttransform-rect-to-screen-space.html
         // Also may be useful:
         // GUIUtility.GUIToScreenPoint
@@ -61,16 +61,6 @@ namespace Evolutex.Evolunity.Extensions
                 return canvas.isRootCanvas ? canvas : canvas.rootCanvas;
             else
                 return null;
-        }
-        
-        public static bool OverlapsCompletelyBy(this Rect rect, Rect otherRect)
-        {
-            return OverlapsCompletely(otherRect, rect);
-        }
-
-        public static bool OverlapsCompletely(this Rect rect, Rect otherRect)
-        {
-            return rect.Contains(otherRect.min) && rect.Contains(otherRect.max);
         }
     }
 }

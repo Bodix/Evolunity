@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
@@ -48,6 +49,18 @@ namespace Evolutex.Evolunity.Extensions
             return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                 new Vector2(texture.width / 2f, texture.height / 2f), pixelsPerUnit, extrude,
                 meshType, border, generateFallbackPhysicsShape);
+        }
+        
+        public static string ToBase64(this Texture2D texture)
+        {
+            return Convert.ToBase64String(texture.EncodeToPNG());
+        }
+        
+        public static Texture2D LoadFromBase64(this Texture2D texture, string base64String)
+        {
+            texture.LoadImage(Convert.FromBase64String(base64String));
+            
+            return texture;
         }
     }
 }

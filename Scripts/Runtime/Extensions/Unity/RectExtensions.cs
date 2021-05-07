@@ -285,6 +285,16 @@ namespace Evolutex.Evolunity.Extensions
             return new Rect(rect.x + width * start, rect.y, width * length, rect.height);
         }
 
+        public static bool OverlapsCompletelyBy(this Rect rect, Rect otherRect)
+        {
+            return OverlapsCompletely(otherRect, rect);
+        }
+
+        public static bool OverlapsCompletely(this Rect rect, Rect otherRect)
+        {
+            return rect.Contains(otherRect.min) && rect.Contains(otherRect.max);
+        }
+
         #endregion
     }
 }

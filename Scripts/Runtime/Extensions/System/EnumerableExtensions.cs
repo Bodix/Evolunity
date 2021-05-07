@@ -153,6 +153,11 @@ namespace Evolutex.Evolunity.Extensions
         {
             return source.OrderBy(item => random.Next());
         }
+        
+        public static IEnumerable<T> Clone<T>(this IEnumerable<T> source) where T : ICloneable
+        {
+            return source.Select(item => (T)item.Clone()).ToList();
+        }
 
         public static bool IsEmpty<T>(this IEnumerable<T> source)
         {
