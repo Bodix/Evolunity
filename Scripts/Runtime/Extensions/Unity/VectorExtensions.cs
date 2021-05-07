@@ -13,12 +13,12 @@ namespace Evolutex.Evolunity.Extensions
         {
             return vector;
         }
-        
+
         public static Vector3 ToVector3(this Vector2 vector)
         {
             return vector;
         }
-        
+
         public static Vector2 WithX(this Vector2 vector, float value)
         {
             vector.x = value;
@@ -135,7 +135,7 @@ namespace Evolutex.Evolunity.Extensions
             angles.x = Angle.Normalize(angles.x);
             angles.y = Angle.Normalize(angles.y);
             angles.z = Angle.Normalize(angles.z);
-            
+
             return angles;
         }
     }

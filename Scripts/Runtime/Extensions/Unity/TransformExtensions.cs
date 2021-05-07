@@ -39,21 +39,21 @@ namespace Evolutex.Evolunity.Extensions
         {
             transform.localPosition = transform.localPosition.WithZ(value);
         }
-        
+
         public static void Reset(this Transform transform)
         {
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             transform.localScale = Vector3.one;
         }
-        
+
         public static void SetParentAndAlign(this Transform transform, Transform parent, bool keepLocalTransform = true)
         {
             Vector3 localPosition = transform.localPosition;
             Quaternion localRotation = transform.localRotation;
-            
+
             transform.SetParent(parent);
-            
+
             if (keepLocalTransform)
             {
                 transform.localPosition = localPosition;
@@ -65,38 +65,38 @@ namespace Evolutex.Evolunity.Extensions
                 transform.localRotation = Quaternion.identity;
             }
         }
-        
+
         // https://forum.unity.com/threads/solved-how-to-get-rotation-value-that-is-in-the-inspector.460310/#post-4564687
         public static Vector3 GetInspectorRotation(this Transform transform)
         {
             Vector3 angle = transform.eulerAngles;
-            
+
             float x = angle.x;
             float y = angle.y;
             float z = angle.z;
 
             if (Vector3.Dot(transform.up, Vector3.up) >= 0f)
             {
-                if (angle.x >= 0f && angle.x <= 90f) 
+                if (angle.x >= 0f && angle.x <= 90f)
                     x = angle.x;
 
-                if (angle.x >= 270f && angle.x <= 360f) 
+                if (angle.x >= 270f && angle.x <= 360f)
                     x = angle.x - 360f;
             }
 
             if (Vector3.Dot(transform.up, Vector3.up) < 0f)
             {
-                if (angle.x >= 0f && angle.x <= 90f) 
+                if (angle.x >= 0f && angle.x <= 90f)
                     x = 180 - angle.x;
 
-                if (angle.x >= 270f && angle.x <= 360f) 
+                if (angle.x >= 270f && angle.x <= 360f)
                     x = 180 - angle.x;
             }
 
-            if (angle.y > 180) 
+            if (angle.y > 180)
                 y = angle.y - 360f;
 
-            if (angle.z > 180) 
+            if (angle.z > 180)
                 z = angle.z - 360f;
 
             return new Vector3(x, y, z);
@@ -106,16 +106,17 @@ namespace Evolutex.Evolunity.Extensions
         {
             return transform.Cast<Transform>().ToList();
         }
-        
-        public static List<Transform> GetChildrenRecursively(this Transform transform, List<Transform> childrenList = null)
+
+        public static List<Transform> GetChildrenRecursively(this Transform transform,
+            List<Transform> childrenList = null)
         {
-            if (childrenList == null) 
+            if (childrenList == null)
                 childrenList = new List<Transform>();
 
             foreach (Transform child in transform)
             {
                 childrenList.Add(child);
-                
+
                 child.GetChildrenRecursively(childrenList);
             }
 
@@ -129,6 +130,23 @@ namespace Evolutex.Evolunity.Extensions
 
             // Update transform.childCount in the current frame.
             transform.DetachChildren();
+        }
+
+        public static void DestroyChildrenImmediate(this Transform transform,
+            bool allowDestroyingAssets = false, bool activeOnly = false)
+        {
+            Transform[] children = transform.GetComponentsInChildren<Transform>();
+
+            foreach (Transform child in children)
+            {
+                if (child == transform)
+                    continue;
+
+                if (activeOnly && !child.gameObject.activeSelf)
+                    continue;
+
+                Object.DestroyImmediate(child.gameObject, allowDestroyingAssets);
+            }
         }
 
         public static RectTransform ToRectTransform(this Transform transform)

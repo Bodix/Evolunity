@@ -65,6 +65,27 @@ namespace Evolutex.Evolunity.Extensions
             return Enumerable.Reverse(source);
         }
 
+        public static IEnumerable<T> ResizeWithRepeating<T>(this IEnumerable<T> source,
+            int newSize, T defaultValue = default)
+        {
+            List<T> list = source.ToList();
+            int currentSize = list.Count;
+
+            if (newSize < currentSize)
+            {
+                list.RemoveRange(newSize, currentSize - newSize);
+            }
+            else if (newSize > currentSize)
+            {
+                if (newSize > list.Capacity)
+                    list.Capacity = newSize;
+
+                list.AddRange(Enumerable.Repeat(defaultValue, newSize - currentSize));
+            }
+
+            return list;
+        }
+
         public static T MinBy<T, TMin>(this IEnumerable<T> source, Func<T, TMin> selector)
             where TMin : IComparable<TMin>
         {
@@ -153,10 +174,10 @@ namespace Evolutex.Evolunity.Extensions
         {
             return source.OrderBy(item => random.Next());
         }
-        
+
         public static IEnumerable<T> Clone<T>(this IEnumerable<T> source) where T : ICloneable
         {
-            return source.Select(item => (T)item.Clone()).ToList();
+            return source.Select(item => (T) item.Clone()).ToList();
         }
 
         public static bool IsEmpty<T>(this IEnumerable<T> source)

@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Utilities
 
         public static T Parse(string value, bool ignoreCase = true)
         {
-            return (T)Enum.Parse(typeof(T), value, ignoreCase);
+            return (T) Enum.Parse(typeof(T), value, ignoreCase);
         }
 
         public static T[] GetValues()
@@ -27,7 +27,7 @@ namespace Evolutex.Evolunity.Utilities
         {
             Array values = Enum.GetValues(typeof(T));
 
-            return (T)values.GetValue(new Random().Next(values.Length));
+            return (T) values.GetValue(new Random().Next(values.Length));
         }
     }
 }
