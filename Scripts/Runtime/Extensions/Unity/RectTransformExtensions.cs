@@ -23,8 +23,6 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         // https://answers.unity.com/questions/1013011/convert-recttransform-rect-to-screen-space.html
-        // Also may be useful:
-        // GUIUtility.GUIToScreenPoint
         public static Rect GetScreenRect(this RectTransform rectTransform)
         {
             Vector2 size = Vector2.Scale(rectTransform.rect.size, rectTransform.lossyScale);

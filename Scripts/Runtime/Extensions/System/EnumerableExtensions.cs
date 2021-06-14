@@ -17,6 +17,23 @@ namespace Evolutex.Evolunity.Extensions
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             foreach (T item in source)
+                action(item);
+
+            return source;
+        }
+
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
+        {
+            int index = 0;
+            foreach (T item in source)
+                action(item, index++);
+
+            return source;
+        }
+
+        public static IEnumerable<T> ForEachLazy<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (T item in source)
             {
                 action(item);
 
@@ -24,7 +41,7 @@ namespace Evolutex.Evolunity.Extensions
             }
         }
 
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
+        public static IEnumerable<T> ForEachLazy<T>(this IEnumerable<T> source, Action<T, int> action)
         {
             int index = 0;
             foreach (T item in source)
@@ -177,7 +194,7 @@ namespace Evolutex.Evolunity.Extensions
 
         public static IEnumerable<T> Clone<T>(this IEnumerable<T> source) where T : ICloneable
         {
-            return source.Select(item => (T) item.Clone()).ToList();
+            return source.Select(item => (T)item.Clone()).ToList();
         }
 
         public static bool IsEmpty<T>(this IEnumerable<T> source)

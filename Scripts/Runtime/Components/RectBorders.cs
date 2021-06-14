@@ -9,7 +9,7 @@ namespace Evolutex.Evolunity.Components
 {
     // TODO:
     // Make a covering of the corners.
-    
+
     /// <summary>
     /// Instantiates four <see cref="BoxCollider2D"/>'s around a given <see cref="Rect"/>.
     /// <para />
@@ -27,7 +27,7 @@ namespace Evolutex.Evolunity.Components
         public float Thickness = 1f;
         [Min(0.01f)]
         [Tooltip("The distance from point of view of perspective camera. " +
-                 "There will no effect if the camera is orthographic")]
+            "There will no effect if the camera is orthographic")]
         public float PerspectiveZOffset = 1f;
         public Camera Camera;
 
@@ -129,7 +129,7 @@ namespace Evolutex.Evolunity.Components
                 Vector3 rectMax = !Camera.orthographic
                     ? screenRect.max.ToVector3().WithZ(PerspectiveZOffset)
                     : screenRect.max.ToVector3();
-            
+
                 width = Vector2.Distance(
                     Camera.ScreenToWorldPoint(rectMax.WithY(0)),
                     Camera.ScreenToWorldPoint(rectMin));

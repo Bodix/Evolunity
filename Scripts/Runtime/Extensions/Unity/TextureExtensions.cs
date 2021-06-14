@@ -56,9 +56,9 @@ namespace Evolutex.Evolunity.Extensions
             return Convert.ToBase64String(texture.EncodeToPNG());
         }
         
-        public static Texture2D LoadFromBase64(this Texture2D texture, string base64String)
+        public static Texture2D LoadFromBase64(this Texture2D texture, string base64Texture)
         {
-            texture.LoadImage(Convert.FromBase64String(base64String));
+            texture.LoadImage(Convert.FromBase64String(base64Texture));
             
             return texture;
         }
