@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Extensions
     {
         public delegate void ResponseHandler(UnityWebRequest response);
 
-        public static CoroutineWrapper WaitForResponseInWrappedCoroutine(
+        public static WrappedCoroutine WaitForResponseInWrappedCoroutine(
             this UnityWebRequestAsyncOperation asyncOperation, MonoBehaviour monoBehaviour, ResponseHandler onComplete)
         {
             return monoBehaviour.StartWrappedCoroutine(WaitForResponse(asyncOperation, onComplete));

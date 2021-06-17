@@ -18,9 +18,9 @@ namespace Evolutex.Evolunity.Extensions
         // WaitForSeconds
         // WaitForSecondsRealtime
 
-        public static CoroutineWrapper StartWrappedCoroutine(this MonoBehaviour monoBehaviour, IEnumerator routine)
+        public static WrappedCoroutine StartWrappedCoroutine(this MonoBehaviour monoBehaviour, IEnumerator routine)
         {
-            return new CoroutineWrapper(monoBehaviour, routine).Start();
+            return new WrappedCoroutine(monoBehaviour, routine).Start();
         }
 
         public static Coroutine WaitInCoroutineUntil(this MonoBehaviour monoBehaviour, Func<bool> conditionPredicate,

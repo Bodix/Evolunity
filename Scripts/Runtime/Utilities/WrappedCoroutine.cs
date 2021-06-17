@@ -13,24 +13,24 @@ namespace Evolutex.Evolunity.Utilities
     // 2. Add completion callback.
     // 3. Implement IDisposable and check the disposing.
 
-    public class CoroutineWrapper
+    public class WrappedCoroutine
     {
         private readonly IEnumerator routine;
         
-        public static implicit operator Coroutine(CoroutineWrapper wrapper) => wrapper.Coroutine;
+        public static implicit operator Coroutine(WrappedCoroutine wrapper) => wrapper.Coroutine;
 
         public MonoBehaviour Owner { get; }
         public Coroutine Coroutine { get; private set; }
         public bool IsRunning => Coroutine != null;
 
-        public CoroutineWrapper(MonoBehaviour owner, IEnumerator routine)
+        public WrappedCoroutine(MonoBehaviour owner, IEnumerator routine)
         {
             this.routine = routine;
             
             Owner = owner;
         }
 
-        public CoroutineWrapper Start()
+        public WrappedCoroutine Start()
         {
             if (IsRunning)
                 throw new InvalidOperationException("The coroutine is already started");
