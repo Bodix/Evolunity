@@ -8,8 +8,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
-    // TODO:
-    // Use Screenshoter here (with instant screenshot method).
+    // TODO: Use Screenshoter here (with instant screenshot method).
     
     public static class CameraScreenshot
     {

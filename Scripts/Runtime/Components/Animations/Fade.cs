@@ -25,11 +25,6 @@ namespace Evolutex.Evolunity.Components.Animations
             image = GetComponent<Image>();
         }
 
-        private void OnValidate()
-        {
-            image = GetComponent<Image>();
-        }
-
         protected override IEnumerator InCoroutine(Action onComplete = null)
         {
             IsPlaying = true;

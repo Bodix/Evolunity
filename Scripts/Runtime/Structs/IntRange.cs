@@ -8,13 +8,13 @@ using Random = UnityEngine.Random;
 
 namespace Evolutex.Evolunity.Structs
 {
-    // TO DO:
-    // Intersection.
-    // IntersectionLength.
-    // NormalizedIntersectionLength.
-    // Intersects.
-    // Overlaps.
-    // '+', '-', '*', '/' operators.
+    // TODO:
+    // 1. Intersection.
+    // 2. IntersectionLength.
+    // 3. NormalizedIntersectionLength.
+    // 4. Intersects.
+    // 5. Overlaps.
+    // 6. '+', '-', '*', '/' operators.
     
     [Serializable]
     public struct IntRange

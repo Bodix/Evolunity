@@ -13,8 +13,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
     [CustomPropertyDrawer(typeof(IntRange))]
     public class RangeDrawer : PropertyDrawer
     {
-        // TO DO:
-        // Change rects getting to cutting.
+        // TODO: Change rects getting to cutting.
         
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

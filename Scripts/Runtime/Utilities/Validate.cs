@@ -7,8 +7,8 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Utilities
 {
     // TODO:
-    // Password (regex).
-    // Email (regex).
+    // 1. Password (regex).
+    // 2. Email (regex).
     
     public static class Validate
     {

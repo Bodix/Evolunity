@@ -8,14 +8,12 @@ using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components
 {
-    // TO DO:
-    //
+    // TODO:
     // 1. Test saving time delta:
     // private void RestartTimer()
     // {
     //     timer -= Period;
     // }
-    //
     // 2. Compare performance with PeriodicCoroutineBehaviour.
     
     [AddComponentMenu("Evolunity/Periodic Behaviour")]

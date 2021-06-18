@@ -7,8 +7,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    // TODO:
-    // Make a covering of the corners.
+    // TODO: Make a covering of the corners.
 
     /// <summary>
     /// Instantiates four <see cref="BoxCollider2D"/>'s around a given <see cref="Rect"/>.

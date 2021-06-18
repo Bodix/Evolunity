@@ -11,21 +11,47 @@ namespace Evolutex.Evolunity.Components.UI
     [RequireComponent(typeof(AspectRatioFitter), typeof(Image))]
     public class ImageAspectRatioFitter : MonoBehaviour
     {
+        [HideInInspector]
+        [SerializeField]
         private AspectRatioFitter aspectRatioFitter;
+        [HideInInspector]
+        [SerializeField]
         private Image image;
+
+        private bool IsInitialized => aspectRatioFitter && image;
+
+        private void OnValidate()
+        {
+            InitializeIfRequired();
+        }
+
+        private void Awake()
+        {
+            InitializeIfRequired();
+        }
 
         private void Start()
         {
-            aspectRatioFitter = GetComponent<AspectRatioFitter>();
-            image = GetComponent<Image>();
-
             Fit();
         }
 
         public void Fit()
         {
+            InitializeIfRequired();
+            
             if (image.sprite)
-                aspectRatioFitter.aspectRatio = (float) image.sprite.texture.width / image.sprite.texture.height;
+                aspectRatioFitter.aspectRatio = (float)image.sprite.texture.width / image.sprite.texture.height;
+            else
+                Debug.LogWarning("Trying to use ImageAspectRatioFitter on Image without sprite");
+        }
+
+        private void InitializeIfRequired()
+        {
+            if (!IsInitialized)
+            {
+                aspectRatioFitter = GetComponent<AspectRatioFitter>();
+                image = GetComponent<Image>();
+            }
         }
     }
 }

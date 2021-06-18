@@ -12,11 +12,11 @@ namespace Evolutex.Evolunity.Extensions
     public static class MonoBehaviourExtensions
     {
         // TODO:
-        // WaitInWrappedCoroutine
-        // WaitForEndOfFrame
-        // WaitForFixedUpdate
-        // WaitForSeconds
-        // WaitForSecondsRealtime
+        // 1. WaitInWrappedCoroutine.
+        // 2. WaitForEndOfFrame.
+        // 3. WaitForFixedUpdate.
+        // 4. WaitForSeconds.
+        // 5. WaitForSecondsRealtime.
 
         public static WrappedCoroutine StartWrappedCoroutine(this MonoBehaviour monoBehaviour, IEnumerator routine)
         {

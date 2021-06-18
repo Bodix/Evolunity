@@ -10,9 +10,9 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Patterns.StateMachine
 {
-    // TO DO:
-    // EnterPreviousState method.
-    // Make property drawer for state type selection.
+    // TODO:
+    // 1. EnterPreviousState method.
+    // 2. Make property drawer for state type selection.
 
     public class StateMachine : IEnumerable<State>
     {

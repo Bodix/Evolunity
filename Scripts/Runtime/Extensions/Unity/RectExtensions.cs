@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    // TO DO:
+    // TODO:
     // 1. Add cutting.
     // 2. Add stretching.
     // 3. Replace Split methods with https://github.com/slavniyteo/rect-ex.

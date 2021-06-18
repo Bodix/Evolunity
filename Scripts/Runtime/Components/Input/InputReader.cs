@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Components
     [RequireComponent(typeof(Graphic))]
     public sealed class InputReader : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
-        // TO DO: Rotate.
+        // TODO: Rotate.
         
         public event Action<Vector2> Drag;
         public event Action<Vector2> DoubleDrag;

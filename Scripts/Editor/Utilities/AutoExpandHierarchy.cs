@@ -9,8 +9,7 @@ using UnityEditor.SceneManagement;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
-    // TODO:
-    // Add UI for adding GameObject's to expand.
+    // TODO: Add UI for adding GameObject's to expand.
     
     [InitializeOnLoad]
     public static class AutoExpandHierarchy
