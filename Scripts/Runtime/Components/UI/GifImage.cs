@@ -24,7 +24,7 @@ namespace Evolutex.Evolunity.Components.UI
         private Image image;
 
         public Sprite[] Sprites => sprites;
-        public bool IsPlaying { get; private set; }
+        public bool IsPlaying { get; private set; } = true;
         public bool IsContainsSprites => Sprites.Length != 0;
         private bool IsInitialized => image;
 
@@ -40,8 +40,8 @@ namespace Evolutex.Evolunity.Components.UI
 
         private void Start()
         {
-            if (IsContainsSprites)
-                IsPlaying = true;
+            if (!IsContainsSprites)
+                IsPlaying = false;
         }
 
         private void Update()
