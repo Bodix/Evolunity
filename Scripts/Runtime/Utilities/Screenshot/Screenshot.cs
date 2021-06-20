@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Screenshoter
+namespace Evolutex.Evolunity.Utilities.Screenshot
 {
     public static class Screenshot
     {

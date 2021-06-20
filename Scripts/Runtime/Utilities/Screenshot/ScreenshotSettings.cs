@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Screenshoter
+namespace Evolutex.Evolunity.Utilities.Screenshot
 {
     public class ScreenshotSettings
     {

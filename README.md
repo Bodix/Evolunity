@@ -7,37 +7,19 @@ Well-designed package with useful scripting tools for Unity development.
 
 ## Content
 
-### Extension methods
-
-- System types:
-  - `char`
-  - `string`
-  - `byte[]`
-  - `IDictionary`
-  - `IEnumerable`
-  - `IComparable`
-
-- Unity types:
-  - `Animator`
-  - `Color`
-  - `Graphic`
-  - `LayerMask`
-  - `Quaternion`
-  - `Rect`
-  - `Renderer`
-  - `Transform`
-  - `Vector`
-
 ### Utilities
 
 - `StaticCoroutine` - Static coroutine.
 - `Delay` - Utility for calling functions with a delay. Based on `StaticCoroutine`.
+- `Screenshot` - Utility for quick and easy screenshots.
 - `Performance` - Utility for measuring functions performance.
 - `BinarySerializer` - Utility for serializing objects.
 - `StringEncryptor` - Utility for encrypting strings.
 - `Enum` - Utility for parsing and working with enums.
 - `Angle` - Utility for working with angles.
 - `RegexPatterns` - Set of default regular expression patterns.
+- `Validate` - Utility for validating various things.
+- `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
 
 ### Unity components
 
@@ -45,6 +27,7 @@ Well-designed package with useful scripting tools for Unity development.
 - `Spawner` - Spawns objects one-time or periodically. Based on `PeriodicBehaviour`.
 - `InputReader` - Reads click, drag and zoom (cross-platform).
 - `LongPressReader` - Reads long press (cross-platform).
+- `GifImage` - Plays an array of sprites like a gif.
 - `FPSCounter` - Counts FPS and outputs it to the `Text` component.
 - `Comment` - Contains a comment to the GameObject.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
@@ -71,8 +54,37 @@ Well-designed package with useful scripting tools for Unity development.
 
 ### Other
 
+- `Singleton` - [POCO](https://ru.wikipedia.org/wiki/Plain_old_CLR_object) singleton.
 - `StateMachine` - Immutable state machine without using strings, enums or reflections.
 - `WeightQueue` - Queue filled with elements in which the number of each element is determined by its weight.
+
+### Extension methods
+
+- System types:
+  - `T[]`
+  - `byte[]`
+  - `char`
+  - `IComparable`
+  - `IDictionary`
+  - `IEnumerable`
+  - `string`
+
+- Unity types:
+  - `Animator`
+  - `Color`
+  - `Graphic`
+  - `LayerMask`
+  - `MonoBehaviour`
+  - `Object`
+  - `Quaternion`
+  - `Rect`
+  - `RectTransform`
+  - `Renderer`
+  - `Texture`
+  - `ToggleGroup`
+  - `Transform`
+  - `UnityWebRequest`
+  - `Vector`
 
 ## Dependencies
 

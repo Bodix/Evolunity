@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Screenshoter
+namespace Evolutex.Evolunity.Utilities.Screenshot
 {
     [RequireComponent(typeof(Camera))]
     [DisallowMultipleComponent]
