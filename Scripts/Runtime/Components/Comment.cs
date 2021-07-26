@@ -9,18 +9,15 @@ namespace Evolutex.Evolunity.Components
     [AddComponentMenu("Evolunity/Comment")]
     public class Comment : MonoBehaviour
     {
+        #if UNITY_EDITOR
         public string Message;
         public CommentType Type = CommentType.Info;
-
-        private void OnValidate()
-        {
-            hideFlags = HideFlags.DontSaveInBuild;
-        }
 
         public enum CommentType
         {
             Info,
             Warning
         }
+        #endif
     }
 }

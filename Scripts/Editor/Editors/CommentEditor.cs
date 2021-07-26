@@ -44,7 +44,11 @@ namespace Evolutex.Evolunity.Editor.Editors
             if (!isEditing)
             {
                 if (GUILayout.Button("Edit"))
+                {
                     isEditing = !isEditing;
+                    
+                    return;
+                }
 
                 MessageType messageType;
                 switch (comment.Type)
@@ -62,15 +66,21 @@ namespace Evolutex.Evolunity.Editor.Editors
 
                 if (!message.IsNullOrEmpty())
                     EditorGUILayout.HelpBox(comment.Message, messageType);
-
-                comment.Message = message;
-                comment.Type = Enum<Comment.CommentType>.Parse(typeOptions[selectedTypeIndex].text);
             }
             else
             {
                 if (GUILayout.Button("Save"))
+                {
                     isEditing = !isEditing;
-                
+
+                    comment.Message = message;
+                    comment.Type = Enum<Comment.CommentType>.Parse(typeOptions[selectedTypeIndex].text);
+                    
+                    EditorUtility.SetDirty(comment);
+
+                    return;
+                }
+
                 GUI.SetNextControlName("TextArea");
                 message = EditorGUILayout.TextArea(message);
                 GUI.FocusControl("TextArea");
