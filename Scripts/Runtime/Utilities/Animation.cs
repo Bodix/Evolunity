@@ -11,20 +11,8 @@ namespace Evolutex.Evolunity.Utilities
 {
     public static class Animation
     {
-        public static IEnumerator FadeOut(GameObject target, float duration,
-            float delay = 0, bool disableOnComplete = true)
-        {
-            if (delay > 0)
-                yield return new WaitForSeconds(delay);
-
-            yield return Fade(target, 1, 0, duration);
-
-            if (disableOnComplete)
-                target.SetActive(false);
-        }
-
         public static IEnumerator FadeIn(GameObject target, float duration,
-            float delay = 0, bool enableOnStart = true)
+            float delay = 0, RenderingMode renderingMode = RenderingMode.Fade, bool enableOnStart = true)
         {
             if (delay > 0)
                 yield return new WaitForSeconds(delay);
@@ -32,7 +20,49 @@ namespace Evolutex.Evolunity.Utilities
             if (enableOnStart)
                 target.SetActive(true);
 
-            yield return Fade(target, 0, 1, duration);
+            yield return Fade(target, 0, 1, duration, renderingMode);
+        }
+
+        public static IEnumerator FadeOut(GameObject target, float duration,
+            float delay = 0, RenderingMode renderingMode = RenderingMode.Fade, bool disableOnComplete = true)
+        {
+            if (delay > 0)
+                yield return new WaitForSeconds(delay);
+
+            yield return Fade(target, 1, 0, duration, renderingMode);
+
+            if (disableOnComplete)
+                target.SetActive(false);
+        }
+        
+        /// <summary>
+        /// Same as <see cref="FadeIn"/> but without saving the initial materials settings.
+        /// </summary>
+        public static IEnumerator FadeInAndRetain(GameObject target, float duration,
+            float delay = 0, RenderingMode renderingMode = RenderingMode.Fade, bool enableOnStart = true)
+        {
+            if (delay > 0)
+                yield return new WaitForSeconds(delay);
+
+            if (enableOnStart)
+                target.SetActive(true);
+
+            yield return Fade(target, 0, 1, duration, renderingMode, false);
+        }
+        
+        /// <summary>
+        /// Same as <see cref="FadeOut"/> but without saving the initial materials settings.
+        /// </summary>
+        public static IEnumerator FadeOutAndRetain(GameObject target, float duration,
+            float delay = 0, RenderingMode renderingMode = RenderingMode.Fade, bool disableOnComplete = true)
+        {
+            if (delay > 0)
+                yield return new WaitForSeconds(delay);
+
+            yield return Fade(target, 1, 0, duration, renderingMode, false);
+
+            if (disableOnComplete)
+                target.SetActive(false);
         }
 
         /// <summary>
@@ -40,14 +70,14 @@ namespace Evolutex.Evolunity.Utilities
         /// 
         /// <para/>Algorithm:
         /// <br/>1. Caches materials properties on all active <see cref="MeshRenderer"/>s (optional).
-        /// <br/>2. Sets rendering mode of these materials to Fade.
+        /// <br/>2. Sets rendering mode of these materials to Fade (can be changed).
         /// <br/>3. Smoothly changes materials' alpha.
         /// <br/>4. Returns to the materials' previously cached properties (optional).
         ///
         /// <para/>Designed to use with `Standard` shaders.
         /// </summary>
         public static IEnumerator Fade(GameObject target, float fromAlpha, float toAlpha, float duration,
-            bool preserveMaterialProperties = true)
+            RenderingMode renderingMode = RenderingMode.Fade, bool preserveMaterialProperties = true)
         {
             Material[] materials = target.GetComponentsInChildren<MeshRenderer>()
                 .SelectMany(x => x.materials).ToArray();
@@ -57,7 +87,7 @@ namespace Evolutex.Evolunity.Utilities
 
             materials.ForEach(material =>
             {
-                material.SetupRenderingMode(RenderingMode.Fade);
+                material.SetupRenderingMode(renderingMode);
                 // To fix the overlap of transparent materials on top of each other.
                 material.SetInt("_ZWrite", 1);
             });
