@@ -11,14 +11,14 @@ namespace Evolutex.Evolunity.Components
 
     /// <summary>
     /// Instantiates four <see cref="BoxCollider2D"/>'s around a given <see cref="Rect"/>.
-    /// <para />
-    /// <para />If enabled:
-    /// <para /> - If the object has a <see cref="RectTransform"/>, this component will create
+    /// 
+    /// <para/>If enabled:
+    /// <br/>- If the object has a <see cref="RectTransform"/>, this component will create
     /// borders for the RectTransform's <see cref="RectTransform.rect"/> in the Start() method.
-    /// <para /> - If the object does not have a <see cref="RectTransform"/>, this component will create
+    /// <br/>- If the object does not have a <see cref="RectTransform"/>, this component will create
     /// borders for the MainCamera's <see cref="UnityEngine.Camera.pixelRect"/> in the Start() method.
-    /// <para />
-    /// <para />In both cases, the boundaries will be child of the object on which the component resides.
+    /// 
+    /// <para/>In both cases, the boundaries will be child of the object on which the component resides.
     /// </summary>
     [AddComponentMenu("Evolunity/Rect Borders")]
     public class RectBorders : MonoBehaviour
