@@ -15,6 +15,9 @@ namespace Evolutex.Evolunity.Components
         
         private void Awake()
         {
+            // DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+            transform.SetParent(null);
+            
             DontDestroyOnLoad(gameObject);
             
             if (log)
