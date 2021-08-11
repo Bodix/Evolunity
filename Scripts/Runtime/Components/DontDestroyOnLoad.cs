@@ -8,6 +8,7 @@ namespace Evolutex.Evolunity.Components
 {
     [AddComponentMenu("Evolunity/Don't Destroy On Load")]
     [DisallowMultipleComponent]
+    [DefaultExecutionOrder(-1)]
     public sealed class DontDestroyOnLoad : MonoBehaviour
     {
         [SerializeField]
