@@ -4,13 +4,13 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Evolutex.Evolunity.Utilities.Gizmos
 {
     public static class GizmosCustom
     {
         public static void DrawRect(Rect rect, float thickness = 0.01f, float zPosition = 0f)
         {
-            Gizmos.DrawWireCube(
+            UnityEngine.Gizmos.DrawWireCube(
                 new Vector3(rect.center.x, rect.center.y, zPosition),
                 new Vector3(rect.size.x, rect.size.y, thickness));
         }
