@@ -31,7 +31,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 
             camera.targetTexture = cameraTargetTexture;
             RenderTexture.active = activeRenderTexture;
-            UnityEngine.Object.Destroy(renderTexture);
+            UnityEngine.Object.DestroyImmediate(renderTexture);
 
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);

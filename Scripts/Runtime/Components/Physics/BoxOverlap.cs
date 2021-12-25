@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using System.Collections.Generic;
 using System.Linq;
 using Evolutex.Evolunity.Extensions;
 using Evolutex.Evolunity.Utilities.Gizmos;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Overlaps
+namespace Evolutex.Evolunity.Components.Physics
 {
     // TODO:
     // 1. Create SphereOverlap and CapsuleOverlap.
     // 2. Handle QueryTriggerInteraction option.
 
+    [AddComponentMenu("Evolunity/Box Overlap")]
     public class BoxOverlap : MonoBehaviour
     {
         [SerializeField]
@@ -18,7 +23,7 @@ namespace Evolutex.Evolunity.Components.Overlaps
         [ShowIf(nameof(OverrideOrigin))]
         public Transform Origin;
         public Vector3 HalfExtents = Vector3.one;
-        public LayerMask Layers = Physics.AllLayers;
+        public LayerMask Layers = UnityEngine.Physics.AllLayers;
 
         [Header("Gizmos")]
         [SerializeField]
@@ -46,7 +51,7 @@ namespace Evolutex.Evolunity.Components.Overlaps
 
         public int Execute(out IEnumerable<Collider> colliders)
         {
-            int collidersCount = Physics.OverlapBoxNonAlloc(
+            int collidersCount = UnityEngine.Physics.OverlapBoxNonAlloc(
                 GetOrigin.position, HalfExtents, _collidersBuffer, GetOrigin.rotation, Layers);
             colliders = _collidersBuffer.Take(collidersCount).Where(x => x != null);
 
