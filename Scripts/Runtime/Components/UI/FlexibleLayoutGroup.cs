@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using System;
 using Evolutex.Evolunity.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
