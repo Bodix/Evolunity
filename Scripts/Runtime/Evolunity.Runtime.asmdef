@@ -1,6 +1,8 @@
 {
     "name": "Evolunity.Runtime",
-    "references": [],
+    "references": [
+        "NaughtyAttributes.Core"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
