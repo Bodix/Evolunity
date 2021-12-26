@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Evolutex.Evolunity.Extensions;
@@ -19,10 +20,14 @@ namespace Evolutex.Evolunity.Components.Physics
     public class BoxOverlap : MonoBehaviour
     {
         [SerializeField]
-        private OverlapOriginTransform _originTransform;
-        [ShowIf(nameof(OverrideOrigin))]
-        public Transform Origin;
+        private OverlapPoseOrigin _poseOrigin;
+        [ShowIf(nameof(IsOverrideOriginTransform))]
+        public Transform PoseTransform;
+        [ShowIf(nameof(IsCustomPose))]
+        public Vector3 Center;
         public Vector3 HalfExtents = Vector3.one;
+        [ShowIf(nameof(IsCustomPose))]
+        public Quaternion Orientation = Quaternion.identity;
         public LayerMask Layers = UnityEngine.Physics.AllLayers;
 
         [Header("Gizmos")]
@@ -38,8 +43,27 @@ namespace Evolutex.Evolunity.Components.Physics
         private readonly Collider[] _collidersBuffer = new Collider[512];
         private float _gizmosColorValue;
 
-        private Transform GetOrigin => Origin ? Origin : transform;
-        private bool OverrideOrigin => _originTransform == OverlapOriginTransform.Override;
+        private Pose Pose
+        {
+            get
+            {
+                switch (_poseOrigin)
+                {
+                    case OverlapPoseOrigin.SelfTransform:
+                        return new Pose(transform.position, transform.rotation);
+                    case OverlapPoseOrigin.OverrideTransform:
+                        return PoseTransform
+                            ? new Pose(PoseTransform.position, PoseTransform.rotation)
+                            : new Pose(transform.position, transform.rotation);
+                    case OverlapPoseOrigin.Custom:
+                        return new Pose(Center, Orientation);
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+        private bool IsOverrideOriginTransform => _poseOrigin == OverlapPoseOrigin.OverrideTransform;
+        private bool IsCustomPose => _poseOrigin == OverlapPoseOrigin.Custom;
 
         [Button("Execute")]
         public void Execute()
@@ -52,7 +76,7 @@ namespace Evolutex.Evolunity.Components.Physics
         public int Execute(out IEnumerable<Collider> colliders)
         {
             int collidersCount = UnityEngine.Physics.OverlapBoxNonAlloc(
-                GetOrigin.position, HalfExtents, _collidersBuffer, GetOrigin.rotation, Layers);
+                Pose.position, HalfExtents, _collidersBuffer, Pose.rotation, Layers);
             colliders = _collidersBuffer.Take(collidersCount).Where(x => x != null);
 
             _gizmosColorValue = 1;
@@ -65,15 +89,17 @@ namespace Evolutex.Evolunity.Components.Physics
             if (!GizmosEnabled)
                 return;
 
+            Gizmos.matrix = Matrix4x4.TRS(Pose.position, Pose.rotation, Vector3.one);
             using (new GizmosColorScope(Color.Lerp(GizmosDefaultColor, GizmosExecutedColor,
                 Mathf.SmoothDamp(_gizmosColorValue, 0, ref _gizmosColorValue, GizmosFadeTime))))
-                Gizmos.DrawCube(GetOrigin.transform.position, HalfExtents * 2);
+                Gizmos.DrawCube(Vector3.zero, HalfExtents * 2);
         }
 
-        private enum OverlapOriginTransform
+        private enum OverlapPoseOrigin
         {
-            Self,
-            Override
+            SelfTransform,
+            OverrideTransform,
+            Custom
         }
     }
 }

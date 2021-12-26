@@ -90,7 +90,7 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         /// <summary>
-        /// Randomize current vector from [-1, -1] to [1, 1].
+        /// Randomize vector from [-1, -1] to [1, 1].
         /// </summary>
         public static Vector2 Randomize(this Vector2 vector)
         {
@@ -98,7 +98,7 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         /// <summary>
-        /// Randomize current vector from [-1, -1, -1] to [1, 1, 1].
+        /// Randomize vector from [-1, -1, -1] to [1, 1, 1].
         /// </summary>
         public static Vector3 Randomize(this Vector3 vector)
         {
@@ -106,7 +106,7 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         /// <summary>
-        /// Randomize current vector with given coordinate limits.
+        /// Randomize vector with given coordinate limits.
         /// If one of the limits is <c>null</c>, coordinate is set to the value from the original vector.
         /// </summary>
         public static Vector2 Randomize(this Vector2 vector,
@@ -118,7 +118,7 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         /// <summary>
-        /// Randomize current vector with given coordinate limits.
+        /// Randomize vector with given coordinate limits.
         /// If one of the limits is <c>null</c>, coordinate is set to the value from the original vector.
         /// </summary>
         public static Vector3 Randomize(this Vector3 vector,
