@@ -66,7 +66,7 @@ namespace Evolutex.Evolunity.Components.Physics
         private bool IsCustomPose => _poseOrigin == OverlapPoseOrigin.Custom;
 
         [Button("Execute")]
-        public void Execute()
+        private void Execute()
         {
             Execute(out IEnumerable<Collider> colliders);
 
