@@ -24,10 +24,12 @@ namespace Evolutex.Evolunity.Components.Physics
         [ShowIf(nameof(IsOverrideOriginTransform))]
         public Transform PoseTransform;
         [ShowIf(nameof(IsCustomPose))]
-        public Vector3 Center;
+        [SerializeField]
+        private Vector3 _center;
         public Vector3 HalfExtents = Vector3.one;
         [ShowIf(nameof(IsCustomPose))]
-        public Quaternion Orientation = Quaternion.identity;
+        [SerializeField]
+        private Quaternion _orientation = Quaternion.identity;
         public LayerMask Layers = UnityEngine.Physics.AllLayers;
 
         [Header("Gizmos")]
@@ -43,6 +45,8 @@ namespace Evolutex.Evolunity.Components.Physics
         private readonly Collider[] _collidersBuffer = new Collider[512];
         private float _gizmosColorValue;
 
+        public Vector3 Center => Pose.position;
+        public Quaternion Orientation => Pose.rotation;
         private Pose Pose
         {
             get
@@ -56,7 +60,7 @@ namespace Evolutex.Evolunity.Components.Physics
                             ? new Pose(PoseTransform.position, PoseTransform.rotation)
                             : new Pose(transform.position, transform.rotation);
                     case OverlapPoseOrigin.Custom:
-                        return new Pose(Center, Orientation);
+                        return new Pose(_center, _orientation);
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
