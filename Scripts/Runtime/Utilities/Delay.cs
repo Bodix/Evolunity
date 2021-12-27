@@ -15,38 +15,40 @@ namespace Evolutex.Evolunity.Utilities
             return ForFrames(1, onComplete);
         }
 
-        public static Coroutine ForFrames(int frames, Action onComplete, MonoBehaviour coroutineHolder = null)
+        public static Coroutine ForFrames(int frames, Action onComplete, MonoBehaviour coroutineOwner = null)
         {
             ThrowIfLessThanZero(frames);
 
             if (frames > 0)
             {
-                if (coroutineHolder)
-                    return coroutineHolder.StartCoroutine(FramesDelay(frames, onComplete));
+                if (coroutineOwner)
+                    return coroutineOwner.StartCoroutine(FramesDelay(frames, onComplete));
                 else
                     return StaticCoroutine.Start(FramesDelay(frames, onComplete));
             }
             else
             {
                 onComplete();
+                
                 return null;
             }
         }
 
-        public static Coroutine ForSeconds(float seconds, Action onComplete, MonoBehaviour coroutineHolder = null)
+        public static Coroutine ForSeconds(float seconds, Action onComplete, MonoBehaviour coroutineOwner = null)
         {
             ThrowIfLessThanZero(seconds);
 
             if (seconds > 0)
             {
-                if (coroutineHolder)
-                    return coroutineHolder.StartCoroutine(SecondsDelay(seconds, onComplete));
+                if (coroutineOwner)
+                    return coroutineOwner.StartCoroutine(SecondsDelay(seconds, onComplete));
                 else
                     return StaticCoroutine.Start(SecondsDelay(seconds, onComplete));
             }
             else
             {
                 onComplete();
+                
                 return null;
             }
         }
