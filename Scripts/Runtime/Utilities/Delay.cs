@@ -10,35 +10,45 @@ namespace Evolutex.Evolunity.Utilities
 {
     public static class Delay
     {
-        public static void ForOneFrame(Action onComplete)
+        public static Coroutine ForOneFrame(Action onComplete)
         {
-            ForFrames(1, onComplete);
+            return ForFrames(1, onComplete);
         }
 
-        public static void ForFrames(int frames, Action onComplete, MonoBehaviour coroutineHolder = null)
+        public static Coroutine ForFrames(int frames, Action onComplete, MonoBehaviour coroutineHolder = null)
         {
             ThrowIfLessThanZero(frames);
 
             if (frames > 0)
+            {
                 if (coroutineHolder)
-                    coroutineHolder.StartCoroutine(FramesDelay(frames, onComplete));
+                    return coroutineHolder.StartCoroutine(FramesDelay(frames, onComplete));
                 else
-                    StaticCoroutine.Start(FramesDelay(frames, onComplete));
+                    return StaticCoroutine.Start(FramesDelay(frames, onComplete));
+            }
             else
+            {
                 onComplete();
+                return null;
+            }
         }
 
-        public static void ForSeconds(float seconds, Action onComplete, MonoBehaviour coroutineHolder = null)
+        public static Coroutine ForSeconds(float seconds, Action onComplete, MonoBehaviour coroutineHolder = null)
         {
             ThrowIfLessThanZero(seconds);
 
             if (seconds > 0)
+            {
                 if (coroutineHolder)
-                    coroutineHolder.StartCoroutine(SecondsDelay(seconds, onComplete));
+                    return coroutineHolder.StartCoroutine(SecondsDelay(seconds, onComplete));
                 else
-                    StaticCoroutine.Start(SecondsDelay(seconds, onComplete));
+                    return StaticCoroutine.Start(SecondsDelay(seconds, onComplete));
+            }
             else
+            {
                 onComplete();
+                return null;
+            }
         }
 
         private static IEnumerator FramesDelay(int frames, Action onComplete)
