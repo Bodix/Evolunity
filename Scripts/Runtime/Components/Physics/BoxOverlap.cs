@@ -13,8 +13,9 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Components.Physics
 {
     // TODO:
-    // 1. Create SphereOverlap and CapsuleOverlap.
-    // 2. Handle QueryTriggerInteraction option.
+    // 1. Add set accessor to properties.
+    // 2. Create SphereOverlap and CapsuleOverlap.
+    // 3. Handle QueryTriggerInteraction option.
 
     [AddComponentMenu("Evolunity/Box Overlap")]
     public class BoxOverlap : MonoBehaviour
@@ -47,7 +48,7 @@ namespace Evolutex.Evolunity.Components.Physics
 
         public Vector3 Center => Pose.position;
         public Quaternion Orientation => Pose.rotation;
-        private Pose Pose
+        public Pose Pose
         {
             get
             {
