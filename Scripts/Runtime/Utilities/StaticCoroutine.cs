@@ -25,6 +25,23 @@ namespace Evolutex.Evolunity.Utilities
             return component.StartCoroutine(routine);
         }
 
-        private class StaticCoroutineComponent : MonoBehaviour { }
+        /// <summary>
+        /// Used to stop coroutines that were created with <see cref="StaticCoroutine"/> class.
+        ///
+        /// <para/>If you try to call StopCoroutine method from another component,
+        /// the following error will appear in the console:
+        /// <br/>Coroutine continue failure
+        ///
+        /// <para/>https://issuetracker.unity3d.com/issues/coroutine-continue-failure-error-when-using-stopcoroutine
+        /// <br/>http://answers.unity.com/answers/1233994/view.html
+        /// </summary>
+        public static void Stop(Coroutine routine)
+        {
+            component.StopCoroutine(routine);
+        }
+
+        private class StaticCoroutineComponent : MonoBehaviour
+        {
+        }
     }
 }
