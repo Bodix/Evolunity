@@ -103,6 +103,26 @@ namespace Evolutex.Evolunity.Extensions
             return list;
         }
 
+        public static IEnumerable<T> RemoveDuplicates<T>(this IEnumerable<T> enumerable,
+            IEqualityComparer<T> comparer = null)
+        {
+            IList<T> list = enumerable.ToList();
+            if (list.Count <= 1)
+                return list;
+
+            HashSet<T> hashSet = new HashSet<T>(comparer ?? EqualityComparer<T>.Default);
+            int index = 0;
+            while (index < list.Count)
+            {
+                if (hashSet.Add(list[index]))
+                    index++;
+                else
+                    list.RemoveAt(index);
+            }
+
+            return list;
+        }
+
         public static T MinBy<T, TMin>(this IEnumerable<T> source, Func<T, TMin> selector)
             where TMin : IComparable<TMin>
         {
