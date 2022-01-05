@@ -138,5 +138,38 @@ namespace Evolutex.Evolunity.Extensions
 
             return angles;
         }
+
+        // Vector4: https://www.dropbox.com/s/el9mci24o10j3z3/VectorExtensions.cs?dl=0
+        // https://en.wikipedia.org/wiki/Swizzling_%28computer_graphics%29
+
+        public static Vector2 XY(this Vector3 vector)
+        {
+            return new Vector2(vector.x, vector.y);
+        }
+
+        public static Vector2 XZ(this Vector3 vector)
+        {
+            return new Vector2(vector.x, vector.z);
+        }
+
+        public static Vector2 YZ(this Vector3 vector)
+        {
+            return new Vector2(vector.y, vector.z);
+        }
+
+        public static Vector2 YX(this Vector3 vector)
+        {
+            return new Vector2(vector.y, vector.x);
+        }
+
+        public static Vector2 ZX(this Vector3 vector)
+        {
+            return new Vector2(vector.z, vector.x);
+        }
+
+        public static Vector2 ZY(this Vector3 vector)
+        {
+            return new Vector2(vector.z, vector.y);
+        }
     }
 }
