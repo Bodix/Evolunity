@@ -81,6 +81,8 @@ objects.ForEachLazy(Debug.Log);
 objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 ```
 
+> Cheatsheet still WIP
+
 ## Content
 
 ### Utilities
