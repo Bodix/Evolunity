@@ -15,7 +15,7 @@ Delay.ForOneFrame(() => Debug.Log("Hello in the next frame"));
 // Calls the function after a N of seconds.
 Delay.ForSeconds(3, () => Debug.Log("Hello after three seconds"));
 // Calls the function after a N of frames.
-Delay.ForSeconds(300, () => Debug.Log("Hello after three hundred frames"));
+Delay.ForFrames(300, () => Debug.Log("Hello after three hundred frames"));
 
 // Calls the function periodically every N seconds.
 Repeat.EverySeconds(1, () => Debug.Log("Hello every second"));
