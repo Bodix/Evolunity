@@ -212,7 +212,6 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 				UnityEngine.Gizmos.DrawRay(position, Vector3.Slerp(forward, -up, angle / 90.0f).normalized * dist);
 				UnityEngine.Gizmos.DrawRay(position, Vector3.Slerp(forward, right, angle / 90.0f).normalized * dist);
 				UnityEngine.Gizmos.DrawRay(position, Vector3.Slerp(forward, -right, angle / 90.0f).normalized * dist);
-
 			}
 			DrawCircle(position + forward, direction, color, (forward - (slerpedVector.normalized * dist)).magnitude);
 			DrawCircle(position + (forward * 0.5f), direction, color, ((forward * 0.5f) - (slerpedVector.normalized * (dist * 0.5f))).magnitude);

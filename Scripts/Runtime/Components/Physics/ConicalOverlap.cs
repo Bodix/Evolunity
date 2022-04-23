@@ -16,9 +16,10 @@ namespace Evolutex.Evolunity.Components.Physics
     // 1. Create SphereOverlap.
     // 2. Handle QueryTriggerInteraction option.
 
-    [AddComponentMenu("Evolunity/Box Overlap")]
-    public class BoxOverlap : MonoBehaviour
+    [RequireComponent(typeof(BoxOverlap))]
+    public class ConicalOverlap : MonoBehaviour
     {
+        [InfoBox("ConicalOverlap uses BoxOverlap. It will override its settings")]
         public OverlapPoseOrigin PoseOrigin;
         [ShowIf(nameof(IsOverridePoseTransform))]
         [SerializeField]
@@ -29,8 +30,11 @@ namespace Evolutex.Evolunity.Components.Physics
         [ShowIf(nameof(IsCustomPose))]
         [SerializeField]
         private Vector3 _rotation;
-        public Vector3 HalfExtents = Vector3.one;
+        public float Distance = 1;
+        public float Angle = 90;
         public LayerMask Layers = UnityEngine.Physics.AllLayers;
+        [SerializeField, HideInInspector]
+        private BoxOverlap _boxOverlap;
 
         [Header("Gizmos")]
         [SerializeField]
@@ -42,10 +46,9 @@ namespace Evolutex.Evolunity.Components.Physics
         [SerializeField]
         public float GizmosFadeTime = 2f;
 
-        private readonly Collider[] _collidersBuffer = new Collider[512];
         private float _gizmosColorValue;
 
-        public Vector3 Center => Pose.position;
+        public Vector3 ApexPosition => Pose.position;
         public Quaternion Rotation => Pose.rotation;
         public Pose Pose
         {
@@ -69,6 +72,12 @@ namespace Evolutex.Evolunity.Components.Physics
         private bool IsOverridePoseTransform => PoseOrigin == OverlapPoseOrigin.OverrideTransform;
         private bool IsCustomPose => PoseOrigin == OverlapPoseOrigin.Custom;
 
+        private void OnValidate()
+        {
+            _boxOverlap = GetComponent<BoxOverlap>();
+            SetupBoxOverlap();
+        }
+
         [Button("Execute")]
         public void ExecuteAndLog()
         {
@@ -79,21 +88,30 @@ namespace Evolutex.Evolunity.Components.Physics
 
         public int Execute(out IEnumerable<Collider> colliders)
         {
-            int collidersCount = UnityEngine.Physics.OverlapBoxNonAlloc(
-                Center, HalfExtents, _collidersBuffer, Rotation, Layers);
-            colliders = _collidersBuffer.Take(collidersCount).Where(x => x != null);
+            SetupBoxOverlap();
+            _boxOverlap.Execute(out colliders);
+            colliders = colliders.Where(x =>
+            {
+                Vector3 forwardDir = _boxOverlap.Pose.forward;
+                Vector3 colliderDir = (x.transform.position - _boxOverlap.Center).normalized;
+                float dot = Vector3.Dot(forwardDir, colliderDir);
+
+                return dot >= Mathf.Cos(Angle / 2);
+            });
 
             _gizmosColorValue = 1;
 
-            return collidersCount;
+            return colliders.Count();
         }
 
-        public void SetPoseTransform(Transform t, bool changePoseOrigin = true)
+        public void SetPoseTransform(Transform newTransform, bool changePoseOrigin = true)
         {
-            _poseTransform = t;
+            _poseTransform = newTransform;
 
             if (changePoseOrigin)
                 PoseOrigin = OverlapPoseOrigin.OverrideTransform;
+
+            SetupBoxOverlap();
         }
 
         public void SetCustomPose(Vector3 position, Quaternion rotation, bool changePoseOrigin = true)
@@ -103,17 +121,31 @@ namespace Evolutex.Evolunity.Components.Physics
 
             if (changePoseOrigin)
                 PoseOrigin = OverlapPoseOrigin.Custom;
+
+            SetupBoxOverlap();
         }
 
-        private void OnDrawGizmos()
+        private void SetupBoxOverlap()
+        {
+            _boxOverlap.Layers = Layers;
+            float boxSize = Distance * Mathf.Tan(Angle / 2 * Mathf.Deg2Rad);
+            _boxOverlap.HalfExtents = new Vector3(boxSize, boxSize, Distance / 2);
+            _boxOverlap.SetCustomPose(ApexPosition + Rotation * Vector3.forward * (Distance / 2), Rotation);
+        }
+
+        public void OnDrawGizmos()
         {
             if (!GizmosEnabled)
                 return;
 
-            Gizmos.matrix = Matrix4x4.TRS(Center, Rotation, Vector3.one);
-            using (new GizmosColorScope(Color.Lerp(GizmosDefaultColor, GizmosExecutedColor,
-                Mathf.SmoothDamp(_gizmosColorValue, 0, ref _gizmosColorValue, GizmosFadeTime))))
-                Gizmos.DrawCube(Vector3.zero, HalfExtents * 2);
+            // TODO: Make cone with spherical base.
+            Gizmos.matrix = Matrix4x4.TRS(ApexPosition, Rotation, Vector3.one);
+            GizmosExtend.DrawCone(
+                Vector3.zero,
+                Vector3.forward * Distance,
+                Color.Lerp(GizmosDefaultColor, GizmosExecutedColor,
+                    Mathf.SmoothDamp(_gizmosColorValue, 0, ref _gizmosColorValue, GizmosFadeTime)),
+                Angle / 2);
         }
     }
 }
