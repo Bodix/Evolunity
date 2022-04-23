@@ -127,6 +127,7 @@ namespace Evolutex.Evolunity.Components.Physics
 
         private void SetupBoxOverlap()
         {
+            _boxOverlap.GizmosEnabled = false;
             _boxOverlap.Layers = Layers;
             float boxSize = Distance * Mathf.Tan(Angle / 2 * Mathf.Deg2Rad);
             _boxOverlap.HalfExtents = new Vector3(boxSize, boxSize, Distance / 2);
