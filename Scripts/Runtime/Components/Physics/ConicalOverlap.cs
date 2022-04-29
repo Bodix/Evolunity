@@ -17,6 +17,7 @@ namespace Evolutex.Evolunity.Components.Physics
     // 2. Handle QueryTriggerInteraction option.
 
     [RequireComponent(typeof(BoxOverlap))]
+    [AddComponentMenu("Evolunity/Conical Overlap")]
     public class ConicalOverlap : MonoBehaviour
     {
         [InfoBox("ConicalOverlap uses BoxOverlap. It will override its settings")]
@@ -130,8 +131,9 @@ namespace Evolutex.Evolunity.Components.Physics
             _boxOverlap.GizmosEnabled = false;
             _boxOverlap.Layers = Layers;
             float boxSize = Distance * Mathf.Tan(Angle / 2 * Mathf.Deg2Rad);
-            _boxOverlap.HalfExtents = new Vector3(boxSize, boxSize, Distance / 2);
-            _boxOverlap.SetCustomPose(ApexPosition + Rotation * Vector3.forward * (Distance / 2), Rotation);
+            float halfDistance = Distance / 2;
+            _boxOverlap.HalfExtents = new Vector3(boxSize, boxSize, halfDistance);
+            _boxOverlap.SetCustomPose(ApexPosition + Rotation * Vector3.forward * halfDistance, Rotation);
         }
 
         public void OnDrawGizmos()
