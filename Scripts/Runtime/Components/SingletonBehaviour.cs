@@ -18,19 +18,19 @@ namespace Evolutex.Evolunity.Components
         private static readonly object lockObject = new object();
         private static readonly string debugPrefix = $"[Singleton<{typeof(T).Name}>] ";
         private static T instance;
-        private static bool isDestroyed;
+        // private static bool isDestroyed;
 
         public static T Instance
         {
             get
             {
-                if (isDestroyed)
-                {
-                    if (Logs)
-                        Debug.LogError(debugPrefix + "The instance will not be returned because it is already destroyed");
-
-                    return null;
-                }
+                // if (isDestroyed)
+                // {
+                //     if (Logs)
+                //         Debug.LogError(debugPrefix + "The instance will not be returned because it is already destroyed");
+                //
+                //     return null;
+                // }
 
                 lock (lockObject)
                 {
@@ -85,9 +85,9 @@ namespace Evolutex.Evolunity.Components
             }
         }
 
-        protected virtual void OnApplicationQuit()
-        {
-            isDestroyed = true;
-        }
+        // protected virtual void OnApplicationQuit()
+        // {
+        //     isDestroyed = true;
+        // }
     }
 }
