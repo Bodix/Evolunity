@@ -2,6 +2,8 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+#if UNITY_2020_1_OR_NEVER
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -182,3 +184,5 @@ namespace Evolutex.Evolunity.Collections
         }
     }
 }
+
+#endif
