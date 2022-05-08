@@ -8,5 +8,5 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class LayerAttribute : PropertyAttribute { }
+    public class TypeSelectorAttribute : PropertyAttribute { }
 }

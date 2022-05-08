@@ -9,13 +9,16 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
-    public abstract class AttributePropertyDrawer<T> : PropertyDrawer where T : PropertyAttribute
+    // Don't forget for this attribute.
+    // [CustomPropertyDrawer(typeof(TAttribute))]
+    public abstract class AttributePropertyDrawer<TAttribute> : PropertyDrawer where TAttribute : PropertyAttribute
     {
         protected abstract SerializedPropertyType[] SupportedTypes { get; }
         
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => -2f;
+        // TODO: FIX THIS ISSUE. CHECK FOR LAYER ATTRIBUTE.
+        // public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => -2f;
         
-        protected T Attribute => (T) attribute;
+        protected TAttribute Attribute => (TAttribute) attribute;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
