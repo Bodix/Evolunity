@@ -13,6 +13,10 @@ using Evolutex.Evolunity.Editor.Extensions;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
+    // TODO: Make safe types renaming:
+    // https://docs.unity3d.com/ScriptReference/SerializationUtility.HasManagedReferencesWithMissingTypes.html
+    // https://docs.unity3d.com/ScriptReference/SerializationUtility.GetManagedReferencesWithMissingTypes.html
+
     [CustomPropertyDrawer(typeof(TypeSelectorAttribute))]
     public class TypeSelectorDrawer : AttributePropertyDrawer<TypeSelectorAttribute>
     {
