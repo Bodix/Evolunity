@@ -29,8 +29,9 @@ namespace Evolutex.Evolunity.Editor.Drawers
         protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             Rect dropdownButtonRect = new Rect(position);
-            dropdownButtonRect.width -= EditorGUIUtility.labelWidth;
-            dropdownButtonRect.x += EditorGUIUtility.labelWidth;
+            dropdownButtonRect.x += EditorGUIUtility.labelWidth + 2;
+            dropdownButtonRect.width -= EditorGUIUtility.labelWidth + 2;
+            // Used to fix strange bug with property drawing.
             dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
 
             if (EditorGUI.DropdownButton(dropdownButtonRect,
@@ -65,7 +66,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
         {
             Type type = property.GetManagedReferenceValueType();
 
-            return type == null ? "NULL" : ObjectNames.NicifyVariableName(type.Name);
+            return type == null ? "<NULL>" : ObjectNames.NicifyVariableName(type.Name);
         }
     }
 }

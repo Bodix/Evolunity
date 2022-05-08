@@ -14,10 +14,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
     public abstract class AttributePropertyDrawer<TAttribute> : PropertyDrawer where TAttribute : PropertyAttribute
     {
         protected abstract SerializedPropertyType[] SupportedTypes { get; }
-        
-        // TODO: FIX THIS ISSUE. CHECK FOR LAYER ATTRIBUTE.
-        // public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => -2f;
-        
+
         protected TAttribute Attribute => (TAttribute) attribute;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

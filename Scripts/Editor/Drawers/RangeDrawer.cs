@@ -14,24 +14,23 @@ namespace Evolutex.Evolunity.Editor.Drawers
     public class RangeDrawer : PropertyDrawer
     {
         // TODO: Change rects getting to cutting.
-        
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.BeginProperty(position, label, property);
+            using (new EditorGUI.PropertyScope(position, label, property))
+            {
+                Rect labelRect = position.WithWidth(EditorGUIUtility.labelWidth);
+                EditorGUI.LabelField(labelRect, property.displayName);
 
-            Rect labelRect = position.WithWidth(EditorGUIUtility.labelWidth);
-            EditorGUI.LabelField(labelRect, property.displayName);
+                Rect valueRect = position.TranslateX(labelRect.width).AddWidth(-labelRect.width);
+                Rect minValueRect = valueRect.WithWidth(valueRect.width / 2);
+                Rect maxValueRect = valueRect.TranslateX(valueRect.width / 2).AddWidth(-valueRect.width / 2);
 
-            Rect valueRect = position.TranslateX(labelRect.width).AddWidth(-labelRect.width);
-            Rect minValueRect = valueRect.WithWidth(valueRect.width / 2);
-            Rect maxValueRect = valueRect.TranslateX(valueRect.width / 2).AddWidth(-valueRect.width / 2);
-            
-            EditorGUIUtility.labelWidth = 30f;
-            EditorGUI.PropertyField(minValueRect, property.FindPropertyRelative("Min"));
-            EditorGUI.PropertyField(maxValueRect, property.FindPropertyRelative("Max"));
-            EditorGUIUtility.labelWidth = 0f;
-            
-            EditorGUI.EndProperty();
+                EditorGUIUtility.labelWidth = 30f;
+                EditorGUI.PropertyField(minValueRect, property.FindPropertyRelative("Min"));
+                EditorGUI.PropertyField(maxValueRect, property.FindPropertyRelative("Max"));
+                EditorGUIUtility.labelWidth = 0f;
+            }
         }
     }
 }
