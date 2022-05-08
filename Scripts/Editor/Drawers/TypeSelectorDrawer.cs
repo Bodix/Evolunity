@@ -2,20 +2,25 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
 
 using System;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using Evolutex.Evolunity.Attributes;
+using Evolutex.Evolunity.Editor.Extensions;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
     [CustomPropertyDrawer(typeof(TypeSelectorAttribute))]
     public class TypeSelectorDrawer : AttributePropertyDrawer<TypeSelectorAttribute>
     {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, true);
+        }
+
         protected override SerializedPropertyType[] SupportedTypes => new[]
         {
             SerializedPropertyType.ManagedReference
@@ -28,43 +33,39 @@ namespace Evolutex.Evolunity.Editor.Drawers
             dropdownButtonRect.x += EditorGUIUtility.labelWidth;
             dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
 
-            // Cache this string. This property internally call Assembly.GetName, which result in a large allocation.
-            string managedReferenceFieldTypename = property.managedReferenceFieldTypename;
-            Debug.Log(managedReferenceFieldTypename);
-
-            using (new EditorGUI.PropertyScope(position, label, property))
+            if (EditorGUI.DropdownButton(dropdownButtonRect,
+                new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
             {
-                // if (EditorGUI.DropdownButton(popupPosition, GetTypeName(property), FocusType.Keyboard))
-                // {
-                //     TypePopupCache popup = GetTypePopup(property);
-                //     m_TargetProperty = property;
-                //     popup.TypePopup.Show(popupPosition);
-                // }
-                Type baseType = GetType(managedReferenceFieldTypename);
-                if (EditorGUI.DropdownButton(dropdownButtonRect, new GUIContent("Test"), FocusType.Keyboard))
-                    new TypeSelectorDropdown(TypeCache.GetTypesDerivedFrom(baseType).Append(baseType).Where(p =>
-                        (p.IsPublic || p.IsNestedPublic) &&
-                        !p.IsAbstract &&
-                        !p.IsGenericType &&
-                        !typeof(UnityEngine.Object).IsAssignableFrom(p) &&
-                        System.Attribute.IsDefined(p, typeof(SerializableAttribute))
-                    )).Show(dropdownButtonRect);
+                Type baseType = property.GetManagedReferenceFieldType();
+                TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
+                    TypeCache.GetTypesDerivedFrom(baseType)
+                        .Append(baseType)
+                        .Where(x =>
+                            (x.IsPublic || x.IsNestedPublic) &&
+                            !x.IsAbstract &&
+                            !x.IsGenericType &&
+                            !typeof(UnityEngine.Object).IsAssignableFrom(x) &&
+                            System.Attribute.IsDefined(x, typeof(SerializableAttribute))
+                        ));
+                dropdown.TypeSelected += type =>
+                {
+                    object obj = property.CreateManagedReferenceValue(type);
+                    property.isExpanded = obj != null;
+                    property.serializedObject.ApplyModifiedProperties();
+                    property.serializedObject.Update();
+                };
 
-                EditorGUI.PropertyField(position, property, label, true);
+                dropdown.Show(dropdownButtonRect);
             }
+
+            EditorGUI.PropertyField(position, property, label, true);
         }
-        
-        public static Type GetType(string typeName)
+
+        private string GetManagedReferenceValueTypename(SerializedProperty property)
         {
-            int splitIndex = typeName.IndexOf(' ');
-            Assembly assembly = Assembly.Load(typeName.Substring(0, splitIndex));
-            return assembly.GetType(typeName.Substring(splitIndex + 1));
-        }
-        
-        public static object SetManagedReference (SerializedProperty property,Type type) {
-            object obj = (type != null) ? Activator.CreateInstance(type) : null;
-            property.managedReferenceValue = obj;
-            return obj;
+            Type type = property.GetManagedReferenceValueType();
+
+            return type == null ? "NULL" : ObjectNames.NicifyVariableName(type.Name);
         }
     }
 }
