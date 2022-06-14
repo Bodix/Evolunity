@@ -2,7 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-#if UNITY_2020_1_OR_NEVER
+#if UNITY_2020_1_OR_NEWER
 
 using System;
 using System.Collections;
