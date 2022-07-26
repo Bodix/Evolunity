@@ -16,21 +16,19 @@ namespace Evolutex.Evolunity.Components
         [Space]
         public T Prefab;
         public uint Amount = 1;
-        [SerializeField]
-        private Transform parent;
+        public Transform Parent;
 
         private readonly List<T> buffer = new List<T>();
 
         public event Action<List<T>> Spawned;
 
-        public Transform Parent
-        {
-            get => parent ? parent : transform;
-            set => parent = value;
-        }
-
         public override bool DrawPeriodFieldInInspector => spawnMethod == SpawnMethod.Periodic;
         public override bool DrawPeriodProgressInInspector => spawnMethod == SpawnMethod.Periodic;
+
+        private void Reset()
+        {
+            Parent = transform;
+        }
 
         private void Start()
         {
@@ -62,10 +60,7 @@ namespace Evolutex.Evolunity.Components
             Spawned?.Invoke(buffer);
         }
 
-        public virtual T GetClone()
-        {
-            return Instantiate(Prefab, Parent);
-        }
+        public abstract T GetClone();
 
         public enum SpawnMethod
         {

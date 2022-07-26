@@ -6,8 +6,23 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
+    public class Spawner<T> : BaseSpawner<T> where T : Object
+    {
+        public bool UseSpawnerPosition = true;
+        public bool UseSpawnerRotation = true;
+
+        public override T GetClone()
+        {
+            return Instantiate(
+                Prefab,
+                UseSpawnerPosition ? transform.position : Vector3.zero,
+                UseSpawnerRotation ? transform.rotation : Quaternion.identity,
+                Parent);
+        }
+    }
+
     [AddComponentMenu("Evolunity/Spawner")]
-    public class Spawner : BaseSpawner<GameObject>
+    public class Spawner : Spawner<GameObject>
     {
     }
 }
