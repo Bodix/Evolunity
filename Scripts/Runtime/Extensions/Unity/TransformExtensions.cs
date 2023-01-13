@@ -66,7 +66,7 @@ namespace Evolutex.Evolunity.Extensions
                 transform.localRotation = Quaternion.identity;
             }
         }
-        
+
         public static Pose GetPose(this Transform transform)
         {
             return new Pose(transform.position, transform.rotation);
@@ -76,18 +76,6 @@ namespace Evolutex.Evolunity.Extensions
         {
             transform.position = pose.position;
             transform.rotation = pose.rotation;
-        }
-
-        public static TransformData GetData(this Transform transform)
-        {
-            return new TransformData(transform.position, transform.rotation, transform.localScale);
-        }
-
-        public static void SetData(this Transform transform, TransformData data)
-        {
-            transform.position = data.Position;
-            transform.rotation = data.Rotation;
-            transform.localScale = data.LocalScale;
         }
 
         // https://forum.unity.com/threads/solved-how-to-get-rotation-value-that-is-in-the-inspector.460310/#post-4564687
