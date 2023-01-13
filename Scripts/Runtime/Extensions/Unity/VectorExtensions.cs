@@ -139,6 +139,16 @@ namespace Evolutex.Evolunity.Extensions
             return angles;
         }
 
+        public static Vector2 ClampMagnitude(this Vector2 vector, float maxLength)
+        {
+            return Vector2.ClampMagnitude(vector, maxLength);
+        }
+
+        public static Vector3 ClampMagnitude(this Vector3 vector, float maxLength)
+        {
+            return Vector3.ClampMagnitude(vector, maxLength);
+        }
+
         // Vector4: https://www.dropbox.com/s/el9mci24o10j3z3/VectorExtensions.cs?dl=0
         // https://en.wikipedia.org/wiki/Swizzling_%28computer_graphics%29
 

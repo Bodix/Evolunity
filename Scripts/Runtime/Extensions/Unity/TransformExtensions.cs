@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Evolutex.Evolunity.Structs;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
@@ -64,6 +65,18 @@ namespace Evolutex.Evolunity.Extensions
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
             }
+        }
+
+        public static TransformData GetData(this Transform transform)
+        {
+            return new TransformData(transform.position, transform.rotation, transform.localScale);
+        }
+
+        public static void SetData(this Transform transform, TransformData data)
+        {
+            transform.position = data.Position;
+            transform.rotation = data.Rotation;
+            transform.localScale = data.LocalScale;
         }
 
         // https://forum.unity.com/threads/solved-how-to-get-rotation-value-that-is-in-the-inspector.460310/#post-4564687
@@ -151,7 +164,7 @@ namespace Evolutex.Evolunity.Extensions
 
         public static RectTransform ToRectTransform(this Transform transform)
         {
-            return (RectTransform) transform;
+            return (RectTransform)transform;
         }
     }
 }
