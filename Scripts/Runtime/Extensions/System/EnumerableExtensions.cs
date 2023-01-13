@@ -12,7 +12,7 @@ namespace Evolutex.Evolunity.Extensions
     public static class EnumerableExtensions
     {
         // System.Random is used because UnityEngine.Random only works in the main thread.
-        private static readonly Random random = new Random();
+        private static readonly Random _random = new Random();
 
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
@@ -174,12 +174,22 @@ namespace Evolutex.Evolunity.Extensions
 
         public static T Random<T>(this IEnumerable<T> source)
         {
+            return Random(source, _random);
+        }
+
+        public static T Random<T>(this IEnumerable<T> source, Random random)
+        {
             T[] array = source.ToArray();
 
             return array[random.Next(0, array.Length)];
         }
 
         public static T Random<T>(this IEnumerable<T> source, Func<T, float> chanceSelector)
+        {
+            return Random(source, chanceSelector, _random);
+        }
+
+        public static T Random<T>(this IEnumerable<T> source, Func<T, float> chanceSelector, Random random)
         {
             T[] orderedArray = source.OrderByDescending(chanceSelector).ToArray();
 
@@ -204,10 +214,20 @@ namespace Evolutex.Evolunity.Extensions
 
         public static IEnumerable<T> Random<T>(this IEnumerable<T> source, int amount)
         {
-            return Shuffle(source).Take(amount);
+            return Random(source, amount, _random);
+        }
+
+        public static IEnumerable<T> Random<T>(this IEnumerable<T> source, int amount, Random random)
+        {
+            return Shuffle(source, random).Take(amount);
         }
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        {
+            return Shuffle(source, _random);
+        }
+
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random random)
         {
             return source.OrderBy(item => random.Next());
         }
