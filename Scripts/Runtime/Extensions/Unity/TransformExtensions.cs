@@ -66,6 +66,17 @@ namespace Evolutex.Evolunity.Extensions
                 transform.localRotation = Quaternion.identity;
             }
         }
+        
+        public static Pose GetPose(this Transform transform)
+        {
+            return new Pose(transform.position, transform.rotation);
+        }
+
+        public static void SetPose(this Transform transform, Pose pose)
+        {
+            transform.position = pose.position;
+            transform.rotation = pose.rotation;
+        }
 
         public static TransformData GetData(this Transform transform)
         {
