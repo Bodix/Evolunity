@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Evolutex.Evolunity.Structs;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions

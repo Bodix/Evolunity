@@ -8,15 +8,15 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class RectTransformExtensions
     {
-        private static readonly Vector3[] worldCornersBuffer = new Vector3[4];
+        private static readonly Vector3[] _worldCornersBuffer = new Vector3[4];
 
         // https://answers.unity.com/questions/1100493/convert-recttransformrect-to-rect-world.html
         public static Rect GetWorldRect(this RectTransform rectTransform)
         {
-            rectTransform.GetWorldCorners(worldCornersBuffer);
+            rectTransform.GetWorldCorners(_worldCornersBuffer);
 
             // Get the bottom left corner.
-            Vector3 position = worldCornersBuffer[0];
+            Vector3 position = _worldCornersBuffer[0];
             Vector2 size = Vector2.Scale(rectTransform.rect.size, rectTransform.lossyScale);
 
             return new Rect(position, size);
@@ -34,11 +34,11 @@ namespace Evolutex.Evolunity.Extensions
         // https://answers.unity.com/questions/1013011/convert-recttransform-rect-to-screen-space.html
         public static Bounds GetBounds(this RectTransform rectTransform)
         {
-            rectTransform.GetWorldCorners(worldCornersBuffer);
+            rectTransform.GetWorldCorners(_worldCornersBuffer);
 
-            Bounds bounds = new Bounds(worldCornersBuffer[0], Vector3.zero);
+            Bounds bounds = new Bounds(_worldCornersBuffer[0], Vector3.zero);
             for (int i = 1; i < 4; ++i)
-                bounds.Encapsulate(worldCornersBuffer[i]);
+                bounds.Encapsulate(_worldCornersBuffer[i]);
 
             return bounds;
         }
