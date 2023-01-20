@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Patterns.StateMachine
+namespace Evolutex.Evolunity.Patterns
 {
     // TODO:
     // 1. EnterPreviousState method.

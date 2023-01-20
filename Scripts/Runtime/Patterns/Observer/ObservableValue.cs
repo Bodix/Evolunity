@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Structs
+namespace Evolutex.Evolunity.Patterns
 {
     [Serializable]
     public struct ObservableValue<T>
