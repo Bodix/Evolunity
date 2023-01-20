@@ -22,11 +22,11 @@ namespace Evolutex.Evolunity.Editor
             if (Selection.gameObjects.Length > 0)
                 foreach (GameObject gameObject in Selection.gameObjects)
                     Undo.SetTransformParent(gameObject.transform, group.transform, "Group");
-            
+
             Selection.activeGameObject = group;
             SceneHierarchy.SetExpanded(group, true);
         }
-        
+
         [MenuItem("Edit/Toggle Inspector Lock", priority = 143)]
         [MenuItem("Tools/Evolunity/Toggle Inspector Lock %&e")]
         public static void ToggleInspectorLock()
@@ -40,7 +40,8 @@ namespace Evolutex.Evolunity.Editor
         public static void ClearAssetBundlesCache()
         {
             Caching.ClearCache();
-            EditorUtility.DisplayDialog("Clear AssetBundles Cache", "AssetBundles cache was successfully cleared", "OK");
+            EditorUtility.DisplayDialog("Clear AssetBundles Cache", "AssetBundles cache was successfully cleared",
+                "OK");
         }
 
         [MenuItem("Assets/Open Persistent Data Folder", priority = 111)]
@@ -49,7 +50,7 @@ namespace Evolutex.Evolunity.Editor
         {
             FileManager.Open(Application.persistentDataPath);
         }
-        
+
 #if DEVELOPMENT
         [MenuItem("Edit/Defines/" + Define.DEVELOPMENT + "/Remove", priority = 269)]
         [MenuItem("Tools/Evolunity/Defines/" + Define.DEVELOPMENT + "/Remove")]
@@ -65,27 +66,41 @@ namespace Evolutex.Evolunity.Editor
             Define.Set(Define.DEVELOPMENT, true);
         }
 #endif
-        
+
         [MenuItem("Assets/Take Screenshot")]
         [MenuItem("Tools/Evolunity/Take Screenshot &s")]
         public static void TakeScreenshot()
         {
             CameraScreenshot.Take();
         }
-        
+
         /// <summary>
-        /// References:
         /// https://gist.github.com/nicoplv/0ba7924abe82356d9bbcbf119c0a4c7f
         /// https://docs.unity3d.com/2017.1/Documentation/ScriptReference/SceneManagement.EditorSceneManager-playModeStartScene.html
         /// </summary>
+        [InitializeOnLoad]
         public static class PlayModeStartScene
         {
+            private const string EditorPrefsKey = nameof(EditorSceneManager.playModeStartScene);
+
+            static PlayModeStartScene()
+            {
+                string scenePath = EditorPrefs.GetString(EditorPrefsKey);
+                SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
+
+                EditorSceneManager.playModeStartScene = sceneAsset;
+            }
+
             [MenuItem("Edit/Play Mode Start Scene/Set Start Scene")]
             [MenuItem("Tools/Evolunity/Play Mode Start Scene/Set Start Scene")]
             public static void SetStartScene()
             {
+                string scenePath = SceneManager.GetActiveScene().path;
+
                 EditorSceneManager.playModeStartScene =
-                    AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
+                    AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
+
+                EditorPrefs.SetString(EditorPrefsKey, scenePath);
             }
 
             [MenuItem("Edit/Play Mode Start Scene/Unset Start Scene")]
@@ -93,6 +108,8 @@ namespace Evolutex.Evolunity.Editor
             public static void UnsetStartScene()
             {
                 EditorSceneManager.playModeStartScene = null;
+
+                EditorPrefs.DeleteKey(EditorPrefsKey);
             }
 
             [MenuItem("Edit/Play Mode Start Scene/Unset Start Scene", true)]
