@@ -95,6 +95,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `StringEncryptor` - Utility for encrypting strings.
 - `Enum` - Utility for parsing and working with enums.
 - `Angle` - Utility for working with angles.
+- `MathUtilities` - Math utilities.
 - `RegexPatterns` - Set of default regular expression patterns.
 - `Validate` - Utility for validating various things.
 - `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
