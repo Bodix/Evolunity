@@ -181,5 +181,21 @@ namespace Evolutex.Evolunity.Extensions
         {
             return new Vector2(vector.z, vector.y);
         }
+
+        /// <summary>
+        /// https://discussions.unity.com/t/vector3-comparison-efficiency-and-float-precision/62649/4
+        /// </summary>
+        /// <param name="precision"><see cref="Mathf.Epsilon"/> by default</param>
+        public static bool ApproximatelyEqual(this Vector3 vector, Vector3 other, float precision = default)
+        {
+            if (precision == default)
+                precision = Mathf.Epsilon;
+
+            if (Mathf.Abs(vector.x - other.x) > precision) return false;
+            if (Mathf.Abs(vector.y - other.y) > precision) return false;
+            if (Mathf.Abs(vector.z - other.z) > precision) return false;
+
+            return true;
+        }
     }
 }
