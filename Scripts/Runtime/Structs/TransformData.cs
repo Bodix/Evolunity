@@ -22,7 +22,7 @@ namespace Evolutex.Evolunity.Structs
         }
     }
 
-    public static class TransformExtensions
+    public static partial class TransformExtensions
     {
         public static TransformData GetData(this Transform transform)
         {

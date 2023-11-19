@@ -183,7 +183,7 @@ namespace Evolutex.Evolunity.Extensions
         }
 
         /// <summary>
-        /// https://discussions.unity.com/t/vector3-comparison-efficiency-and-float-precision/62649/4
+        /// https://discussions.unity.com/t/vector3-comparison-efficiency-and-float-precision/62649/2
         /// </summary>
         /// <param name="precision"><see cref="Mathf.Epsilon"/> by default</param>
         public static bool ApproximatelyEqual(this Vector3 vector, Vector3 other, float precision = default)
