@@ -8,34 +8,27 @@ namespace Evolutex.Evolunity.Extensions
 {
     public static class QuaternionExtensions
     {
-        public static Quaternion WithX(this Quaternion quaternion, float x)
+        public static Quaternion WithEulerX(this Quaternion quaternion, float x)
         {
-            quaternion.x = x;
+            quaternion = Quaternion.Euler(x, quaternion.eulerAngles.y, quaternion.eulerAngles.z);
 
             return quaternion;
         }
 
-        public static Quaternion WithY(this Quaternion quaternion, float y)
+        public static Quaternion WithEulerY(this Quaternion quaternion, float y)
         {
-            quaternion.y = y;
+            quaternion = Quaternion.Euler(quaternion.eulerAngles.x, y, quaternion.eulerAngles.z);
 
             return quaternion;
         }
 
-        public static Quaternion WithZ(this Quaternion quaternion, float z)
+        public static Quaternion WithEulerZ(this Quaternion quaternion, float z)
         {
-            quaternion.z = z;
+            quaternion = Quaternion.Euler(quaternion.eulerAngles.x, quaternion.eulerAngles.y, z);
 
             return quaternion;
         }
 
-        public static Quaternion WithW(this Quaternion quaternion, float w)
-        {
-            quaternion.w = w;
-
-            return quaternion;
-        }
-        
         // http://wiki.unity3d.com/index.php/QuaternionExtensions
 
         /// <summary>
@@ -70,9 +63,9 @@ namespace Evolutex.Evolunity.Extensions
         public static float Magnitude(this Quaternion quaternion)
         {
             return Mathf.Sqrt(quaternion.x * quaternion.x +
-                              quaternion.y * quaternion.y +
-                              quaternion.z * quaternion.z +
-                              quaternion.w * quaternion.w);
+                quaternion.y * quaternion.y +
+                quaternion.z * quaternion.z +
+                quaternion.w * quaternion.w);
         }
 
         public static Quaternion ScalarMultiply(this Quaternion quaternion, float scalar)
