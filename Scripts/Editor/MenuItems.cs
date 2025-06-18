@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Evolutex.Evolunity.Editor.Utilities;
@@ -48,7 +49,52 @@ namespace Evolutex.Evolunity.Editor
         [MenuItem("Tools/Evolunity/Open Persistent Data Folder")]
         public static void OpenPersistentDataFolder()
         {
-            FileManager.Open(Application.persistentDataPath);
+            FileExplorer.Open(Application.persistentDataPath);
+        }
+
+        [MenuItem("Assets/Open Temporary Cache Folder", priority = 112)]
+        [MenuItem("Tools/Evolunity/Open Temporary Cache Folder")]
+        public static void OpenTemporaryCacheFolder()
+        {
+            FileExplorer.Open(Application.temporaryCachePath);
+        }
+
+        [MenuItem("Edit/Open/Open Editor Folder", priority = 268)]
+        [MenuItem("Tools/Evolunity/Open Editor Folder")]
+        public static void OpenEditorFolder()
+        {
+            FileExplorer.Open(EditorApplication.applicationPath);
+        }
+
+        [MenuItem("Edit/Open/Open Editor Logs Folder", priority = 268)]
+        [MenuItem("Tools/Evolunity/Open Editor Logs Folder")]
+        private static void OpenEditorLogsFolder()
+        {
+#if UNITY_EDITOR_OSX
+			string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string logsFolderPath = Path.Combine(rootFolderPath, "Library", "Logs", "Unity");
+#elif UNITY_EDITOR_WIN
+            string rootFolderPath = System.Environment.ExpandEnvironmentVariables("%localappdata%");
+            string logsFolderPath = Path.Combine(rootFolderPath, "Unity", "Editor");
+#endif
+
+            FileExplorer.Open(logsFolderPath);
+        }
+
+        [MenuItem("Edit/Open/Open Asset Store Packages Folder", priority = 268)]
+        [MenuItem("Tools/Evolunity/Open Asset Store Packages Folder")]
+        private static void OpenAssetStorePackagesFolder()
+        {
+#if UNITY_EDITOR_OSX
+            string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string unityFolderPath = Path.Combine(rootFolderPath, "Library", "Unity");
+#elif UNITY_EDITOR_WIN
+            string rootFolderPath = System.Environment.ExpandEnvironmentVariables("%appdata%");
+            string unityFolderPath = Path.Combine(rootFolderPath, "Unity");
+#endif
+            string packagesFolderPath = Path.Combine(unityFolderPath, "Asset Store-5.x");
+
+            FileExplorer.Open(packagesFolderPath);
         }
 
 #if DEVELOPMENT

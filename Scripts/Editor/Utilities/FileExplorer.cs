@@ -9,8 +9,12 @@ using Debug = UnityEngine.Debug;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
-    public static class FileManager
+    public static class FileExplorer
     {
+        // TODO:
+        // 1. Make the opening abort if the folder does not exist, with error logging.
+        // 2. Change "openInsideFolder" logic to something more obvious (for example, add logs) or remove completely.
+        
         private static bool IsMacOS => SystemInfo.operatingSystem.Contains("Mac OS");
         private static bool IsWinOS => SystemInfo.operatingSystem.Contains("Windows");
 
@@ -21,7 +25,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
             else if (IsMacOS)
                 OpenInMac(path);
             else
-                Debug.LogWarning($"[{nameof(FileManager)}] OS is not supported");
+                Debug.LogWarning($"[{nameof(FileExplorer)}] OS is not supported");
         }
 
         private static void OpenInMac(string path)
