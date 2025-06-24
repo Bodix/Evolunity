@@ -36,38 +36,36 @@ namespace Evolutex.Evolunity.Editor
             ActiveEditorTracker.sharedTracker.ForceRebuild();
         }
 
-        [MenuItem("Edit/Clear AssetBundles Cache", priority = 270)]
-        [MenuItem("Tools/Evolunity/Clear AssetBundles Cache")]
-        public static void ClearAssetBundlesCache()
+        [MenuItem("Assets/Take Screenshot")]
+        [MenuItem("Tools/Evolunity/Take Screenshot &s")]
+        public static void TakeScreenshot()
         {
-            Caching.ClearCache();
-            EditorUtility.DisplayDialog("Clear AssetBundles Cache", "AssetBundles cache was successfully cleared",
-                "OK");
+            CameraScreenshot.Take();
         }
 
         [MenuItem("Assets/Open Persistent Data Folder", priority = 111)]
-        [MenuItem("Tools/Evolunity/Open Persistent Data Folder")]
+        [MenuItem("Tools/Evolunity/Open/Open Persistent Data Folder")]
         public static void OpenPersistentDataFolder()
         {
             FileExplorer.Open(Application.persistentDataPath);
         }
 
         [MenuItem("Assets/Open Temporary Cache Folder", priority = 112)]
-        [MenuItem("Tools/Evolunity/Open Temporary Cache Folder")]
+        [MenuItem("Tools/Evolunity/Open/Open Temporary Cache Folder")]
         public static void OpenTemporaryCacheFolder()
         {
             FileExplorer.Open(Application.temporaryCachePath);
         }
 
         [MenuItem("Edit/Open/Open Editor Folder", priority = 268)]
-        [MenuItem("Tools/Evolunity/Open Editor Folder")]
+        [MenuItem("Tools/Evolunity/Open/Open Editor Folder")]
         public static void OpenEditorFolder()
         {
             FileExplorer.Open(EditorApplication.applicationPath);
         }
 
         [MenuItem("Edit/Open/Open Editor Logs Folder", priority = 268)]
-        [MenuItem("Tools/Evolunity/Open Editor Logs Folder")]
+        [MenuItem("Tools/Evolunity/Open/Open Editor Logs Folder")]
         private static void OpenEditorLogsFolder()
         {
 #if UNITY_EDITOR_OSX
@@ -82,7 +80,7 @@ namespace Evolutex.Evolunity.Editor
         }
 
         [MenuItem("Edit/Open/Open Asset Store Packages Folder", priority = 268)]
-        [MenuItem("Tools/Evolunity/Open Asset Store Packages Folder")]
+        [MenuItem("Tools/Evolunity/Open/Open Asset Store Packages Folder")]
         private static void OpenAssetStorePackagesFolder()
         {
 #if UNITY_EDITOR_OSX
@@ -113,11 +111,13 @@ namespace Evolutex.Evolunity.Editor
         }
 #endif
 
-        [MenuItem("Assets/Take Screenshot")]
-        [MenuItem("Tools/Evolunity/Take Screenshot &s")]
-        public static void TakeScreenshot()
+        [MenuItem("Edit/Clear AssetBundles Cache", priority = 270)]
+        [MenuItem("Tools/Evolunity/Clear AssetBundles Cache")]
+        public static void ClearAssetBundlesCache()
         {
-            CameraScreenshot.Take();
+            Caching.ClearCache();
+            EditorUtility.DisplayDialog("Clear AssetBundles Cache", "AssetBundles cache was successfully cleared",
+                "OK");
         }
 
         /// <summary>

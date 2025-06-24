@@ -1,4 +1,8 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEV_LOGS
 #else
 #undef DEV_LOGS
@@ -7,7 +11,7 @@
 using System;
 using UnityEngine;
 
-namespace _WIP
+namespace Evolutex.Evolunity.Utilities
 {
     /// <summary>
     /// Works only when "Development Build" option is enabled (in "Build Settings") or in Unity Editor.

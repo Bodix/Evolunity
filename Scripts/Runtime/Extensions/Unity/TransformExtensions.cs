@@ -4,12 +4,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
     public static class TransformExtensions
     {
+        private static readonly StringBuilder _stringBuilder = new StringBuilder();
+
         public static void SetX(this Transform transform, float value)
         {
             transform.position = transform.position.WithX(value);
@@ -75,6 +78,53 @@ namespace Evolutex.Evolunity.Extensions
         {
             transform.position = pose.position;
             transform.rotation = pose.rotation;
+        }
+
+        /// <summary>
+        /// WARNING!!! This method is not suitable if there are different transforms
+        /// with the same name under the same parent. Use <see cref="GetIndexedPath" /> instead.
+        /// However result from this method should be usable in <see cref="GameObject.Find"/> method
+        /// </summary>
+        public static string GetPath(this Transform transform)
+        {
+            _stringBuilder.Append(transform.name);
+            while (transform.parent != null)
+            {
+                transform = transform.parent;
+
+                _stringBuilder.Insert(0, transform.name, '/');
+            }
+
+            string result = _stringBuilder.ToString();
+            _stringBuilder.Clear();
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method is not completely reliable because order of objects may change.
+        /// If you need to get the most reliable path, then re-implement this method using
+        /// <a href="https://docs.unity3d.com/ScriptReference/GlobalObjectId.html">GlobalObjectId</a> instead of index.
+        /// 
+        /// Also may be useful:
+        /// <a href="https://web.archive.org/web/20240312052715/https://bdts.com.au/tips-and-resources/unity-how-to-save-and-load-references-to-gameobjects.html"/>
+        /// <a href="https://github.com/Unity-Technologies/guid-based-reference"/>
+        /// <a href="https://github.com/ashblue/fluid-unique-id"/>
+        /// </summary>
+        public static string GetIndexedPath(this Transform transform)
+        {
+            _stringBuilder.Append(transform.name, '[', transform.GetSiblingIndex(), ']');
+            while (transform.parent != null)
+            {
+                transform = transform.parent;
+
+                _stringBuilder.Insert(0, transform.name, '[', transform.GetSiblingIndex(), ']', '/');
+            }
+
+            string result = _stringBuilder.ToString();
+            _stringBuilder.Clear();
+
+            return result;
         }
 
         // https://forum.unity.com/threads/solved-how-to-get-rotation-value-that-is-in-the-inspector.460310/#post-4564687

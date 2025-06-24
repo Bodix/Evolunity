@@ -2,8 +2,8 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using UnityEngine;
 using Evolutex.Evolunity.Utilities;
+using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
@@ -132,9 +132,9 @@ namespace Evolutex.Evolunity.Extensions
 
         public static Vector3 NormalizeAngles(this Vector3 angles)
         {
-            angles.x = Angle.Normalize(angles.x);
-            angles.y = Angle.Normalize(angles.y);
-            angles.z = Angle.Normalize(angles.z);
+            angles.x = MathUtility.NormalizeAngle(angles.x);
+            angles.y = MathUtility.NormalizeAngle(angles.y);
+            angles.z = MathUtility.NormalizeAngle(angles.z);
 
             return angles;
         }

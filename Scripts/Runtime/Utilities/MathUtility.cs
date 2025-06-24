@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Utilities
 {
-    public static class MathUtilities
+    public static class MathUtility
     {
         /// <summary>
         /// https://www.youtube.com/watch?v=YCFt0L5KNWE
@@ -28,6 +28,29 @@ namespace Evolutex.Evolunity.Utilities
             float y = radius * Mathf.Sin(angle);
 
             return new Vector2(x, y);
+        }
+        
+        /// <summary>
+        /// Parametric equation of the sphere.
+        /// </summary>
+        public static Vector3 GetSpherePosition(float radius, float horizontalAngle, float verticalAngle)
+        {
+            float x = radius * Mathf.Sin(verticalAngle) * Mathf.Cos(horizontalAngle);
+            float y = radius * Mathf.Cos(verticalAngle);
+            float z = radius * Mathf.Sin(verticalAngle) * Mathf.Sin(horizontalAngle);
+
+            return new Vector3(x, y, z);
+        }
+        
+        /// <summary>
+        /// Normalize angle within [-360, 360].
+        /// </summary>
+        public static float NormalizeAngle(float angle)
+        {
+            if (angle == -360 || angle == 360)
+                return angle;
+            
+            return angle % 360;
         }
     }
 }
