@@ -8,12 +8,12 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Patterns
 {
     [Serializable]
-    public class ObservableReference<T>
+    public class ObservableProperty<T>
     {
         [SerializeField]
         private T _value;
 
-        public ObservableReference(T value)
+        public ObservableProperty(T value)
         {
             _value = value;
 
@@ -33,7 +33,12 @@ namespace Evolutex.Evolunity.Patterns
             }
         }
 
-        public static implicit operator T(ObservableReference<T> observable)
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
+        public static implicit operator T(ObservableProperty<T> observable)
         {
             return observable.Value;
         }

@@ -7,6 +7,11 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Patterns
 {
+    /// <summary>
+    /// Suitable for use only as fields or local variables. Not suitable for use as a property, as it will be copied
+    /// as a value type when accessed. If you need to use it as a property, use <see cref="ObservableProperty{T}"/> instead.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Serializable]
     public struct ObservableValue<T>
     {
@@ -31,6 +36,11 @@ namespace Evolutex.Evolunity.Patterns
 
                 Updated?.Invoke(_value);
             }
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
 
         public static implicit operator T(ObservableValue<T> observable)
