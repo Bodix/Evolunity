@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Components.Animations
 
     public interface IRootMotionReceiver
     {
-        void ApplyRootMotion(Vector3 positionDelta, Quaternion rotationDelta);
+        void ApplyRootMotion(Vector3 deltaPosition, Quaternion deltaRotation);
     }
 
     [RequireComponent(typeof(Animator))]
