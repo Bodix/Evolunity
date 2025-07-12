@@ -16,8 +16,6 @@ namespace Evolutex.Evolunity.Patterns
         public ObservableProperty(T value)
         {
             _value = value;
-
-            Updated = null;
         }
 
         public event Action<T> Updated;

@@ -17,4 +17,9 @@ namespace Evolutex.Evolunity.Components
             return Instantiate(Prefab, new Vector3(position.x, 0, position.y), Quaternion.identity, Parent);
         }
     }
+
+    [AddComponentMenu("Evolunity/Circle Zone Spawner")]
+    public class CircleZoneSpawner : CircleZoneSpawner<GameObject>
+    {
+    }
 }
