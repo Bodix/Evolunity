@@ -23,10 +23,13 @@
         "unity3d",
         "unity-development",
         "asset"
-      ],
-      "author": {
+    ],
+    "dependencies": {
+        "com.mackysoft.serializereference-extensions": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions"
+    },
+    "author": {
         "name": "Bodix",
         "email": "bodix321@gmail.com",
         "url": "https://github.com/Bodix/Evolunity"
-      }
+    }
 }
