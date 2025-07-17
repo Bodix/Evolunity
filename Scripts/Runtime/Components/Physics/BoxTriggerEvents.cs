@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Components.Physics
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class BoxTrigger : MonoBehaviour
+    public class BoxTriggerEvents : MonoBehaviour
     {
         [SerializeField, HideInInspector]
         private BoxCollider _boxCollider;

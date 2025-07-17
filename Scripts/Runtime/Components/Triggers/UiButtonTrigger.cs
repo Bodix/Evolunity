@@ -5,45 +5,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
-using Evolutex.Evolunity.Components.Physics;
 using Evolutex.Evolunity.Attributes;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
     [AddComponentMenu("Evolunity/Triggers/UI Button Trigger")]
-    [RequireComponent(typeof(BoxTrigger))]
-    public class UiButtonTrigger : MonoBehaviour
+    public class UiButtonTrigger : AbstractTrigger
     {
         [SerializeReference, TypeSelector]
         private ITriggerable _triggerable;
         [SerializeField, HideIf(nameof(HideButtonInInspector))]
         protected Button _uiButton;
 
-        private BoxTrigger _boxTrigger;
-
         protected virtual bool HideButtonInInspector => false;
-        public BoxTrigger BoxTrigger => _boxTrigger;
 
-        private void Awake()
-        {
-            _boxTrigger = GetComponent<BoxTrigger>();
-            _boxTrigger.TriggerEnter += ShowInteractButton;
-            _boxTrigger.TriggerExit += HideInteractButton;
-        }
-
-        private void OnDestroy()
-        {
-            _boxTrigger.TriggerEnter -= ShowInteractButton;
-            _boxTrigger.TriggerExit += HideInteractButton;
-        }
-
-        private void ShowInteractButton(Collider obj)
+        protected override void EnterTrigger(Collider other)
         {
             _uiButton.gameObject.SetActive(true);
             _uiButton.onClick.AddListener(_triggerable.Trigger);
         }
 
-        private void HideInteractButton(Collider obj)
+        protected override void ExitTrigger(Collider other)
         {
             _uiButton.gameObject.SetActive(false);
             _uiButton.onClick.RemoveListener(_triggerable.Trigger);
