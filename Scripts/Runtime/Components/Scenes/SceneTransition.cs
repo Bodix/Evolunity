@@ -8,7 +8,7 @@ using Evolutex.Evolunity.Components.Animations;
 
 namespace Evolutex.Evolunity.Components.Scenes
 {
-    [AddComponentMenu("Evolunity/Scene Transition")]
+    [AddComponentMenu("Evolunity/Scenes/Scene Transition")]
     public class SceneTransition : MonoBehaviour
     {
         public InOutBehaviour InOutAnimation = null;

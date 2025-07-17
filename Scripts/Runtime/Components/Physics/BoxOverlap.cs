@@ -17,7 +17,7 @@ namespace Evolutex.Evolunity.Components.Physics
     // 2. Handle QueryTriggerInteraction option.
     // 3. Make read only if controlled from other script (e. g. from ConicalOverlap).
 
-    [AddComponentMenu("Evolunity/Box Overlap")]
+    [AddComponentMenu("Evolunity/Physics/Box Overlap")]
     public class BoxOverlap : MonoBehaviour
     {
         public OverlapPoseOrigin PoseOrigin;

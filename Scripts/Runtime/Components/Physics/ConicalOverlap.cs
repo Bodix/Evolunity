@@ -17,7 +17,7 @@ namespace Evolutex.Evolunity.Components.Physics
     // 2. Handle QueryTriggerInteraction option.
 
     [RequireComponent(typeof(BoxOverlap))]
-    [AddComponentMenu("Evolunity/Conical Overlap")]
+    [AddComponentMenu("Evolunity/Physics/Conical Overlap")]
     public class ConicalOverlap : MonoBehaviour
     {
         [InfoBox("ConicalOverlap uses BoxOverlap. It will override its settings")]

@@ -2,11 +2,12 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using UnityEngine;
-using NaughtyAttributes;
 using Evolutex.Evolunity.Components.Physics;
+using Evolutex.Evolunity.Components.Scenes;
+using NaughtyAttributes;
+using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Scenes
+namespace Evolutex.Evolunity.Components.Triggers
 {
     [AddComponentMenu("Evolunity/Triggers/Scene Change Trigger")]
     [RequireComponent(typeof(BoxTrigger))]

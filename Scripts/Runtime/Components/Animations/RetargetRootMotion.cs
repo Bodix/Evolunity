@@ -24,6 +24,7 @@ namespace Evolutex.Evolunity.Components.Animations
         void ApplyRootMotion(Vector3 deltaPosition, Quaternion deltaRotation);
     }
 
+    [AddComponentMenu("Evolunity/Animations/Retarget Root Motion")]
     [RequireComponent(typeof(Animator))]
     public class RetargetRootMotion : MonoBehaviour
     {
