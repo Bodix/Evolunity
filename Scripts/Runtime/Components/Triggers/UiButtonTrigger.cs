@@ -5,15 +5,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
-using Evolutex.Evolunity.Attributes;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
     [AddComponentMenu("Evolunity/Triggers/UI Button Trigger")]
-    public class UiButtonTrigger : AbstractTrigger
+    public class UiButtonTrigger : Trigger
     {
-        [SerializeReference, TypeSelector]
-        private ITriggerable _triggerable;
         [SerializeField, HideIf(nameof(HideButtonInInspector))]
         protected Button _uiButton;
 
