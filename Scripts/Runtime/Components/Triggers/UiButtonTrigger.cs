@@ -23,12 +23,14 @@ namespace Evolutex.Evolunity.Components.Triggers
         {
             _uiButton.gameObject.SetActive(true);
             _uiButton.onClick.AddListener(_triggerable.Trigger);
+            _uiButton.onClick.AddListener(InvokeTriggeredEvent);
         }
 
         protected override void ExitTrigger(Collider other)
         {
             _uiButton.gameObject.SetActive(false);
             _uiButton.onClick.RemoveListener(_triggerable.Trigger);
+            _uiButton.onClick.RemoveListener(InvokeTriggeredEvent);
         }
     }
 }

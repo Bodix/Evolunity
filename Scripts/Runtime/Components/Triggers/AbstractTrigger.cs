@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace Evolutex.Evolunity.Components.Triggers
 #endif
 
         public BoxCollider BoxCollider => _boxCollider;
+        
+        public event Action Triggered;
 
         private void OnValidate()
         {
@@ -77,6 +80,11 @@ namespace Evolutex.Evolunity.Components.Triggers
         protected virtual void StayInTrigger(Collider other) { }
 
         protected virtual void ExitTrigger(Collider other) { }
+
+        protected void InvokeTriggeredEvent()
+        {
+            Triggered?.Invoke();
+        }
 
         // Should be protected to be visible by in derived class by NaughtyAttributes.
         protected bool ValidateTag(string value)

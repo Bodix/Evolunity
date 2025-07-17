@@ -19,6 +19,8 @@ namespace Evolutex.Evolunity.Components.Triggers
         protected override void EnterTrigger(Collider other)
         {
             _sceneTransition.LoadSceneAfterAnimation(_scene);
+
+            InvokeTriggeredEvent();
         }
     }
 }
