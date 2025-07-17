@@ -4,19 +4,18 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
     [Serializable]
-    public class TriggerableEvent : ITriggerable
+    public class TriggerableUnityObject : ITriggerable
     {
-        [SerializeField]
-        private UnityEvent Event;
-        
+        [SerializeField, InterfaceType(typeof(ITriggerable))]
+        private UnityEngine.Object _object;
+
         public void Trigger()
         {
-            Event.Invoke();
+            ((ITriggerable)_object).Trigger();
         }
     }
 }

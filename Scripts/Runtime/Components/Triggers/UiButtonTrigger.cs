@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
 using Evolutex.Evolunity.Components.Physics;
+using Evolutex.Evolunity.Attributes;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
@@ -13,8 +14,8 @@ namespace Evolutex.Evolunity.Components.Triggers
     [RequireComponent(typeof(BoxTrigger))]
     public class UiButtonTrigger : MonoBehaviour
     {
-        [SerializeField, InterfaceType(typeof(ITriggerable))]
-        private Object triggerable;
+        [SerializeReference, TypeSelector]
+        private ITriggerable _triggerable;
         [SerializeField, HideIf(nameof(HideButtonInInspector))]
         protected Button _uiButton;
 
@@ -22,7 +23,6 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         protected virtual bool HideButtonInInspector => false;
         public BoxTrigger BoxTrigger => _boxTrigger;
-        private ITriggerable Triggerable => (ITriggerable)triggerable;
 
         private void Awake()
         {
@@ -40,13 +40,13 @@ namespace Evolutex.Evolunity.Components.Triggers
         private void ShowInteractButton(Collider obj)
         {
             _uiButton.gameObject.SetActive(true);
-            _uiButton.onClick.AddListener(Triggerable.Trigger);
+            _uiButton.onClick.AddListener(_triggerable.Trigger);
         }
 
         private void HideInteractButton(Collider obj)
         {
             _uiButton.gameObject.SetActive(false);
-            _uiButton.onClick.RemoveListener(Triggerable.Trigger);
+            _uiButton.onClick.RemoveListener(_triggerable.Trigger);
         }
     }
 }

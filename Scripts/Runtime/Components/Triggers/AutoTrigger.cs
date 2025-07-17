@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using Evolutex.Evolunity.Components.Physics;
+using Evolutex.Evolunity.Attributes;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
@@ -11,13 +12,12 @@ namespace Evolutex.Evolunity.Components.Triggers
     [RequireComponent(typeof(BoxTrigger))]
     public class AutoTrigger : MonoBehaviour
     {
-        [SerializeField, InterfaceType(typeof(ITriggerable))]
-        private Object triggerable;
+        [SerializeReference, TypeSelector]
+        private ITriggerable _triggerable;
 
         private BoxTrigger _boxTrigger;
 
         public BoxTrigger BoxTrigger => _boxTrigger;
-        private ITriggerable Triggerable => (ITriggerable)triggerable;
 
         private void Awake()
         {
@@ -32,7 +32,7 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         private void Trigger(Collider obj)
         {
-            Triggerable.Trigger();
+            _triggerable.Trigger();
         }
     }
 }
