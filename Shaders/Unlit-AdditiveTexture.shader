@@ -12,8 +12,6 @@
         Blend One One
         // Disable writing to depth texture.
         ZWrite Off
-        // Cull Off
-        // Lighting Off
 
         Pass
         {

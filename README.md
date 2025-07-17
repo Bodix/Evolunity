@@ -121,6 +121,8 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `MenuItems` - Useful menu items.
 - `Config` - Editor window with different project settings (e.g., target frame rate).
 - `LayerDrawer` - Property drawer for `LayerAttribute` that shows a popup with layers (not mask).
+- `TypeSelectorDrawer` - Property drawer for `TypeSelectorAttribute` that allows you to select a derived class or
+  interface implementation. Target type requirements see in `TypeSelectorAttribute` documentation. Use together with `SerializeReferenceAttribute`.
 - `Define` - Defines management.
 - `EditorConsole` - Utility for working with the Editor console.
 - `OpenInFileManager` - Utility to open the given path in the file manager.
@@ -186,8 +188,7 @@ Use the following URL in the **Package Manager**:
 
 1. Unity 2019.3+
 
-2. Git
-  *(Must be added to the **PATH** environment variable)*
+2. Git *(Must be added to the **PATH** environment variable)*
 
 ## License
 

@@ -10,8 +10,6 @@ namespace Evolutex.Evolunity.Editor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
-#if UNITY_2019_3_OR_NEWER
-
         public static Type GetManagedReferenceFieldType(this SerializedProperty serializedProperty)
         {
             return GetManagedReferenceType(serializedProperty.managedReferenceFieldTypename);
@@ -40,7 +38,5 @@ namespace Evolutex.Evolunity.Editor.Extensions
 
             return assembly.GetType(managedReferenceTypename.Substring(splitIndex + 1));
         }
-
-#endif
     }
 }

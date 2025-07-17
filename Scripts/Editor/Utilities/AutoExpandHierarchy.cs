@@ -17,8 +17,9 @@ namespace Evolutex.Evolunity.Editor.Utilities
     // {
     //     static EditorBootstrap()
     //     {
-    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");  
+    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
     //         AutoExpandHierarchy.GameObjectsToExpand.Add("Game");
+    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
     //         AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
     //     }
     // }

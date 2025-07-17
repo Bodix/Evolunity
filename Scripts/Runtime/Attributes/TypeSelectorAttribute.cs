@@ -10,12 +10,12 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Attributes
 {
     /// <summary>
-    /// Supported types:
+    /// Target type requirements:
     /// <br/> - Public
+    /// <br/> - Has [Serializable] attribute
     /// <br/> - Not abstract
     /// <br/> - Not generic
     /// <br/> - Not derived from UnityEngine.Object
-    /// <br/> - Has [Serializable] attribute
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public class TypeSelectorAttribute : PropertyAttribute { }

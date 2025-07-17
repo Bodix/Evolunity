@@ -2,8 +2,6 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-#if UNITY_2019_3_OR_NEWER
-
 using System;
 using System.Linq;
 using UnityEditor;
@@ -39,7 +37,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
             dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
 
             if (EditorGUI.DropdownButton(dropdownButtonRect,
-                new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
+                    new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
             {
                 Type baseType = property.GetManagedReferenceFieldType();
                 TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
@@ -74,5 +72,3 @@ namespace Evolutex.Evolunity.Editor.Drawers
         }
     }
 }
-
-#endif
