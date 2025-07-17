@@ -1,6 +1,6 @@
 {
     "name": "com.evolutex.evolunity",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "displayName": "Evolunity",
     "description": "Well-designed package with useful scripting tools for Unity development.",
     "unity": "2019.3",

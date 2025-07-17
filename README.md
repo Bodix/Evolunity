@@ -168,7 +168,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 ## Dependencies
 
 - [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes)
-- [Unity Interface Support](https://github.com/TheDudeFromCI/Unity-Interface-Support)
+- [UnityInterfaceSupport](https://github.com/TheDudeFromCI/Unity-Interface-Support)
 
 ## Warning
 
