@@ -1,6 +1,6 @@
 # 🌿 Evolunity
 
-![Unity version](https://img.shields.io/badge/unity-2018.4%2B-blue?logo=unity)
+![Unity version](https://img.shields.io/badge/unity-2019.4%2B-blue?logo=unity)
 [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
 
 Well-designed package with useful scripting tools for Unity development.
