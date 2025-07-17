@@ -8,6 +8,7 @@ using Evolutex.Evolunity.Components.Physics;
 
 namespace Evolutex.Evolunity.Components.Scenes
 {
+    [AddComponentMenu("Evolunity/Triggers/Scene Change Trigger")]
     [RequireComponent(typeof(BoxTrigger))]
     public class SceneChangeTrigger : MonoBehaviour
     {

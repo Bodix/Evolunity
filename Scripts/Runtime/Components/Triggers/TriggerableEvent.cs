@@ -7,7 +7,8 @@ using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    public class EventTriggerComponent : MonoBehaviour, ITrigger
+    [AddComponentMenu("Evolunity/Triggers/Triggerable Event")]
+    public class TriggerableEvent : MonoBehaviour, ITriggerable
     {
         public UnityEvent Event;
         

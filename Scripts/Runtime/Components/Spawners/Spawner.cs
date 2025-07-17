@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Components
         }
     }
 
-    [AddComponentMenu("Evolunity/Spawner")]
+    [AddComponentMenu("Evolunity/Spawners/Spawner")]
     public class Spawner : Spawner<GameObject>
     {
     }

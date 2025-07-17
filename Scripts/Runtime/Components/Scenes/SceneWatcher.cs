@@ -12,6 +12,7 @@ namespace Evolutex.Evolunity.Components.Scenes
     /// Use it in Start() method. Dont use it in Awake() method.
     /// The reason is that SceneManager.activeSceneChanged event invokes after Awake(), before Start().
     /// </summary>
+    [AddComponentMenu("Evolunity/Scene Watcher")]
     public class SceneWatcher : MonoBehaviour
     {
         public bool Logs;

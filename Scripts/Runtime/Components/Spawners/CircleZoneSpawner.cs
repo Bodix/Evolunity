@@ -18,7 +18,7 @@ namespace Evolutex.Evolunity.Components
         }
     }
 
-    [AddComponentMenu("Evolunity/Circle Zone Spawner")]
+    [AddComponentMenu("Evolunity/Spawners/Circle Zone Spawner")]
     public class CircleZoneSpawner : CircleZoneSpawner<GameObject>
     {
     }
