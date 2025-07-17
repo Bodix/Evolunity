@@ -4,8 +4,9 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Evolutex.Evolunity.Components.Animations;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Evolutex.Evolunity.Components.Scenes
 {
     [AddComponentMenu("Evolunity/Animations/Scene Transition")]
     public class SceneTransition : MonoBehaviour
