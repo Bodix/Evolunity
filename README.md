@@ -176,7 +176,7 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 
 ## Install
 
-Use the following URL in the **Package Manager**:
+Use the following URL in the **Package Manager**:<br>
 `https://github.com/Bodix/Evolunity.git`
 
   [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)
