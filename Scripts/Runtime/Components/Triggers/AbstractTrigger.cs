@@ -1,4 +1,8 @@
-﻿using NaughtyAttributes;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.Triggers
@@ -19,10 +23,15 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         public BoxCollider BoxCollider => _boxCollider;
 
+        private void OnValidate()
+        {
+            _boxCollider = GetComponent<BoxCollider>();
+            _boxCollider.isTrigger = true;
+        }
+
         private void Awake()
         {
             _boxCollider = GetComponent<BoxCollider>();
-
 #if UNITY_2023_2_OR_NEWER
             _tagHandle = TagHandle.GetExistingTag(AllowedTag);
 #endif
