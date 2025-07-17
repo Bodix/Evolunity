@@ -12,6 +12,9 @@ namespace Evolutex.Evolunity.Components.Triggers
     {
         // [SerializeReference, SubclassSelector]
         // private ITrigger _trigger;
+        [SerializeField, InterfaceType(typeof(ITrigger))]
+        private Object trigger;
+        private ITrigger _trigger => (ITrigger)trigger;
 
         private BoxTrigger _boxTrigger;
 
@@ -30,7 +33,7 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         private void Trigger(Collider obj)
         {
-            // _trigger.Trigger();
+            _trigger.Trigger();
         }
     }
 }

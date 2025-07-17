@@ -14,6 +14,9 @@ namespace Evolutex.Evolunity.Components.Triggers
     {
         // [SerializeReference, SubclassSelector]
         // private ITrigger _trigger;
+        [SerializeField, InterfaceType(typeof(ITrigger))]
+        private Object trigger;
+        private ITrigger _trigger => (ITrigger)trigger;
         [SerializeField, HideIf(nameof(HideButtonInInspector))]
         protected Button _uiButton;
 
@@ -38,13 +41,13 @@ namespace Evolutex.Evolunity.Components.Triggers
         private void ShowInteractButton(Collider obj)
         {
             _uiButton.gameObject.SetActive(true);
-            // _uiButton.onClick.AddListener(_trigger.Trigger);
+            _uiButton.onClick.AddListener(_trigger.Trigger);
         }
 
         private void HideInteractButton(Collider obj)
         {
             _uiButton.gameObject.SetActive(false);
-            // _uiButton.onClick.RemoveListener(_trigger.Trigger);
+            _uiButton.onClick.RemoveListener(_trigger.Trigger);
         }
     }
 }

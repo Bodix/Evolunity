@@ -7,14 +7,14 @@ using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    [Serializable]
-    public class EventTrigger : ITrigger
-    {
-        public UnityEvent Event;
-        
-        public void Trigger()
-        {
-            Event.Invoke();
-        }
-    }
+    // [Serializable]
+    // public class EventTrigger : ITrigger
+    // {
+    //     public UnityEvent Event;
+    //     
+    //     public void Trigger()
+    //     {
+    //         Event.Invoke();
+    //     }
+    // }
 }
