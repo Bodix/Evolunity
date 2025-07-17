@@ -1,6 +1,6 @@
 # 🌿 Evolunity
 
-![Unity version](https://img.shields.io/badge/unity-2019.4%2B-blue?logo=unity)
+![Unity version](https://img.shields.io/badge/unity-2019.3%2B-blue?logo=unity)
 [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
 
 Well-designed package with useful scripting tools for Unity development.
@@ -168,6 +168,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 ## Dependencies
 
 - [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes)
+- [Unity Interface Support](https://github.com/TheDudeFromCI/Unity-Interface-Support)
 
 ## Warning
 
@@ -175,33 +176,15 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 
 ## Install
 
-- **Unity 2019.3 and above:**
-
-  Use the following URL in the **Package Manager**:
-  `https://github.com/Bodix/Evolunity.git`
+Use the following URL in the **Package Manager**:
+`https://github.com/Bodix/Evolunity.git`
 
   [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)
 
-- **Before Unity 2019.3:**
-
-  Open `{ProjectFolder}/Packages/manifest.json` and add the following line:
-
-    ```json
-    {
-      "dependencies":
-      {
-        "com.evolutex.evolunity": "https://github.com/Bodix/Evolunity.git",
-        ...
-      }
-    }
-    ```
-
 ## Requirements
 
-- Unity 2018.4+<br>
-  *(You can try the lower version, but I haven't tested that)*
-
-- Git<br>
+1. Unity 2019.3+
+2. Git
   *(Must be added to the **PATH** environment variable)*
 
 ## License
