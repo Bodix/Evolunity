@@ -23,16 +23,16 @@ namespace Evolutex.Evolunity.Components.Triggers
 #endif
 
         public BoxCollider BoxCollider => _boxCollider;
-        
+
         public event Action Triggered;
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             _boxCollider = GetComponent<BoxCollider>();
             _boxCollider.isTrigger = true;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _boxCollider = GetComponent<BoxCollider>();
 #if UNITY_2023_2_OR_NEWER
