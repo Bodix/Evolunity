@@ -18,6 +18,11 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         protected override void EnterTrigger(Collider obj)
         {
+            InvokeTrigger();
+        }
+
+        protected void InvokeTrigger()
+        {
             _triggerable.Trigger();
 
             InvokeTriggeredEvent();
