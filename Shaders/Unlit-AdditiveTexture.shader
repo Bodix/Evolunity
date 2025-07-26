@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _TintColor ("Tint Color", Color) = (1,1,1,1)
+        _Color ("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -20,7 +20,7 @@
             #pragma fragment frag
 
             sampler2D _MainTex;
-            float4 _TintColor;
+            float4 _Color;
 
             struct appdata
             {
@@ -46,7 +46,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return tex2D(_MainTex, i.uv) * _TintColor;
+                return tex2D(_MainTex, i.uv) * _Color;
             }
             ENDCG
         }
