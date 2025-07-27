@@ -23,6 +23,7 @@ namespace Evolutex.Evolunity.Utilities
         /// <summary>
         /// Avoid use UriKind.Relative or UriKind.RelativeOrAbsolute because most of the strings are valid URLs.
         /// For example, "asdasd", "/", and "?????" are valid in this case.
+        /// Also see <a href="https://mathiasbynens.be/demo/url-regex/">Regex versions</a>
         /// </summary>
         public static bool Url(string url, UriKind urlKind = UriKind.Absolute)
         {
