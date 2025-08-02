@@ -18,14 +18,24 @@ namespace Evolutex.Evolunity.Components.Triggers
 
         protected override void EnterTrigger(Collider other)
         {
-            _uiButton.gameObject.SetActive(true);
+            ShowButton();
             _uiButton.onClick.AddListener(InvokeTrigger);
         }
 
         protected override void ExitTrigger(Collider other)
         {
-            _uiButton.gameObject.SetActive(false);
+            HideButton();
             _uiButton.onClick.RemoveListener(InvokeTrigger);
+        }
+
+        protected virtual void ShowButton()
+        {
+            _uiButton.gameObject.SetActive(true);
+        }
+
+        protected virtual void HideButton()
+        {
+            _uiButton.gameObject.SetActive(false);
         }
     }
 }

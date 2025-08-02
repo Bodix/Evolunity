@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Components.Triggers
             InvokeTrigger();
         }
 
-        protected void InvokeTrigger()
+        protected virtual void InvokeTrigger()
         {
             _triggerable.Trigger();
 
