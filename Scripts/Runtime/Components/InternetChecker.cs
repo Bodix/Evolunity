@@ -15,26 +15,35 @@ namespace Evolutex.Evolunity.Components
     public class InternetChecker : MonoBehaviour
     {
         /// <summary>
-        /// Interval between pings in seconds.
+        /// Interval between pings in seconds when connected.
         /// </summary>
-        public int PingFrequency = 1;
+        [Min(1)]
+        public int ConnectedPingInterval = 1;
         /// <summary>
-        /// Dont use "google.com" URL because Google <a href="https://stackoverflow.com/a/77422720/8614296">may block your IP</a>.
+        /// Interval between pings in seconds when disconnected.
+        /// </summary>
+        [Min(1)]
+        public int DisconnectedPingInterval = 1;
+
+        // Cloudflare:
+        // https://1.1.1.1/generate_204
+        // Google:
+        // https://clients3.google.com/generate_204
+        // https://www.gstatic.com/generate_204
+        // https://connectivitycheck.gstatic.com/generate_204
+
+        /// <summary>
+        /// Dont use "https://google.com" URL because Google <a href="https://stackoverflow.com/a/77422720/8614296">may block your IP</a>.
         /// Ideally the PingUrl should be your game service, because firewall may block access to some endpoints.
         /// The player may be connected to an intranet or captive portal.
         /// </summary>
-        public string PingUrl = "8.8.8.8";
+        public string PingUrl = "https://clients3.google.com/generate_204";
         public bool Logs;
 
         public bool IsConnected { get; private set; }
 
         public event Action InternetConnected;
         public event Action InternetDisconnected;
-
-        private void Awake()
-        {
-            IsConnected = Validate.InternetConnection();
-        }
 
         private void OnEnable()
         {
@@ -46,50 +55,69 @@ namespace Evolutex.Evolunity.Components
             while (enabled)
             {
                 if (!Validate.InternetConnection() && IsConnected)
-                {
-                    IsConnected = false;
+                    OnDisconnected();
 
-                    if (Logs)
-                        Debug.LogWarning("Disconnected from the internet", this);
-
-                    InternetDisconnected?.Invoke();
-                }
-                else if (Validate.InternetConnection() && !IsConnected)
-                {
-                    if (Validate.Url(PingUrl))
-                    {
-                        yield return Ping();
-                    }
-                    else
-                    {
-                        enabled = false;
-
-                        Debug.LogError("Invalid ping URL. " + nameof(InternetChecker) + " has been disabled", this);
-                    }
-                }
+                if (Validate.InternetConnection())
+                    yield return Ping(IsConnected ? ConnectedPingInterval : DisconnectedPingInterval);
 
                 yield return null;
             }
         }
 
-        private IEnumerator Ping()
+        private IEnumerator Ping(int interval)
         {
-            using (UnityWebRequest request = UnityWebRequest.Head(PingUrl))
+            if (Validate.Url(PingUrl))
             {
-                request.timeout = PingFrequency;
-
-                yield return request.SendWebRequest();
-
-                if (!request.IsError() && request.responseCode == 200)
+                using (UnityWebRequest request = UnityWebRequest.Head(PingUrl))
                 {
-                    IsConnected = true;
+                    request.timeout = interval;
 
-                    if (Logs)
-                        Debug.LogWarning("Connected to the internet", this);
+                    float requestTime = Time.time;
+                    yield return request.SendWebRequest();
+                    float responseTime = Time.time;
+                    float requestDuration = responseTime - requestTime;
 
-                    InternetConnected?.Invoke();
+#if UNITY_2020_1_OR_NEWER
+                    bool isSuccessful = request.result == UnityWebRequest.Result.Success;
+#else
+                    bool isSuccessful = !request.IsError();
+#endif
+                    if (isSuccessful && !IsConnected)
+                        OnConnected();
+                    else if (!isSuccessful && IsConnected)
+                        OnDisconnected();
+
+                    float remainingInterval = interval - requestDuration;
+                    if (remainingInterval > 0)
+                        yield return new WaitForSeconds(remainingInterval);
                 }
             }
+            else
+            {
+                enabled = false;
+
+                Debug.LogError("Invalid ping URL. " + nameof(InternetChecker) + " has been disabled", this);
+            }
+        }
+
+        private void OnConnected()
+        {
+            IsConnected = true;
+
+            if (Logs)
+                Debug.LogWarning("Connected to the internet", this);
+
+            InternetConnected?.Invoke();
+        }
+
+        private void OnDisconnected()
+        {
+            IsConnected = false;
+
+            if (Logs)
+                Debug.LogWarning("Disconnected from the internet", this);
+
+            InternetDisconnected?.Invoke();
         }
     }
 }
