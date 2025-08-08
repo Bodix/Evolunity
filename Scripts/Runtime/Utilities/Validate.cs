@@ -15,7 +15,7 @@ namespace Evolutex.Evolunity.Utilities
 
     public static class Validate
     {
-        public static bool InternetConnection()
+        public static bool InternetReachability()
         {
             return Application.internetReachability != NetworkReachability.NotReachable;
         }
