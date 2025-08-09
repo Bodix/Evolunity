@@ -15,35 +15,33 @@ namespace Evolutex.Evolunity.Structs
         public static Direction Left => new Direction(Vector2.left);
         
         public readonly Vector2 NormalizedVector;
-
-        public readonly Vector2 Vector;
-    
         /// <summary>
         /// Signed angle from Vector2.right.
         /// </summary>
         public readonly float Angle;
-        
-        private readonly Func<Vector2, float> axisSelector;
+
+        // private readonly bool _isInitialized;
+        private readonly Func<Vector2, float> _axisSelector;
 
         private Direction(Vector2 vector)
         {
             NormalizedVector = vector.normalized;
-            Vector = vector;
             Angle = Vector2.SignedAngle(Vector2.right, NormalizedVector);
-            
-            axisSelector = v => vector.x * v.x + vector.y * v.y;
+
+            // _isInitialized = true;
+            _axisSelector = v => vector.x * v.x + vector.y * v.y;
         }
 
         public float GetAxis(Vector2 vector)
         {
-            return axisSelector?.Invoke(vector) ?? 0f;
+            return _axisSelector?.Invoke(vector) ?? 0f;
         }
-    
+
         public bool Equals(Direction other)
         {
             return NormalizedVector.Equals(other.NormalizedVector) 
                    && Angle.Equals(other.Angle) 
-                   && axisSelector.Equals(other.axisSelector);
+                   && _axisSelector.Equals(other._axisSelector);
         }
 
         public override bool Equals(object obj)
@@ -57,10 +55,26 @@ namespace Evolutex.Evolunity.Structs
             {
                 int hashCode = NormalizedVector.GetHashCode();
                 hashCode = (hashCode * 397) ^ Angle.GetHashCode();
-                hashCode = (hashCode * 397) ^ (axisSelector != null ? axisSelector.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_axisSelector != null ? _axisSelector.GetHashCode() : 0);
                 return hashCode;
             }
         }
+
+        public override string ToString()
+        {
+            return NormalizedVector.ToString();
+        }
+
+        // private void CheckInitialization()
+        // {
+        //     if (!_isInitialized)
+        //         Debug.LogError(@"Struct is not created correctly. This could have happened in one of two cases:
+        //             - either the structure was created using a standard constructor;
+        //             - or the structure was created using default(Direction).
+        //             To create the structure correctly, use one of the following methods:
+        //             - either create the structure using a constructor with a parameter. For example: “new Direction(new Vector2(1, 0))”
+        //             - or create the structure using a static method. For example: “Direction.Right”");
+        // }
 
         public static bool operator ==(Direction direction1, Direction direction2)
         {
