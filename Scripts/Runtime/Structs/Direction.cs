@@ -2,7 +2,6 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using System;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Structs
@@ -13,7 +12,7 @@ namespace Evolutex.Evolunity.Structs
         public static Direction Down => new Direction(Vector2.down);
         public static Direction Right => new Direction(Vector2.right);
         public static Direction Left => new Direction(Vector2.left);
-        
+
         public readonly Vector2 NormalizedVector;
         /// <summary>
         /// Signed angle from Vector2.right.
@@ -21,7 +20,6 @@ namespace Evolutex.Evolunity.Structs
         public readonly float Angle;
 
         // private readonly bool _isInitialized;
-        private readonly Func<Vector2, float> _axisSelector;
 
         private Direction(Vector2 vector)
         {
@@ -29,19 +27,20 @@ namespace Evolutex.Evolunity.Structs
             Angle = Vector2.SignedAngle(Vector2.right, NormalizedVector);
 
             // _isInitialized = true;
-            _axisSelector = v => vector.x * v.x + vector.y * v.y;
         }
 
+        /// <summary>
+        /// Dot product between "direction.NormalizedVector" and "vector".
+        /// </summary>
         public float GetAxis(Vector2 vector)
         {
-            return _axisSelector?.Invoke(vector) ?? 0f;
+            return NormalizedVector.x * vector.x + NormalizedVector.y * vector.y;
         }
 
         public bool Equals(Direction other)
         {
-            return NormalizedVector.Equals(other.NormalizedVector) 
-                   && Angle.Equals(other.Angle) 
-                   && _axisSelector.Equals(other._axisSelector);
+            return NormalizedVector.Equals(other.NormalizedVector)
+                && Angle.Equals(other.Angle);
         }
 
         public override bool Equals(object obj)
@@ -55,7 +54,6 @@ namespace Evolutex.Evolunity.Structs
             {
                 int hashCode = NormalizedVector.GetHashCode();
                 hashCode = (hashCode * 397) ^ Angle.GetHashCode();
-                hashCode = (hashCode * 397) ^ (_axisSelector != null ? _axisSelector.GetHashCode() : 0);
                 return hashCode;
             }
         }
