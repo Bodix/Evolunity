@@ -15,7 +15,7 @@ namespace Evolutex.Evolunity.Structs
 
         public readonly Vector2 NormalizedVector;
         /// <summary>
-        /// Signed angle from Vector2.right.
+        /// Signed angle from "Vector2.right".
         /// </summary>
         public readonly float Angle;
 
@@ -82,6 +82,11 @@ namespace Evolutex.Evolunity.Structs
         public static bool operator !=(Direction direction1, Direction direction2)
         {
             return !direction1.Equals(direction2);
+        }
+
+        public static Direction operator -(Direction direction)
+        {
+            return new Direction(-direction.NormalizedVector);
         }
     }
 }
