@@ -37,6 +37,16 @@ namespace Evolutex.Evolunity.Structs
             return NormalizedVector.x * vector.x + NormalizedVector.y * vector.y;
         }
 
+        public Direction RotateClockwise(float angle)
+        {
+            return RotateCounterclockwise(-angle);
+        }
+
+        public Direction RotateCounterclockwise(float angle)
+        {
+            return new Direction(Quaternion.AngleAxis(angle, Vector3.forward) * NormalizedVector);
+        }
+
         public bool Equals(Direction other)
         {
             return NormalizedVector.Equals(other.NormalizedVector)
