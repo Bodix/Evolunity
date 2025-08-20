@@ -197,5 +197,12 @@ namespace Evolutex.Evolunity.Extensions
 
             return true;
         }
+
+        public static bool IsInteger(this Vector3 vector)
+        {
+            return Mathf.Approximately(vector.x, Mathf.Round(vector.x))
+                && Mathf.Approximately(vector.y, Mathf.Round(vector.y))
+                && Mathf.Approximately(vector.z, Mathf.Round(vector.z));
+        }
     }
 }
