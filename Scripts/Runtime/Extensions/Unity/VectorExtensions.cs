@@ -2,6 +2,8 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System.Collections.Generic;
+using System.Linq;
 using Evolutex.Evolunity.Utilities;
 using UnityEngine;
 
@@ -203,6 +205,16 @@ namespace Evolutex.Evolunity.Extensions
             return Mathf.Approximately(vector.x, Mathf.Round(vector.x))
                 && Mathf.Approximately(vector.y, Mathf.Round(vector.y))
                 && Mathf.Approximately(vector.z, Mathf.Round(vector.z));
+        }
+
+        public static float GetPathLength(this IEnumerable<Vector3> vectors)
+        {
+            if (vectors == null)
+                return 0f;
+
+            return vectors
+                .Zip(vectors.Skip(1), Vector3.Distance)
+                .Sum();
         }
     }
 }
