@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Structs
 
         // private readonly bool _isInitialized;
 
-        private Direction(Vector2 vector)
+        public Direction(Vector2 vector)
         {
             NormalizedVector = vector.normalized;
             Angle = Vector2.SignedAngle(Vector2.right, NormalizedVector);
