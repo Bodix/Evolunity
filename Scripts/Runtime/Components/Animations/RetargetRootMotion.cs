@@ -28,7 +28,7 @@ namespace Evolutex.Evolunity.Components.Animations
     [RequireComponent(typeof(Animator))]
     public class RetargetRootMotion : MonoBehaviour
     {
-        // TODO: Make API of this class public. [#refactoring]
+        // TODO: Make API of this class public.
 
         [SerializeField, ValidateInput(nameof(IsBuiltInTarget), "The same as without this component")]
         private RootMotionTarget _targetType = RootMotionTarget.CharacterController;
