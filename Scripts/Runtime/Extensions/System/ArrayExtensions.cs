@@ -19,9 +19,7 @@ namespace Evolutex.Evolunity.Extensions
         
         public static void SwapElements<T>(this T[] array, int firstIndex, int secondIndex)
         {
-            T value = array[firstIndex];
-            array[firstIndex] = array[secondIndex];
-            array[secondIndex] = value;
+            (array[firstIndex], array[secondIndex]) = (array[secondIndex], array[firstIndex]);
         }
     }
 }
