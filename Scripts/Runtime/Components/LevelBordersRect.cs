@@ -96,10 +96,10 @@ namespace Evolutex.Evolunity.Components
 			float halfWidth = size.x * 0.5f;
 			float halfDepth = size.y * 0.5f;
 
-			float objLeft = pos.x - halfWidth;
-			float objRight = pos.x + halfWidth;
-			float objTop = pos.z + halfDepth;
-			float objBottom = pos.z - halfDepth;
+			float newLeft = pos.x - halfWidth - _leftOffset;
+			float newRight = pos.x + halfWidth + _rightOffset;
+			float newTop = pos.z + halfDepth + _topOffset;
+			float newBottom = pos.z - halfDepth - _bottomOffset;
 
 			float currentLeft = Mathf.Min(_topLeftCorner.position.x, _bottomLeftCorner.position.x);
 			float currentRight = Mathf.Max(_topRightCorner.position.x, _bottomRightCorner.position.x);
@@ -107,27 +107,27 @@ namespace Evolutex.Evolunity.Components
 			float currentBottom = Mathf.Min(_bottomLeftCorner.position.z, _bottomRightCorner.position.z);
 
 			bool changed = false;
-			if (objLeft < currentLeft)
+			if (newLeft < currentLeft)
 			{
-				currentLeft = objLeft - _leftOffset;
+				currentLeft = newLeft;
 				changed = true;
 			}
 
-			if (objRight > currentRight)
+			if (newRight > currentRight)
 			{
-				currentRight = objRight + _rightOffset;
+				currentRight = newRight;
 				changed = true;
 			}
 
-			if (objTop > currentTop)
+			if (newTop > currentTop)
 			{
-				currentTop = objTop + _topOffset;
+				currentTop = newTop;
 				changed = true;
 			}
 
-			if (objBottom < currentBottom)
+			if (newBottom < currentBottom)
 			{
-				currentBottom = objBottom - _bottomOffset;
+				currentBottom = newBottom;
 				changed = true;
 			}
 
