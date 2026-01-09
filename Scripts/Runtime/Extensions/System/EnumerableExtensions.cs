@@ -9,6 +9,8 @@ using System.Linq;
 
 namespace Evolutex.Evolunity.Extensions
 {
+    // TODO: Optimize all ToArray() invocations. [#optimization]
+
     public static class EnumerableExtensions
     {
         // System.Random is used because UnityEngine.Random only works in the main thread.

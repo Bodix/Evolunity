@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
@@ -11,15 +12,24 @@ namespace Evolutex.Evolunity.Extensions
         public static T[] Copy<T>(this T[] array, int index, int length)
         {
             T[] newArray = new T[length];
-            
+
             Array.Copy(array, index, newArray, 0, length);
-            
+
             return newArray;
         }
-        
+
         public static void SwapElements<T>(this T[] array, int firstIndex, int secondIndex)
         {
             (array[firstIndex], array[secondIndex]) = (array[secondIndex], array[firstIndex]);
+        }
+
+        public static Vector2Int Get2DIndex<T>(this T[,] array, int index)
+        {
+            int columnCount = array.GetLength(1);
+            int row = index / columnCount;
+            int col = index % columnCount;
+
+            return new Vector2Int(row, col);
         }
     }
 }
