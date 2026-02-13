@@ -3,7 +3,6 @@
 // All Rights Reserved
 
 using System;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Patterns
@@ -14,15 +13,13 @@ namespace Evolutex.Evolunity.Patterns
 	[Serializable]
 	public struct Optional<T>
 	{
-		[CanBeNull]
 		[SerializeField]
 		private T _value;
 
-		public T Value => !HasValue
+		public T Value => _value;
+		public T ValueOrThrow => !HasValue
 			? throw new InvalidOperationException($"Optional<{typeof(T).Name}> has no value")
 			: _value;
-		[CanBeNull]
-		public T ValueOrDefault => _value;
 		public bool HasValue => _value != null;
 
 		public Optional(T value)
