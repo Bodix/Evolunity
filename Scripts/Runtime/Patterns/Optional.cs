@@ -1,5 +1,9 @@
-﻿#if CSHARP_8_OR_LATER
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Patterns
@@ -10,16 +14,18 @@ namespace Evolutex.Evolunity.Patterns
 	[Serializable]
 	public struct Optional<T>
 	{
+		[CanBeNull]
 		[SerializeField]
-		private T? _value;
+		private T _value;
 
 		public T Value => !HasValue
 			? throw new InvalidOperationException($"Optional<{typeof(T).Name}> has no value")
-			: _value!;
-		public T? ValueOrDefault => _value;
+			: _value;
+		[CanBeNull]
+		public T ValueOrDefault => _value;
 		public bool HasValue => _value != null;
 
-		public Optional(T? value)
+		public Optional(T value)
 		{
 			_value = value;
 		}
@@ -35,4 +41,3 @@ namespace Evolutex.Evolunity.Patterns
 		}
 	}
 }
-#endif
