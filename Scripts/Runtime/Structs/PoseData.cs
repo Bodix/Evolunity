@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Structs
 {
 	[Serializable]
-	public struct PoseData
+	public struct PoseData : IEquatable<PoseData>
 	{
 		public Vector3 position;
 		public Quaternion rotation;
@@ -16,6 +16,46 @@ namespace Evolutex.Evolunity.Structs
 		public override string ToString()
 		{
 			return position + " : " + rotation;
+		}
+
+		public bool Equals(PoseData other)
+		{
+			return position == other.position && rotation == other.rotation;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is PoseData other && Equals(other);
+		}
+
+		public override int GetHashCode()
+		{
+#if UNITY_2021_2_OR_NEWER
+			return HashCode.Combine(position, rotation);
+#else
+			unchecked
+			{
+				return (position.GetHashCode() * 397) ^ rotation.GetHashCode();
+			}
+#endif
+		}
+
+		public bool ApproximatelyEquals(PoseData other, float positionSqrEpsilon, float rotationDotThreshold)
+		{
+			bool positionMatch = (position - other.position).sqrMagnitude < positionSqrEpsilon;
+			bool rotationMatch = Mathf.Abs(Quaternion.Dot(rotation, other.rotation)) > rotationDotThreshold;
+
+			return positionMatch && rotationMatch;
+		}
+
+		public static bool operator ==(PoseData left, PoseData right)
+		{
+			return left.Equals(right);
+		}
+
+		public static bool operator !=(PoseData left, PoseData right)
+		{
+			return !left.Equals(right);
 		}
 
 		public static implicit operator Pose(PoseData data)
