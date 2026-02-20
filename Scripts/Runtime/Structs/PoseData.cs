@@ -43,6 +43,7 @@ namespace Evolutex.Evolunity.Structs
 		/// <param name="other"> </param>
 		/// <param name="positionSqrEpsilon">To convert metres to sqrMagnitude, simply square them.</param>
 		/// <param name="rotationDotEpsilon">To convert degrees to Dot Product, use the cosine of half angle formula: Dot = cos(Angle / 2).</param>
+        // TODO: Make readonly keyword for newer versions. [#refactoring]
 		public bool ApproximatelyEquals(PoseData other, float positionSqrEpsilon, float rotationDotEpsilon)
 		{
 			bool positionMatch = (position - other.position).sqrMagnitude < positionSqrEpsilon;
