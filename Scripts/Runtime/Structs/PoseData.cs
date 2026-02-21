@@ -50,8 +50,10 @@ namespace Evolutex.Evolunity.Structs
 		}
 
 		/// <param name="other"> </param>
-		/// <param name="positionSqrEpsilon">To convert metres to sqrMagnitude, simply square them.</param>
-		/// <param name="rotationDotEpsilon">To convert degrees to Dot Product, use the cosine of half angle formula: Dot = cos(Angle / 2).</param>
+		/// <param name="positionSqrEpsilon">To convert meters to sqrMagnitude, simply square them:
+		/// PositionSquareEpsilon = PositionEpsilon * PositionEpsilon</param>
+		/// <param name="rotationDotEpsilon">To convert degrees to Dot Product, use the cosine of half angle formula:
+		/// RotationDotProductEpsilon = Mathf.Cos(RotationDegreesEpsilon * Mathf.Deg2Rad * 0.5f).</param>
 		// TODO: Make readonly keyword for newer versions. [#refactoring]
 		public bool ApproximatelyEqualsOptimized(PoseData other, float positionSqrEpsilon, float rotationDotEpsilon)
 		{
