@@ -14,20 +14,28 @@ namespace Evolutex.Evolunity.Structs
 		{
 			if (size <= 0)
 				throw new ArgumentException("Ring buffer size must be greater than zero.");
-			
+
 			_buffer = new T[size];
 		}
 
+		public T this[int tick]
+		{
+			get => Get(tick);
+			set => Set(tick, value);
+		}
+
+		public int Size => _buffer.Length;
+
 		public void Set(int tick, T data)
 		{
-			int index = Math.Abs(tick) % _buffer.Length;
+			int index = Math.Abs(tick) % Size;
 
 			_buffer[index] = data;
 		}
 
 		public T Get(int tick)
 		{
-			int index = Math.Abs(tick) % _buffer.Length;
+			int index = Math.Abs(tick) % Size;
 
 			return _buffer[index];
 		}
