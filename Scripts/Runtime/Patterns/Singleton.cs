@@ -10,8 +10,6 @@ namespace Evolutex.Evolunity.Patterns
     {
         private static readonly Lazy<T> instance = new Lazy<T>(() => new T());
 
-        protected Singleton() { }
-
         public static T Instance => instance.Value;
         public static bool IsInstanceCreated => instance.IsValueCreated;
     }

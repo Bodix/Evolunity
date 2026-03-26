@@ -37,24 +37,40 @@ namespace Evolutex.Evolunity.Extensions
                 this.key = key;
             }
 
-            public TValue OrDefault() => Or(default(TValue));
+            public TValue OrDefault()
+            {
+                return Or(default(TValue));
+            }
 
-            public TValue Or(TValue value) =>
-                dictionary.TryGetValue(key, out TValue x) ? x : value;
+            public TValue Or(TValue value)
+            {
+                return dictionary.TryGetValue(key, out TValue x) ? x : value;
+            }
 
-            public TValue Or(Func<TValue> value) =>
-                dictionary.TryGetValue(key, out TValue x) ? x : value();
+            public TValue Or(Func<TValue> value)
+            {
+                return dictionary.TryGetValue(key, out TValue x) ? x : value();
+            }
 
-            public TValue OrAdd(TValue value) =>
-                dictionary.TryGetValue(key, out TValue x) ? x : dictionary[key] = value;
+            public TValue OrAdd(TValue value)
+            {
+                return dictionary.TryGetValue(key, out TValue x) ? x : dictionary[key] = value;
+            }
 
-            public TValue OrAdd(Func<TValue> value) =>
-                dictionary.TryGetValue(key, out TValue x) ? x : dictionary[key] = value();
+            public TValue OrAdd(Func<TValue> value)
+            {
+                return dictionary.TryGetValue(key, out TValue x) ? x : dictionary[key] = value();
+            }
 
-            public TValue OrException() => OrException($"Couldn't find value with [{key}] key.");
+            public TValue OrException()
+            {
+                return OrException($"Couldn't find value with [{key}] key.");
+            }
 
-            public TValue OrException(string message) =>
-                dictionary.TryGetValue(key, out TValue value) ? value : throw new KeyNotFoundException(message);
+            public TValue OrException(string message)
+            {
+                return dictionary.TryGetValue(key, out TValue value) ? value : throw new KeyNotFoundException(message);
+            }
         }
     }
 }

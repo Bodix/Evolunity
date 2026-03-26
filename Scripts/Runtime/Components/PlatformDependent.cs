@@ -31,23 +31,23 @@ namespace Evolutex.Evolunity.Components
 
             disable =
                 ((platform == RuntimePlatform.WindowsPlayer
-                  || platform == RuntimePlatform.WindowsEditor
-                  || platform == RuntimePlatform.OSXPlayer
-                  || platform == RuntimePlatform.OSXEditor
-                  || platform == RuntimePlatform.LinuxPlayer
-                  || platform == RuntimePlatform.LinuxEditor) && !PC) ||
+                    || platform == RuntimePlatform.WindowsEditor
+                    || platform == RuntimePlatform.OSXPlayer
+                    || platform == RuntimePlatform.OSXEditor
+                    || platform == RuntimePlatform.LinuxPlayer
+                    || platform == RuntimePlatform.LinuxEditor) && !PC) ||
                 (platform == RuntimePlatform.IPhonePlayer && !iOS) ||
                 (platform == RuntimePlatform.Android && !android) ||
                 (platform == RuntimePlatform.WebGLPlayer && !webGL) ||
-                ((platform != RuntimePlatform.WindowsPlayer
-                 && platform != RuntimePlatform.WindowsEditor
-                 && platform != RuntimePlatform.OSXPlayer
-                 && platform != RuntimePlatform.OSXEditor
-                 && platform != RuntimePlatform.LinuxPlayer
-                 && platform != RuntimePlatform.LinuxEditor
-                 && platform != RuntimePlatform.IPhonePlayer
-                 && platform != RuntimePlatform.Android
-                 && platform != RuntimePlatform.WebGLPlayer) && !other);
+                (platform != RuntimePlatform.WindowsPlayer
+                    && platform != RuntimePlatform.WindowsEditor
+                    && platform != RuntimePlatform.OSXPlayer
+                    && platform != RuntimePlatform.OSXEditor
+                    && platform != RuntimePlatform.LinuxPlayer
+                    && platform != RuntimePlatform.LinuxEditor
+                    && platform != RuntimePlatform.IPhonePlayer
+                    && platform != RuntimePlatform.Android
+                    && platform != RuntimePlatform.WebGLPlayer && !other);
 
             if (disable)
                 switch (disableMethod)

@@ -3,9 +3,9 @@
 // All Rights Reserved
 
 using System.Collections;
+using Evolutex.Evolunity.Utilities;
 using UnityEngine;
 using UnityEngine.Networking;
-using Evolutex.Evolunity.Utilities;
 
 namespace Evolutex.Evolunity.Extensions
 {

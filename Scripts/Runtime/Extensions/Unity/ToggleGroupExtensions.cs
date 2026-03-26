@@ -12,7 +12,7 @@ namespace Evolutex.Evolunity.Extensions
     public static class ToggleGroupExtensions
     {
         private static FieldInfo togglesField;
-        
+
         // https://forum.unity.com/threads/how-to-get-reference-of-all-toggles-from-togglegroup.463534/
         // https://github.com/Unity-Technologies/uGUI/blob/2019.1/UnityEngine.UI/UI/Core/ToggleGroup.cs
         public static List<Toggle> GetToggles(this ToggleGroup toggleGroup)

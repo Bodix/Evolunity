@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Components.Animations
     {
         public event Action Start;
         public event Action End;
-    
+
         public void OnStart()
         {
             Start?.Invoke();

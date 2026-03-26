@@ -50,16 +50,16 @@ namespace Evolutex.Evolunity.Extensions
                 new Vector2(texture.width / 2f, texture.height / 2f), pixelsPerUnit, extrude,
                 meshType, border, generateFallbackPhysicsShape);
         }
-        
+
         public static string ToBase64(this Texture2D texture)
         {
             return Convert.ToBase64String(texture.EncodeToPNG());
         }
-        
+
         public static Texture2D LoadFromBase64(this Texture2D texture, string base64Texture)
         {
             texture.LoadImage(Convert.FromBase64String(base64Texture));
-            
+
             return texture;
         }
     }

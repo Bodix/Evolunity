@@ -50,7 +50,7 @@ namespace Evolutex.Evolunity.Utilities.Screenshot
                 cam.cullingMask = cullingMask;
 
                 takeScreenshot = false;
-                
+
                 callback?.Invoke(texture);
             }
         }

@@ -26,7 +26,7 @@ namespace Evolutex.Evolunity.Extensions
         public static Rect GetScreenRect(this RectTransform rectTransform)
         {
             Vector2 size = Vector2.Scale(rectTransform.rect.size, rectTransform.lossyScale);
-            Vector2 position = (Vector2) rectTransform.position - size * 0.5f;
+            Vector2 position = (Vector2)rectTransform.position - size * 0.5f;
 
             return new Rect(position, size);
         }

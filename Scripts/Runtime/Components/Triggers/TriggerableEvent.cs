@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Components.Triggers
     {
         [SerializeField]
         private UnityEvent Event;
-        
+
         public void Trigger()
         {
             Event.Invoke();

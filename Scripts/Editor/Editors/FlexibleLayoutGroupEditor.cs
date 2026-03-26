@@ -1,6 +1,6 @@
-﻿using UnityEditor;
+﻿using Evolutex.Evolunity.Components.UI;
+using UnityEditor;
 using UnityEngine.UI;
-using Evolutex.Evolunity.Components.UI;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
@@ -33,7 +33,7 @@ namespace Evolutex.Evolunity.Editor.Editors
             constraintProperty = serializedObject.FindProperty("m_Constraint");
             constraintCountProperty = serializedObject.FindProperty("m_ConstraintCount");
 
-            FlexibleLayoutGroup flexibleLayoutGroup = (FlexibleLayoutGroup) target;
+            FlexibleLayoutGroup flexibleLayoutGroup = (FlexibleLayoutGroup)target;
 
             columnSizeModeProperty = serializedObject.FindProperty(nameof(flexibleLayoutGroup.ColumnSizeMode));
             columnCountProperty = serializedObject.FindProperty(nameof(flexibleLayoutGroup.ColumnCount));
@@ -43,7 +43,7 @@ namespace Evolutex.Evolunity.Editor.Editors
 
         public override void OnInspectorGUI()
         {
-            FlexibleLayoutGroup flexibleLayoutGroup = (FlexibleLayoutGroup) target;
+            FlexibleLayoutGroup flexibleLayoutGroup = (FlexibleLayoutGroup)target;
 
             serializedObject.Update();
 

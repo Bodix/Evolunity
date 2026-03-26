@@ -2,11 +2,12 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using System.IO;
-using UnityEditor;
-using UnityEngine;
 using Evolutex.Evolunity.Editor.Utilities;
+using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Evolutex.Evolunity.Editor
@@ -72,7 +73,7 @@ namespace Evolutex.Evolunity.Editor
 			string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string logsFolderPath = Path.Combine(rootFolderPath, "Library", "Logs", "Unity");
 #elif UNITY_EDITOR_WIN
-            string rootFolderPath = System.Environment.ExpandEnvironmentVariables("%localappdata%");
+            string rootFolderPath = Environment.ExpandEnvironmentVariables("%localappdata%");
             string logsFolderPath = Path.Combine(rootFolderPath, "Unity", "Editor");
 #endif
 
@@ -87,7 +88,7 @@ namespace Evolutex.Evolunity.Editor
             string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string unityFolderPath = Path.Combine(rootFolderPath, "Library", "Unity");
 #elif UNITY_EDITOR_WIN
-            string rootFolderPath = System.Environment.ExpandEnvironmentVariables("%appdata%");
+            string rootFolderPath = Environment.ExpandEnvironmentVariables("%appdata%");
             string unityFolderPath = Path.Combine(rootFolderPath, "Unity");
 #endif
             string packagesFolderPath = Path.Combine(unityFolderPath, "Asset Store-5.x");

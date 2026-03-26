@@ -30,7 +30,7 @@ namespace Evolutex.Evolunity.Utilities
                 {
                     Debug.LogError($"Game object at index [{segment.Index}] should be \"{segment.Name}\", " +
                         $"but actual game object is \"{transform.name}\". This could happen if the hierarchy " +
-                        $"has changed (order or presence of elements). Full path:\n" + indexedPath, transform);
+                        "has changed (order or presence of elements). Full path:\n" + indexedPath, transform);
 
                     return null;
                 }

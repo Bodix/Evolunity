@@ -35,7 +35,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
                 {
                     Object[] allWindows = Resources.FindObjectsOfTypeAll(SceneHierarchyWindowType);
                     if (allWindows.Length > 0)
-                        sceneHierarchyWindow = (EditorWindow) allWindows[0];
+                        sceneHierarchyWindow = (EditorWindow)allWindows[0];
                 }
 
                 return sceneHierarchyWindow;

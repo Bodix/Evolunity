@@ -29,7 +29,7 @@ namespace Evolutex.Evolunity.Utilities
 
             return new Vector2(x, y);
         }
-        
+
         /// <summary>
         /// Parametric equation of the sphere.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Evolutex.Evolunity.Utilities
 
             return new Vector3(x, y, z);
         }
-        
+
         /// <summary>
         /// Normalize angle within [-360, 360].
         /// </summary>
@@ -49,7 +49,7 @@ namespace Evolutex.Evolunity.Utilities
         {
             if (angle == -360 || angle == 360)
                 return angle;
-            
+
             return angle % 360;
         }
     }

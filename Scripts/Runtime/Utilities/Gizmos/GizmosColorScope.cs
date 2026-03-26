@@ -14,7 +14,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
         public GizmosColorScope(Color color)
         {
             _prevColor = UnityEngine.Gizmos.color;
-            
+
             UnityEngine.Gizmos.color = color == default ? _prevColor : color;
         }
 

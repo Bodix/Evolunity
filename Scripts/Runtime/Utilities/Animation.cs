@@ -4,8 +4,8 @@
 
 using System.Collections;
 using System.Linq;
-using UnityEngine;
 using Evolutex.Evolunity.Extensions;
+using UnityEngine;
 
 namespace Evolutex.Evolunity.Utilities
 {
@@ -34,7 +34,7 @@ namespace Evolutex.Evolunity.Utilities
             if (disableOnComplete)
                 target.SetActive(false);
         }
-        
+
         /// <summary>
         /// Same as <see cref="FadeIn"/> but without saving the initial materials settings.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Evolutex.Evolunity.Utilities
 
             yield return Fade(target, 0, 1, duration, renderingMode, false);
         }
-        
+
         /// <summary>
         /// Same as <see cref="FadeOut"/> but without saving the initial materials settings.
         /// </summary>

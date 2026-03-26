@@ -28,15 +28,24 @@ namespace Evolutex.Evolunity.Collections
                     queue.Enqueue(item);
         }
 
-        public void Enqueue(T item) => queue.Enqueue(item);
+        public void Enqueue(T item)
+        {
+            queue.Enqueue(item);
+        }
 
-        public T Dequeue() => queue.Dequeue();
+        public T Dequeue()
+        {
+            return queue.Dequeue();
+        }
 
-        public T Peek() => queue.Peek();
+        public T Peek()
+        {
+            return queue.Peek();
+        }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>) queue).GetEnumerator();
+            return ((IEnumerable<T>)queue).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

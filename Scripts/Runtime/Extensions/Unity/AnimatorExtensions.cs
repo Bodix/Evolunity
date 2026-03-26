@@ -31,7 +31,7 @@ namespace Evolutex.Evolunity.Extensions
         {
             return animator.GetCurrentAnimatorStateInfo(layerIndex).fullPathHash == stateHash;
         }
-        
+
         /// <summary>
         /// Set trigger and invoke callback when trigger is triggered.
         /// <param name="onTriggered">This callback will not be invoked if Animator is inactive.</param>
@@ -40,7 +40,7 @@ namespace Evolutex.Evolunity.Extensions
         {
             StaticCoroutine.Start(SetTriggerAndWaitForTriggered(animator, triggerId, onTriggered));
         }
-        
+
         private static IEnumerator SetTriggerAndWaitForTriggered(Animator animator, int triggerId, Action onTriggered)
         {
             animator.SetTrigger(triggerId);
@@ -51,11 +51,11 @@ namespace Evolutex.Evolunity.Extensions
             if (animator.isActiveAndEnabled)
                 onTriggered?.Invoke();
         }
-        
+
         #region State Name
-        
+
         // https://forum.unity.com/threads/current-animator-state-name.331803/#post-3305760
-        
+
         /// <summary>Gets an instance method with single argument of type <typeparamref
         /// name="TArg0"/> and return type of <typeparamref name="TReturn"/> from <typeparamref
         /// name="TThis"/> and compiles it into a fast open delegate.</summary>
@@ -71,7 +71,7 @@ namespace Evolutex.Evolunity.Extensions
         /// <see href="https://codeblog.jonskeet.uk/2008/08/09/making-reflection-fly-and-exploring-delegates/"/>
         private static Func<TThis, TArg0, TReturn> BuildFastOpenMemberDelegate<TThis, TArg0, TReturn>(string methodName)
         {
-            var method = typeof(TThis).GetMethod(
+            MethodInfo method = typeof(TThis).GetMethod(
                 methodName,
                 BindingFlags.Instance | BindingFlags.NonPublic,
                 null,
@@ -134,7 +134,7 @@ namespace Evolutex.Evolunity.Extensions
                 _resolveHash = BuildFastOpenMemberDelegate<Animator, int, string>("ResolveHash");
             return _resolveHash(animator, hash);
         }
-        
+
         #endregion
     }
 }

@@ -15,14 +15,13 @@ namespace Evolutex.Evolunity.Components
     //     timer -= Period;
     // }
     // 2. Compare performance with PeriodicCoroutineBehaviour.
-    
+
     [AddComponentMenu("Evolunity/Periodic Behaviour")]
     public class PeriodicBehaviour : MonoBehaviour
     {
         public UnityEvent OnPeriodCallback;
-        
+
         [Space]
-        
         [SerializeField]
         private float period = 1f;
 
@@ -90,7 +89,7 @@ namespace Evolutex.Evolunity.Components
 
             OnPeriodCallback?.Invoke();
         }
-        
+
         [ContextMenu("Restart")]
         private void RestartTimer()
         {

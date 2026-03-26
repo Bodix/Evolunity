@@ -33,7 +33,7 @@ namespace Evolutex.Evolunity.Utilities
                 memoryStream.Write(bytes, 0, bytes.Length);
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
-                return (T) binaryFormatter.Deserialize(memoryStream);
+                return (T)binaryFormatter.Deserialize(memoryStream);
             }
         }
 
@@ -68,7 +68,7 @@ namespace Evolutex.Evolunity.Utilities
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-                return (T) binaryFormatter.Deserialize(stream);
+                return (T)binaryFormatter.Deserialize(stream);
             }
         }
     }

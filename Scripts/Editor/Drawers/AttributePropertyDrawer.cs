@@ -15,7 +15,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
     {
         protected abstract SerializedPropertyType[] SupportedTypes { get; }
 
-        protected TAttribute Attribute => (TAttribute) attribute;
+        protected TAttribute Attribute => (TAttribute)attribute;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

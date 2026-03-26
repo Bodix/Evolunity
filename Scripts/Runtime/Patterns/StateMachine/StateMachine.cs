@@ -69,7 +69,7 @@ namespace Evolutex.Evolunity.Patterns
 
         public TState GetState<TState>() where TState : State
         {
-            return (TState) GetState(typeof(TState));
+            return (TState)GetState(typeof(TState));
         }
 
         public State GetState(Type stateType)

@@ -3,11 +3,11 @@
 // All Rights Reserved
 
 using System.Linq;
-using UnityEditor;
-using UnityEngine;
 using Evolutex.Evolunity.Components;
 using Evolutex.Evolunity.Extensions;
 using Evolutex.Evolunity.Utilities;
+using UnityEditor;
+using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
@@ -22,7 +22,7 @@ namespace Evolutex.Evolunity.Editor.Editors
 
         private void OnEnable()
         {
-            Comment comment = (Comment) target;
+            Comment comment = (Comment)target;
 
             typeOptions = new[]
             {
@@ -39,14 +39,14 @@ namespace Evolutex.Evolunity.Editor.Editors
 
         public override void OnInspectorGUI()
         {
-            Comment comment = (Comment) target;
+            Comment comment = (Comment)target;
 
             if (!isEditing)
             {
                 if (GUILayout.Button("Edit"))
                 {
                     isEditing = !isEditing;
-                    
+
                     return;
                 }
 
@@ -75,7 +75,7 @@ namespace Evolutex.Evolunity.Editor.Editors
 
                     comment.Message = message;
                     comment.Type = Enum<Comment.CommentType>.Parse(typeOptions[selectedTypeIndex].text);
-                    
+
                     EditorUtility.SetDirty(comment);
 
                     return;
@@ -87,7 +87,7 @@ namespace Evolutex.Evolunity.Editor.Editors
 
                 TextAnchor tempPopupAlignment = EditorStyles.popup.alignment;
                 EditorStyles.popup.alignment = TextAnchor.MiddleCenter;
-                
+
                 selectedTypeIndex = EditorGUILayout.Popup(selectedTypeIndex,
                     typeOptions, GUILayout.Height(20));
 

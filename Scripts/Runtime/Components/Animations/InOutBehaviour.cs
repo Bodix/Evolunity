@@ -11,15 +11,15 @@ namespace Evolutex.Evolunity.Components.Animations
     public abstract class InOutBehaviour : MonoBehaviour, IInOutPlayable
     {
         protected abstract IEnumerator InCoroutine(Action onComplete = null);
-        
+
         protected abstract IEnumerator OutCoroutine(Action onComplete = null);
-        
+
         [ContextMenu("Play In")]
         public void PlayIn()
         {
             PlayInCoroutine();
         }
-        
+
         [ContextMenu("Play Out")]
         public void PlayOut()
         {

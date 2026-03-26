@@ -16,8 +16,11 @@ namespace Evolutex.Evolunity.Utilities
     public class WrappedCoroutine
     {
         private readonly IEnumerator routine;
-        
-        public static implicit operator Coroutine(WrappedCoroutine wrapper) => wrapper.Coroutine;
+
+        public static implicit operator Coroutine(WrappedCoroutine wrapper)
+        {
+            return wrapper.Coroutine;
+        }
 
         public MonoBehaviour Owner { get; }
         public Coroutine Coroutine { get; private set; }
@@ -26,7 +29,7 @@ namespace Evolutex.Evolunity.Utilities
         public WrappedCoroutine(MonoBehaviour owner, IEnumerator routine)
         {
             this.routine = routine;
-            
+
             Owner = owner;
         }
 
@@ -34,7 +37,7 @@ namespace Evolutex.Evolunity.Utilities
         {
             if (IsRunning)
                 throw new InvalidOperationException("The coroutine is already started");
-            
+
             Coroutine = Owner.StartCoroutine(Process());
 
             return this;

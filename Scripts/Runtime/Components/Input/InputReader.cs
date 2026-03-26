@@ -14,7 +14,7 @@ namespace Evolutex.Evolunity.Components
     public sealed class InputReader : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
         // TODO: Rotate.
-        
+
         public event Action<Vector2> Drag;
         public event Action<Vector2> DoubleDrag;
         public event Action<float> Zoom;
@@ -23,8 +23,8 @@ namespace Evolutex.Evolunity.Components
 #if UNITY_EDITOR || !(UNITY_IOS && UNITY_ANDROID)
         private void Update()
         {
-            if (UnityEngine.Input.mouseScrollDelta.y != 0)
-                Zoom?.Invoke(UnityEngine.Input.mouseScrollDelta.y / 10);
+            if (Input.mouseScrollDelta.y != 0)
+                Zoom?.Invoke(Input.mouseScrollDelta.y / 10);
         }
 #endif
 
@@ -53,8 +53,8 @@ namespace Evolutex.Evolunity.Components
 
         private void Pinch()
         {
-            Touch firstTouch = UnityEngine.Input.GetTouch(0);
-            Touch secondTouch = UnityEngine.Input.GetTouch(1);
+            Touch firstTouch = Input.GetTouch(0);
+            Touch secondTouch = Input.GetTouch(1);
 
             Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
             Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;

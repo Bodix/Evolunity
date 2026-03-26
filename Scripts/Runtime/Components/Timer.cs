@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Components
 {
     public delegate void TimerUpdateHandler(float deltaTime);
-    
+
     // TODO: Add check for enabled GO in Start method. Also, review Awake logic after this.
     // TODO: Consider removing the _onStart callback.
 

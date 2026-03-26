@@ -14,7 +14,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
         // TODO:
         // 1. Make the opening abort if the folder does not exist, with error logging.
         // 2. Change "openInsideFolder" logic to something more obvious (for example, add logs) or remove completely.
-        
+
         private static bool IsMacOS => SystemInfo.operatingSystem.Contains("Mac OS");
         private static bool IsWinOS => SystemInfo.operatingSystem.Contains("Windows");
 

@@ -13,7 +13,7 @@ namespace Evolutex.Evolunity.Components.UI
     // 1. Fix "RowSize + ColumnSize" case: uncontrollable cellSize.x in Inspector.
     // 2. Add sync with constraint count.
     // 3. Add "AspectRatio" mode.
-    
+
     [AddComponentMenu("Evolunity/UI/Flexible Layout Group")]
     public class FlexibleLayoutGroup : GridLayoutGroup
     {
@@ -21,7 +21,7 @@ namespace Evolutex.Evolunity.Components.UI
         public int ColumnCount = 5;
         public RowSizeMode RowSizeMode = RowSizeMode.Fixed;
         public int RowCount = 5;
-        
+
         private float cellSizeX;
         private float cellSizeY;
 
@@ -51,7 +51,7 @@ namespace Evolutex.Evolunity.Components.UI
         public override void SetLayoutHorizontal()
         {
             base.SetLayoutHorizontal();
-            
+
             cellSize = cellSize.WithX(cellSizeX);
         }
 

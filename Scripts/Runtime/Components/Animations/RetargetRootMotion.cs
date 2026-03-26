@@ -42,7 +42,11 @@ namespace Evolutex.Evolunity.Components.Animations
         [SerializeField, InterfaceType(typeof(IRootMotionReceiver)), ShowIf(nameof(IsCustomReceiverTarget))]
         private Object _targetReceiver;
 
-        private bool IsBuiltInTarget(RootMotionTarget target) => target != RootMotionTarget.BuiltIn;
+        private bool IsBuiltInTarget(RootMotionTarget target)
+        {
+            return target != RootMotionTarget.BuiltIn;
+        }
+
         private bool IsCharacterControllerTarget => _targetType == RootMotionTarget.CharacterController;
         private bool IsRigidbodyTarget => _targetType == RootMotionTarget.Rigidbody;
         private bool IsTransformTarget => _targetType == RootMotionTarget.Transform;

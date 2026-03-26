@@ -113,7 +113,7 @@ namespace Evolutex.Evolunity.Components.Physics
 
             Gizmos.matrix = Matrix4x4.TRS(Center, Rotation, Vector3.one);
             using (new GizmosColorScope(Color.Lerp(GizmosDefaultColor, GizmosExecutedColor,
-                Mathf.SmoothDamp(_gizmosColorValue, 0, ref _gizmosColorValue, GizmosFadeTime))))
+                       Mathf.SmoothDamp(_gizmosColorValue, 0, ref _gizmosColorValue, GizmosFadeTime))))
                 Gizmos.DrawCube(Vector3.zero, HalfExtents * 2);
         }
     }

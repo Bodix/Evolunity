@@ -17,11 +17,11 @@ namespace Evolutex.Evolunity.Utilities.Screenshot
         public static void TakeAndSave(ScreenshotSettings settings = null, bool destroyOnComplete = true)
         {
             settings = settings ?? new ScreenshotSettings();
-            
+
             Take(bytes => File.WriteAllBytes(
                     Path.Combine(ScreenshotPath, settings.Name + ".png"),
-                    bytes.EncodeToPNG()), 
-                settings, 
+                    bytes.EncodeToPNG()),
+                settings,
                 destroyOnComplete);
         }
 

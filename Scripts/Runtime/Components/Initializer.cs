@@ -41,7 +41,7 @@ namespace Evolutex.Evolunity.Components
             if (_initializables.Any(x => !x))
             {
                 Debug.LogError("Initializer contains null", this);
-                
+
                 return;
             }
 

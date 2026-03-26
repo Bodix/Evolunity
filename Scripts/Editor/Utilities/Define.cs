@@ -11,7 +11,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
     public static class Define
     {
         public const string DEVELOPMENT = "DEVELOPMENT";
-        
+
         public static void Set(string define, bool set)
         {
             string definesString =
@@ -27,7 +27,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
                 defines.Remove(define);
 
             PlayerSettings.SetScriptingDefineSymbolsForGroup(
-                EditorUserBuildSettings.selectedBuildTargetGroup, 
+                EditorUserBuildSettings.selectedBuildTargetGroup,
                 string.Join(";", defines));
         }
     }

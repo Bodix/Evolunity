@@ -16,5 +16,7 @@ namespace Evolutex.Evolunity.Attributes
     /// <br/> - Not derived from UnityEngine.Object
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class TypeSelectorAttribute : PropertyAttribute { }
+    public class TypeSelectorAttribute : PropertyAttribute
+    {
+    }
 }

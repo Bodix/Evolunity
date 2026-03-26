@@ -29,7 +29,7 @@ namespace Evolutex.Evolunity.Components
             Frames,
             Seconds
         }
-        
+
         private void Awake()
         {
             if (InvokeMethod == DelayedEventInvokeMethod.Awake)
@@ -47,7 +47,7 @@ namespace Evolutex.Evolunity.Components
             if (DelayType == DelayedEventDelayType.Frames)
                 RoundDelayToInt();
         }
-        
+
         [ContextMenu("Delayed Invoke")]
         public void DelayedInvoke()
         {
@@ -55,7 +55,7 @@ namespace Evolutex.Evolunity.Components
             {
                 case DelayedEventDelayType.Frames:
                     RoundDelayToInt();
-                    DelayUtility.ForFrames((int) Delay, Invoke, this);
+                    DelayUtility.ForFrames((int)Delay, Invoke, this);
                     break;
                 case DelayedEventDelayType.Seconds:
                     DelayUtility.ForSeconds(Delay, Invoke, this);

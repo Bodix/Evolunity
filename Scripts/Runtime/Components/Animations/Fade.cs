@@ -38,7 +38,7 @@ namespace Evolutex.Evolunity.Components.Animations
 
             image.color = Color;
             IsPlaying = false;
-            
+
             onComplete?.Invoke();
         }
 
@@ -55,7 +55,7 @@ namespace Evolutex.Evolunity.Components.Animations
 
             image.color = Color.clear;
             IsPlaying = false;
-            
+
             onComplete?.Invoke();
         }
     }

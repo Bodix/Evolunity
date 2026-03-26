@@ -2,9 +2,9 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using Evolutex.Evolunity.Components.Scenes;
 using NaughtyAttributes;
 using UnityEngine;
-using Evolutex.Evolunity.Components.Scenes;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {

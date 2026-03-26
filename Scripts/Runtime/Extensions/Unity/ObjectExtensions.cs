@@ -11,7 +11,7 @@ namespace Evolutex.Evolunity.Extensions
         // http://answers.unity.com/answers/1224404/view.html
         public static bool IsRealNull(this Object obj)
         {
-            return ((object) obj) == null;
+            return (object)obj == null;
         }
 
         public static void SetLayerRecursively(this GameObject gameObject, int layer)

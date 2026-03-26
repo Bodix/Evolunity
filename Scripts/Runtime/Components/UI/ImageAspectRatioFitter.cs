@@ -39,9 +39,9 @@ namespace Evolutex.Evolunity.Components.UI
         public void Fit()
         {
             InitializeIfRequired();
-            
+
             if (image.sprite)
-                aspectRatioFitter.aspectRatio = (float)image.sprite.rect.width / image.sprite.rect.height;
+                aspectRatioFitter.aspectRatio = image.sprite.rect.width / image.sprite.rect.height;
             else
                 Debug.LogWarning("Trying to use ImageAspectRatioFitter on Image without sprite");
         }

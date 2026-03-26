@@ -15,13 +15,13 @@ namespace Evolutex.Evolunity.Structs
     // 4. Intersects.
     // 5. Overlaps.
     // 6. '+', '-', '*', '/' operators.
-    
+
     [Serializable]
     public struct FloatRange
     {
         public float Min;
         public float Max;
-        
+
         public FloatRange(float min, float max)
         {
             Min = min;
@@ -56,7 +56,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return Min <= value && value <= Max;
         }
-        
+
         public bool ContainsExcludingBounds(int value)
         {
             return Min < value && value < Max;
@@ -66,7 +66,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return new Vector2(Min, Max);
         }
-        
+
         public bool Equals(FloatRange other)
         {
             return Min.Equals(other.Min) && Max.Equals(other.Max);
@@ -99,7 +99,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return left.Equals(right);
         }
-        
+
         public static bool operator !=(FloatRange left, FloatRange right)
         {
             return !left.Equals(right);

@@ -15,13 +15,13 @@ namespace Evolutex.Evolunity.Structs
     // 4. Intersects.
     // 5. Overlaps.
     // 6. '+', '-', '*', '/' operators.
-    
+
     [Serializable]
     public struct IntRange
     {
         public int Min;
         public int Max;
-        
+
         public IntRange(int min, int max)
         {
             Min = min;
@@ -29,9 +29,9 @@ namespace Evolutex.Evolunity.Structs
         }
 
         public int Length => Max - Min;
-        
+
         public int RandomWithin => Random.Range(Min, Max + 1);
-        
+
         public int Clamp(int value)
         {
             return Mathf.Clamp(value, Min, Max);
@@ -41,7 +41,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return Min <= value && value <= Max;
         }
-        
+
         public bool ContainsExcludingBounds(int value)
         {
             return Min < value && value < Max;
@@ -51,7 +51,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return new Vector2Int(Min, Max);
         }
-        
+
         public bool Equals(IntRange other)
         {
             return Min == other.Min && Max == other.Max;
@@ -69,7 +69,7 @@ namespace Evolutex.Evolunity.Structs
                 return (Min * 397) ^ Max;
             }
         }
-        
+
         public static implicit operator IntRange(Vector2Int vector)
         {
             return new IntRange(vector.x, vector.y);
@@ -84,7 +84,7 @@ namespace Evolutex.Evolunity.Structs
         {
             return left.Equals(right);
         }
-        
+
         public static bool operator !=(IntRange left, IntRange right)
         {
             return !left.Equals(right);

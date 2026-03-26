@@ -14,11 +14,11 @@ namespace Evolutex.Evolunity.Utilities
         {
             return EveryFrames(1, onRepeat, coroutineOwner);
         }
-        
+
         public static Coroutine EveryFrames(int frames, Action onRepeat, MonoBehaviour coroutineOwner = null)
         {
             ThrowIfNotGreaterThanZero(frames);
-            
+
             if (coroutineOwner)
                 return coroutineOwner.StartCoroutine(FramesRepeat(frames, onRepeat));
             else

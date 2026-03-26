@@ -27,11 +27,20 @@ namespace Evolutex.Evolunity.Components
 
         #region Callbacks
 
-        public void OnPointerDown(PointerEventData eventData) => StartHold();
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            StartHold();
+        }
 
-        public void OnPointerUp(PointerEventData eventData) => StopHold();
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            StopHold();
+        }
 
-        public void OnBeginDrag(PointerEventData eventData) => StopHold();
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            StopHold();
+        }
 
         #endregion
 

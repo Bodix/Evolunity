@@ -16,7 +16,7 @@ namespace Evolutex.Evolunity.Extensions
                 stringBuilder.Append(value);
             }
         }
-        
+
         public static void Append(this StringBuilder stringBuilder, params object[] values)
         {
             foreach (object value in values)
@@ -24,7 +24,7 @@ namespace Evolutex.Evolunity.Extensions
                 stringBuilder.Append(value);
             }
         }
-        
+
         public static void Insert(this StringBuilder stringBuilder, int index, params string[] values)
         {
             foreach (string value in Enumerable.Reverse(values))
@@ -32,7 +32,7 @@ namespace Evolutex.Evolunity.Extensions
                 stringBuilder.Insert(index, value);
             }
         }
-        
+
         public static void Insert(this StringBuilder stringBuilder, int index, params object[] values)
         {
             foreach (object value in Enumerable.Reverse(values))

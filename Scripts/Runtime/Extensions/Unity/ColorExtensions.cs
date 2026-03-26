@@ -35,12 +35,12 @@ namespace Evolutex.Evolunity.Extensions
 
             return color;
         }
-        
+
         public static float Hue(this Color color)
         {
             float min = Mathf.Min(color.r, color.g, color.b);
             float max = Mathf.Max(color.r, color.g, color.b);
-            
+
             if (max == 0 || max == min)
                 return 0;
             else
@@ -57,7 +57,7 @@ namespace Evolutex.Evolunity.Extensions
 
                 hue *= 60;
 
-                if (hue < 0) 
+                if (hue < 0)
                     hue += 360;
 
                 return hue;
@@ -79,7 +79,7 @@ namespace Evolutex.Evolunity.Extensions
 
             return 255 * delta / max;
         }
-        
+
         public static Color Closest(this Color color, Color[] colors)
         {
             return colors.MinBy(x => GetDiff(x, color));
@@ -91,7 +91,7 @@ namespace Evolutex.Evolunity.Extensions
                 r = color.r - otherColor.r,
                 g = color.g - otherColor.g,
                 b = color.b - otherColor.b;
-            
+
             return a * a + r * r + g * g + b * b;
         }
     }

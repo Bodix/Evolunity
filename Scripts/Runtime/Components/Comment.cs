@@ -9,7 +9,7 @@ namespace Evolutex.Evolunity.Components
     [AddComponentMenu("Evolunity/Comment")]
     public class Comment : MonoBehaviour
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public string Message;
         public CommentType Type = CommentType.Info;
 
@@ -18,6 +18,6 @@ namespace Evolutex.Evolunity.Components
             Info,
             Warning
         }
-        #endif
+#endif
     }
 }

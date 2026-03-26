@@ -11,7 +11,7 @@ namespace Evolutex.Evolunity.Extensions
         public static Texture2D ToTexture(this byte[] bytes, bool markNonReadable = false)
         {
             Texture2D texture = new Texture2D(0, 0);
-            
+
             texture.LoadImage(bytes, markNonReadable);
 
             return texture;

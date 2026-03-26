@@ -29,7 +29,7 @@ namespace Evolutex.Evolunity.Utilities
             else
             {
                 onComplete();
-                
+
                 return null;
             }
         }
@@ -48,7 +48,7 @@ namespace Evolutex.Evolunity.Utilities
             else
             {
                 onComplete();
-                
+
                 return null;
             }
         }

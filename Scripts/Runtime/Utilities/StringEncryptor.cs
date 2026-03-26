@@ -15,40 +15,40 @@ namespace Evolutex.Evolunity.Utilities
 #if UNITY_EDITOR
         private const int KeySize = 256;
         private const int DerivationIterationCount = 1000;
-        
+
         public static string Encrypt(string plainText, string passPhrase)
         {
             byte[] saltStringBytes = Generate256BitsOfRandomEntropy();
             byte[] ivStringBytes = Generate256BitsOfRandomEntropy();
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            
+
             using (Rfc2898DeriveBytes password = new Rfc2898DeriveBytes(
-                passPhrase, saltStringBytes, DerivationIterationCount))
+                       passPhrase, saltStringBytes, DerivationIterationCount))
             {
                 byte[] keyBytes = password.GetBytes(KeySize / 8);
-                
+
                 using (RijndaelManaged symmetricKey = new RijndaelManaged())
                 {
                     symmetricKey.BlockSize = 256;
                     symmetricKey.Mode = CipherMode.CBC;
                     symmetricKey.Padding = PaddingMode.PKCS7;
-                    
+
                     using (ICryptoTransform encryptor = symmetricKey.CreateEncryptor(keyBytes, ivStringBytes))
                     {
                         using (MemoryStream memoryStream = new MemoryStream())
                         {
                             using (CryptoStream cryptoStream = new CryptoStream(
-                                memoryStream, encryptor, CryptoStreamMode.Write))
+                                       memoryStream, encryptor, CryptoStreamMode.Write))
                             {
                                 cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
                                 cryptoStream.FlushFinalBlock();
-                                
+
                                 byte[] cipherTextBytes = saltStringBytes;
                                 cipherTextBytes = cipherTextBytes.Concat(ivStringBytes).ToArray();
                                 cipherTextBytes = cipherTextBytes.Concat(memoryStream.ToArray()).ToArray();
                                 memoryStream.Close();
                                 cryptoStream.Close();
-                                
+
                                 return Convert.ToBase64String(cipherTextBytes);
                             }
                         }
@@ -66,28 +66,28 @@ namespace Evolutex.Evolunity.Utilities
                 .Take(cipherTextBytesWithSaltAndIv.Length - KeySize / 8 * 2).ToArray();
 
             using (Rfc2898DeriveBytes password = new Rfc2898DeriveBytes(
-                passPhrase, saltStringBytes, DerivationIterationCount))
+                       passPhrase, saltStringBytes, DerivationIterationCount))
             {
                 byte[] keyBytes = password.GetBytes(KeySize / 8);
-                
+
                 using (RijndaelManaged symmetricKey = new RijndaelManaged())
                 {
                     symmetricKey.BlockSize = 256;
                     symmetricKey.Mode = CipherMode.CBC;
                     symmetricKey.Padding = PaddingMode.PKCS7;
-                    
+
                     using (ICryptoTransform decryptor = symmetricKey.CreateDecryptor(keyBytes, ivStringBytes))
                     {
                         using (MemoryStream memoryStream = new MemoryStream(cipherTextBytes))
                         {
                             using (CryptoStream cryptoStream = new CryptoStream(
-                                memoryStream, decryptor, CryptoStreamMode.Read))
+                                       memoryStream, decryptor, CryptoStreamMode.Read))
                             {
                                 byte[] plainTextBytes = new byte[cipherTextBytes.Length];
                                 int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
                                 memoryStream.Close();
                                 cryptoStream.Close();
-                                
+
                                 return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
                             }
                         }
@@ -99,7 +99,7 @@ namespace Evolutex.Evolunity.Utilities
         private static byte[] Generate256BitsOfRandomEntropy()
         {
             byte[] randomBytes = new byte[32];
-            using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider()) 
+            using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider())
                 rngCsp.GetBytes(randomBytes);
 
             return randomBytes;

@@ -2,9 +2,9 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using Evolutex.Evolunity.Components.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Evolutex.Evolunity.Components.Animations;
 
 namespace Evolutex.Evolunity.Components.Scenes
 {
@@ -24,7 +24,7 @@ namespace Evolutex.Evolunity.Components.Scenes
         {
             InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneName));
         }
-        
+
         public void LoadSceneAfterAnimation(int sceneBuildIndex)
         {
             InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneBuildIndex));

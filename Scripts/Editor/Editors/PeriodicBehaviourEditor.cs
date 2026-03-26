@@ -3,9 +3,9 @@
 // All Rights Reserved
 
 using System.Collections.Generic;
+using Evolutex.Evolunity.Components;
 using UnityEditor;
 using UnityEngine;
-using Evolutex.Evolunity.Components;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
@@ -16,7 +16,7 @@ namespace Evolutex.Evolunity.Editor.Editors
         {
             serializedObject.Update();
 
-            PeriodicBehaviour periodicBehaviour = (PeriodicBehaviour) target;
+            PeriodicBehaviour periodicBehaviour = (PeriodicBehaviour)target;
             if (periodicBehaviour.GetType() == typeof(PeriodicBehaviour))
             {
                 base.OnInspectorGUI();
