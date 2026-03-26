@@ -14,19 +14,15 @@ namespace Evolutex.Evolunity.Components.Physics
 		public float ColliderRadius = 0.5f;
 		// This is an offset that moves the hit effect slightly away from the point of hit to reduce clipping of the hit effect.
 		public float HitOffsetAlongNormal = 0.15f;
-		[FormerlySerializedAs("StartParticlesLocalOffset")]
 		public Vector3 StartEffectLocalOffset = Vector3.zero;
 		public LayerMask LayerMask = 1; // 1 = Default
 
 		[Header("Effects")]
 		[Tooltip("Effect instantly spawned when this projectile is spawned (connected to projectile as a child).")]
-		[FormerlySerializedAs("childParticlesPrefab")]
 		public GameObject childEffectPrefab;
 		[Tooltip("Effect instantly spawned when this projectile is spawned (disconnected from projectile).")]
-		[FormerlySerializedAs("startParticlesPrefab")]
 		public GameObject startEffectPrefab;
 		[Tooltip("Effect spawned when this projectile hits a collider.")]
-		[FormerlySerializedAs("hitParticlesPrefab")]
 		public GameObject hitEffectPrefab;
 
 		[Header("Lifetime")]
@@ -34,11 +30,8 @@ namespace Evolutex.Evolunity.Components.Physics
 		// All the following lifetimes are taken by default from `ETFXProjectileScript` from the `Epic Toon FX` asset
 		// to increase the chances that `Projectile` script will work well with missiles from this asset.
 		// We keep the author's idea just in case.
-		[FormerlySerializedAs("TrailParticlesLifetime")]
 		public float ChildEffectLifetime = 2f;
-		[FormerlySerializedAs("StartParticlesLifetime")]
 		public float StartEffectLifetime = 1.5f;
-		[FormerlySerializedAs("HitParticlesLifetime")]
 		public float HitEffectLifetime = 3.5f;
 
 		private GameObject _childEffect;
