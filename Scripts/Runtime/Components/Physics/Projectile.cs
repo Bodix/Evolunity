@@ -1,6 +1,7 @@
 ﻿using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Evolutex.Evolunity.Components.Physics
 {
@@ -11,30 +12,37 @@ namespace Evolutex.Evolunity.Components.Physics
 		public bool PushOnStart = true;
 		public float DefaultPushSpeed = 100f;
 		public float ColliderRadius = 0.5f;
-		// This is an offset that moves the hit particles slightly away from the point of hit to reduce clipping of the hit effect.
+		// This is an offset that moves the hit effect slightly away from the point of hit to reduce clipping of the hit effect.
 		public float HitOffsetAlongNormal = 0.15f;
-		public Vector3 StartParticlesLocalOffset = Vector3.zero;
+		[FormerlySerializedAs("StartParticlesLocalOffset")]
+		public Vector3 StartEffectLocalOffset = Vector3.zero;
 		public LayerMask LayerMask = 1; // 1 = Default
 
-		[Header("Particles")]
+		[Header("Effects")]
 		[Tooltip("Effect instantly spawned when this projectile is spawned (connected to projectile as a child).")]
-		public GameObject trailParticlesPrefab;
+		[FormerlySerializedAs("childParticlesPrefab")]
+		public GameObject childEffectPrefab;
 		[Tooltip("Effect instantly spawned when this projectile is spawned (disconnected from projectile).")]
-		public GameObject startParticlesPrefab;
+		[FormerlySerializedAs("startParticlesPrefab")]
+		public GameObject startEffectPrefab;
 		[Tooltip("Effect spawned when this projectile hits a collider.")]
-		public GameObject hitParticlesPrefab;
+		[FormerlySerializedAs("hitParticlesPrefab")]
+		public GameObject hitEffectPrefab;
 
 		[Header("Lifetime")]
 		public float ProjectileLifetime = 5f;
 		// All the following lifetimes are taken by default from `ETFXProjectileScript` from the `Epic Toon FX` asset
 		// to increase the chances that `Projectile` script will work well with missiles from this asset.
 		// We keep the author's idea just in case.
-		public float TrailParticlesLifetime = 2f;
-		public float StartParticlesLifetime = 1.5f;
-		public float HitParticlesLifetime = 3.5f;
+		[FormerlySerializedAs("TrailParticlesLifetime")]
+		public float ChildEffectLifetime = 2f;
+		[FormerlySerializedAs("StartParticlesLifetime")]
+		public float StartEffectLifetime = 1.5f;
+		[FormerlySerializedAs("HitParticlesLifetime")]
+		public float HitEffectLifetime = 3.5f;
 
-		private GameObject _trailParticles;
-		private GameObject _startParticles;
+		private GameObject _childEffect;
+		private GameObject _startEffect;
 
 		public event Action<RaycastHit> Hit;
 
@@ -49,7 +57,7 @@ namespace Evolutex.Evolunity.Components.Physics
 
 		private void Start()
 		{
-			CreateParticles();
+			SpawnEffects();
 
 			if (PushOnStart)
 				PushForward();
@@ -81,26 +89,26 @@ namespace Evolutex.Evolunity.Components.Physics
 		private void OnHit(RaycastHit hit)
 		{
 			Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
-			GameObject hitParticles = Instantiate(hitParticlesPrefab, position,
+			GameObject hitEffect = Instantiate(hitEffectPrefab, position,
 				Quaternion.FromToRotation(Vector3.up, hit.normal));
 
 			DetachAndDelayedDestroyTrails();
-			Destroy(hitParticles, HitParticlesLifetime);
+			Destroy(hitEffect, HitEffectLifetime);
 			Destroy(gameObject);
 
 			Hit?.Invoke(hit);
 		}
 
-		private void CreateParticles()
+		private void SpawnEffects()
 		{
-			_trailParticles = Instantiate(trailParticlesPrefab, transform.position, transform.rotation, transform);
+			_childEffect = Instantiate(childEffectPrefab, transform.position, transform.rotation, transform);
 
-			if (startParticlesPrefab)
+			if (startEffectPrefab)
 			{
-				_startParticles = Instantiate(startParticlesPrefab,
-					transform.position + transform.TransformVector(StartParticlesLocalOffset), transform.rotation);
+				_startEffect = Instantiate(startEffectPrefab,
+					transform.position + transform.TransformVector(StartEffectLocalOffset), transform.rotation);
 
-				Destroy(_startParticles, StartParticlesLifetime);
+				Destroy(_startEffect, StartEffectLifetime);
 			}
 		}
 
@@ -124,22 +132,24 @@ namespace Evolutex.Evolunity.Components.Physics
 				OnHit(hit);
 		}
 
-		// TODO: Fix string comparison. [#optimization]
+		// TODO: Improve reliability of this method. [#bug]
 		private void DetachAndDelayedDestroyTrails()
 		{
 			ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
-			// Skipping component at index 0 because it is on the parent.
-			for (int i = 1; i < particles.Length; i++)
-			{
-				ParticleSystem possibleTrail = particles[i];
-
-				if (possibleTrail.gameObject.name.ToLower().Contains("trail"))
+			if (particles.Length > 1)
+				// Skipping component at index 0 because it is on the parent.
+				for (int i = 1; i < particles.Length; i++)
 				{
-					possibleTrail.transform.SetParent(null);
+					ParticleSystem possibleTrail = particles[i];
 
-					Destroy(possibleTrail.gameObject, TrailParticlesLifetime);
+					// TODO: Fix string comparison. [#optimization]
+					if (possibleTrail.gameObject.name.ToLower().Contains("trail"))
+					{
+						possibleTrail.transform.SetParent(null);
+
+						Destroy(possibleTrail.gameObject, ChildEffectLifetime);
+					}
 				}
-			}
 		}
 
 		private void OnDrawGizmosSelected()
