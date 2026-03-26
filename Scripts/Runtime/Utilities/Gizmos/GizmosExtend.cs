@@ -2,6 +2,9 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
+using System.Diagnostics;
+using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
 using Handles = UnityEditor.Handles;
@@ -32,21 +35,22 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 	public static class GizmosExtend
 	{
 		#region GizmoDrawFunctions
+
 		/// <summary>- Draws a point.</summary>
 		/// <param name='position'>- The point to draw.</param>
 		///  <param name='color'>- The color of the drawn point.</param>
 		/// <param name='scale'>- The size of the drawn point.</param>
-		public static void DrawPoint(Vector3 position, Color color = default(Color), float scale = 1.0f)
+		public static void DrawPoint(Vector3 position, Color color = default, float scale = 1.0f)
 		{
 			using (new GizmosColorScope(color))
 			{
-				UnityEngine.Gizmos.DrawRay(position + (Vector3.up * (scale * 0.5f)), -Vector3.up * scale);
-				UnityEngine.Gizmos.DrawRay(position + (Vector3.right * (scale * 0.5f)), -Vector3.right * scale);
-				UnityEngine.Gizmos.DrawRay(position + (Vector3.forward * (scale * 0.5f)), -Vector3.forward * scale);
+				UnityEngine.Gizmos.DrawRay(position + Vector3.up * (scale * 0.5f), -Vector3.up * scale);
+				UnityEngine.Gizmos.DrawRay(position + Vector3.right * (scale * 0.5f), -Vector3.right * scale);
+				UnityEngine.Gizmos.DrawRay(position + Vector3.forward * (scale * 0.5f), -Vector3.forward * scale);
 			}
 		}
 
-		public static void DrawRay(Vector3 position, Vector3 direction, Color color = default(Color))
+		public static void DrawRay(Vector3 position, Vector3 direction, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
@@ -58,7 +62,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="from"></param>
 		/// <param name="to"></param>
 		/// <param name="color"></param>
-		public static void DrawLine(Vector3 from, Vector3 to, Color color = default(Color))
+		public static void DrawLine(Vector3 from, Vector3 to, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
@@ -69,7 +73,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <summary>- Draws an axis-aligned bounding box.</summary>
 		/// <param name='bounds'>- The bounds to draw.</param>
 		/// <param name='color'>- The color of the bounds.</param>
-		public static void DrawBounds(Bounds bounds, Color color = default(Color))
+		public static void DrawBounds(Bounds bounds, Color color = default)
 		{
 			Vector3
 				ruf = bounds.center + new Vector3(bounds.extents.x, bounds.extents.y, bounds.extents.z),
@@ -105,14 +109,14 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name='up'>- The direction perpendicular to the surface of the circle.</param>
 		/// <param name='color'>- The color of the circle.</param>
 		/// <param name='radius'>- The radius of the circle.</param>
-		public static void DrawCircle(Vector3 position, Vector3 up = default(Vector3), Color color = default(Color), float radius = 1.0f)
+		public static void DrawCircle(Vector3 position, Vector3 up = default, Color color = default, float radius = 1.0f)
 		{
-			up = ((up == default(Vector3)) ? Vector3.up : up).normalized * radius;
+			up = (up == default ? Vector3.up : up).normalized * radius;
 			Vector3
 				forward = Vector3.Slerp(up, -up, 0.5f),
 				right = Vector3.Cross(up, forward).normalized * radius;
 
-			Matrix4x4 matrix = new Matrix4x4()
+			Matrix4x4 matrix = new Matrix4x4
 			{
 				m00 = right.x,
 				m10 = right.y,
@@ -137,11 +141,11 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 				{
 					nextPoint = position + matrix.MultiplyPoint3x4(
 						new Vector3(
-							Mathf.Cos((i * 4) * Mathf.Deg2Rad),
+							Mathf.Cos(i * 4 * Mathf.Deg2Rad),
 							0f,
-							Mathf.Sin((i * 4) * Mathf.Deg2Rad)
-							)
-						);
+							Mathf.Sin(i * 4 * Mathf.Deg2Rad)
+						)
+					);
 					UnityEngine.Gizmos.DrawLine(lastPoint, nextPoint);
 					lastPoint = nextPoint;
 				}
@@ -153,7 +157,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name='end'>- The position of the other end of the cylinder.</param>
 		/// <param name='color'>- The color of the cylinder.</param>
 		/// <param name='radius'>- The radius of the cylinder.</param>
-		public static void DrawCylinder(Vector3 start, Vector3 end, Color color = default(Color), float radius = 1.0f)
+		public static void DrawCylinder(Vector3 start, Vector3 end, Color color = default, float radius = 1.0f)
 		{
 			Vector3
 				up = (end - start).normalized * radius,
@@ -189,7 +193,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name='direction'>- The direction for the cone to get wider in.</param>
 		/// <param name='color'>- The color of the cone.</param>
 		/// <param name='angle'>- The angle of the cone.</param>
-		public static void DrawCone(Vector3 position, Vector3 direction, Color color = default(Color), float angle = 45)
+		public static void DrawCone(Vector3 position, Vector3 direction, Color color = default, float angle = 45)
 		{
 			float length = direction.magnitude;
 			angle = Mathf.Clamp(angle, 0f, 90f);
@@ -213,8 +217,9 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 				UnityEngine.Gizmos.DrawRay(position, Vector3.Slerp(forward, right, angle / 90.0f).normalized * dist);
 				UnityEngine.Gizmos.DrawRay(position, Vector3.Slerp(forward, -right, angle / 90.0f).normalized * dist);
 			}
-			DrawCircle(position + forward, direction, color, (forward - (slerpedVector.normalized * dist)).magnitude);
-			DrawCircle(position + (forward * 0.5f), direction, color, ((forward * 0.5f) - (slerpedVector.normalized * (dist * 0.5f))).magnitude);
+
+			DrawCircle(position + forward, direction, color, (forward - slerpedVector.normalized * dist).magnitude);
+			DrawCircle(position + forward * 0.5f, direction, color, (forward * 0.5f - slerpedVector.normalized * (dist * 0.5f)).magnitude);
 		}
 
 		/// <summary>- Draws an arrow.</summary>
@@ -223,7 +228,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name='color'>- The color of the arrow.</param>
 		/// <param name="angle">- The angle of arrow head.0 ~ 90f</param>
 		/// <param name="headLength">- The angle length of arrow head. 0 ~ 1 in percent</param>
-		public static void DrawArrow(Vector3 position, Vector3 direction, Color color = default(Color), float angle = 15f, float headLength = 0.3f)
+		public static void DrawArrow(Vector3 position, Vector3 direction, Color color = default, float angle = 15f, float headLength = 0.3f)
 		{
 			if (direction == Vector3.zero)
 				return; // can't draw a thing
@@ -236,6 +241,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 				Vector3 headDir = direction.normalized * -arrowLength;
 				DrawCone(position + direction, headDir, color, angle);
 			}
+
 			using (new GizmosColorScope(color))
 			{
 				UnityEngine.Gizmos.DrawRay(position, direction);
@@ -247,7 +253,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name='point2'>- The position of the other end of the capsule.</param>
 		/// <param name='color'>- The color of the capsule.</param>
 		/// <param name='radius'>- The radius of the capsule.</param>
-		public static void DrawCapsule(Vector3 point1, Vector3 point2, float radius = 1f, Color color = default(Color))
+		public static void DrawCapsule(Vector3 point1, Vector3 point2, float radius = 1f, Color color = default)
 		{
 			if (point1 == point2)
 			{
@@ -260,7 +266,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 			{
 				float
 					height = (point1 - point2).magnitude,
-					sideLength = Mathf.Max(0, (height * 0.5f));
+					sideLength = Mathf.Max(0, height * 0.5f);
 
 				Vector3
 					up = (point2 - point1).normalized * radius,
@@ -268,8 +274,8 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 					right = Vector3.Cross(up, forward).normalized * radius,
 					middle = (point2 + point1) * 0.5f;
 
-				point1 = middle + ((point1 - middle).normalized * sideLength);
-				point2 = middle + ((point2 - middle).normalized * sideLength);
+				point1 = middle + (point1 - middle).normalized * sideLength;
+				point2 = middle + (point2 - middle).normalized * sideLength;
 
 				//Radial circles
 				DrawCircle(point1, up, color, radius);
@@ -305,7 +311,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <summary>Draw Camera based on give reference.</summary>
 		/// <param name="camera"></param>
 		/// <param name="color"></param>
-		public static void DrawFrustum(Camera camera, Color color = default(Color))
+		public static void DrawFrustum(Camera camera, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
@@ -322,7 +328,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="height"></param>
 		/// <param name="color"></param>
 		/// <remarks>pivot point is start point</remarks>
-		public static void DrawPlane(Vector3 start, Vector3 end, Vector3 upward, float height = 1f, Color color = default(Color))
+		public static void DrawPlane(Vector3 start, Vector3 end, Vector3 upward, float height = 1f, Color color = default)
 		{
 			float width = Vector3.Distance(start, end);
 			if (Mathf.Approximately(width, 0f))
@@ -346,12 +352,12 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="width"></param>
 		/// <param name="height"></param>
 		/// <param name="color"></param>
-		public static void DrawPlane(Transform self, float width, float height = 1f, Color color = default(Color))
+		public static void DrawPlane(Transform self, float width, float height = 1f, Color color = default)
 		{
-			DrawPlane(self.position, self.position + (self.forward * width), self.up, height, color);
+			DrawPlane(self.position, self.position + self.forward * width, self.up, height, color);
 		}
 
-		public static void DrawSphere(Transform self, Color color = default(Color))
+		public static void DrawSphere(Transform self, Color color = default)
 		{
 			DrawSphere(self.position, self.localScale.x, color);
 		}
@@ -360,7 +366,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="position"></param>
 		/// <param name="radius"></param>
 		/// <param name="color"></param>
-		public static void DrawSphere(Vector3 position, float radius, Color color = default(Color))
+		public static void DrawSphere(Vector3 position, float radius, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
@@ -368,7 +374,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 			}
 		}
 
-		public static void DrawDirection(Transform self, Color color = default(Color))
+		public static void DrawDirection(Transform self, Color color = default)
 		{
 			DrawDirection(self.position, Vector3.forward, self.localScale.x, color);
 		}
@@ -378,19 +384,21 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="direction"></param>
 		/// <param name="distance"></param>
 		/// <param name="color"></param>
-		public static void DrawDirection(Vector3 position, Vector3 direction, float distance = 1f, Color color = default(Color))
+		public static void DrawDirection(Vector3 position, Vector3 direction, float distance = 1f, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
-				UnityEngine.Gizmos.DrawLine(position, position + (direction * distance));
+				UnityEngine.Gizmos.DrawLine(position, position + direction * distance);
 			}
 		}
+
 		#endregion
 
 		#region Handles
+
 #if UNITY_EDITOR
 		private static bool IsHandleHackAvailable =>
-			UnityEditor.SceneView.currentDrawingSceneView != null ||
+			SceneView.currentDrawingSceneView != null ||
 			(Application.isPlaying && Camera.main != null);
 #else
 		private const bool IsHandleHackAvailable = false;
@@ -411,14 +419,15 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="text"></param>
 		/// <param name="style"></param>
 		/// <param name="color"></param>
-		[System.Diagnostics.Conditional("UNITY_EDITOR")]
-		public static void DrawLabel(Vector3 position, string text, GUIStyle style = default(GUIStyle), Color color = default(Color), float offsetX = 0f, float offsetY = 0f)
+		[Conditional("UNITY_EDITOR")]
+		public static void DrawLabel(Vector3 position, string text, GUIStyle style = default, Color color = default, float offsetX = 0f, float offsetY = 0f)
 		{
 #if UNITY_EDITOR
 			if (IsHandleHackAvailable)
 			{
-				Transform cam = UnityEditor.SceneView.currentDrawingSceneView != null ?
-					UnityEditor.SceneView.currentDrawingSceneView.camera.transform : // Scene View
+				Transform cam = SceneView.currentDrawingSceneView != null
+					? SceneView.currentDrawingSceneView.camera.transform
+					: // Scene View
 					Camera.main.transform; // Only Game View
 				if (Vector3.Dot(cam.forward, position - cam.position) > 0)
 				{
@@ -431,7 +440,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 
 					if (style == default(GUIStyle))
 					{
-						if (color == default(Color))
+						if (color == default)
 							Handles.Label(pos, text, GUI.skin.textArea);
 						else
 						{
@@ -444,7 +453,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 					}
 					else
 					{
-						if (color == default(Color))
+						if (color == default)
 							Handles.Label(pos, text, style);
 						else
 						{
@@ -466,7 +475,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="angle">The angle of the sector, in degrees.</param>
 		/// <param name="radius">The radius of the circle</param>
 		/// <param name="constantScreenSize">Have constant screen-sized</param>
-		[System.Diagnostics.Conditional("UNITY_EDITOR")]
+		[Conditional("UNITY_EDITOR")]
 		public static void DrawArc(Vector3 center, Vector3 normal, Vector3 from, float angle, float radius, Color color, bool constantScreenSize = true)
 		{
 #if UNITY_EDITOR
@@ -489,7 +498,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		/// <param name="axis">A vector around, which the other vectors are rotated.</param>
 		/// <param name="radius"></param>
 		/// <param name="constantScreenSize"></param>
-		[System.Diagnostics.Conditional("UNITY_EDITOR")]
+		[Conditional("UNITY_EDITOR")]
 		public static void DrawAngleBetween(Vector3 center, Vector3 from, Vector3 to, Vector3 axis, float radius, Color color, bool constantScreenSize = true, bool label = false)
 		{
 #if UNITY_EDITOR
@@ -500,21 +509,22 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 				if (label)
 				{
 					float factor = constantScreenSize ? HandleUtility.GetHandleSize(center) : 1f;
-					Vector3 labelPos = center + (Vector3.Lerp(from, to, 0.5f) * factor);
+					Vector3 labelPos = center + Vector3.Lerp(from, to, 0.5f) * factor;
 					DrawLabel(labelPos, $"{angle:F2}");
 				}
 			}
 #endif
 		}
 
-		private struct HandleColorScope : System.IDisposable
+		private struct HandleColorScope : IDisposable
 		{
-			Color oldColor;
+			private readonly Color oldColor;
+
 			public HandleColorScope(Color color)
 			{
 #if UNITY_EDITOR
 				oldColor = Handles.color;
-				Handles.color = color == default(Color) ? oldColor : color;
+				Handles.color = color == default ? oldColor : color;
 #else
 				oldColor = Color.white;
 #endif
@@ -527,15 +537,17 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 #endif
 			}
 		}
+
 		#endregion // Handles
-		
+
 		#region Cube
-		public static void DrawBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Color color = default(Color))
+
+		public static void DrawBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Color color = default)
 		{
 			DrawBox(new Box(origin, halfExtents, orientation), color);
 		}
 
-		public static void DrawBox(Box box, Color color = default(Color))
+		public static void DrawBox(Box box, Color color = default)
 		{
 			using (new GizmosColorScope(color))
 			{
@@ -562,21 +574,21 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 			public Vector3 localFrontTopRight { get; private set; }
 			public Vector3 localFrontBottomLeft { get; private set; }
 			public Vector3 localFrontBottomRight { get; private set; }
-			public Vector3 localBackTopLeft { get { return -localFrontBottomRight; } }
-			public Vector3 localBackTopRight { get { return -localFrontBottomLeft; } }
-			public Vector3 localBackBottomLeft { get { return -localFrontTopRight; } }
-			public Vector3 localBackBottomRight { get { return -localFrontTopLeft; } }
+			public Vector3 localBackTopLeft => -localFrontBottomRight;
+			public Vector3 localBackTopRight => -localFrontBottomLeft;
+			public Vector3 localBackBottomLeft => -localFrontTopRight;
+			public Vector3 localBackBottomRight => -localFrontTopLeft;
 
-			public Vector3 frontTopLeft { get { return localFrontTopLeft + origin; } }
-			public Vector3 frontTopRight { get { return localFrontTopRight + origin; } }
-			public Vector3 frontBottomLeft { get { return localFrontBottomLeft + origin; } }
-			public Vector3 frontBottomRight { get { return localFrontBottomRight + origin; } }
-			public Vector3 backTopLeft { get { return localBackTopLeft + origin; } }
-			public Vector3 backTopRight { get { return localBackTopRight + origin; } }
-			public Vector3 backBottomLeft { get { return localBackBottomLeft + origin; } }
-			public Vector3 backBottomRight { get { return localBackBottomRight + origin; } }
+			public Vector3 frontTopLeft => localFrontTopLeft + origin;
+			public Vector3 frontTopRight => localFrontTopRight + origin;
+			public Vector3 frontBottomLeft => localFrontBottomLeft + origin;
+			public Vector3 frontBottomRight => localFrontBottomRight + origin;
+			public Vector3 backTopLeft => localBackTopLeft + origin;
+			public Vector3 backTopRight => localBackTopRight + origin;
+			public Vector3 backBottomLeft => localBackBottomLeft + origin;
+			public Vector3 backBottomRight => localBackBottomRight + origin;
 
-			public Vector3 origin { get; private set; }
+			public Vector3 origin { get; }
 
 			public Box(Vector3 origin, Vector3 halfExtents, Quaternion orientation) : this(origin, halfExtents)
 			{
@@ -585,10 +597,10 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 
 			public Box(Vector3 origin, Vector3 halfExtents) : this()
 			{
-				this.localFrontTopLeft = new Vector3(-halfExtents.x, halfExtents.y, -halfExtents.z);
-				this.localFrontTopRight = new Vector3(halfExtents.x, halfExtents.y, -halfExtents.z);
-				this.localFrontBottomLeft = new Vector3(-halfExtents.x, -halfExtents.y, -halfExtents.z);
-				this.localFrontBottomRight = new Vector3(halfExtents.x, -halfExtents.y, -halfExtents.z);
+				localFrontTopLeft = new Vector3(-halfExtents.x, halfExtents.y, -halfExtents.z);
+				localFrontTopRight = new Vector3(halfExtents.x, halfExtents.y, -halfExtents.z);
+				localFrontBottomLeft = new Vector3(-halfExtents.x, -halfExtents.y, -halfExtents.z);
+				localFrontBottomRight = new Vector3(halfExtents.x, -halfExtents.y, -halfExtents.z);
 
 				this.origin = origin;
 			}
@@ -603,18 +615,18 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		}
 
 		//Draws just the box at where it is currently hitting.
-		public static void DrawBoxCastOnHit(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float hitInfoDistance, Color color = default(Color))
+		public static void DrawBoxCastOnHit(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float hitInfoDistance, Color color = default)
 		{
 			origin = CastCenterOnCollision(origin, direction, hitInfoDistance);
 			DrawBox(origin, halfExtents, orientation, color);
 		}
 
 		//Draws the full box from start of cast to its end distance. Can also pass in hitInfoDistance instead of full distance
-		public static void DrawBoxCastBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float distance, Color color = default(Color))
+		public static void DrawBoxCastBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float distance, Color color = default)
 		{
 			direction.Normalize();
 			Box bottomBox = new Box(origin, halfExtents, orientation);
-			Box topBox = new Box(origin + (direction * distance), halfExtents, orientation);
+			Box topBox = new Box(origin + direction * distance, halfExtents, orientation);
 
 			using (new GizmosColorScope(color))
 			{
@@ -635,7 +647,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 		//This should work for all cast types
 		private static Vector3 CastCenterOnCollision(Vector3 origin, Vector3 direction, float hitInfoDistance)
 		{
-			return origin + (direction.normalized * hitInfoDistance);
+			return origin + direction.normalized * hitInfoDistance;
 		}
 
 		private static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
@@ -644,7 +656,7 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 			return pivot + rotation * direction;
 		}
 
-		[System.Obsolete("Use DrawBox", true)]
+		[Obsolete("Use DrawBox", true)]
 		private static void DrawLocalCube(ref Color color, ref Vector3 lbb, ref Vector3 rbb, ref Vector3 lbf, ref Vector3 rbf, ref Vector3 lub, ref Vector3 rub, ref Vector3 luf, ref Vector3 ruf)
 		{
 			using (new GizmosColorScope(color))
@@ -666,51 +678,52 @@ namespace Evolutex.Evolunity.Utilities.Gizmos
 			}
 		}
 
-		[System.Obsolete("Use DrawBox", true)]
+		[Obsolete("Use DrawBox", true)]
 		/// <summary>- Draws a local cube.</summary>
 		/// <param name='transform'>- The transform the cube will be local to.</param>
 		/// <param name='size'>- The local size of the cube.</param>
 		/// <param name='center'>- The local position of the cube.</param>
 		/// <param name='color'>- The color of the cube.</param>
-		public static void DrawLocalCube(Transform transform, Vector3 size, Color color = default(Color), Vector3 center = default(Vector3))
+		public static void DrawLocalCube(Transform transform, Vector3 size, Color color = default, Vector3 center = default)
 		{
 			Box box = new Box(transform.position, size * 0.5f, transform.rotation);
 			DrawBox(box, color);
 		}
 
-		[System.Obsolete("Use DrawBox", true)]
+		[Obsolete("Use DrawBox", true)]
 		/// <summary>- Draws a local cube.</summary>
 		/// <param name='space'>- The space the cube will be local to.</param>
 		/// <param name='size'>- The local size of the cube.</param>
 		/// <param name='center'>- The local position of the cube.</param>
 		/// <param name='color'>- The color of the cube.</param>
-		public static void DrawLocalCube(Matrix4x4 space, Vector3 size = default(Vector3), Color color = default(Color), Vector3 center = default(Vector3))
+		public static void DrawLocalCube(Matrix4x4 space, Vector3 size = default, Color color = default, Vector3 center = default)
 		{
 			// Box box = new Box(space.GetPosition(), size * 0.5f, space.GetRotation());
-			size = (size == default(Vector3)) ? Vector3.one : size;
+			size = size == default ? Vector3.one : size;
 			Vector3
-				lbb = space.MultiplyPoint3x4(center + ((-size) * 0.5f)),
-				rbb = space.MultiplyPoint3x4(center + (new Vector3(size.x, -size.y, -size.z) * 0.5f)),
-				lbf = space.MultiplyPoint3x4(center + (new Vector3(size.x, -size.y, size.z) * 0.5f)),
-				rbf = space.MultiplyPoint3x4(center + (new Vector3(-size.x, -size.y, size.z) * 0.5f)),
-				lub = space.MultiplyPoint3x4(center + (new Vector3(-size.x, size.y, -size.z) * 0.5f)),
-				rub = space.MultiplyPoint3x4(center + (new Vector3(size.x, size.y, -size.z) * 0.5f)),
-				luf = space.MultiplyPoint3x4(center + ((size) * 0.5f)),
-				ruf = space.MultiplyPoint3x4(center + (new Vector3(-size.x, size.y, size.z) * 0.5f));
+				lbb = space.MultiplyPoint3x4(center + -size * 0.5f),
+				rbb = space.MultiplyPoint3x4(center + new Vector3(size.x, -size.y, -size.z) * 0.5f),
+				lbf = space.MultiplyPoint3x4(center + new Vector3(size.x, -size.y, size.z) * 0.5f),
+				rbf = space.MultiplyPoint3x4(center + new Vector3(-size.x, -size.y, size.z) * 0.5f),
+				lub = space.MultiplyPoint3x4(center + new Vector3(-size.x, size.y, -size.z) * 0.5f),
+				rub = space.MultiplyPoint3x4(center + new Vector3(size.x, size.y, -size.z) * 0.5f),
+				luf = space.MultiplyPoint3x4(center + size * 0.5f),
+				ruf = space.MultiplyPoint3x4(center + new Vector3(-size.x, size.y, size.z) * 0.5f);
 
 			DrawLocalCube(ref color, ref lbb, ref rbb, ref lbf, ref rbf, ref lub, ref rub, ref luf, ref ruf);
 		}
 
-		[System.Obsolete("Use DrawBox", true)]
+		[Obsolete("Use DrawBox", true)]
 		/// <summary>- Draws a local cube.</summary>
 		/// <param name="position">- The position of the cube.</param>
 		/// <param name="rotation">- The rotation of the cube.</param>
 		/// <param name='size'>- The local size of the cube.</param>
 		/// <param name='color'>- The color of the cube.</param>
-		public static void DrawLocalCube(Vector3 position, Quaternion rotation, Vector3 size = default(Vector3), Color color = default(Color))
+		public static void DrawLocalCube(Vector3 position, Quaternion rotation, Vector3 size = default, Color color = default)
 		{
 			DrawLocalCube(Matrix4x4.TRS(position, rotation, Vector3.one), size, color, Vector3.zero);
 		}
+
 		#endregion // Cube
 	}
 }

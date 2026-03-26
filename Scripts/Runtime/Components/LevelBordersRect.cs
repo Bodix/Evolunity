@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Evolutex.Evolunity.Extensions;
@@ -166,7 +167,7 @@ namespace Evolutex.Evolunity.Components
 		}
 	}
 
-	[System.Serializable]
+	[Serializable]
 	public struct LevelBordersRectEntry
 	{
 		public Transform Transform;

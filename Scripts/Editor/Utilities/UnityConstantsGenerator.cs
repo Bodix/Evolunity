@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Utilities
@@ -58,7 +59,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 				// Tags.
 				writer.WriteLine("    public static class Tag");
 				writer.WriteLine("    {");
-				foreach (string tag in UnityEditorInternal.InternalEditorUtility.tags)
+				foreach (string tag in InternalEditorUtility.tags)
 				{
 					writer.WriteLine("        /// <summary>");
 					writer.WriteLine("        /// Name of tag '{0}'.", tag);
@@ -88,7 +89,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 				writer.WriteLine("    {");
 				for (int i = 0; i < 32; i++)
 				{
-					string layer = UnityEditorInternal.InternalEditorUtility.GetLayerName(i);
+					string layer = InternalEditorUtility.GetLayerName(i);
 					if (!string.IsNullOrEmpty(layer))
 					{
 						writer.WriteLine("        /// <summary>");
@@ -102,7 +103,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 
 				for (int i = 0; i < 32; i++)
 				{
-					string layer = UnityEditorInternal.InternalEditorUtility.GetLayerName(i);
+					string layer = InternalEditorUtility.GetLayerName(i);
 					if (!string.IsNullOrEmpty(layer))
 					{
 						writer.WriteLine("        /// <summary>");
