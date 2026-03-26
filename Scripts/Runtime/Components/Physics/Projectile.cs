@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.Physics
 {
+	[AddComponentMenu("Evolunity/Physics/Projectile")]
 	[RequireComponent(typeof(Rigidbody))]
 	public class Projectile : MonoBehaviour
 	{
