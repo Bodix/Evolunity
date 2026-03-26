@@ -70,7 +70,7 @@ namespace Evolutex.Evolunity.Editor
 		private static void OpenEditorLogsFolder()
 		{
 #if UNITY_EDITOR_OSX
-			string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+			string rootFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string logsFolderPath = Path.Combine(rootFolderPath, "Library", "Logs", "Unity");
 #elif UNITY_EDITOR_WIN
 			string rootFolderPath = Environment.ExpandEnvironmentVariables("%localappdata%");
@@ -85,7 +85,7 @@ namespace Evolutex.Evolunity.Editor
 		private static void OpenAssetStorePackagesFolder()
 		{
 #if UNITY_EDITOR_OSX
-            string rootFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string rootFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string unityFolderPath = Path.Combine(rootFolderPath, "Library", "Unity");
 #elif UNITY_EDITOR_WIN
 			string rootFolderPath = Environment.ExpandEnvironmentVariables("%appdata%");
