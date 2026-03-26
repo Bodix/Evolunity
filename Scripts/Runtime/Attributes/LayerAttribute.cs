@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Attributes
 {
-    [AttributeUsage(AttributeTargets.Field)]
-    public class LayerAttribute : PropertyAttribute
-    {
-    }
+	[AttributeUsage(AttributeTargets.Field)]
+	public class LayerAttribute : PropertyAttribute
+	{
+	}
 }

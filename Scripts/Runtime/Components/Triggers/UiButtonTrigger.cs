@@ -8,34 +8,34 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    [AddComponentMenu("Evolunity/Triggers/UI Button Trigger")]
-    public class UiButtonTrigger : Trigger
-    {
-        [SerializeField, HideIf(nameof(HideButtonInInspector))]
-        protected Button _uiButton;
+	[AddComponentMenu("Evolunity/Triggers/UI Button Trigger")]
+	public class UiButtonTrigger : Trigger
+	{
+		[SerializeField, HideIf(nameof(HideButtonInInspector))]
+		protected Button _uiButton;
 
-        protected virtual bool HideButtonInInspector => false;
+		protected virtual bool HideButtonInInspector => false;
 
-        protected override void EnterTrigger(Collider other)
-        {
-            ShowButton();
-            _uiButton.onClick.AddListener(InvokeTrigger);
-        }
+		protected override void EnterTrigger(Collider other)
+		{
+			ShowButton();
+			_uiButton.onClick.AddListener(InvokeTrigger);
+		}
 
-        protected override void ExitTrigger(Collider other)
-        {
-            HideButton();
-            _uiButton.onClick.RemoveListener(InvokeTrigger);
-        }
+		protected override void ExitTrigger(Collider other)
+		{
+			HideButton();
+			_uiButton.onClick.RemoveListener(InvokeTrigger);
+		}
 
-        protected virtual void ShowButton()
-        {
-            _uiButton.gameObject.SetActive(true);
-        }
+		protected virtual void ShowButton()
+		{
+			_uiButton.gameObject.SetActive(true);
+		}
 
-        protected virtual void HideButton()
-        {
-            _uiButton.gameObject.SetActive(false);
-        }
-    }
+		protected virtual void HideButton()
+		{
+			_uiButton.gameObject.SetActive(false);
+		}
+	}
 }

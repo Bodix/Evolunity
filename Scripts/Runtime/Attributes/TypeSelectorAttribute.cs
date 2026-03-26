@@ -7,16 +7,16 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Attributes
 {
-    /// <summary>
-    /// Target type requirements:
-    /// <br/> - Public
-    /// <br/> - Has [Serializable] attribute
-    /// <br/> - Not abstract
-    /// <br/> - Not generic
-    /// <br/> - Not derived from UnityEngine.Object
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    public class TypeSelectorAttribute : PropertyAttribute
-    {
-    }
+	/// <summary>
+	/// Target type requirements:
+	/// <br/> - Public
+	/// <br/> - Has [Serializable] attribute
+	/// <br/> - Not abstract
+	/// <br/> - Not generic
+	/// <br/> - Not derived from UnityEngine.Object
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Field)]
+	public class TypeSelectorAttribute : PropertyAttribute
+	{
+	}
 }

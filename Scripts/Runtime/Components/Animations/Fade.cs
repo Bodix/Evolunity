@@ -9,54 +9,54 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.Animations
 {
-    [AddComponentMenu("Evolunity/Animations/Fade")]
-    [RequireComponent(typeof(Image))]
-    public class Fade : InOutBehaviour
-    {
-        public float Duration = 1f;
-        public Color Color = Color.black;
+	[AddComponentMenu("Evolunity/Animations/Fade")]
+	[RequireComponent(typeof(Image))]
+	public class Fade : InOutBehaviour
+	{
+		public float Duration = 1f;
+		public Color Color = Color.black;
 
-        private Image image;
+		private Image image;
 
-        public bool IsPlaying { get; private set; }
+		public bool IsPlaying { get; private set; }
 
-        private void Awake()
-        {
-            image = GetComponent<Image>();
-        }
+		private void Awake()
+		{
+			image = GetComponent<Image>();
+		}
 
-        protected override IEnumerator InCoroutine(Action onComplete = null)
-        {
-            IsPlaying = true;
+		protected override IEnumerator InCoroutine(Action onComplete = null)
+		{
+			IsPlaying = true;
 
-            for (float i = 0; i <= Duration; i += Time.deltaTime)
-            {
-                image.color = new Color(Color.r, Color.g, Color.b, i / Duration);
+			for (float i = 0; i <= Duration; i += Time.deltaTime)
+			{
+				image.color = new Color(Color.r, Color.g, Color.b, i / Duration);
 
-                yield return null;
-            }
+				yield return null;
+			}
 
-            image.color = Color;
-            IsPlaying = false;
+			image.color = Color;
+			IsPlaying = false;
 
-            onComplete?.Invoke();
-        }
+			onComplete?.Invoke();
+		}
 
-        protected override IEnumerator OutCoroutine(Action onComplete = null)
-        {
-            IsPlaying = true;
+		protected override IEnumerator OutCoroutine(Action onComplete = null)
+		{
+			IsPlaying = true;
 
-            for (float i = Duration; i >= 0; i -= Time.deltaTime)
-            {
-                image.color = new Color(Color.r, Color.g, Color.b, i / Duration);
+			for (float i = Duration; i >= 0; i -= Time.deltaTime)
+			{
+				image.color = new Color(Color.r, Color.g, Color.b, i / Duration);
 
-                yield return null;
-            }
+				yield return null;
+			}
 
-            image.color = Color.clear;
-            IsPlaying = false;
+			image.color = Color.clear;
+			IsPlaying = false;
 
-            onComplete?.Invoke();
-        }
-    }
+			onComplete?.Invoke();
+		}
+	}
 }

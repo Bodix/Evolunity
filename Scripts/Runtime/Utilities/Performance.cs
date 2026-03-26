@@ -8,62 +8,62 @@ using Debug = UnityEngine.Debug;
 
 namespace Evolutex.Evolunity.Utilities
 {
-    public static class Performance
-    {
-        private const int IterationCount = 10000;
+	public static class Performance
+	{
+		private const int IterationCount = 10000;
 
-        public static void TestAction(Action action)
-        {
-            TestAction(action, "Action", IterationCount);
-        }
+		public static void TestAction(Action action)
+		{
+			TestAction(action, "Action", IterationCount);
+		}
 
-        public static void TestAction(Action action, int iterationCount)
-        {
-            TestAction(action, "Action", iterationCount);
-        }
+		public static void TestAction(Action action, int iterationCount)
+		{
+			TestAction(action, "Action", iterationCount);
+		}
 
-        public static void TestAction(Action action, string name)
-        {
-            TestAction(action, name, IterationCount);
-        }
+		public static void TestAction(Action action, string name)
+		{
+			TestAction(action, name, IterationCount);
+		}
 
-        public static void TestAction(Action action, string name, int iterationCount)
-        {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+		public static void TestAction(Action action, string name, int iterationCount)
+		{
+			Stopwatch stopwatch = Stopwatch.StartNew();
 
-            for (int i = 0; i < iterationCount; i++)
-                action();
+			for (int i = 0; i < iterationCount; i++)
+				action();
 
-            stopwatch.Stop();
+			stopwatch.Stop();
 
-            Debug.Log(name + ": " + stopwatch.ElapsedMilliseconds);
-        }
+			Debug.Log(name + ": " + stopwatch.ElapsedMilliseconds);
+		}
 
-        public static void TestFunction<T>(Func<T> function)
-        {
-            TestFunction(function, "Function", IterationCount);
-        }
+		public static void TestFunction<T>(Func<T> function)
+		{
+			TestFunction(function, "Function", IterationCount);
+		}
 
-        public static void TestFunction<T>(Func<T> function, int iterationCount)
-        {
-            TestFunction(function, "Function", iterationCount);
-        }
+		public static void TestFunction<T>(Func<T> function, int iterationCount)
+		{
+			TestFunction(function, "Function", iterationCount);
+		}
 
-        public static void TestFunction<T>(Func<T> function, string name)
-        {
-            TestFunction(function, name, IterationCount);
-        }
+		public static void TestFunction<T>(Func<T> function, string name)
+		{
+			TestFunction(function, name, IterationCount);
+		}
 
-        public static void TestFunction<T>(Func<T> function, string name, int iterationCount)
-        {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+		public static void TestFunction<T>(Func<T> function, string name, int iterationCount)
+		{
+			Stopwatch stopwatch = Stopwatch.StartNew();
 
-            for (int i = 0; i < iterationCount; i++)
-                GC.KeepAlive(function());
+			for (int i = 0; i < iterationCount; i++)
+				GC.KeepAlive(function());
 
-            stopwatch.Stop();
+			stopwatch.Stop();
 
-            Debug.Log(name + ": " + stopwatch.ElapsedMilliseconds);
-        }
-    }
+			Debug.Log(name + ": " + stopwatch.ElapsedMilliseconds);
+		}
+	}
 }

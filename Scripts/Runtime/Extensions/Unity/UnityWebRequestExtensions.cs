@@ -9,33 +9,33 @@ using UnityEngine.Networking;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    public static class UnityWebRequestExtensions
-    {
-        public delegate void ResponseHandler(UnityWebRequest response);
+	public static class UnityWebRequestExtensions
+	{
+		public delegate void ResponseHandler(UnityWebRequest response);
 
-        public static WrappedCoroutine WaitForResponseInWrappedCoroutine(
-            this UnityWebRequestAsyncOperation asyncOperation, MonoBehaviour monoBehaviour, ResponseHandler onComplete)
-        {
-            return monoBehaviour.StartWrappedCoroutine(WaitForResponse(asyncOperation, onComplete));
-        }
+		public static WrappedCoroutine WaitForResponseInWrappedCoroutine(
+			this UnityWebRequestAsyncOperation asyncOperation, MonoBehaviour monoBehaviour, ResponseHandler onComplete)
+		{
+			return monoBehaviour.StartWrappedCoroutine(WaitForResponse(asyncOperation, onComplete));
+		}
 
-        public static Coroutine WaitForResponseInCoroutine(
-            this UnityWebRequestAsyncOperation asyncOperation, MonoBehaviour monoBehaviour, ResponseHandler onComplete)
-        {
-            return monoBehaviour.StartCoroutine(WaitForResponse(asyncOperation, onComplete));
-        }
+		public static Coroutine WaitForResponseInCoroutine(
+			this UnityWebRequestAsyncOperation asyncOperation, MonoBehaviour monoBehaviour, ResponseHandler onComplete)
+		{
+			return monoBehaviour.StartCoroutine(WaitForResponse(asyncOperation, onComplete));
+		}
 
-        private static IEnumerator WaitForResponse(UnityWebRequestAsyncOperation asyncOperation,
-            ResponseHandler onComplete)
-        {
-            yield return asyncOperation;
+		private static IEnumerator WaitForResponse(UnityWebRequestAsyncOperation asyncOperation,
+			ResponseHandler onComplete)
+		{
+			yield return asyncOperation;
 
-            onComplete?.Invoke(asyncOperation.webRequest);
-        }
+			onComplete?.Invoke(asyncOperation.webRequest);
+		}
 
-        public static bool IsError(this UnityWebRequest webRequest)
-        {
-            return webRequest.isNetworkError || webRequest.isHttpError;
-        }
-    }
+		public static bool IsError(this UnityWebRequest webRequest)
+		{
+			return webRequest.isNetworkError || webRequest.isHttpError;
+		}
+	}
 }

@@ -8,90 +8,90 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.UI
 {
-    // TODO: Add OnEnable() and OnDisable() logic.
+	// TODO: Add OnEnable() and OnDisable() logic.
 
-    [AddComponentMenu("Evolunity/UI/GIF Image")]
-    [RequireComponent(typeof(Image))]
-    public class GifImage : MonoBehaviour
-    {
-        public float FramesPerSecond = 30f;
+	[AddComponentMenu("Evolunity/UI/GIF Image")]
+	[RequireComponent(typeof(Image))]
+	public class GifImage : MonoBehaviour
+	{
+		public float FramesPerSecond = 30f;
 
-        [SerializeField]
-        private Sprite[] sprites;
+		[SerializeField]
+		private Sprite[] sprites;
 
-        [HideInInspector]
-        [SerializeField]
-        private Image image;
+		[HideInInspector]
+		[SerializeField]
+		private Image image;
 
-        public Sprite[] Sprites => sprites;
-        public bool IsPlaying { get; private set; } = true;
-        public bool IsContainsSprites => Sprites.Length != 0;
-        private bool IsInitialized => image;
+		public Sprite[] Sprites => sprites;
+		public bool IsPlaying { get; private set; } = true;
+		public bool IsContainsSprites => Sprites.Length != 0;
+		private bool IsInitialized => image;
 
-        public void OnValidate()
-        {
-            InitializeIfRequired();
-        }
+		public void OnValidate()
+		{
+			InitializeIfRequired();
+		}
 
-        private void Awake()
-        {
-            InitializeIfRequired();
-        }
+		private void Awake()
+		{
+			InitializeIfRequired();
+		}
 
-        private void Start()
-        {
-            if (!IsContainsSprites)
-                IsPlaying = false;
-        }
+		private void Start()
+		{
+			if (!IsContainsSprites)
+				IsPlaying = false;
+		}
 
-        private void Update()
-        {
-            if (IsPlaying)
-            {
-                int index = (int)(Time.time * FramesPerSecond) % Sprites.Length;
+		private void Update()
+		{
+			if (IsPlaying)
+			{
+				int index = (int)(Time.time * FramesPerSecond) % Sprites.Length;
 
-                image.sprite = Sprites[index];
-            }
-        }
+				image.sprite = Sprites[index];
+			}
+		}
 
-        public void SetGif(Sprite[] sprites)
-        {
-            this.sprites = sprites;
+		public void SetGif(Sprite[] sprites)
+		{
+			this.sprites = sprites;
 
-            Reset();
-        }
+			Reset();
+		}
 
-        public void Play()
-        {
-            if (!IsContainsSprites)
-                throw new InvalidOperationException("Unable to play gif animation without sprites");
+		public void Play()
+		{
+			if (!IsContainsSprites)
+				throw new InvalidOperationException("Unable to play gif animation without sprites");
 
-            IsPlaying = true;
-        }
+			IsPlaying = true;
+		}
 
-        public void Stop()
-        {
-            if (!IsPlaying)
-            {
-                Debug.LogWarning("Trying to stop a gif animation that is not playing");
+		public void Stop()
+		{
+			if (!IsPlaying)
+			{
+				Debug.LogWarning("Trying to stop a gif animation that is not playing");
 
-                return;
-            }
+				return;
+			}
 
-            IsPlaying = false;
+			IsPlaying = false;
 
-            Reset();
-        }
+			Reset();
+		}
 
-        private void InitializeIfRequired()
-        {
-            if (!IsInitialized)
-                image = GetComponent<Image>();
-        }
+		private void InitializeIfRequired()
+		{
+			if (!IsInitialized)
+				image = GetComponent<Image>();
+		}
 
-        private void Reset()
-        {
-            image.sprite = Sprites[0];
-        }
-    }
+		private void Reset()
+		{
+			image.sprite = Sprites[0];
+		}
+	}
 }

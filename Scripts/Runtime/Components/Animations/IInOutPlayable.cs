@@ -4,9 +4,9 @@
 
 namespace Evolutex.Evolunity.Components.Animations
 {
-    public interface IInOutPlayable
-    {
-        void PlayIn();
-        void PlayOut();
-    }
+	public interface IInOutPlayable
+	{
+		void PlayIn();
+		void PlayOut();
+	}
 }

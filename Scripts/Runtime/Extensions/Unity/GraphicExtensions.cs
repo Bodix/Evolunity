@@ -7,16 +7,16 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    public static class GraphicExtensions
-    {
-        public static void SetAlpha(this Graphic graphic, float value)
-        {
-            graphic.color = graphic.color.WithAlpha(value);
-        }
+	public static class GraphicExtensions
+	{
+		public static void SetAlpha(this Graphic graphic, float value)
+		{
+			graphic.color = graphic.color.WithAlpha(value);
+		}
 
-        public static void SetAlpha(this SpriteRenderer spriteRenderer, float value)
-        {
-            spriteRenderer.color = spriteRenderer.color.WithAlpha(value);
-        }
-    }
+		public static void SetAlpha(this SpriteRenderer spriteRenderer, float value)
+		{
+			spriteRenderer.color = spriteRenderer.color.WithAlpha(value);
+		}
+	}
 }

@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.UI
 {
-    [RequireComponent(typeof(Button))]
-    public class DisableButtonAfterClick : MonoBehaviour
-    {
-        private void Awake()
-        {
-            Button button = GetComponent<Button>();
+	[RequireComponent(typeof(Button))]
+	public class DisableButtonAfterClick : MonoBehaviour
+	{
+		private void Awake()
+		{
+			Button button = GetComponent<Button>();
 
-            button.onClick.AddListener(() => button.interactable = false);
-        }
-    }
+			button.onClick.AddListener(() => button.interactable = false);
+		}
+	}
 }

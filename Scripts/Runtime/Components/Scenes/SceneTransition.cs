@@ -8,26 +8,26 @@ using UnityEngine.SceneManagement;
 
 namespace Evolutex.Evolunity.Components.Scenes
 {
-    [AddComponentMenu("Evolunity/Scenes/Scene Transition")]
-    public class SceneTransition : MonoBehaviour
-    {
-        public InOutBehaviour InOutAnimation = null;
-        public bool OutAnimationOnStart = true;
+	[AddComponentMenu("Evolunity/Scenes/Scene Transition")]
+	public class SceneTransition : MonoBehaviour
+	{
+		public InOutBehaviour InOutAnimation = null;
+		public bool OutAnimationOnStart = true;
 
-        private void Start()
-        {
-            if (OutAnimationOnStart)
-                InOutAnimation.PlayOut();
-        }
+		private void Start()
+		{
+			if (OutAnimationOnStart)
+				InOutAnimation.PlayOut();
+		}
 
-        public void LoadSceneAfterAnimation(string sceneName)
-        {
-            InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneName));
-        }
+		public void LoadSceneAfterAnimation(string sceneName)
+		{
+			InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneName));
+		}
 
-        public void LoadSceneAfterAnimation(int sceneBuildIndex)
-        {
-            InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneBuildIndex));
-        }
-    }
+		public void LoadSceneAfterAnimation(int sceneBuildIndex)
+		{
+			InOutAnimation.PlayInCoroutine(() => SceneManager.LoadScene(sceneBuildIndex));
+		}
+	}
 }

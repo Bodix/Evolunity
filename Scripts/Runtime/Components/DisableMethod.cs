@@ -4,9 +4,9 @@
 
 namespace Evolutex.Evolunity.Components
 {
-    public enum DisableMethod
-    {
-        Destroy,
-        Disable
-    }
+	public enum DisableMethod
+	{
+		Destroy,
+		Disable
+	}
 }

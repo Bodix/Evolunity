@@ -9,37 +9,37 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Input/Input Reader")]
-    [RequireComponent(typeof(Graphic))]
-    public sealed class InputReader : MonoBehaviour, IPointerClickHandler, IDragHandler
-    {
-        // TODO: Rotate.
+	[AddComponentMenu("Evolunity/Input/Input Reader")]
+	[RequireComponent(typeof(Graphic))]
+	public sealed class InputReader : MonoBehaviour, IPointerClickHandler, IDragHandler
+	{
+		// TODO: Rotate.
 
-        public event Action<Vector2> Drag;
-        public event Action<Vector2> DoubleDrag;
-        public event Action<float> Zoom;
-        public event Action<Vector2> Click;
+		public event Action<Vector2> Drag;
+		public event Action<Vector2> DoubleDrag;
+		public event Action<float> Zoom;
+		public event Action<Vector2> Click;
 
 #if UNITY_EDITOR || !(UNITY_IOS && UNITY_ANDROID)
-        private void Update()
-        {
-            if (Input.mouseScrollDelta.y != 0)
-                Zoom?.Invoke(Input.mouseScrollDelta.y / 10);
-        }
+		private void Update()
+		{
+			if (Input.mouseScrollDelta.y != 0)
+				Zoom?.Invoke(Input.mouseScrollDelta.y / 10);
+		}
 #endif
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            Click?.Invoke(eventData.position);
-        }
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			Click?.Invoke(eventData.position);
+		}
 
-        public void OnDrag(PointerEventData eventData)
-        {
+		public void OnDrag(PointerEventData eventData)
+		{
 #if UNITY_EDITOR || !(UNITY_IOS || UNITY_ANDROID)
-            if (eventData.button == PointerEventData.InputButton.Left)
-                Drag?.Invoke(eventData.delta);
-            else if (eventData.button == PointerEventData.InputButton.Right)
-                DoubleDrag?.Invoke(eventData.delta);
+			if (eventData.button == PointerEventData.InputButton.Left)
+				Drag?.Invoke(eventData.delta);
+			else if (eventData.button == PointerEventData.InputButton.Right)
+				DoubleDrag?.Invoke(eventData.delta);
 #else
             if (UnityEngine.Input.touchCount == 2)
             {
@@ -49,20 +49,20 @@ namespace Evolutex.Evolunity.Components
             else if (UnityEngine.Input.touchCount == 1)
                 Drag?.Invoke(eventData.delta);
 #endif
-        }
+		}
 
-        private void Pinch()
-        {
-            Touch firstTouch = Input.GetTouch(0);
-            Touch secondTouch = Input.GetTouch(1);
+		private void Pinch()
+		{
+			Touch firstTouch = Input.GetTouch(0);
+			Touch secondTouch = Input.GetTouch(1);
 
-            Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
-            Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
+			Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+			Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
 
-            float prevTouchDelta = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
-            float touchDelta = (firstTouch.position - secondTouch.position).magnitude;
+			float prevTouchDelta = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+			float touchDelta = (firstTouch.position - secondTouch.position).magnitude;
 
-            Zoom?.Invoke((touchDelta - prevTouchDelta) / 100);
-        }
-    }
+			Zoom?.Invoke((touchDelta - prevTouchDelta) / 100);
+		}
+	}
 }

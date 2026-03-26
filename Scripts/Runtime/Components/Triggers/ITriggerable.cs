@@ -4,8 +4,8 @@
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    public interface ITriggerable
-    {
-        void Trigger();
-    }
+	public interface ITriggerable
+	{
+		void Trigger();
+	}
 }

@@ -8,19 +8,19 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    [AddComponentMenu("Evolunity/Triggers/Scene Change Trigger")]
-    public class SceneChangeTrigger : AbstractTrigger
-    {
-        [SerializeField, Scene]
-        private string _scene;
-        [SerializeField]
-        private SceneTransition _sceneTransition;
+	[AddComponentMenu("Evolunity/Triggers/Scene Change Trigger")]
+	public class SceneChangeTrigger : AbstractTrigger
+	{
+		[SerializeField, Scene]
+		private string _scene;
+		[SerializeField]
+		private SceneTransition _sceneTransition;
 
-        protected override void EnterTrigger(Collider other)
-        {
-            _sceneTransition.LoadSceneAfterAnimation(_scene);
+		protected override void EnterTrigger(Collider other)
+		{
+			_sceneTransition.LoadSceneAfterAnimation(_scene);
 
-            InvokeTriggeredEvent();
-        }
-    }
+			InvokeTriggeredEvent();
+		}
+	}
 }

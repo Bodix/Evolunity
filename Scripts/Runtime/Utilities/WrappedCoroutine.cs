@@ -8,53 +8,53 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Utilities
 {
-    // TODO:
-    // 1. Test stopping null coroutine.
-    // 2. Add completion callback.
-    // 3. Implement IDisposable and check the disposing.
+	// TODO:
+	// 1. Test stopping null coroutine.
+	// 2. Add completion callback.
+	// 3. Implement IDisposable and check the disposing.
 
-    public class WrappedCoroutine
-    {
-        private readonly IEnumerator routine;
+	public class WrappedCoroutine
+	{
+		private readonly IEnumerator routine;
 
-        public static implicit operator Coroutine(WrappedCoroutine wrapper)
-        {
-            return wrapper.Coroutine;
-        }
+		public static implicit operator Coroutine(WrappedCoroutine wrapper)
+		{
+			return wrapper.Coroutine;
+		}
 
-        public MonoBehaviour Owner { get; }
-        public Coroutine Coroutine { get; private set; }
-        public bool IsRunning => Coroutine != null;
+		public MonoBehaviour Owner { get; }
+		public Coroutine Coroutine { get; private set; }
+		public bool IsRunning => Coroutine != null;
 
-        public WrappedCoroutine(MonoBehaviour owner, IEnumerator routine)
-        {
-            this.routine = routine;
+		public WrappedCoroutine(MonoBehaviour owner, IEnumerator routine)
+		{
+			this.routine = routine;
 
-            Owner = owner;
-        }
+			Owner = owner;
+		}
 
-        public WrappedCoroutine Start()
-        {
-            if (IsRunning)
-                throw new InvalidOperationException("The coroutine is already started");
+		public WrappedCoroutine Start()
+		{
+			if (IsRunning)
+				throw new InvalidOperationException("The coroutine is already started");
 
-            Coroutine = Owner.StartCoroutine(Process());
+			Coroutine = Owner.StartCoroutine(Process());
 
-            return this;
-        }
+			return this;
+		}
 
-        public void Stop()
-        {
-            Owner.StopCoroutine(Coroutine);
+		public void Stop()
+		{
+			Owner.StopCoroutine(Coroutine);
 
-            Coroutine = null;
-        }
+			Coroutine = null;
+		}
 
-        private IEnumerator Process()
-        {
-            yield return routine;
+		private IEnumerator Process()
+		{
+			yield return routine;
 
-            Coroutine = null;
-        }
-    }
+			Coroutine = null;
+		}
+	}
 }

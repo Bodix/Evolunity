@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    public class CircleZoneSpawner<T> : BaseSpawner<T> where T : Object
-    {
-        public float Radius = 10;
+	public class CircleZoneSpawner<T> : BaseSpawner<T> where T : Object
+	{
+		public float Radius = 10;
 
-        public override T GetClone()
-        {
-            Vector2 position = Random.insideUnitCircle * Radius;
+		public override T GetClone()
+		{
+			Vector2 position = Random.insideUnitCircle * Radius;
 
-            return Instantiate(Prefab, new Vector3(position.x, 0, position.y), Quaternion.identity, Parent);
-        }
-    }
+			return Instantiate(Prefab, new Vector3(position.x, 0, position.y), Quaternion.identity, Parent);
+		}
+	}
 
-    [AddComponentMenu("Evolunity/Spawners/Circle Zone Spawner")]
-    public class CircleZoneSpawner : CircleZoneSpawner<GameObject>
-    {
-    }
+	[AddComponentMenu("Evolunity/Spawners/Circle Zone Spawner")]
+	public class CircleZoneSpawner : CircleZoneSpawner<GameObject>
+	{
+	}
 }

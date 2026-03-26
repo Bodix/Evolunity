@@ -11,64 +11,64 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
-    // TODO: Make safe types renaming:
-    // https://docs.unity3d.com/ScriptReference/SerializationUtility.HasManagedReferencesWithMissingTypes.html
-    // https://docs.unity3d.com/ScriptReference/SerializationUtility.GetManagedReferencesWithMissingTypes.html
+	// TODO: Make safe types renaming:
+	// https://docs.unity3d.com/ScriptReference/SerializationUtility.HasManagedReferencesWithMissingTypes.html
+	// https://docs.unity3d.com/ScriptReference/SerializationUtility.GetManagedReferencesWithMissingTypes.html
 
-    [CustomPropertyDrawer(typeof(TypeSelectorAttribute))]
-    public class TypeSelectorDrawer : AttributePropertyDrawer<TypeSelectorAttribute>
-    {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, true);
-        }
+	[CustomPropertyDrawer(typeof(TypeSelectorAttribute))]
+	public class TypeSelectorDrawer : AttributePropertyDrawer<TypeSelectorAttribute>
+	{
+		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		{
+			return EditorGUI.GetPropertyHeight(property, true);
+		}
 
-        protected override SerializedPropertyType[] SupportedTypes => new[]
-        {
-            SerializedPropertyType.ManagedReference
-        };
+		protected override SerializedPropertyType[] SupportedTypes => new[]
+		{
+			SerializedPropertyType.ManagedReference
+		};
 
-        protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            Rect dropdownButtonRect = new Rect(position);
-            dropdownButtonRect.x += EditorGUIUtility.labelWidth + 2;
-            dropdownButtonRect.width -= EditorGUIUtility.labelWidth + 2;
-            // Used to fix strange bug with property drawing.
-            dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
+		protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
+		{
+			Rect dropdownButtonRect = new Rect(position);
+			dropdownButtonRect.x += EditorGUIUtility.labelWidth + 2;
+			dropdownButtonRect.width -= EditorGUIUtility.labelWidth + 2;
+			// Used to fix strange bug with property drawing.
+			dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
 
-            if (EditorGUI.DropdownButton(dropdownButtonRect,
-                    new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
-            {
-                Type baseType = property.GetManagedReferenceFieldType();
-                TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
-                    TypeCache.GetTypesDerivedFrom(baseType)
-                        .Append(baseType)
-                        .Where(x =>
-                            (x.IsPublic || x.IsNestedPublic) &&
-                            !x.IsAbstract &&
-                            !x.IsGenericType &&
-                            !typeof(UnityEngine.Object).IsAssignableFrom(x) &&
-                            System.Attribute.IsDefined(x, typeof(SerializableAttribute))
-                        ));
-                dropdown.TypeSelected += type =>
-                {
-                    object obj = property.CreateManagedReferenceValue(type);
-                    property.isExpanded = obj != null;
-                    property.serializedObject.ApplyModifiedProperties();
-                    property.serializedObject.Update();
-                };
+			if (EditorGUI.DropdownButton(dropdownButtonRect,
+				    new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
+			{
+				Type baseType = property.GetManagedReferenceFieldType();
+				TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
+					TypeCache.GetTypesDerivedFrom(baseType)
+						.Append(baseType)
+						.Where(x =>
+							(x.IsPublic || x.IsNestedPublic) &&
+							!x.IsAbstract &&
+							!x.IsGenericType &&
+							!typeof(UnityEngine.Object).IsAssignableFrom(x) &&
+							System.Attribute.IsDefined(x, typeof(SerializableAttribute))
+						));
+				dropdown.TypeSelected += type =>
+				{
+					object obj = property.CreateManagedReferenceValue(type);
+					property.isExpanded = obj != null;
+					property.serializedObject.ApplyModifiedProperties();
+					property.serializedObject.Update();
+				};
 
-                dropdown.Show(dropdownButtonRect);
-            }
+				dropdown.Show(dropdownButtonRect);
+			}
 
-            EditorGUI.PropertyField(position, property, label, true);
-        }
+			EditorGUI.PropertyField(position, property, label, true);
+		}
 
-        private string GetManagedReferenceValueTypename(SerializedProperty property)
-        {
-            Type type = property.GetManagedReferenceValueType();
+		private string GetManagedReferenceValueTypename(SerializedProperty property)
+		{
+			Type type = property.GetManagedReferenceValueType();
 
-            return type == null ? "<NULL>" : ObjectNames.NicifyVariableName(type.Name);
-        }
-    }
+			return type == null ? "<NULL>" : ObjectNames.NicifyVariableName(type.Name);
+		}
+	}
 }

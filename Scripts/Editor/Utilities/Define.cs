@@ -8,27 +8,27 @@ using UnityEditor;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
-    public static class Define
-    {
-        public const string DEVELOPMENT = "DEVELOPMENT";
+	public static class Define
+	{
+		public const string DEVELOPMENT = "DEVELOPMENT";
 
-        public static void Set(string define, bool set)
-        {
-            string definesString =
-                PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-            List<string> defines = definesString.Split(';').ToList();
+		public static void Set(string define, bool set)
+		{
+			string definesString =
+				PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+			List<string> defines = definesString.Split(';').ToList();
 
-            if (set)
-            {
-                if (!defines.Contains(define))
-                    defines.Add(define);
-            }
-            else
-                defines.Remove(define);
+			if (set)
+			{
+				if (!defines.Contains(define))
+					defines.Add(define);
+			}
+			else
+				defines.Remove(define);
 
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(
-                EditorUserBuildSettings.selectedBuildTargetGroup,
-                string.Join(";", defines));
-        }
-    }
+			PlayerSettings.SetScriptingDefineSymbolsForGroup(
+				EditorUserBuildSettings.selectedBuildTargetGroup,
+				string.Join(";", defines));
+		}
+	}
 }

@@ -8,15 +8,15 @@ using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-    [Serializable]
-    public class TriggerableEvent : ITriggerable
-    {
-        [SerializeField]
-        private UnityEvent Event;
+	[Serializable]
+	public class TriggerableEvent : ITriggerable
+	{
+		[SerializeField]
+		private UnityEvent Event;
 
-        public void Trigger()
-        {
-            Event.Invoke();
-        }
-    }
+		public void Trigger()
+		{
+			Event.Invoke();
+		}
+	}
 }

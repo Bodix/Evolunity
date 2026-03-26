@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Frame Rate Config")]
-    [DisallowMultipleComponent]
-    public class FrameRateConfig : MonoBehaviour
-    {
-        [SerializeField]
-        private int targetFrameRate = 120;
-        [SerializeField]
-        private int vSyncCount = 0;
+	[AddComponentMenu("Evolunity/Frame Rate Config")]
+	[DisallowMultipleComponent]
+	public class FrameRateConfig : MonoBehaviour
+	{
+		[SerializeField]
+		private int targetFrameRate = 120;
+		[SerializeField]
+		private int vSyncCount = 0;
 
-        private void Start()
-        {
-            QualitySettings.vSyncCount = vSyncCount;
-            Application.targetFrameRate = targetFrameRate;
-        }
-    }
+		private void Start()
+		{
+			QualitySettings.vSyncCount = vSyncCount;
+			Application.targetFrameRate = targetFrameRate;
+		}
+	}
 }

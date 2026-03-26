@@ -10,47 +10,47 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Collections
 {
-    public class WeightQueue<T> : IEnumerable<T>
-    {
-        private readonly Queue<T> queue;
+	public class WeightQueue<T> : IEnumerable<T>
+	{
+		private readonly Queue<T> queue;
 
-        /// <summary>
-        /// Fills the queue with items, with the amount of each item determined by its weight.
-        /// </summary>
-        public WeightQueue(IEnumerable<T> items, Func<T, float> weightSelector, int count)
-        {
-            queue = new Queue<T>(count);
+		/// <summary>
+		/// Fills the queue with items, with the amount of each item determined by its weight.
+		/// </summary>
+		public WeightQueue(IEnumerable<T> items, Func<T, float> weightSelector, int count)
+		{
+			queue = new Queue<T>(count);
 
-            float weightSum = items.Select(weightSelector).Sum();
+			float weightSum = items.Select(weightSelector).Sum();
 
-            foreach (T item in items)
-                for (int i = 0; i < Mathf.Round(count * (weightSelector(item) / weightSum)); i++)
-                    queue.Enqueue(item);
-        }
+			foreach (T item in items)
+				for (int i = 0; i < Mathf.Round(count * (weightSelector(item) / weightSum)); i++)
+					queue.Enqueue(item);
+		}
 
-        public void Enqueue(T item)
-        {
-            queue.Enqueue(item);
-        }
+		public void Enqueue(T item)
+		{
+			queue.Enqueue(item);
+		}
 
-        public T Dequeue()
-        {
-            return queue.Dequeue();
-        }
+		public T Dequeue()
+		{
+			return queue.Dequeue();
+		}
 
-        public T Peek()
-        {
-            return queue.Peek();
-        }
+		public T Peek()
+		{
+			return queue.Peek();
+		}
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return ((IEnumerable<T>)queue).GetEnumerator();
-        }
+		public IEnumerator<T> GetEnumerator()
+		{
+			return ((IEnumerable<T>)queue).GetEnumerator();
+		}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-    }
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+	}
 }

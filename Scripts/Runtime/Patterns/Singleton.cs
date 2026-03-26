@@ -6,11 +6,11 @@ using System;
 
 namespace Evolutex.Evolunity.Patterns
 {
-    public abstract class Singleton<T> where T : class, new()
-    {
-        private static readonly Lazy<T> instance = new Lazy<T>(() => new T());
+	public abstract class Singleton<T> where T : class, new()
+	{
+		private static readonly Lazy<T> instance = new Lazy<T>(() => new T());
 
-        public static T Instance => instance.Value;
-        public static bool IsInstanceCreated => instance.IsValueCreated;
-    }
+		public static T Instance => instance.Value;
+		public static bool IsInstanceCreated => instance.IsValueCreated;
+	}
 }

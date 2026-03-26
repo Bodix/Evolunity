@@ -10,70 +10,70 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Input/Long Press Reader")]
-    [RequireComponent(typeof(Graphic))]
-    public sealed class LongPressReader : MonoBehaviour,
-        IPointerDownHandler,
-        IPointerUpHandler,
-        IBeginDragHandler
-    {
-        public event Action LongPress;
+	[AddComponentMenu("Evolunity/Input/Long Press Reader")]
+	[RequireComponent(typeof(Graphic))]
+	public sealed class LongPressReader : MonoBehaviour,
+		IPointerDownHandler,
+		IPointerUpHandler,
+		IBeginDragHandler
+	{
+		public event Action LongPress;
 
-        public float Delay = 0.3f;
-        public bool Continuous = false;
+		public float Delay = 0.3f;
+		public bool Continuous = false;
 
-        private Coroutine holdCoroutine;
-        private bool isHold;
+		private Coroutine holdCoroutine;
+		private bool isHold;
 
-        #region Callbacks
+		#region Callbacks
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            StartHold();
-        }
+		public void OnPointerDown(PointerEventData eventData)
+		{
+			StartHold();
+		}
 
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            StopHold();
-        }
+		public void OnPointerUp(PointerEventData eventData)
+		{
+			StopHold();
+		}
 
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            StopHold();
-        }
+		public void OnBeginDrag(PointerEventData eventData)
+		{
+			StopHold();
+		}
 
-        #endregion
+		#endregion
 
-        private void StartHold()
-        {
-            holdCoroutine = Continuous ? StartCoroutine(ContinuousHold()) : StartCoroutine(Hold());
-            isHold = true;
-        }
+		private void StartHold()
+		{
+			holdCoroutine = Continuous ? StartCoroutine(ContinuousHold()) : StartCoroutine(Hold());
+			isHold = true;
+		}
 
-        private IEnumerator Hold()
-        {
-            yield return new WaitForSeconds(Delay);
+		private IEnumerator Hold()
+		{
+			yield return new WaitForSeconds(Delay);
 
-            if (isHold)
-                LongPress?.Invoke();
-        }
+			if (isHold)
+				LongPress?.Invoke();
+		}
 
-        private IEnumerator ContinuousHold()
-        {
-            yield return new WaitForSeconds(Delay);
+		private IEnumerator ContinuousHold()
+		{
+			yield return new WaitForSeconds(Delay);
 
-            while (isHold)
-            {
-                yield return null;
+			while (isHold)
+			{
+				yield return null;
 
-                LongPress?.Invoke();
-            }
-        }
+				LongPress?.Invoke();
+			}
+		}
 
-        private void StopHold()
-        {
-            StopCoroutine(holdCoroutine);
-            isHold = false;
-        }
-    }
+		private void StopHold()
+		{
+			StopCoroutine(holdCoroutine);
+			isHold = false;
+		}
+	}
 }

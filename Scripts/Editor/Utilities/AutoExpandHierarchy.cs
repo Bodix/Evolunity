@@ -9,39 +9,39 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
-    // TODO: Add UI for adding GameObject's to expand.
+	// TODO: Add UI for adding GameObject's to expand.
 
-    // Use it as follows:
-    // [InitializeOnLoad]
-    // public static class EditorBootstrap
-    // {
-    //     static EditorBootstrap()
-    //     {
-    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
-    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Game");
-    //         AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
-    //         AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
-    //     }
-    // }
+	// Use it as follows:
+	// [InitializeOnLoad]
+	// public static class EditorBootstrap
+	// {
+	//     static EditorBootstrap()
+	//     {
+	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
+	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Game");
+	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
+	//         AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
+	//     }
+	// }
 
-    [InitializeOnLoad]
-    public static class AutoExpandHierarchy
-    {
-        static AutoExpandHierarchy()
-        {
-            EditorSceneManager.sceneOpened += (scene, mode) => ExpandObjects();
-        }
+	[InitializeOnLoad]
+	public static class AutoExpandHierarchy
+	{
+		static AutoExpandHierarchy()
+		{
+			EditorSceneManager.sceneOpened += (scene, mode) => ExpandObjects();
+		}
 
-        private static void ExpandObjects()
-        {
-            GameObjectsToExpand.ForEach(name =>
-            {
-                GameObject gameObject = GameObject.Find(name);
-                if (gameObject)
-                    SceneHierarchy.SetExpanded(gameObject, true);
-            });
-        }
+		private static void ExpandObjects()
+		{
+			GameObjectsToExpand.ForEach(name =>
+			{
+				GameObject gameObject = GameObject.Find(name);
+				if (gameObject)
+					SceneHierarchy.SetExpanded(gameObject, true);
+			});
+		}
 
-        public static List<string> GameObjectsToExpand { get; } = new List<string>();
-    }
+		public static List<string> GameObjectsToExpand { get; } = new List<string>();
+	}
 }

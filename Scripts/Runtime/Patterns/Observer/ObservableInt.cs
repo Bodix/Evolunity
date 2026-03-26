@@ -6,11 +6,11 @@ using System;
 
 namespace Evolutex.Evolunity.Patterns
 {
-    [Serializable]
-    public class ObservableInt : ObservableProperty<int>
-    {
-        public ObservableInt(int value) : base(value)
-        {
-        }
-    }
+	[Serializable]
+	public class ObservableInt : ObservableProperty<int>
+	{
+		public ObservableInt(int value) : base(value)
+		{
+		}
+	}
 }

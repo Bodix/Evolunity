@@ -9,43 +9,43 @@ using UnityEditor.IMGUI.Controls;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
-    public class TypeSelectorDropdown : AdvancedDropdown
-    {
-        private readonly IEnumerable<Type> _types;
+	public class TypeSelectorDropdown : AdvancedDropdown
+	{
+		private readonly IEnumerable<Type> _types;
 
-        public TypeSelectorDropdown(IEnumerable<Type> types) : base(new AdvancedDropdownState())
-        {
-            _types = types;
-        }
+		public TypeSelectorDropdown(IEnumerable<Type> types) : base(new AdvancedDropdownState())
+		{
+			_types = types;
+		}
 
-        public event Action<Type> TypeSelected;
+		public event Action<Type> TypeSelected;
 
-        protected override AdvancedDropdownItem BuildRoot()
-        {
-            AdvancedDropdownItem root = new AdvancedDropdownItem("Select type");
+		protected override AdvancedDropdownItem BuildRoot()
+		{
+			AdvancedDropdownItem root = new AdvancedDropdownItem("Select type");
 
-            foreach (Type type in _types)
-                root.AddChild(new TypeSelectorDropdownItem(type));
+			foreach (Type type in _types)
+				root.AddChild(new TypeSelectorDropdownItem(type));
 
-            return root;
-        }
+			return root;
+		}
 
-        protected override void ItemSelected(AdvancedDropdownItem item)
-        {
-            base.ItemSelected(item);
+		protected override void ItemSelected(AdvancedDropdownItem item)
+		{
+			base.ItemSelected(item);
 
-            if (item is TypeSelectorDropdownItem typeSelectorItem)
-                TypeSelected?.Invoke(typeSelectorItem.Type);
-        }
+			if (item is TypeSelectorDropdownItem typeSelectorItem)
+				TypeSelected?.Invoke(typeSelectorItem.Type);
+		}
 
-        private class TypeSelectorDropdownItem : AdvancedDropdownItem
-        {
-            public TypeSelectorDropdownItem(Type type) : base(ObjectNames.NicifyVariableName(type.Name))
-            {
-                Type = type;
-            }
+		private class TypeSelectorDropdownItem : AdvancedDropdownItem
+		{
+			public TypeSelectorDropdownItem(Type type) : base(ObjectNames.NicifyVariableName(type.Name))
+			{
+				Type = type;
+			}
 
-            public Type Type { get; }
-        }
-    }
+			public Type Type { get; }
+		}
+	}
 }

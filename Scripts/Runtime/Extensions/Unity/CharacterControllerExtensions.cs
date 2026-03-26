@@ -6,17 +6,17 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    public static class CharacterControllerExtensions
-    {
-        /// <summary>
-        /// https://forum.unity.com/threads/does-transform-position-work-on-a-charactercontroller.36149/#post-4132021
-        /// </summary>
-        public static void SetPositionAndRotation(this CharacterController characterController,
-            Vector3 position, Quaternion rotation)
-        {
-            characterController.enabled = false;
-            characterController.transform.SetPositionAndRotation(position, rotation);
-            characterController.enabled = true;
-        }
-    }
+	public static class CharacterControllerExtensions
+	{
+		/// <summary>
+		/// https://forum.unity.com/threads/does-transform-position-work-on-a-charactercontroller.36149/#post-4132021
+		/// </summary>
+		public static void SetPositionAndRotation(this CharacterController characterController,
+			Vector3 position, Quaternion rotation)
+		{
+			characterController.enabled = false;
+			characterController.transform.SetPositionAndRotation(position, rotation);
+			characterController.enabled = true;
+		}
+	}
 }

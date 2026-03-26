@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    [AddComponentMenu("Evolunity/Disable On Awake")]
-    public class DisableOnAwake : MonoBehaviour
-    {
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
-    }
+	[AddComponentMenu("Evolunity/Disable On Awake")]
+	public class DisableOnAwake : MonoBehaviour
+	{
+		private void Awake()
+		{
+			gameObject.SetActive(false);
+		}
+	}
 }

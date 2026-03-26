@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Extensions
 {
-    public static class ByteArrayExtensions
-    {
-        public static Texture2D ToTexture(this byte[] bytes, bool markNonReadable = false)
-        {
-            Texture2D texture = new Texture2D(0, 0);
+	public static class ByteArrayExtensions
+	{
+		public static Texture2D ToTexture(this byte[] bytes, bool markNonReadable = false)
+		{
+			Texture2D texture = new Texture2D(0, 0);
 
-            texture.LoadImage(bytes, markNonReadable);
+			texture.LoadImage(bytes, markNonReadable);
 
-            return texture;
-        }
+			return texture;
+		}
 
-        public static Sprite ToSprite(this byte[] bytes, bool markNonReadable = false)
-        {
-            return bytes.ToTexture(markNonReadable).ToSprite();
-        }
-    }
+		public static Sprite ToSprite(this byte[] bytes, bool markNonReadable = false)
+		{
+			return bytes.ToTexture(markNonReadable).ToSprite();
+		}
+	}
 }

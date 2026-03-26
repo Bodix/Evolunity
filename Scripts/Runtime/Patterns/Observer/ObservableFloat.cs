@@ -6,11 +6,11 @@ using System;
 
 namespace Evolutex.Evolunity.Patterns
 {
-    [Serializable]
-    public class ObservableFloat : ObservableProperty<float>
-    {
-        public ObservableFloat(float value) : base(value)
-        {
-        }
-    }
+	[Serializable]
+	public class ObservableFloat : ObservableProperty<float>
+	{
+		public ObservableFloat(float value) : base(value)
+		{
+		}
+	}
 }

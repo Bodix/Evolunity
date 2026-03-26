@@ -7,38 +7,38 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Patterns
 {
-    [Serializable]
-    public class ObservableProperty<T>
-    {
-        [SerializeField]
-        private T _value;
+	[Serializable]
+	public class ObservableProperty<T>
+	{
+		[SerializeField]
+		private T _value;
 
-        public ObservableProperty(T value)
-        {
-            _value = value;
-        }
+		public ObservableProperty(T value)
+		{
+			_value = value;
+		}
 
-        public event Action<T> Updated;
+		public event Action<T> Updated;
 
-        public T Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
+		public T Value
+		{
+			get => _value;
+			set
+			{
+				_value = value;
 
-                Updated?.Invoke(_value);
-            }
-        }
+				Updated?.Invoke(_value);
+			}
+		}
 
-        public override string ToString()
-        {
-            return Value.ToString();
-        }
+		public override string ToString()
+		{
+			return Value.ToString();
+		}
 
-        public static implicit operator T(ObservableProperty<T> observable)
-        {
-            return observable.Value;
-        }
-    }
+		public static implicit operator T(ObservableProperty<T> observable)
+		{
+			return observable.Value;
+		}
+	}
 }

@@ -4,61 +4,61 @@
 
 namespace Evolutex.Evolunity.Patterns
 {
-    public abstract class State
-    {
-        /// <summary>
-        /// If the time equals -1, then the state is inactive.
-        /// </summary>
-        public float TimeSinceEnter { get; private set; } = -1;
+	public abstract class State
+	{
+		/// <summary>
+		/// If the time equals -1, then the state is inactive.
+		/// </summary>
+		public float TimeSinceEnter { get; private set; } = -1;
 
-        protected StateMachine StateMachine { get; private set; }
+		protected StateMachine StateMachine { get; private set; }
 
-        /// <summary>
-        /// Don't call this method manually. It will be called automatically from the state machine.
-        /// </summary>
-        public void Initialize(StateMachine stateMachine)
-        {
-            StateMachine = stateMachine;
+		/// <summary>
+		/// Don't call this method manually. It will be called automatically from the state machine.
+		/// </summary>
+		public void Initialize(StateMachine stateMachine)
+		{
+			StateMachine = stateMachine;
 
-            OnInitialize();
-        }
+			OnInitialize();
+		}
 
-        /// <summary>
-        /// Don't call this method manually. It will be called automatically from the state machine.
-        /// </summary>
-        public void Enter()
-        {
-            TimeSinceEnter = 0;
+		/// <summary>
+		/// Don't call this method manually. It will be called automatically from the state machine.
+		/// </summary>
+		public void Enter()
+		{
+			TimeSinceEnter = 0;
 
-            OnEnter();
-        }
+			OnEnter();
+		}
 
-        /// <summary>
-        /// Don't call this method manually. It will be called automatically from the state machine.
-        /// </summary>
-        public void Update(float deltaTime)
-        {
-            OnUpdate(deltaTime);
+		/// <summary>
+		/// Don't call this method manually. It will be called automatically from the state machine.
+		/// </summary>
+		public void Update(float deltaTime)
+		{
+			OnUpdate(deltaTime);
 
-            TimeSinceEnter += deltaTime;
-        }
+			TimeSinceEnter += deltaTime;
+		}
 
-        /// <summary>
-        /// Don't call this method manually. It will be called automatically from the state machine.
-        /// </summary>
-        public void Exit()
-        {
-            OnExit();
+		/// <summary>
+		/// Don't call this method manually. It will be called automatically from the state machine.
+		/// </summary>
+		public void Exit()
+		{
+			OnExit();
 
-            TimeSinceEnter = -1;
-        }
+			TimeSinceEnter = -1;
+		}
 
-        protected virtual void OnInitialize() { }
+		protected virtual void OnInitialize() { }
 
-        protected virtual void OnEnter() { }
+		protected virtual void OnEnter() { }
 
-        protected virtual void OnUpdate(float deltaTime) { }
+		protected virtual void OnUpdate(float deltaTime) { }
 
-        protected virtual void OnExit() { }
-    }
+		protected virtual void OnExit() { }
+	}
 }

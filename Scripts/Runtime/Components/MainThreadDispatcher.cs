@@ -37,65 +37,65 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-    /// <summary>
-    /// A thread-safe class that holds a queue with actions to execute on the next <see cref="Update"/> method.
-    /// It can be used to execute functions in the main thread.
-    /// </summary>
-    [AddComponentMenu("Evolunity/Main Thread Dispatcher")]
-    public class MainThreadDispatcher : SingletonBehaviour<MainThreadDispatcher>
-    {
-        private static readonly Queue<Action> actionQueue = new Queue<Action>();
+	/// <summary>
+	/// A thread-safe class that holds a queue with actions to execute on the next <see cref="Update"/> method.
+	/// It can be used to execute functions in the main thread.
+	/// </summary>
+	[AddComponentMenu("Evolunity/Main Thread Dispatcher")]
+	public class MainThreadDispatcher : SingletonBehaviour<MainThreadDispatcher>
+	{
+		private static readonly Queue<Action> actionQueue = new Queue<Action>();
 
-        private void Update()
-        {
-            lock (actionQueue)
-                while (actionQueue.Count > 0)
-                    actionQueue.Dequeue().Invoke();
-        }
+		private void Update()
+		{
+			lock (actionQueue)
+				while (actionQueue.Count > 0)
+					actionQueue.Dequeue().Invoke();
+		}
 
-        /// <summary>
-        /// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
-        /// </summary>
-        public void Enqueue(Action action)
-        {
-            lock (actionQueue)
-                actionQueue.Enqueue(action);
-        }
+		/// <summary>
+		/// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
+		/// </summary>
+		public void Enqueue(Action action)
+		{
+			lock (actionQueue)
+				actionQueue.Enqueue(action);
+		}
 
-        /// <summary>
-        /// Locks the queue and adds the <see cref="IEnumerator"/> to the queue to be executed in the main thread.
-        /// </summary>
-        public void EnqueueStartCoroutine(IEnumerator routine)
-        {
-            lock (actionQueue)
-                actionQueue.Enqueue(() => StartCoroutine(routine));
-        }
+		/// <summary>
+		/// Locks the queue and adds the <see cref="IEnumerator"/> to the queue to be executed in the main thread.
+		/// </summary>
+		public void EnqueueStartCoroutine(IEnumerator routine)
+		{
+			lock (actionQueue)
+				actionQueue.Enqueue(() => StartCoroutine(routine));
+		}
 
-        /// <summary>
-        /// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="Task"/> that is completed when the action completes.
-        /// </returns>
-        public Task EnqueueAsync(Action action)
-        {
-            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
+		/// <summary>
+		/// Locks the queue and adds the <see cref="Action"/> to the queue to be executed in the main thread.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Task"/> that is completed when the action completes.
+		/// </returns>
+		public Task EnqueueAsync(Action action)
+		{
+			TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
-            Enqueue(() =>
-            {
-                try
-                {
-                    action.Invoke();
+			Enqueue(() =>
+			{
+				try
+				{
+					action.Invoke();
 
-                    taskCompletionSource.TrySetResult(true);
-                }
-                catch (Exception ex)
-                {
-                    taskCompletionSource.TrySetException(ex);
-                }
-            });
+					taskCompletionSource.TrySetResult(true);
+				}
+				catch (Exception ex)
+				{
+					taskCompletionSource.TrySetException(ex);
+				}
+			});
 
-            return taskCompletionSource.Task;
-        }
-    }
+			return taskCompletionSource.Task;
+		}
+	}
 }
