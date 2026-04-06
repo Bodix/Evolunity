@@ -75,7 +75,7 @@ namespace Evolutex.Evolunity.Components.Physics
 
 		public void PushForward(float speed)
 		{
-			Push(Vector3.forward, speed);
+			Push(transform.forward, speed);
 		}
 
 		private void OnHit(RaycastHit hit)
