@@ -15,6 +15,8 @@ namespace Evolutex.Evolunity.Components.Physics
 		public float HitOffsetAlongNormal = 0.15f;
 		public Vector3 StartEffectLocalOffset = Vector3.zero;
 		public LayerMask LayerMask = 1; // 1 = Default
+		[Min(1)]
+		public int HitsBufferSize = 10;
 
 		[Header("Effects")]
 		[Tooltip("Effect instantly spawned when this projectile is spawned (connected to projectile as a child).")]
@@ -33,6 +35,7 @@ namespace Evolutex.Evolunity.Components.Physics
 		public float StartEffectLifetime = 1.5f;
 		public float HitEffectLifetime = 3.5f;
 
+		private RaycastHit[] _hitsBuffer;
 		private GameObject _childEffect;
 		private GameObject _startEffect;
 
@@ -43,6 +46,7 @@ namespace Evolutex.Evolunity.Components.Physics
 		private void Awake()
 		{
 			Rigidbody = GetComponent<Rigidbody>();
+			_hitsBuffer = new RaycastHit[HitsBufferSize];
 
 			Destroy(gameObject, ProjectileLifetime);
 		}
@@ -78,17 +82,20 @@ namespace Evolutex.Evolunity.Components.Physics
 			Push(transform.forward, speed);
 		}
 
-		private void OnHit(RaycastHit hit)
+		private void OnHit(RaycastHit[] hitsBuffer)
 		{
-			Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
-			GameObject hitEffect = Instantiate(hitEffectPrefab, position,
-				Quaternion.FromToRotation(Vector3.up, hit.normal));
+			foreach (RaycastHit hit in hitsBuffer)
+			{
+				Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
+				GameObject hitEffect = Instantiate(hitEffectPrefab, position,
+					Quaternion.FromToRotation(Vector3.up, hit.normal));
+				Destroy(hitEffect, HitEffectLifetime);
+
+				Hit?.Invoke(hit);
+			}
 
 			DetachAndDelayedDestroyTrails();
-			Destroy(hitEffect, HitEffectLifetime);
 			Destroy(gameObject);
-
-			Hit?.Invoke(hit);
 		}
 
 		private void SpawnEffects()
@@ -119,12 +126,13 @@ namespace Evolutex.Evolunity.Components.Physics
 
 			float velocityMagnitudeDelta = Rigidbody.velocity.magnitude * Time.deltaTime;
 
-			if (UnityEngine.Physics.SphereCast(transform.position, ColliderRadius, direction,
-				    out RaycastHit hit, velocityMagnitudeDelta, LayerMask))
-				OnHit(hit);
+			if (UnityEngine.Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
+				    _hitsBuffer, velocityMagnitudeDelta, LayerMask) > 0)
+				OnHit(_hitsBuffer);
 		}
 
 		// TODO: Improve reliability of this method. [#bug]
+		// TODO: Optimize this method. [#optimization]
 		private void DetachAndDelayedDestroyTrails()
 		{
 			ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
