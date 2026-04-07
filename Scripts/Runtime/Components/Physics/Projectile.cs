@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -82,9 +84,9 @@ namespace Evolutex.Evolunity.Components.Physics
 			Push(transform.forward, speed);
 		}
 
-		private void OnHit(RaycastHit[] hitsBuffer)
+		private void OnHit(IEnumerable<RaycastHit> hits)
 		{
-			foreach (RaycastHit hit in hitsBuffer)
+			foreach (RaycastHit hit in hits)
 			{
 				Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
 				GameObject hitEffect = Instantiate(hitEffectPrefab, position,
@@ -119,20 +121,17 @@ namespace Evolutex.Evolunity.Components.Physics
 
 		private void CheckHit()
 		{
-			Vector3 direction = Rigidbody.velocity;
-			if (Rigidbody.useGravity)
-				direction += UnityEngine.Physics.gravity * Time.deltaTime;
-			direction = direction.normalized;
+			Vector3 direction = Rigidbody.velocity.normalized;
+			float velocityMagnitudeDelta = Rigidbody.velocity.magnitude * Time.fixedDeltaTime;
 
-			float velocityMagnitudeDelta = Rigidbody.velocity.magnitude * Time.deltaTime;
-
-			if (UnityEngine.Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
-				    _hitsBuffer, velocityMagnitudeDelta, LayerMask) > 0)
-				OnHit(_hitsBuffer);
+			int hitsCount;
+			if ((hitsCount = UnityEngine.Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
+				    _hitsBuffer, velocityMagnitudeDelta, LayerMask)) > 0)
+				OnHit(_hitsBuffer.Take(hitsCount));
 		}
 
 		// TODO: Improve reliability of this method. [#bug]
-		// TODO: Optimize this method. [#optimization]
+		// TODO: Consider change GetComponentsInChildren by something else. [#optimization]
 		private void DetachAndDelayedDestroyTrails()
 		{
 			ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
