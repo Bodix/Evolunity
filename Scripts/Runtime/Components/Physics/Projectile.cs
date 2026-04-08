@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Evolutex.Evolunity.Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Evolutex.Evolunity.Components.Physics
 		public float StartEffectLifetime = 1.5f;
 		public float HitEffectLifetime = 3.5f;
 
+		private List<Collider> _ignoredColliders;
 		private RaycastHit[] _hitsBuffer;
 		private GameObject _childEffect;
 		private GameObject _startEffect;
@@ -49,6 +51,7 @@ namespace Evolutex.Evolunity.Components.Physics
 		{
 			Rigidbody = GetComponent<Rigidbody>();
 			_hitsBuffer = new RaycastHit[HitsBufferSize];
+			_ignoredColliders = new List<Collider>();
 
 			Destroy(gameObject, ProjectileLifetime);
 		}
@@ -84,9 +87,24 @@ namespace Evolutex.Evolunity.Components.Physics
 			Push(transform.forward, speed);
 		}
 
+		public void AddIgnoredCollider(Collider collider)
+		{
+			_ignoredColliders.Add(collider);
+		}
+
+		public void RemoveIgnoredCollider(Collider collider)
+		{
+			_ignoredColliders.Remove(collider);
+		}
+
 		private void OnHit(IEnumerable<RaycastHit> hits)
 		{
-			foreach (RaycastHit hit in hits)
+			IEnumerable<RaycastHit> filteredHits = hits.Where(x => !_ignoredColliders.Contains(x.collider)).ToArray();
+
+			if (filteredHits.IsNullOrEmpty())
+				return;
+
+			foreach (RaycastHit hit in filteredHits)
 			{
 				Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
 				GameObject hitEffect = Instantiate(hitEffectPrefab, position,
