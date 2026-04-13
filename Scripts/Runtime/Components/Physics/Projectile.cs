@@ -41,7 +41,6 @@ namespace Evolutex.Evolunity.Components.Physics
 		private List<Collider> _ignoredColliders;
 		private RaycastHit[] _hitsBuffer;
 		private GameObject _childEffect;
-		private GameObject _startEffect;
 
 		public event Action<RaycastHit> Hit;
 
@@ -87,6 +86,11 @@ namespace Evolutex.Evolunity.Components.Physics
 			Push(transform.forward, speed);
 		}
 
+		public void ToggleChildEffect(bool isOn)
+		{
+			_childEffect.SetActive(isOn);
+		}
+
 		public void AddIgnoredCollider(Collider collider)
 		{
 			_ignoredColliders.Add(collider);
@@ -124,10 +128,10 @@ namespace Evolutex.Evolunity.Components.Physics
 
 			if (startEffectPrefab)
 			{
-				_startEffect = Instantiate(startEffectPrefab,
+				GameObject startEffect = Instantiate(startEffectPrefab,
 					transform.position + transform.TransformVector(StartEffectLocalOffset), transform.rotation);
 
-				Destroy(_startEffect, StartEffectLifetime);
+				Destroy(startEffect, StartEffectLifetime);
 			}
 		}
 
