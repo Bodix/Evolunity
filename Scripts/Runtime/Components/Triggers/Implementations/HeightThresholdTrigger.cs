@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
+	[AddComponentMenu("Evolunity/Triggers/Height Threshold Trigger")]
 	public class HeightThresholdTrigger : MonoBehaviour
 	{
 		public float TargetHeightThreshold = 0f;

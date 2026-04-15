@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-	[AddComponentMenu("Evolunity/Triggers/UI Button Trigger")]
-	public class UiButtonTrigger : Trigger
+	[AddComponentMenu("Evolunity/Triggers/Button Trigger")]
+	public class ButtonTrigger : Trigger
 	{
 		[SerializeField, HideIf(nameof(HideButtonInInspector))]
 		protected Button _uiButton;
