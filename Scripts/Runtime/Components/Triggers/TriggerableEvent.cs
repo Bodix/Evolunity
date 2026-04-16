@@ -15,8 +15,10 @@ namespace Evolutex.Evolunity.Components.Triggers
 		[SerializeField, FormerlySerializedAs("Event")]
 		private UnityEvent _event;
 
-		public TriggerableEvent(UnityEvent @event)
+		public TriggerableEvent(UnityAction action)
 		{
+			UnityEvent @event = new UnityEvent();
+			@event.AddListener(action);
 			_event = @event;
 		}
 
