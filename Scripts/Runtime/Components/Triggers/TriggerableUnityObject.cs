@@ -8,13 +8,14 @@ using UnityEngine;
 namespace Evolutex.Evolunity.Components.Triggers
 {
 	[Serializable]
-	public class TriggerableUnityObject : ITriggerable
+	public struct TriggerableUnityObject : ITriggerable
 	{
 		[SerializeField, InterfaceType(typeof(ITriggerable))]
 		private UnityEngine.Object _object;
 
 		public void Trigger()
 		{
+			// ReSharper disable once SuspiciousTypeConversion.Global
 			((ITriggerable)_object).Trigger();
 		}
 	}
