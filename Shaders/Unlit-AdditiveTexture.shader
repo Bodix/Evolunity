@@ -7,7 +7,10 @@
     }
     SubShader
     {
-        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+        Tags
+        {
+            "Queue"="Transparent" "RenderType"="Transparent"
+        }
         // Additive blending.
         Blend One One
         // Disable writing to depth texture.
@@ -34,17 +37,17 @@
                 float4 vertex : SV_POSITION;
             };
 
-            v2f vert (appdata v)
+            v2f vert(appdata v)
             {
                 v2f o;
-                
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
-                
+
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
                 return tex2D(_MainTex, i.uv) * _Color;
             }

@@ -81,7 +81,7 @@ namespace Evolutex.Evolunity.Components.DebugSelector
 			}
 
 			if (Logs)
-				UnityEngine.Debug.Log("Selected item: " + (_isUnselectedAllOption
+				Debug.Log("Selected item: " + (_isUnselectedAllOption
 					? "None"
 					: _isSelectedAllOption
 						? "All"
