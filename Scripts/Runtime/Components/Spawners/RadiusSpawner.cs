@@ -8,6 +8,7 @@ namespace Evolutex.Evolunity.Components
 {
 	public class RadiusSpawner<T> : BaseSpawner<T> where T : Object
 	{
+		[Space]
 		public Transform Origin;
 		public float MinRadius = 30;
 		public float MaxRadius = 45;

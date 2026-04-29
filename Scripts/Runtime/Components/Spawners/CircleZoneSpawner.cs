@@ -8,6 +8,7 @@ namespace Evolutex.Evolunity.Components
 {
 	public class CircleZoneSpawner<T> : BaseSpawner<T> where T : Object
 	{
+		[Space]
 		public float Radius = 10;
 
 		public override T GetClone()
