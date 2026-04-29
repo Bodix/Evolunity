@@ -8,21 +8,18 @@ namespace Evolutex.Evolunity.Components
 {
 	public class SimpleSpawner<T> : BaseSpawner<T> where T : Object
 	{
-		public bool UseSpawnerPosition = true;
-		public bool UseSpawnerRotation = true;
-
 		public override T GetClone()
 		{
 			return Instantiate(
 				Prefab,
 				GetSpawnPosition(),
-				UseSpawnerRotation ? transform.rotation : Quaternion.identity,
+				transform.rotation,
 				Parent);
 		}
 
 		public override Vector3 GetSpawnPosition()
 		{
-			return UseSpawnerPosition ? transform.position : Vector3.zero;
+			return transform.position;
 		}
 	}
 

@@ -19,7 +19,7 @@ namespace Evolutex.Evolunity.Components
 		{
 			Vector2 position = Random.insideUnitCircle * Radius;
 
-			return new Vector3(position.x, 0, position.y);
+			return new Vector3(transform.position.x + position.x, transform.position.y, transform.position.z + position.y);
 		}
 	}
 
