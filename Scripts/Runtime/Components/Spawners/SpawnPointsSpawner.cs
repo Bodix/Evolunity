@@ -29,7 +29,7 @@ namespace Evolutex.Evolunity.Components
 		public override Vector3 GetSpawnPosition()
 		{
 			if (_spawnPointsSet.Count == 0)
-				_spawnPointsSet = _spawnPoints.Shuffle().ToHashSet();
+				_spawnPointsSet = new HashSet<Transform>(_spawnPoints.Shuffle());
 
 			Transform spawnPoint = _spawnPointsSet.First();
 			_spawnPointsSet.Remove(spawnPoint);

@@ -254,16 +254,6 @@ namespace Evolutex.Evolunity.Extensions
 			return new ObservableCollection<T>(source);
 		}
 
-		public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
-		{
-			return new HashSet<T>(source);
-		}
-
-		public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer)
-		{
-			return new HashSet<T>(source, comparer);
-		}
-
 		public static string AsString<T>(this IEnumerable<T> source)
 		{
 			return AsString(source, x => x?.ToString());
