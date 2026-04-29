@@ -24,14 +24,18 @@ namespace Evolutex.Evolunity.Components
 
 		public override T GetClone()
 		{
+			return Instantiate(Prefab, GetSpawnPosition(), Quaternion.identity, Parent);
+		}
+
+		public override Vector3 GetSpawnPosition()
+		{
 			if (_spawnPointsSet.Count == 0)
 				_spawnPointsSet = _spawnPoints.Shuffle().ToHashSet();
 
 			Transform spawnPoint = _spawnPointsSet.First();
-			Vector3 spawnPosition = spawnPoint.position;
 			_spawnPointsSet.Remove(spawnPoint);
 
-			return Instantiate(Prefab, spawnPosition, Quaternion.identity, Parent);
+			return spawnPoint.position;
 		}
 	}
 

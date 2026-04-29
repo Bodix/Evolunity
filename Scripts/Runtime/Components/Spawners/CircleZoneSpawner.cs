@@ -12,9 +12,14 @@ namespace Evolutex.Evolunity.Components
 
 		public override T GetClone()
 		{
+			return Instantiate(Prefab, GetSpawnPosition(), Quaternion.identity, Parent);
+		}
+
+		public override Vector3 GetSpawnPosition()
+		{
 			Vector2 position = Random.insideUnitCircle * Radius;
 
-			return Instantiate(Prefab, new Vector3(position.x, 0, position.y), Quaternion.identity, Parent);
+			return new Vector3(position.x, 0, position.y);
 		}
 	}
 

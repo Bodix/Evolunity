@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using Evolutex.Evolunity.Components;
 using UnityEditor;
 using UnityEngine;
+using NaughtyAttributes.Editor;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
 	[CustomEditor(typeof(PeriodicBehaviour), true)]
-	public class PeriodicBehaviourEditor : UnityEditor.Editor
+	public class PeriodicBehaviourEditor : NaughtyInspector
 	{
 		public override void OnInspectorGUI()
 		{
@@ -33,11 +34,25 @@ namespace Evolutex.Evolunity.Editor.Editors
 				};
 				if (!periodicBehaviour.DrawPeriodEventInInspector)
 					excludingProperties.Add(nameof(periodicBehaviour.OnPeriodCallback));
-				DrawPropertiesExcluding(serializedObject, excludingProperties.ToArray());
+
+				// Replaced DrawPropertiesExcluding with manual property iteration
+				// to ensure NaughtyAttributes logic is applied to each field.
+				SerializedProperty iterator = serializedObject.GetIterator();
+				bool enterChildren = true;
+				while (iterator.NextVisible(enterChildren))
+				{
+					enterChildren = false;
+					if (excludingProperties.Contains(iterator.name))
+						continue;
+
+					NaughtyEditorGUI.PropertyField_Layout(iterator, true);
+				}
 
 				if (periodicBehaviour.DrawPeriodFieldInInspector)
-					EditorGUILayout.PropertyField(
-						serializedObject.FindProperty(nameof(periodicBehaviour.Period).ToLower()));
+				{
+					SerializedProperty periodProp = serializedObject.FindProperty(nameof(periodicBehaviour.Period).ToLower());
+					NaughtyEditorGUI.PropertyField_Layout(periodProp, true);
+				}
 			}
 
 			if (periodicBehaviour.DrawPeriodProgressInInspector)

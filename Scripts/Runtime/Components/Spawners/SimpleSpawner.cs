@@ -15,9 +15,14 @@ namespace Evolutex.Evolunity.Components
 		{
 			return Instantiate(
 				Prefab,
-				UseSpawnerPosition ? transform.position : Vector3.zero,
+				GetSpawnPosition(),
 				UseSpawnerRotation ? transform.rotation : Quaternion.identity,
 				Parent);
+		}
+
+		public override Vector3 GetSpawnPosition()
+		{
+			return UseSpawnerPosition ? transform.position : Vector3.zero;
 		}
 	}
 
