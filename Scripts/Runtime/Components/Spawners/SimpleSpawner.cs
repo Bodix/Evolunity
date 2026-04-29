@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components
 {
-	public class Spawner<T> : BaseSpawner<T> where T : Object
+	public class SimpleSpawner<T> : BaseSpawner<T> where T : Object
 	{
 		public bool UseSpawnerPosition = true;
 		public bool UseSpawnerRotation = true;
@@ -21,8 +21,8 @@ namespace Evolutex.Evolunity.Components
 		}
 	}
 
-	[AddComponentMenu("Evolunity/Spawners/Spawner")]
-	public class Spawner : Spawner<GameObject>
+	[AddComponentMenu("Evolunity/Spawners/Simple Spawner")]
+	public class SimpleSpawner : SimpleSpawner<GameObject>
 	{
 	}
 }
