@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using Evolutex.Evolunity.Components;
+using NaughtyAttributes.Editor;
 using UnityEditor;
 using UnityEngine;
-using NaughtyAttributes.Editor;
 
 namespace Evolutex.Evolunity.Editor.Editors
 {
