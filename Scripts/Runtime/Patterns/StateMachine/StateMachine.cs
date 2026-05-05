@@ -18,14 +18,10 @@ namespace Evolutex.Evolunity.Patterns
 	{
 		private readonly Dictionary<Type, State> states = new Dictionary<Type, State>();
 
-		public StateMachine(State initialState, params State[] otherStates)
+		public StateMachine(params State[] states)
 		{
-			AddState(initialState);
-
-			foreach (State state in otherStates)
+			foreach (State state in states)
 				AddState(state);
-            
-			EnterState(initialState.GetType());
 		}
 
 		public delegate void StateChangeHandler(State previousState, State currentState);
@@ -45,7 +41,6 @@ namespace Evolutex.Evolunity.Patterns
 			if (!ContainsState(stateType))
 			{
 				Debug.LogError("State machine doesn't contains state " + stateType.Name);
-
 				return;
 			}
 
@@ -80,6 +75,11 @@ namespace Evolutex.Evolunity.Patterns
 
 		public void Update(float deltaTime)
 		{
+			if (CurrentState == null)
+			{
+				throw new InvalidOperationException("State machine is not initialized. Please call EnterState() before calling Update().");
+			}
+
 			CurrentState.Update(deltaTime);
 		}
 
@@ -89,7 +89,6 @@ namespace Evolutex.Evolunity.Patterns
 			if (ContainsState(stateType))
 			{
 				Debug.LogError("State machine already contains state " + stateType.Name);
-
 				return;
 			}
 
