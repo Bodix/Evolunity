@@ -21,10 +21,11 @@ namespace Evolutex.Evolunity.Patterns
 		public StateMachine(State initialState, params State[] otherStates)
 		{
 			AddState(initialState);
-			EnterState(initialState.GetType());
 
 			foreach (State state in otherStates)
 				AddState(state);
+            
+			EnterState(initialState.GetType());
 		}
 
 		public delegate void StateChangeHandler(State previousState, State currentState);
