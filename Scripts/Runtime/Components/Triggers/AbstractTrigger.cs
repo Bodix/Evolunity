@@ -74,7 +74,11 @@ namespace Evolutex.Evolunity.Components.Triggers
 			while (collider)
 			{
 				if (Vector3.Distance(collider.transform.position, transform.position) > ReenableThresholdDistance)
+				{
 					gameObject.SetActive(true);
+
+					yield break;
+				}
 
 				yield return new WaitForSeconds(1f / DistanceCheckRate);
 			}
