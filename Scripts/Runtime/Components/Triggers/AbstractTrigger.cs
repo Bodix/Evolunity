@@ -3,6 +3,8 @@
 // All Rights Reserved
 
 using System;
+using System.Collections;
+using Evolutex.Evolunity.Utilities;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -12,6 +14,13 @@ namespace Evolutex.Evolunity.Components.Triggers
 	public abstract class AbstractTrigger : MonoBehaviour
 	{
 		public bool DisableAfterEnter = false;
+		[ShowIf(nameof(DisableAfterEnter))]
+		public bool ReenableOnDistance = false;
+		[ShowIf(nameof(ReenableOnDistance))]
+		public float ReenableThresholdDistance = 10f;
+		[ShowIf(nameof(ReenableOnDistance))]
+		[Tooltip("Times per second")]
+		public float DistanceCheckRate = 10;
 		[Tag, ValidateInput(nameof(ValidateTag),
 			 "If \"(None)\" is selected, then collider with any tag will activate this trigger")]
 		public string AllowedTag = "Player";
@@ -51,7 +60,23 @@ namespace Evolutex.Evolunity.Components.Triggers
 				EnterTrigger(other);
 
 				if (DisableAfterEnter)
+				{
 					gameObject.SetActive(false);
+
+					if (ReenableOnDistance)
+						StaticCoroutine.Start(DistanceCheckForReenable(other));
+				}
+			}
+		}
+
+		private IEnumerator DistanceCheckForReenable(Collider collider)
+		{
+			while (collider)
+			{
+				if (Vector3.Distance(collider.transform.position, transform.position) > ReenableThresholdDistance)
+					gameObject.SetActive(true);
+
+				yield return new WaitForSeconds(1f / DistanceCheckRate);
 			}
 		}
 
