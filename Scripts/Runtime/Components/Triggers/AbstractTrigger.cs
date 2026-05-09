@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.Triggers
 {
-	[RequireComponent(typeof(BoxCollider))]
+	[RequireComponent(typeof(Collider))]
 	public abstract class AbstractTrigger : MonoBehaviour
 	{
 		public bool DisableAfterEnter = false;
@@ -16,25 +16,25 @@ namespace Evolutex.Evolunity.Components.Triggers
 			 "If \"(None)\" is selected, then collider with any tag will activate this trigger")]
 		public string AllowedTag = "Player";
 
-		private BoxCollider _boxCollider;
+		private Collider _collider;
 #if UNITY_2023_2_OR_NEWER
         // https://docs.unity3d.com/2023.2/Documentation/ScriptReference/TagHandle.html
         private TagHandle _tagHandle;
 #endif
 
-		public BoxCollider BoxCollider => _boxCollider;
+		public Collider Collider => _collider;
 
 		public event Action Triggered;
 
 		protected virtual void OnValidate()
 		{
-			_boxCollider = GetComponent<BoxCollider>();
-			_boxCollider.isTrigger = true;
+			_collider = GetComponent<Collider>();
+			_collider.isTrigger = true;
 		}
 
 		protected virtual void Awake()
 		{
-			_boxCollider = GetComponent<BoxCollider>();
+			_collider = GetComponent<Collider>();
 #if UNITY_2023_2_OR_NEWER
             _tagHandle = TagHandle.GetExistingTag(AllowedTag);
 #endif
