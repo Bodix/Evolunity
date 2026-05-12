@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.UI
 {
+	[AddComponentMenu("Evolunity/UI/Disable Button After Click")]
 	[RequireComponent(typeof(Button))]
 	public class DisableButtonAfterClick : MonoBehaviour
 	{

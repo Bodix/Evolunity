@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace Evolutex.Evolunity.Components.UI
 	// In the Editor, FPS can be obtained from the Stats panel in the Game window.
 	[AddComponentMenu("Evolunity/UI/FPS Counter")]
 	[RequireComponent(typeof(Text))]
+	[Obsolete("Use Graphy package in runtime or Stats panel in Editor instead. ")]
 	public class FpsCounter : MonoBehaviour
 	{
 		public float MeasurementPeriod = 0.5f;
