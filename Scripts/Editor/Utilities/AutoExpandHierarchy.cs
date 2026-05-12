@@ -30,20 +30,43 @@ namespace Evolutex.Evolunity.Editor.Utilities
 	{
 		static AutoExpandHierarchy()
 		{
-			EditorSceneManager.sceneOpened += (scene, mode) => ExpandObjects();
-			SceneManager.sceneLoaded += (scene, mode) => ExpandObjects();
+			EditorSceneManager.sceneOpened += (scene, mode) => ExpandObjects(scene);
+			SceneManager.sceneLoaded += (scene, mode) => ExpandObjects(scene);
 		}
 
-		private static void ExpandObjects()
+		public static List<string> GameObjectsToExpand { get; } = new List<string>();
+
+		private static void ExpandObjects(Scene scene)
 		{
 			GameObjectsToExpand.ForEach(name =>
 			{
-				GameObject gameObject = GameObject.Find(name);
+				// GameObject gameObject = GameObject.Find(name);
+				// FindObjectInScene is better than GameObject.Find because:
+				// 1. It searches not only for active objects, but for inactive ones as well.
+				// 2. It searches only within the specified scene, rather than searching across all scenes.
+				GameObject gameObject = FindObjectInScene(scene, name);
 				if (gameObject)
 					SceneHierarchy.SetExpanded(gameObject, true);
 			});
 		}
 
-		public static List<string> GameObjectsToExpand { get; } = new List<string>();
+		private static GameObject FindObjectInScene(Scene scene, string name)
+		{
+			// Iterate through all root objects in the loaded scene.
+			GameObject[] rootObjects = scene.GetRootGameObjects();
+			foreach (GameObject root in rootObjects)
+			{
+				if (root.name == name)
+					return root;
+
+				// Search through all children, including inactive ones.
+				Transform[] children = root.GetComponentsInChildren<Transform>(true);
+				foreach (Transform child in children)
+					if (child.name == name)
+						return child.gameObject;
+			}
+
+			return null;
+		}
 	}
 }
