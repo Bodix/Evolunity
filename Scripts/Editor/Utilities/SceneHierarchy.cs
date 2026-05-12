@@ -6,7 +6,6 @@ using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {

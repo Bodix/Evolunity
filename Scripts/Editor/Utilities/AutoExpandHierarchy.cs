@@ -16,13 +16,13 @@ namespace Evolutex.Evolunity.Editor.Utilities
 	[InitializeOnLoad]
 	public static class EditorBootstrap
 	{
-	    static EditorBootstrap()
-	    {
-	        AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
-	        AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
-	        AutoExpandHierarchy.GameObjectsToExpand.Add("Player");
-	        AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
-	    }
+		static EditorBootstrap()
+		{
+			AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
+			AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
+			AutoExpandHierarchy.GameObjectsToExpand.Add("Player");
+			AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
+		}
 	}
 
 	[InitializeOnLoad]
