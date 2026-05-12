@@ -109,7 +109,11 @@ namespace Evolutex.Evolunity.Editor.Utilities
 			if (isRecursive)
 				SetExpandedRecursiveMethod.Invoke(SceneHierarchyWindow, new object[] { gameObject.GetInstanceID(), isExpanded });
 			else
+#if UNITY_6000
+				SetExpandedMethod.Invoke(SceneHierarchyWindow, new object[] { gameObject.GetInstanceID(), isExpanded });
+#else
 				ExpandTreeViewItemMethod.Invoke(SceneHierarchyObject, new object[] { gameObject.GetInstanceID(), isExpanded });
+#endif
 		}
 	}
 }
