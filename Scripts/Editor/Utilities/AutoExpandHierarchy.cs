@@ -6,23 +6,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Evolutex.Evolunity.Editor.Utilities
 {
 	// TODO: Add UI for adding GameObject's to expand.
 
 	// Use it as follows:
-	// [InitializeOnLoad]
-	// public static class EditorBootstrap
-	// {
-	//     static EditorBootstrap()
-	//     {
-	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
-	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Game");
-	//         AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
-	//         AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
-	//     }
-	// }
+	[InitializeOnLoad]
+	public static class EditorBootstrap
+	{
+	    static EditorBootstrap()
+	    {
+	        AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
+	        AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
+	        AutoExpandHierarchy.GameObjectsToExpand.Add("Player");
+	        AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
+	    }
+	}
 
 	[InitializeOnLoad]
 	public static class AutoExpandHierarchy
@@ -30,6 +31,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 		static AutoExpandHierarchy()
 		{
 			EditorSceneManager.sceneOpened += (scene, mode) => ExpandObjects();
+			SceneManager.sceneLoaded += (scene, mode) => ExpandObjects();
 		}
 
 		private static void ExpandObjects()

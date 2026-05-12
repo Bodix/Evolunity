@@ -19,8 +19,7 @@ namespace Evolutex.Evolunity.Editor.Utilities
 			get
 			{
 				if (sceneHierarchyWindowType == null)
-					sceneHierarchyWindowType =
-						typeof(EditorWindow).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
+					sceneHierarchyWindowType = typeof(EditorWindow).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
 
 				return sceneHierarchyWindowType;
 			}
@@ -32,15 +31,39 @@ namespace Evolutex.Evolunity.Editor.Utilities
 			get
 			{
 				if (sceneHierarchyWindow == null)
-				{
-					Object[] allWindows = Resources.FindObjectsOfTypeAll(SceneHierarchyWindowType);
-					if (allWindows.Length > 0)
-						sceneHierarchyWindow = (EditorWindow)allWindows[0];
-				}
+					sceneHierarchyWindow = EditorWindow.GetWindow(SceneHierarchyWindowType);
 
 				return sceneHierarchyWindow;
 			}
 		}
+
+		private static MethodInfo setExpandedRecursiveMethod;
+		private static MethodInfo SetExpandedRecursiveMethod
+		{
+			get
+			{
+				if (setExpandedRecursiveMethod == null)
+					setExpandedRecursiveMethod = SceneHierarchyWindowType.GetMethod("SetExpandedRecursive",
+						BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+				return setExpandedRecursiveMethod;
+			}
+		}
+
+#if UNITY_6000
+		private static MethodInfo setExpandedMethod;
+		private static MethodInfo SetExpandedMethod
+		{
+			get
+			{
+				if (setExpandedMethod == null)
+					setExpandedMethod = SceneHierarchyWindowType.GetMethod("SetExpanded",
+						BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+				return setExpandedMethod;
+			}
+		}
+#endif
 
 		private static object sceneHierarchyObject;
 		private static object SceneHierarchyObject
@@ -81,9 +104,13 @@ namespace Evolutex.Evolunity.Editor.Utilities
 			}
 		}
 
-		public static void SetExpanded(GameObject gameObject, bool isExpanded)
+
+		public static void SetExpanded(GameObject gameObject, bool isExpanded, bool isRecursive = false)
 		{
-			ExpandTreeViewItemMethod.Invoke(SceneHierarchyObject, new object[] { gameObject.GetInstanceID(), isExpanded });
+			if (isRecursive)
+				SetExpandedRecursiveMethod.Invoke(SceneHierarchyWindow, new object[] { gameObject.GetInstanceID(), isExpanded });
+			else
+				ExpandTreeViewItemMethod.Invoke(SceneHierarchyObject, new object[] { gameObject.GetInstanceID(), isExpanded });
 		}
 	}
 }
