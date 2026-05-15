@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +21,10 @@ namespace Evolutex.Evolunity.Components.UI
 		public event Action Accepted;
 		public event Action Declined;
 
-		protected virtual void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
+
 			AcceptButton.onClick.AddListener(Accept);
 			DeclineButton.onClick.AddListener(Decline);
 		}
