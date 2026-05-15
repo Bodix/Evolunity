@@ -1,10 +1,19 @@
-﻿using System;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using System;
 using Evolutex.Evolunity.Attributes;
 using Evolutex.Evolunity.Components.Animations;
 using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.UI
 {
+	public class UiElement<T> : UiElement where T : UnityEngine.Object
+	{
+		public T Value;
+	}
+
 	public class UiElement : MonoBehaviour
 	{
 		[SerializeReference, TypeSelector]
