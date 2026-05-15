@@ -9,11 +9,6 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.UI
 {
-	public class UiElement<T> : UiElement where T : UnityEngine.Object
-	{
-		public T Value;
-	}
-
 	public class UiElement : MonoBehaviour
 	{
 		[SerializeReference, TypeSelector]

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Evolutex.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Progress Bar")]
-	public class ProgressBar : MonoBehaviour
+	public class UiProgressBar : UiElement
 	{
 		public Image FillImage;
 
