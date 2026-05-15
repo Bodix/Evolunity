@@ -36,8 +36,10 @@ namespace Evolutex.Evolunity.Editor.Drawers
 			// Used to fix strange bug with property drawing.
 			dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
 
-			if (EditorGUI.DropdownButton(dropdownButtonRect,
-				    new GUIContent(GetManagedReferenceValueTypename(property)), FocusType.Keyboard))
+			if (EditorGUI.DropdownButton(
+				    dropdownButtonRect,
+				    new GUIContent(GetManagedReferenceValueTypename(property)),
+				    FocusType.Keyboard))
 			{
 				Type baseType = property.GetManagedReferenceFieldType();
 				TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
