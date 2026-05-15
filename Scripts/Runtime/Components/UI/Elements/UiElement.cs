@@ -22,10 +22,20 @@ namespace Evolutex.Evolunity.Components.UI
 		public event Action Shown;
 		public event Action Hidden;
 
+		public virtual bool IsShown => State == UiElementState.Shown;
+		public virtual bool IsHidden => State == UiElementState.Hidden;
 		public IAnimation ShowAnimation => Animations?.ShowAnimation;
 		public IAnimation HideAnimation => Animations?.HideAnimation;
-		public virtual bool IsShown => gameObject.activeSelf;
+		public UiElementState State { get; private set; } = UiElementState.Hidden;
+		public bool IsInTransition => State == UiElementState.Showing || State == UiElementState.Hiding;
 		public bool IsShownAndActiveInHierarchy => IsShown && gameObject.activeInHierarchy;
+
+		protected virtual void Awake()
+		{
+			State = gameObject.activeSelf
+				? UiElementState.Shown
+				: UiElementState.Hidden;
+		}
 
 		[ContextMenu(nameof(Show))]
 		public void Show()
@@ -63,13 +73,15 @@ namespace Evolutex.Evolunity.Components.UI
 
 		protected virtual void Show(bool instantly, Action onComplete)
 		{
-			if (IsShown /*&& LogWarnings*/)
+			if (State == UiElementState.Showing || State == UiElementState.Shown /*&& LogWarnings*/)
 			{
 				Debug.LogWarning("Trying to show the UiElement when it is already shown. " +
 					"Animation and callbacks won't be invoked");
 
 				return;
 			}
+
+			State = UiElementState.Showing;
 
 			if (ShowAnimation == null || instantly)
 			{
@@ -86,13 +98,15 @@ namespace Evolutex.Evolunity.Components.UI
 
 		protected virtual void Hide(bool instantly, Action onComplete)
 		{
-			if (!IsShown /*&& LogWarnings*/)
+			if (State == UiElementState.Hiding || State == UiElementState.Hidden /*&& LogWarnings*/)
 			{
 				Debug.LogWarning("Trying to hide the UiElement when it is already hidden. " +
 					"Animation and callbacks won't be invoked");
 
 				return;
 			}
+
+			State = UiElementState.Hiding;
 
 			if (HideAnimation == null || instantly)
 			{
@@ -116,6 +130,8 @@ namespace Evolutex.Evolunity.Components.UI
 
 		protected virtual void OnShowAnimationComplete(Action onComplete)
 		{
+			State = UiElementState.Shown;
+
 			onComplete?.Invoke();
 			Shown?.Invoke();
 		}
@@ -127,6 +143,7 @@ namespace Evolutex.Evolunity.Components.UI
 
 		protected virtual void OnHideAnimationComplete(Action onComplete)
 		{
+			State = UiElementState.Hidden;
 			gameObject.SetActive(false);
 
 			onComplete?.Invoke();
