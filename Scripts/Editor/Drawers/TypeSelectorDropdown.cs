@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 namespace Evolutex.Evolunity.Editor.Drawers
 {
@@ -16,9 +17,9 @@ namespace Evolutex.Evolunity.Editor.Drawers
 		public TypeSelectorDropdown(IEnumerable<Type> types) : base(new AdvancedDropdownState())
 		{
 			_types = types;
-			
+
 			// Increase the minimum height to fit more items without scrolling.
-			minimumSize = new UnityEngine.Vector2(minimumSize.x, 300f);
+			minimumSize = new Vector2(minimumSize.x, 300f);
 		}
 
 		public event Action<Type> TypeSelected;
@@ -27,9 +28,7 @@ namespace Evolutex.Evolunity.Editor.Drawers
 		{
 			AdvancedDropdownItem root = new AdvancedDropdownItem("Select type");
 
-			// Added a "Null" option to allow clearing the reference.
-			root.AddChild(new AdvancedDropdownItem("Null"));
-
+			root.AddChild(new TypeSelectorDropdownItem(null));
 			foreach (Type type in _types)
 				root.AddChild(new TypeSelectorDropdownItem(type));
 
@@ -41,19 +40,12 @@ namespace Evolutex.Evolunity.Editor.Drawers
 			base.ItemSelected(item);
 
 			if (item is TypeSelectorDropdownItem typeSelectorItem)
-			{
 				TypeSelected?.Invoke(typeSelectorItem.Type);
-			}
-			else if (item.name == "Null")
-			{
-				// If the "Null" item is selected, pass null type.
-				TypeSelected?.Invoke(null);
-			}
 		}
 
 		private class TypeSelectorDropdownItem : AdvancedDropdownItem
 		{
-			public TypeSelectorDropdownItem(Type type) : base(ObjectNames.NicifyVariableName(type.Name))
+			public TypeSelectorDropdownItem(Type type) : base(type != null ? ObjectNames.NicifyVariableName(type.Name) : "Null")
 			{
 				Type = type;
 			}

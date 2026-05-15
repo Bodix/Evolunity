@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Evolutex.Evolunity.Components
 {
 	public class OrientationChangeListener : MonoBehaviour
 	{
-		[System.Serializable]
+		[Serializable]
 		public class OrientationChangeEvent : UnityEvent<bool>
 		{
 		}
@@ -38,7 +39,7 @@ namespace Evolutex.Evolunity.Components
 			if (_isLandscape != isLandscape)
 			{
 				_isLandscape = isLandscape;
-				
+
 				OrientationChanged.Invoke(_isLandscape);
 			}
 		}

@@ -52,10 +52,12 @@ namespace Evolutex.Evolunity.Editor.Drawers
 						));
 				dropdown.TypeSelected += type =>
 				{
+					property.serializedObject.Update();
+
 					object obj = property.CreateManagedReferenceValue(type);
 					property.isExpanded = obj != null;
+
 					property.serializedObject.ApplyModifiedProperties();
-					property.serializedObject.Update();
 				};
 
 				dropdown.Show(dropdownButtonRect);

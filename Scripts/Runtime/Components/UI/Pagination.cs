@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ namespace Evolutex.Evolunity.Components.UI
 	[AddComponentMenu("Evolunity/UI/Pagination")]
 	public class Pagination : MonoBehaviour
 	{
-		[System.Serializable]
+		[Serializable]
 		public class PageChangeHandler : UnityEvent<int>
 		{
 		}
