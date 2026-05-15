@@ -22,8 +22,8 @@ namespace Evolutex.Evolunity.Components.UI
 		public event Action Shown;
 		public event Action Hidden;
 
-		public IAnimation ShowAnimation => Animations.ShowAnimation;
-		public IAnimation HideAnimation => Animations.HideAnimation;
+		public IAnimation ShowAnimation => Animations?.ShowAnimation;
+		public IAnimation HideAnimation => Animations?.HideAnimation;
 		public virtual bool IsShown => gameObject.activeSelf;
 		public bool IsShownAndActiveInHierarchy => IsShown && gameObject.activeInHierarchy;
 
