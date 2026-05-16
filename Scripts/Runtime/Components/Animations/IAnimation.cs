@@ -8,10 +8,15 @@ namespace Evolutex.Evolunity.Components.Animations
 {
 	public interface IAnimation
 	{
+		// TODO:
+		// Add "CancellationToken cancellationToken = default" to parameters.
+		// Don't forget to cancel this token in OnDestroy. 
+		// [#design]
 		void Play(Action onStart = null, Action onComplete = null);
 
 		// TODO:
 		// Add Stop() method. [#design]
+
 		// void Stop();
 	}
 }
