@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Bodix.Evolunity.Components
 {
 	public interface IAnimation
 	{

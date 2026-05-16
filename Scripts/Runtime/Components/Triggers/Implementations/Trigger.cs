@@ -2,11 +2,11 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolutex.Evolunity.Attributes;
+using Bodix.Evolunity.Attributes;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Triggers
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Triggers/Trigger")]
 	public class Trigger : AbstractTrigger

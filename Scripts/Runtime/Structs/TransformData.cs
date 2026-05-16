@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Structs
+namespace Bodix.Evolunity.Structs
 {
 	[Serializable]
 	public readonly struct TransformData

@@ -5,7 +5,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Text")]
 	public class UiText : UiElement

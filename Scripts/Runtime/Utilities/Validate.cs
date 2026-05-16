@@ -4,10 +4,10 @@
 
 using System;
 using System.Net;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	// TODO:
 	// 1. Password (regex).

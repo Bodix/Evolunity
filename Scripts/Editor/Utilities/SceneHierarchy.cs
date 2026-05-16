@@ -7,7 +7,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	//https://github.com/Unity-Technologies/UnityCsReference/blob/master/Editor/Mono/SceneHierarchyWindow.cs
 	public static class SceneHierarchy

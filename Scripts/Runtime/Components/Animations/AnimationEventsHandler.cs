@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Animations/Animation Events Handler")]
 	[RequireComponent(typeof(Animator))]

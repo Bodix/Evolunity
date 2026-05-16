@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Attributes
+namespace Bodix.Evolunity.Attributes
 {
 	/// <summary>
 	/// Target type requirements:

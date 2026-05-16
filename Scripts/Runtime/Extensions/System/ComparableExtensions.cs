@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class ComparableExtensions
 	{

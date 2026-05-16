@@ -1,8 +1,8 @@
-﻿using Evolutex.Evolunity.Components.UI;
+﻿using Bodix.Evolunity.Components.UI;
 using UnityEditor;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Editor.Editors
+namespace Bodix.Evolunity.Editor.Editors
 {
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(FlexibleLayoutGroup))]

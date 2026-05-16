@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	public static class Define
 	{

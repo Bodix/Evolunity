@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class ToggleGroupExtensions
 	{

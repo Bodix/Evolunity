@@ -4,11 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public abstract class BaseSpawner<T> : PeriodicBehaviour where T : UnityEngine.Object
 	{
@@ -84,13 +84,13 @@ namespace Evolutex.Evolunity.Components
 
 		private bool IsSpawnPointValid()
 		{
-			if (UnityEngine.Physics.Raycast(GetSpawnPosition().WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance))
+			if (Physics.Raycast(GetSpawnPosition().WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance))
 			{
 				if (((1 << hit.collider.gameObject.layer) & RaycastAllowedLayers) != 0)
 				{
 					if (IsSphereCheck)
 					{
-						return !UnityEngine.Physics.CheckSphere(hit.point, SphereCheckRadius, SphereCheckDisallowedLayers);
+						return !Physics.CheckSphere(hit.point, SphereCheckRadius, SphereCheckDisallowedLayers);
 					}
 					else
 					{

@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.DebugSelector
+namespace Bodix.Evolunity.Components
 {
 	[Serializable]
 	public struct GameObjectArraySelectable : ISelectable

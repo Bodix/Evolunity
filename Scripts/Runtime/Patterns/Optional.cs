@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Patterns
+namespace Bodix.Evolunity.Patterns
 {
 	/// <summary>
 	/// Can be used for optional dependencies in VContainer, because VContainer doesn't support it by default.

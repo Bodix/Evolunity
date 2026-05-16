@@ -4,10 +4,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public class SpawnPointsSpawner<T> : BaseSpawner<T> where T : Object
 	{

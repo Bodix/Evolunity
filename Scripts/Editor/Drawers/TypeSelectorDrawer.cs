@@ -4,12 +4,12 @@
 
 using System;
 using System.Linq;
-using Evolutex.Evolunity.Attributes;
-using Evolutex.Evolunity.Editor.Extensions;
+using Bodix.Evolunity.Attributes;
+using Bodix.Evolunity.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Drawers
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	// TODO: Make safe types renaming:
 	// https://docs.unity3d.com/ScriptReference/SerializationUtility.HasManagedReferencesWithMissingTypes.html

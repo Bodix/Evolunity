@@ -7,7 +7,7 @@ using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Collections
+namespace Bodix.Evolunity.Collections
 {
 	public abstract class DatabaseEntry : ScriptableObject
 	{

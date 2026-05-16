@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Safe Area")]
 	[RequireComponent(typeof(RectTransform))]

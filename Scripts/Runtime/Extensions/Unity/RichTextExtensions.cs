@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	// https://docs.unity3d.com/ru/2019.4/Manual/StyledText.html
 	// https://github.com/zuizuii/RichText-Extension/blob/master/Assets/RichText%20Extension/Runtime/RichTextExtension.cs

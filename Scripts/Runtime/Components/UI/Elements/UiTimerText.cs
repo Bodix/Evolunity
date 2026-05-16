@@ -6,7 +6,7 @@ using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	public class UiTimerText : UiText
 	{

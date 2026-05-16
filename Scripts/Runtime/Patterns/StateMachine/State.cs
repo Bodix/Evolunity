@@ -2,7 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-namespace Evolutex.Evolunity.Patterns
+namespace Bodix.Evolunity.Patterns
 {
 	public abstract class State
 	{

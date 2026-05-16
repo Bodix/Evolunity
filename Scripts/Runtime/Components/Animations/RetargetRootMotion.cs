@@ -5,7 +5,7 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Bodix.Evolunity.Components
 {
 	public enum RootMotionTarget
 	{

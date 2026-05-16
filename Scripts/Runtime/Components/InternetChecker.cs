@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections;
-using Evolutex.Evolunity.Extensions;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Extensions;
+using Bodix.Evolunity.Utilities;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Internet Checker")]
 	public class InternetChecker : MonoBehaviour

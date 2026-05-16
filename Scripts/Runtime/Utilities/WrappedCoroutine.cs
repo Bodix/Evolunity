@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	// TODO:
 	// 1. Test stopping null coroutine.

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class TransformExtensions
 	{

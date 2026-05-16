@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Frame Rate Config")]
 	[DisallowMultipleComponent]

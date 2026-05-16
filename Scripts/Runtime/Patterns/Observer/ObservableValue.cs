@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Patterns
+namespace Bodix.Evolunity.Patterns
 {
 	/// <summary>
 	/// Suitable for use only as fields or local variables. Not suitable for use as a property, as it will be copied

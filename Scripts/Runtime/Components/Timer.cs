@@ -6,7 +6,7 @@ using System;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public delegate void TimerUpdateHandler(float deltaTime);
 

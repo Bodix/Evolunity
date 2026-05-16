@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
 	{

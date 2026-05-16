@@ -5,12 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Evolutex.Evolunity.Extensions;
-using Evolutex.Evolunity.Utilities.Gizmos;
+using Bodix.Evolunity.Extensions;
+using Bodix.Evolunity.Utilities.Gizmos;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Physics
+namespace Bodix.Evolunity.Components
 {
 	// TODO:
 	// 1. Create SphereOverlap.
@@ -33,7 +33,7 @@ namespace Evolutex.Evolunity.Components.Physics
 		private Vector3 _rotation;
 		public float Distance = 1;
 		public float Angle = 90;
-		public LayerMask Layers = UnityEngine.Physics.AllLayers;
+		public LayerMask Layers = Physics.AllLayers;
 		[SerializeField, HideInInspector]
 		private BoxOverlap _boxOverlap;
 

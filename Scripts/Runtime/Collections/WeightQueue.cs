@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Collections
+namespace Bodix.Evolunity.Collections
 {
 	public class WeightQueue<T> : IEnumerable<T>
 	{

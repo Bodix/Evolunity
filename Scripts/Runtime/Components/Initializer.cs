@@ -5,7 +5,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	/// <summary>
 	/// Used to initialize objects, mostly disabled on scene by default.

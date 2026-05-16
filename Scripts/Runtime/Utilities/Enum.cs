@@ -5,7 +5,7 @@
 using System;
 using System.Linq;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	public static class Enum<T> where T : struct, Enum
 	{

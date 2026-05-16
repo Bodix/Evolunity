@@ -3,11 +3,11 @@
 // All Rights Reserved
 
 using System.Linq;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Drawers
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	// Don't forget for this attribute.
 	// [CustomPropertyDrawer(typeof(TAttribute))]

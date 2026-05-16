@@ -2,11 +2,10 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolutex.Evolunity.Components.Scenes;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Triggers
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Triggers/Scene Change Trigger")]
 	public class SceneChangeTrigger : AbstractTrigger

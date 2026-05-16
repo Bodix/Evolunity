@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	/// <summary>
 	/// This is a bool predicate called <see cref="Condition"/>.

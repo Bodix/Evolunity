@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Evolutex.Evolunity.Patterns
+namespace Bodix.Evolunity.Patterns
 {
 	[Serializable]
 	public class ObservableFloat : ObservableProperty<float>

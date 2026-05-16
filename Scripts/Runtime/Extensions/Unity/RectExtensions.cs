@@ -5,7 +5,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	// TODO:
 	// 1. Add cutting.

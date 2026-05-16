@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace Evolutex.Evolunity.Editor
+namespace Bodix.Evolunity.Editor
 {
 	public class NamespacePostprocessor : AssetPostprocessor
 	{

@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Gizmos
+namespace Bodix.Evolunity.Utilities.Gizmos
 {
 	public readonly struct GizmosColorScope : IDisposable
 	{

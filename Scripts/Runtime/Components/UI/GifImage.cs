@@ -5,7 +5,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/GIF Image")]
 	[RequireComponent(typeof(Image))]

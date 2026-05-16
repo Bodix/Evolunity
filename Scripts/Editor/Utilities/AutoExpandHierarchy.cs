@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	// TODO: Add UI for adding GameObject's to expand.
 

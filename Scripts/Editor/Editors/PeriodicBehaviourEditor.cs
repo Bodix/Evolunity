@@ -3,12 +3,12 @@
 // All Rights Reserved
 
 using System.Collections.Generic;
-using Evolutex.Evolunity.Components;
+using Bodix.Evolunity.Components;
 using NaughtyAttributes.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Editors
+namespace Bodix.Evolunity.Editor.Editors
 {
 	[CustomEditor(typeof(PeriodicBehaviour), true)]
 	public class PeriodicBehaviourEditor : NaughtyInspector

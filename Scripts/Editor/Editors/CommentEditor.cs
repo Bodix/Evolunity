@@ -3,13 +3,13 @@
 // All Rights Reserved
 
 using System.Linq;
-using Evolutex.Evolunity.Components;
-using Evolutex.Evolunity.Extensions;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Components;
+using Bodix.Evolunity.Extensions;
+using Bodix.Evolunity.Utilities;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Editors
+namespace Bodix.Evolunity.Editor.Editors
 {
 	[CustomEditor(typeof(Comment))]
 	public class CommentEditor : UnityEditor.Editor

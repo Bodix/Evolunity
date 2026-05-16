@@ -3,11 +3,11 @@
 // All Rights Reserved
 
 using System;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	// TODO:
 	// 1. Fix "RowSize + ColumnSize" case: uncontrollable cellSize.x in Inspector.

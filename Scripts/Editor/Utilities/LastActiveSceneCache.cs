@@ -5,7 +5,7 @@
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	[InitializeOnLoad]
 	public static class LastActiveSceneCache

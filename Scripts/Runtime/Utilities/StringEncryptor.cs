@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	public static class StringEncryptor
 	{

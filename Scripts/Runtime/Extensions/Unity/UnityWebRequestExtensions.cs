@@ -3,11 +3,11 @@
 // All Rights Reserved
 
 using System.Collections;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Utilities;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class UnityWebRequestExtensions
 	{

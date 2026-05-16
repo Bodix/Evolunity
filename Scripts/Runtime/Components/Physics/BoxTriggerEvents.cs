@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Physics
+namespace Bodix.Evolunity.Components
 {
 	[RequireComponent(typeof(BoxCollider))]
 	public class BoxTriggerEvents : MonoBehaviour

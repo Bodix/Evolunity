@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class StringExtensions
 	{

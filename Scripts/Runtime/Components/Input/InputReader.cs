@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Input/Input Reader")]
 	[RequireComponent(typeof(Graphic))]

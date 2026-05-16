@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public class OrientationChangeFov : MonoBehaviour
 	{

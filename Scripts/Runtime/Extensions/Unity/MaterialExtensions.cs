@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class MaterialExtensions
 	{

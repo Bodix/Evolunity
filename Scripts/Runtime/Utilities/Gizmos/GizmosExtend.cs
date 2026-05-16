@@ -11,7 +11,7 @@ using Handles = UnityEditor.Handles;
 using HandleUtility = UnityEditor.HandleUtility;
 #endif
 
-namespace Evolutex.Evolunity.Utilities.Gizmos
+namespace Bodix.Evolunity.Utilities.Gizmos
 {
 	/// <summary>
 	/// Gizmo Extension - Static class that extends Unity's gizmo functionality.

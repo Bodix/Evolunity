@@ -7,7 +7,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Animations/Fade")]
 	[RequireComponent(typeof(Image))]

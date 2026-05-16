@@ -3,10 +3,10 @@
 // All Rights Reserved
 
 using System.Linq;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	public static class GameObjectFinder
 	{

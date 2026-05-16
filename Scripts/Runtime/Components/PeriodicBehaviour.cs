@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	// TODO:
 	// 1. Test saving time delta:

@@ -2,11 +2,10 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolutex.Evolunity.Components.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Evolutex.Evolunity.Components.Scenes
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Scenes/Scene Transition")]
 	public class SceneTransition : MonoBehaviour

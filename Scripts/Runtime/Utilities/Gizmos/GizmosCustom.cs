@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Gizmos
+namespace Bodix.Evolunity.Utilities.Gizmos
 {
 	public static class GizmosCustom
 	{

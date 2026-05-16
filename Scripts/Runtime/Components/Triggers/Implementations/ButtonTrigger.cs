@@ -6,7 +6,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.Triggers
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Triggers/Button Trigger")]
 	public class ButtonTrigger : Trigger

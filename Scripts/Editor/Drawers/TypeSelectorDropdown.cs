@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Drawers
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	public class TypeSelectorDropdown : AdvancedDropdown
 	{

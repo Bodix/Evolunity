@@ -4,11 +4,11 @@
 
 using System;
 using System.Collections;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Utilities;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Triggers
+namespace Bodix.Evolunity.Components
 {
 	[RequireComponent(typeof(Collider))]
 	public abstract class AbstractTrigger : MonoBehaviour

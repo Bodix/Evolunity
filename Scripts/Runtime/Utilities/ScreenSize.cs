@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	// https://medium.com/@kunaltandon.kt/scaling-sprites-based-on-screen-resolutions-f28c47744ab5
 

@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.DebugSelector
+namespace Bodix.Evolunity.Components
 {
 	public class DebugSelector : DebugSelector<GameObjectSelectable>
 	{

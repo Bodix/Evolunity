@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Evolutex.Evolunity.Patterns
+namespace Bodix.Evolunity.Patterns
 {
 	public abstract class Singleton<T> where T : class, new()
 	{

@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	public static class FileExplorer
 	{

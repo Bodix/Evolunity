@@ -6,7 +6,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Evolutex.Evolunity.Components.Scenes
+namespace Bodix.Evolunity.Components
 {
 	/// <summary>
 	/// Use it in Start() method. Dont use it in Awake() method.

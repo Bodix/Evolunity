@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class DictionaryExtensions
 	{

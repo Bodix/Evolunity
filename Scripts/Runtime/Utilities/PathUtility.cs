@@ -4,7 +4,7 @@
 
 using System.IO;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	public static class PathUtility
 	{

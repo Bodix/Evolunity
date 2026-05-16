@@ -2,12 +2,12 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolutex.Evolunity.Extensions;
-using Evolutex.Evolunity.Structs;
+using Bodix.Evolunity.Extensions;
+using Bodix.Evolunity.Structs;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Drawers
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	[CustomPropertyDrawer(typeof(FloatRange))]
 	[CustomPropertyDrawer(typeof(IntRange))]

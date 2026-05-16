@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using UnityEditor;
 
-namespace Evolutex.Evolunity.Editor.Extensions
+namespace Bodix.Evolunity.Editor.Extensions
 {
 	public static class SerializedPropertyExtensions
 	{

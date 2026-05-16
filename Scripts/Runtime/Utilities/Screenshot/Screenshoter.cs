@@ -5,7 +5,7 @@
 using System;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Utilities.Screenshot
+namespace Bodix.Evolunity.Utilities.Screenshot
 {
 	[RequireComponent(typeof(Camera))]
 	[DisallowMultipleComponent]

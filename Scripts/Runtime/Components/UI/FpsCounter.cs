@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	// This makes no sense because the Game window is not updated every frame in the Editor.
 	// [ExecuteAlways]

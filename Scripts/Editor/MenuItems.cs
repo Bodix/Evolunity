@@ -4,13 +4,13 @@
 
 using System;
 using System.IO;
-using Evolutex.Evolunity.Editor.Utilities;
+using Bodix.Evolunity.Editor.Utilities;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Evolutex.Evolunity.Editor
+namespace Bodix.Evolunity.Editor
 {
 	public static class MenuItems
 	{

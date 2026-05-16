@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Animations
+namespace Bodix.Evolunity.Components
 {
 	public abstract class AnimationBehaviour : MonoBehaviour, IAnimation
 	{

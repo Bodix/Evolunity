@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace Evolutex.Evolunity.Components.Triggers
+namespace Bodix.Evolunity.Components
 {
 	[Serializable]
 	public struct TriggerableEvent : ITriggerable

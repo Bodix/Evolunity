@@ -4,10 +4,10 @@
 
 using System;
 using System.Collections;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Utilities;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	public static class MonoBehaviourExtensions
 	{

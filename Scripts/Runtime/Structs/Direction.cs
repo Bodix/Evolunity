@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Structs
+namespace Bodix.Evolunity.Structs
 {
 	public readonly struct Direction
 	{

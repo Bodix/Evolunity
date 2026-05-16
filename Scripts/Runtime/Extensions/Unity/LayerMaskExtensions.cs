@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Extensions
+namespace Bodix.Evolunity.Extensions
 {
 	// http://wiki.unity3d.com/index.php/LayerMaskExtensions
 	public static class LayerMaskExtensions

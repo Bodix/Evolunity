@@ -11,7 +11,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Evolutex.Evolunity.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	/// <summary>
 	/// Works only when "Development Build" option is enabled (in "Build Settings") or in Unity Editor.

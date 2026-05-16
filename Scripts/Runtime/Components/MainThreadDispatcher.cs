@@ -35,7 +35,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	/// <summary>
 	/// A thread-safe class that holds a queue with actions to execute on the next <see cref="Update"/> method.

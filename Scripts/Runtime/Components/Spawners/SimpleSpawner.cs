@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	public class SimpleSpawner<T> : BaseSpawner<T> where T : Object
 	{

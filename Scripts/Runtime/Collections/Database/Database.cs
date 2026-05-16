@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Collections
+namespace Bodix.Evolunity.Collections
 {
 	public abstract class Database<T> : ScriptableObject where T : DatabaseEntry
 	{

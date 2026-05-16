@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Disable On Awake")]
 	public class DisableOnAwake : MonoBehaviour

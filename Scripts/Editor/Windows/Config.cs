@@ -5,7 +5,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Windows
+namespace Bodix.Evolunity.Editor.Windows
 {
 	// In Unity 2018.4.30f1 we can't create a new instance of a class inherited from UnityEngine.Object.
 	//

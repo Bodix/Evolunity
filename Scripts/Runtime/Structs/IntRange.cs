@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Evolutex.Evolunity.Structs
+namespace Bodix.Evolunity.Structs
 {
 	// TODO:
 	// 1. Intersection.

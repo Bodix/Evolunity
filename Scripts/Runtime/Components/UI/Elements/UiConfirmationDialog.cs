@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Confirmation Dialog")]
 	public class UiConfirmationDialog : UiElement

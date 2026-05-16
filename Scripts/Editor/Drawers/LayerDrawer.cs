@@ -2,11 +2,11 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Evolutex.Evolunity.Attributes;
+using Bodix.Evolunity.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Drawers
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	[CustomPropertyDrawer(typeof(LayerAttribute))]
 	public class LayerDrawer : AttributePropertyDrawer<LayerAttribute>

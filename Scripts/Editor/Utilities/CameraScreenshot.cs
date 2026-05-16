@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Utilities
 {
 	// TODO: Use Screenshoter here (with instant screenshot method).
 

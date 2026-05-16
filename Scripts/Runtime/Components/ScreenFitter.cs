@@ -3,11 +3,11 @@
 // All Rights Reserved
 
 using System;
-using Evolutex.Evolunity.Extensions;
-using Evolutex.Evolunity.Utilities;
+using Bodix.Evolunity.Extensions;
+using Bodix.Evolunity.Utilities;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[ExecuteAlways]
 	[DisallowMultipleComponent]

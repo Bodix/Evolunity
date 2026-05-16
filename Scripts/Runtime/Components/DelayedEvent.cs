@@ -5,9 +5,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using DelayUtility = Evolutex.Evolunity.Utilities.Delay;
+using DelayUtility = Bodix.Evolunity.Utilities.Delay;
 
-namespace Evolutex.Evolunity.Components
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Delayed Event")]
 	public class DelayedEvent : MonoBehaviour

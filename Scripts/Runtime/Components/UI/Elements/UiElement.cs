@@ -3,11 +3,10 @@
 // All Rights Reserved
 
 using System;
-using Evolutex.Evolunity.Attributes;
-using Evolutex.Evolunity.Components.Animations;
+using Bodix.Evolunity.Attributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.UI
+namespace Bodix.Evolunity.Components.UI
 {
 	// TODO:
 	// - UiIconButton

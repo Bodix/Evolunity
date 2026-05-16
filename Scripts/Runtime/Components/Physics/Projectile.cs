@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Evolutex.Evolunity.Extensions;
+using Bodix.Evolunity.Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Evolutex.Evolunity.Components.Physics
+namespace Bodix.Evolunity.Components
 {
 	[AddComponentMenu("Evolunity/Physics/Projectile")]
 	[RequireComponent(typeof(Rigidbody))]
@@ -147,7 +147,7 @@ namespace Evolutex.Evolunity.Components.Physics
 			float velocityMagnitudeDelta = Rigidbody.velocity.magnitude * Time.fixedDeltaTime;
 
 			int hitsCount;
-			if ((hitsCount = UnityEngine.Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
+			if ((hitsCount = Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
 				    _hitsBuffer, velocityMagnitudeDelta, LayerMask)) > 0)
 				OnHit(_hitsBuffer.Take(hitsCount));
 		}
