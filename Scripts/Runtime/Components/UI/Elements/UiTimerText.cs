@@ -8,16 +8,13 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.UI
 {
-	public class TimerText : MonoBehaviour
+	public class UiTimerText : UiText
 	{
 		public TimeUpdateMethod UpdateMethod;
 		[SerializeField, ShowIf(nameof(IsTimersUpdate))]
 		protected Timer _timer;
-		[SerializeField]
-		protected TextMeshProUGUI _text;
 
 		public Timer Timer => _timer;
-		public TextMeshProUGUI Text => _text;
 		public bool IsSubscribedToTimer { get; private set; }
 		public virtual TimerTextHandler TimerTextHandler { protected get; set; } =
 			(text, time) => text.text = ToStringUtility.TimeToMinutesSeconds(time);
@@ -78,7 +75,7 @@ namespace Evolutex.Evolunity.Components.UI
 			}
 			else
 			{
-				Debug.LogError(nameof(TimerText) + " is not subscribed to any timer", this);
+				Debug.LogError(nameof(UiTimerText) + " is not subscribed to any timer", this);
 			}
 		}
 
@@ -100,7 +97,7 @@ namespace Evolutex.Evolunity.Components.UI
 		}
 	}
 
-	public delegate void TimerTextHandler(TextMeshProUGUI text, float time);
+	public delegate void TimerTextHandler(TMP_Text text, float time);
 
 	public delegate float TimeGetter();
 

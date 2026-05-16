@@ -11,9 +11,9 @@ namespace Evolutex.Evolunity.Components.UI
 	// This makes no sense because the Game window is not updated every frame in the Editor.
 	// [ExecuteAlways]
 	// In the Editor, FPS can be obtained from the Stats panel in the Game window.
+	[Obsolete("Use Graphy package in runtime or Stats panel in Editor instead. ")]
 	[AddComponentMenu("Evolunity/UI/FPS Counter")]
 	[RequireComponent(typeof(Text))]
-	[Obsolete("Use Graphy package in runtime or Stats panel in Editor instead. ")]
 	public class FpsCounter : MonoBehaviour
 	{
 		public float MeasurementPeriod = 0.5f;
