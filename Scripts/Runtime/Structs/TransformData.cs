@@ -26,7 +26,10 @@ namespace Bodix.Evolunity.Structs
 	{
 		public static TransformData GetData(this Transform transform)
 		{
-			return new TransformData(transform.position, transform.rotation, transform.localScale);
+			return new TransformData(
+				transform.position,
+				transform.rotation,
+				transform.localScale);
 		}
 
 		public static void SetData(this Transform transform, TransformData data)
