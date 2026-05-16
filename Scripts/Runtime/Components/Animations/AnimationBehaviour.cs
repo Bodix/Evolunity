@@ -10,9 +10,17 @@ namespace Evolutex.Evolunity.Components.Animations
 {
 	public abstract class AnimationBehaviour : MonoBehaviour, IAnimation
 	{
+		private Coroutine _coroutine;
+
 		public virtual void Play(Action onStart = null, Action onComplete = null)
 		{
-			StartCoroutine(AnimationCoroutineWithCallbacks(onStart, onComplete));
+			_coroutine = StartCoroutine(AnimationCoroutineWithCallbacks(onStart, onComplete));
+		}
+
+		public void Stop()
+		{
+			if (_coroutine != null)
+				StopCoroutine(_coroutine);
 		}
 
 		protected virtual IEnumerator AnimationCoroutineWithCallbacks(Action onStart, Action onComplete)

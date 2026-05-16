@@ -9,6 +9,20 @@ using UnityEngine;
 
 namespace Evolutex.Evolunity.Components.UI
 {
+	// TODO:
+	// - UiInteractionBlocker
+	// - UiIconButton
+	// - UiPopup / UiDialog
+	// - UiToast / UiNotification
+	// - UiToggle
+	// - UiWindow (not UiScreen, UiScreen can be only one at time, UiWindow can be multiple)
+	// - UiConditionalButton
+	// - UiQuantitySelector
+	// - UiTimerText
+	// - UiSlot / UiItemCard ???
+	// - UiBadge ???
+	// - UiTooltip
+
 	public class UiElement : MonoBehaviour
 	{
 		[SerializeReference, TypeSelector]
