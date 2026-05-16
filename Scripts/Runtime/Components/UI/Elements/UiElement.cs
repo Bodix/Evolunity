@@ -20,6 +20,7 @@ namespace Bodix.Evolunity.Components.UI
 	// - UiWindow (not UiScreen, UiScreen can be only one at time, UiWindow can be multiple)
 	// - UiSlot / UiItemCard ???
 	// - UiBadge ???
+	// [#design]
 
 	public class UiElement : MonoBehaviour
 	{
