@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI
 {
+	[AddComponentMenu("Evolunity/UI/Timer Text")]
 	public class UiTimerText : UiText
 	{
 		public TimeUpdateMethod UpdateMethod;

@@ -9,7 +9,6 @@ using UnityEngine;
 namespace Bodix.Evolunity.Components.UI
 {
 	// TODO:
-	// - UiIconButton
 	// - UiConditionalButton
 	// - UiQuantitySelector
 	// - UiPopup / UiDialog
