@@ -30,6 +30,7 @@ namespace Evolutex.Evolunity.Components.UI
 
 		public void UpdateFillImage()
 		{
+			// IMPORTANT: Using anchors instead of "fillAmount" to add possibility to work with Sliced image type.
 			FillImage.rectTransform.anchorMax = new Vector2(_normalizedValue, FillImage.rectTransform.anchorMax.y);
 		}
 	}
