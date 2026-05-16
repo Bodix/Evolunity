@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Evolutex.Evolunity.Components.UI
 {
-	[AddComponentMenu("Evolunity/UI/Pagination")]
+	[AddComponentMenu("Evolunity/UI/Tab Pager")]
 	public class UiTabPager : UiElement
 	{
 		[Serializable]
@@ -48,6 +48,7 @@ namespace Evolutex.Evolunity.Components.UI
 			if (pageIndex < 0 || pageIndex >= _tabsToggles.Count)
 			{
 				Debug.LogWarning("Invalid page index.");
+
 				return;
 			}
 
@@ -111,13 +112,9 @@ namespace Evolutex.Evolunity.Components.UI
 				return;
 
 			for (int i = 0; i < _tabsToggles.Count; i++)
-			{
 				if (_tabsToggles[i] != null && i < _toggleListeners.Count)
-				{
 					// Unsubscribes ONLY our specific listeners to avoid breaking other scripts.
 					_tabsToggles[i].onValueChanged.RemoveListener(_toggleListeners[i]);
-				}
-			}
 		}
 	}
 }
