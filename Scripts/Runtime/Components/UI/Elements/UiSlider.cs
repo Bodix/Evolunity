@@ -12,7 +12,7 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiSlider : UiElement
 	{
 		[SerializeField]
-		private Slider _slider;
+		protected Slider _slider;
 
 		public event Action<float> ValueChanged;
 

@@ -11,12 +11,16 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiQuantitySlider : UiElement
 	{
 		[Header("Interactive Elements")]
-		[SerializeField] private UiSlider _slider;
-		[SerializeField] private UiButton _decreaseButton;
-		[SerializeField] private UiButton _increaseButton;
+		[SerializeField]
+		protected UiSlider _slider;
+		[SerializeField]
+		protected UiButton _decreaseButton;
+		[SerializeField]
+		protected UiButton _increaseButton;
 
 		[Header("Visual Elements")]
-		[SerializeField] private UiText _amountText;
+		[SerializeField]
+		protected UiText _amountText;
 
 		public event Action<int> ValueChanged;
 
