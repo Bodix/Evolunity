@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Bodix.Evolunity.Structs
+namespace Bodix.Evolunity.Collections
 {
 	public class RingBuffer<T> where T : struct
 	{
