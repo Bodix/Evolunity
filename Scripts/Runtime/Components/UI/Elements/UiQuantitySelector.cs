@@ -18,7 +18,7 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField] private UiButton _increaseButton;
 
 		[Header("Visual Elements")]
-		[SerializeField] private TMP_Text _amountText;
+		[SerializeField] private UiText _amountText;
 
 		public event Action<int> ValueChanged;
 
@@ -105,7 +105,7 @@ namespace Bodix.Evolunity.Components.UI
 		private void UpdateVisuals()
 		{
 			if (_amountText != null)
-				_amountText.text = _currentValue.ToString();
+				_amountText.Text.text = _currentValue.ToString();
 
 			if (_slider != null && !Mathf.Approximately(_slider.Value, _currentValue))
 				_slider.SetValueWithoutNotify(_currentValue);
