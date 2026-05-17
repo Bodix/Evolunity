@@ -32,19 +32,11 @@ namespace Bodix.Evolunity.Components.UI
 		public UiButton DecreaseButton => decreaseButton;
 		public UiButton IncreaseButton => increaseButton;
 		public UiText AmountText => amountText;
+
 		public int Value
 		{
 			get => _currentValue;
-			set
-			{
-				int clampedValue = Mathf.Clamp(value, _minValue, _maxValue);
-				if (_currentValue == clampedValue)
-					return;
-
-				_currentValue = clampedValue;
-				UpdateVisuals();
-				ValueChanged?.Invoke(_currentValue);
-			}
+			set => SetValueInternal(value, true);
 		}
 
 		protected virtual void OnEnable()
@@ -95,7 +87,8 @@ namespace Bodix.Evolunity.Components.UI
 
 		private void OnSliderValueChanged(float value)
 		{
-			Value = Mathf.RoundToInt(value);
+			// Value came from the slider itself, so we skip updating the slider's visual position.
+			SetValueInternal(Mathf.RoundToInt(value), false);
 		}
 
 		private void Decrease()
@@ -108,12 +101,18 @@ namespace Bodix.Evolunity.Components.UI
 			Value++;
 		}
 
-		private void UpdateVisuals()
+		private void SetValueInternal(int newValue, bool updateSliderVisuals)
 		{
+			int clampedValue = Mathf.Clamp(newValue, _minValue, _maxValue);
+			if (_currentValue == clampedValue)
+				return;
+
+			_currentValue = clampedValue;
+
 			if (amountText != null)
 				amountText.Text.text = _currentValue.ToString();
 
-			if (slider != null && !Mathf.Approximately(slider.Value, _currentValue))
+			if (updateSliderVisuals && slider != null)
 				slider.Slider.SetValueWithoutNotify(_currentValue);
 
 			if (decreaseButton != null && decreaseButton.Button != null)
@@ -121,6 +120,8 @@ namespace Bodix.Evolunity.Components.UI
 
 			if (increaseButton != null && increaseButton.Button != null)
 				increaseButton.Button.interactable = _currentValue < _maxValue;
+
+			ValueChanged?.Invoke(_currentValue);
 		}
 	}
 }
