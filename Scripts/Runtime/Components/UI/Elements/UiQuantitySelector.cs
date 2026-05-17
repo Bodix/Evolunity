@@ -13,7 +13,7 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiQuantitySelector : UiElement
 	{
 		[Header("Interactive Elements")]
-		[SerializeField] private Slider _slider;
+		[SerializeField] private UiSlider _slider;
 		[SerializeField] private UiButton _decreaseButton;
 		[SerializeField] private UiButton _increaseButton;
 
@@ -44,7 +44,7 @@ namespace Bodix.Evolunity.Components.UI
 		protected virtual void OnEnable()
 		{
 			if (_slider != null)
-				_slider.onValueChanged.AddListener(OnSliderValueChanged);
+				_slider.ValueChanged += OnSliderValueChanged;
 
 			if (_decreaseButton != null && _decreaseButton.Button != null)
 				_decreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
@@ -56,7 +56,7 @@ namespace Bodix.Evolunity.Components.UI
 		protected virtual void OnDisable()
 		{
 			if (_slider != null)
-				_slider.onValueChanged.RemoveListener(OnSliderValueChanged);
+				_slider.ValueChanged -= OnSliderValueChanged;
 
 			if (_decreaseButton != null && _decreaseButton.Button != null)
 				_decreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
@@ -71,25 +71,18 @@ namespace Bodix.Evolunity.Components.UI
 			_maxValue = maxValue;
 
 			if (_slider != null)
-			{
-				_slider.minValue = _minValue;
-				_slider.maxValue = _maxValue;
-			}
+				_slider.SetBoundaries(minValue, maxValue);
 
 			Value = startingValue;
 		}
 
-		// Resets the selector to a zero state.
 		public void Clear()
 		{
 			_minValue = 0;
 			_maxValue = 0;
 
 			if (_slider != null)
-			{
-				_slider.minValue = 0;
-				_slider.maxValue = 0;
-			}
+				_slider.SetBoundaries(0, 0);
 
 			Value = 0;
 		}
@@ -114,7 +107,7 @@ namespace Bodix.Evolunity.Components.UI
 			if (_amountText != null)
 				_amountText.text = _currentValue.ToString();
 
-			if (_slider != null && !Mathf.Approximately(_slider.value, _currentValue))
+			if (_slider != null && !Mathf.Approximately(_slider.Value, _currentValue))
 				_slider.SetValueWithoutNotify(_currentValue);
 
 			if (_decreaseButton != null && _decreaseButton.Button != null)
