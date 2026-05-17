@@ -4,13 +4,11 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 namespace Bodix.Evolunity.Components.UI
 {
-	[AddComponentMenu("Evolunity/UI/Quantity Selector")]
-	public class UiQuantitySelector : UiElement
+	[AddComponentMenu("Evolunity/UI/Quantity Slider")]
+	public class UiQuantitySlider : UiElement
 	{
 		[Header("Interactive Elements")]
 		[SerializeField] private UiSlider _slider;

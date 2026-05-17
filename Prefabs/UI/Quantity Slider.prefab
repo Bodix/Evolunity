@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4508060976419647431}
   - component: {fileID: 4508060976419647430}
   m_Layer: 5
-  m_Name: Quantity Selector
+  m_Name: Quantity Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

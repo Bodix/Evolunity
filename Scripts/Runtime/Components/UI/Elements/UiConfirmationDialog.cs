@@ -4,7 +4,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Bodix.Evolunity.Components.UI
 {
