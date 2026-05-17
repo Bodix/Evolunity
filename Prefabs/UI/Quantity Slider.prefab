@@ -146,9 +146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  _slider: {fileID: 3930571703218410285}
-  _decreaseButton: {fileID: 0}
-  _increaseButton: {fileID: 0}
+  Slider: {fileID: 3930571703218410285}
+  DecreaseButton: {fileID: 0}
+  IncreaseButton: {fileID: 0}
   _amountText: {fileID: 7458579338067116473}
   references:
     version: 1
