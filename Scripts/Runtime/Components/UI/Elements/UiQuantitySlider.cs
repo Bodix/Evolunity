@@ -53,10 +53,10 @@ namespace Bodix.Evolunity.Components.UI
 				slider.ValueChanged += OnSliderValueChanged;
 
 			if (decreaseButton != null && decreaseButton.Button != null)
-				decreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
+				decreaseButton.Button.onClick.AddListener(Decrease);
 
 			if (increaseButton != null && increaseButton.Button != null)
-				increaseButton.Button.onClick.AddListener(OnIncreaseClicked);
+				increaseButton.Button.onClick.AddListener(Increase);
 		}
 
 		protected virtual void OnDisable()
@@ -65,10 +65,10 @@ namespace Bodix.Evolunity.Components.UI
 				slider.ValueChanged -= OnSliderValueChanged;
 
 			if (decreaseButton != null && decreaseButton.Button != null)
-				decreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
+				decreaseButton.Button.onClick.RemoveListener(Decrease);
 
 			if (increaseButton != null && increaseButton.Button != null)
-				increaseButton.Button.onClick.RemoveListener(OnIncreaseClicked);
+				increaseButton.Button.onClick.RemoveListener(Increase);
 		}
 
 		public void Setup(int minValue, int maxValue, int startingValue)
@@ -98,12 +98,12 @@ namespace Bodix.Evolunity.Components.UI
 			Value = Mathf.RoundToInt(value);
 		}
 
-		private void OnDecreaseClicked()
+		private void Decrease()
 		{
 			Value--;
 		}
 
-		private void OnIncreaseClicked()
+		private void Increase()
 		{
 			Value++;
 		}
