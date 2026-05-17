@@ -12,9 +12,9 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiConfirmationDialog : UiElement
 	{
 		[SerializeField]
-		protected Button AcceptButton;
+		protected UiButton AcceptButton;
 		[SerializeField]
-		protected Button DeclineButton;
+		protected UiButton DeclineButton;
 
 		protected Action<Result> ResultCallback;
 
@@ -25,17 +25,17 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			base.Awake();
 
-			AcceptButton.onClick.AddListener(Accept);
-			DeclineButton.onClick.AddListener(Decline);
+			AcceptButton.Button.onClick.AddListener(Accept);
+			DeclineButton.Button.onClick.AddListener(Decline);
 		}
 
 		protected virtual void OnDestroy()
 		{
 			if (AcceptButton != null)
-				AcceptButton.onClick.RemoveListener(Accept);
+				AcceptButton.Button.onClick.RemoveListener(Accept);
 
 			if (DeclineButton != null)
-				DeclineButton.onClick.RemoveListener(Decline);
+				DeclineButton.Button.onClick.RemoveListener(Decline);
 		}
 
 		public void Show(Action<Result> resultCallback, Action onShowComplete = null, bool instantly = false)
