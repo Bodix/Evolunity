@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  Text: {fileID: 8047604358386916687}
+  text: {fileID: 8047604358386916687}
   references:
     version: 1
     00000000:
@@ -146,10 +146,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  Slider: {fileID: 3930571703218410285}
-  DecreaseButton: {fileID: 0}
-  IncreaseButton: {fileID: 0}
-  _amountText: {fileID: 7458579338067116473}
+  slider: {fileID: 3930571703218410285}
+  decreaseButton: {fileID: 0}
+  increaseButton: {fileID: 0}
+  amountText: {fileID: 7458579338067116473}
   references:
     version: 1
     00000000:

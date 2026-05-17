@@ -189,8 +189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  Button: {fileID: 1567835276812258758}
-  Text: {fileID: 151662120234859827}
+  button: {fileID: 1567835276812258758}
+  text: {fileID: 151662120234859827}
   references:
     version: 1
     00000000:

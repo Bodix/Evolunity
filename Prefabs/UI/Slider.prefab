@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  Slider: {fileID: 4808049641773864594}
+  slider: {fileID: 4808049641773864594}
   references:
     version: 1
     00000000:

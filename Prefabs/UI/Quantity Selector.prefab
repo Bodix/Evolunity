@@ -52,8 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  _quantitySlider: {fileID: 8777591438311702054}
-  _confirmButton: {fileID: 7220917727923078333}
+  quantitySlider: {fileID: 8777591438311702054}
+  confirmButton: {fileID: 7220917727923078333}
   references:
     version: 1
     00000000:
