@@ -35,14 +35,15 @@ namespace Bodix.Evolunity.Components.UI
 		public void Setup(int minAmount, int maxAmount, string actionName)
 		{
 			quantitySlider.Setup(minAmount, maxAmount, 1);
-			confirmButton.Setup(actionName, quantitySlider.Value);
 
+			confirmButton.Setup(actionName, quantitySlider.Value);
 			confirmButton.Button.interactable = maxAmount > 0;
 		}
 
 		public void Clear()
 		{
 			quantitySlider.Clear();
+
 			confirmButton.Setup("...", 0);
 			confirmButton.Button.interactable = false;
 		}
