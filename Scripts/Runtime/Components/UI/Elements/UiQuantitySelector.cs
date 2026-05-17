@@ -13,9 +13,7 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		protected UiQuantitySlider quantitySlider;
 		[SerializeField]
-		protected UiTextButton confirmButton;
-
-		protected string ActionPrefix = "Confirm";
+		protected UiActionButton confirmButton;
 
 		public event Action<int> Confirmed;
 
@@ -24,41 +22,39 @@ namespace Bodix.Evolunity.Components.UI
 
 		private void OnEnable()
 		{
-			quantitySlider.ValueChanged += UpdateConfirmText;
+			quantitySlider.ValueChanged += UpdateConfirmButton;
 			confirmButton.Button.onClick.AddListener(Confirm);
 		}
 
 		private void OnDisable()
 		{
-			quantitySlider.ValueChanged -= UpdateConfirmText;
+			quantitySlider.ValueChanged -= UpdateConfirmButton;
 			confirmButton.Button.onClick.RemoveListener(Confirm);
 		}
 
-		public void Setup(int minAmount, int maxAmount, string actionPrefix)
+		public void Setup(int minAmount, int maxAmount, string actionName)
 		{
-			ActionPrefix = actionPrefix;
 			quantitySlider.Setup(minAmount, maxAmount, 1);
+			confirmButton.Setup(actionName, quantitySlider.Value);
+
 			confirmButton.Button.interactable = maxAmount > 0;
-			UpdateConfirmText(quantitySlider.Value);
 		}
 
 		public void Clear()
 		{
 			quantitySlider.Clear();
+			confirmButton.Setup("...", 0);
 			confirmButton.Button.interactable = false;
-			if (confirmButton.Text != null)
-				confirmButton.Text.text = "...";
+		}
+
+		private void UpdateConfirmButton(int amount)
+		{
+			confirmButton.SetAmount(amount);
 		}
 
 		private void Confirm()
 		{
 			Confirmed?.Invoke(quantitySlider.Value);
-		}
-
-		private void UpdateConfirmText(int amount)
-		{
-			if (confirmButton.Text != null)
-				confirmButton.Text.text = $"{ActionPrefix} ({amount} pcs)";
 		}
 	}
 }
