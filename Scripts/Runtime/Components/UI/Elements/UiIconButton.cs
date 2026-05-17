@@ -10,6 +10,9 @@ namespace Bodix.Evolunity.Components.UI
 	[AddComponentMenu("Evolunity/UI/Icon Button")]
 	public class UiIconButton : UiButton
 	{
-		public Image Icon;
+		[SerializeField]
+		protected Image icon;
+
+		public Image Icon => icon;
 	}
 }

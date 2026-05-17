@@ -11,14 +11,17 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiConfirmationDialog : UiElement
 	{
 		[SerializeField]
-		protected UiButton AcceptButton;
+		protected UiButton acceptButton;
 		[SerializeField]
-		protected UiButton DeclineButton;
+		protected UiButton declineButton;
 
 		protected Action<Result> ResultCallback;
 
 		public event Action Accepted;
 		public event Action Declined;
+
+		public UiButton AcceptButton => acceptButton;
+		public UiButton DeclineButton => declineButton;
 
 		protected override void Awake()
 		{

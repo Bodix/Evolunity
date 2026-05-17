@@ -11,12 +11,14 @@ namespace Bodix.Evolunity.Components.UI
 	[AddComponentMenu("Evolunity/UI/Progress Bar")]
 	public class UiProgressBar : UiElement
 	{
-		public Image FillImage;
+		[SerializeField]
+		protected Image fillImage;
 
 		[Range(0, 1), OnValueChanged(nameof(UpdateFillImage))]
 		[SerializeField]
 		private float _normalizedValue;
 
+		public Image FillImage => fillImage;
 		public float NormalizedValue
 		{
 			get => _normalizedValue;

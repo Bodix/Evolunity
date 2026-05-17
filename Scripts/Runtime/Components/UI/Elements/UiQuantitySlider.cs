@@ -12,22 +12,26 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		[Header("Interactive Elements")]
 		[SerializeField]
-		protected UiSlider Slider;
+		protected UiSlider slider;
 		[SerializeField]
-		protected UiButton DecreaseButton;
+		protected UiButton decreaseButton;
 		[SerializeField]
-		protected UiButton IncreaseButton;
+		protected UiButton increaseButton;
 
 		[Header("Visual Elements")]
 		[SerializeField]
-		protected UiText _amountText;
-
-		public event Action<int> ValueChanged;
+		protected UiText amountText;
 
 		private int _minValue = 1;
 		private int _maxValue = 1;
 		private int _currentValue = 1;
 
+		public event Action<int> ValueChanged;
+
+		public UiSlider Slider => slider;
+		public UiButton DecreaseButton => decreaseButton;
+		public UiButton IncreaseButton => increaseButton;
+		public UiText AmountText => amountText;
 		public int Value
 		{
 			get => _currentValue;
@@ -45,26 +49,26 @@ namespace Bodix.Evolunity.Components.UI
 
 		protected virtual void OnEnable()
 		{
-			if (Slider != null)
-				Slider.ValueChanged += OnSliderValueChanged;
+			if (slider != null)
+				slider.ValueChanged += OnSliderValueChanged;
 
-			if (DecreaseButton != null && DecreaseButton.Button != null)
-				DecreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
+			if (decreaseButton != null && decreaseButton.Button != null)
+				decreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
 
-			if (IncreaseButton != null && IncreaseButton.Button != null)
-				IncreaseButton.Button.onClick.AddListener(OnIncreaseClicked);
+			if (increaseButton != null && increaseButton.Button != null)
+				increaseButton.Button.onClick.AddListener(OnIncreaseClicked);
 		}
 
 		protected virtual void OnDisable()
 		{
-			if (Slider != null)
-				Slider.ValueChanged -= OnSliderValueChanged;
+			if (slider != null)
+				slider.ValueChanged -= OnSliderValueChanged;
 
-			if (DecreaseButton != null && DecreaseButton.Button != null)
-				DecreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
+			if (decreaseButton != null && decreaseButton.Button != null)
+				decreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
 
-			if (IncreaseButton != null && IncreaseButton.Button != null)
-				IncreaseButton.Button.onClick.RemoveListener(OnIncreaseClicked);
+			if (increaseButton != null && increaseButton.Button != null)
+				increaseButton.Button.onClick.RemoveListener(OnIncreaseClicked);
 		}
 
 		public void Setup(int minValue, int maxValue, int startingValue)
@@ -72,8 +76,8 @@ namespace Bodix.Evolunity.Components.UI
 			_minValue = minValue;
 			_maxValue = maxValue;
 
-			if (Slider != null)
-				Slider.SetBoundaries(minValue, maxValue);
+			if (slider != null)
+				slider.SetBoundaries(minValue, maxValue);
 
 			Value = startingValue;
 		}
@@ -83,8 +87,8 @@ namespace Bodix.Evolunity.Components.UI
 			_minValue = 0;
 			_maxValue = 0;
 
-			if (Slider != null)
-				Slider.SetBoundaries(0, 0);
+			if (slider != null)
+				slider.SetBoundaries(0, 0);
 
 			Value = 0;
 		}
@@ -106,17 +110,17 @@ namespace Bodix.Evolunity.Components.UI
 
 		private void UpdateVisuals()
 		{
-			if (_amountText != null)
-				_amountText.Text.text = _currentValue.ToString();
+			if (amountText != null)
+				amountText.Text.text = _currentValue.ToString();
 
-			if (Slider != null && !Mathf.Approximately(Slider.Value, _currentValue))
-				Slider.SetValueWithoutNotify(_currentValue);
+			if (slider != null && !Mathf.Approximately(slider.Value, _currentValue))
+				slider.Slider.SetValueWithoutNotify(_currentValue);
 
-			if (DecreaseButton != null && DecreaseButton.Button != null)
-				DecreaseButton.Button.interactable = _currentValue > _minValue;
+			if (decreaseButton != null && decreaseButton.Button != null)
+				decreaseButton.Button.interactable = _currentValue > _minValue;
 
-			if (IncreaseButton != null && IncreaseButton.Button != null)
-				IncreaseButton.Button.interactable = _currentValue < _maxValue;
+			if (increaseButton != null && increaseButton.Button != null)
+				increaseButton.Button.interactable = _currentValue < _maxValue;
 		}
 	}
 }

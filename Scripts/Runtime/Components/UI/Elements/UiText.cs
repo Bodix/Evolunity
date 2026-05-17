@@ -10,6 +10,9 @@ namespace Bodix.Evolunity.Components.UI
 	[AddComponentMenu("Evolunity/UI/Text")]
 	public class UiText : UiElement
 	{
-		public TMP_Text Text;
+		[SerializeField]
+		protected TMP_Text text;
+
+		public TMP_Text Text => text;
 	}
 }

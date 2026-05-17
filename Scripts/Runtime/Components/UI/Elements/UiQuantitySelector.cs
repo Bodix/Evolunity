@@ -11,51 +11,54 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiQuantitySelector : UiElement
 	{
 		[SerializeField]
-		protected UiQuantitySlider _quantitySlider;
+		protected UiQuantitySlider quantitySlider;
 		[SerializeField]
-		protected UiTextButton _confirmButton;
-
-		public event Action<int> Confirmed;
+		protected UiTextButton confirmButton;
 
 		private string _actionPrefix = "Confirm";
 
+		public event Action<int> Confirmed;
+
+		public UiQuantitySlider QuantitySlider => quantitySlider;
+		public UiTextButton ConfirmButton => confirmButton;
+
 		private void OnEnable()
 		{
-			_quantitySlider.ValueChanged += UpdateConfirmText;
-			_confirmButton.Button.onClick.AddListener(Confirm);
+			quantitySlider.ValueChanged += UpdateConfirmText;
+			confirmButton.Button.onClick.AddListener(Confirm);
 		}
 
 		private void OnDisable()
 		{
-			_quantitySlider.ValueChanged -= UpdateConfirmText;
-			_confirmButton.Button.onClick.RemoveListener(Confirm);
+			quantitySlider.ValueChanged -= UpdateConfirmText;
+			confirmButton.Button.onClick.RemoveListener(Confirm);
 		}
 
 		public void Setup(int minAmount, int maxAmount, string actionPrefix)
 		{
 			_actionPrefix = actionPrefix;
-			_quantitySlider.Setup(minAmount, maxAmount, 1);
-			_confirmButton.Button.interactable = maxAmount > 0;
-			UpdateConfirmText(_quantitySlider.Value);
+			quantitySlider.Setup(minAmount, maxAmount, 1);
+			confirmButton.Button.interactable = maxAmount > 0;
+			UpdateConfirmText(quantitySlider.Value);
 		}
 
 		public void Clear()
 		{
-			_quantitySlider.Clear();
-			_confirmButton.Button.interactable = false;
-			if (_confirmButton.Text != null)
-				_confirmButton.Text.text = "...";
+			quantitySlider.Clear();
+			confirmButton.Button.interactable = false;
+			if (confirmButton.Text != null)
+				confirmButton.Text.text = "...";
 		}
 
 		private void Confirm()
 		{
-			Confirmed?.Invoke(_quantitySlider.Value);
+			Confirmed?.Invoke(quantitySlider.Value);
 		}
 
 		private void UpdateConfirmText(int amount)
 		{
-			if (_confirmButton.Text != null)
-				_confirmButton.Text.text = $"{_actionPrefix} ({amount} pcs)";
+			if (confirmButton.Text != null)
+				confirmButton.Text.text = $"{_actionPrefix} ({amount} pcs)";
 		}
 	}
 }
