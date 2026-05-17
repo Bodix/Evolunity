@@ -15,7 +15,7 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		protected UiTextButton confirmButton;
 
-		private string _actionPrefix = "Confirm";
+		protected string ActionPrefix = "Confirm";
 
 		public event Action<int> Confirmed;
 
@@ -36,7 +36,7 @@ namespace Bodix.Evolunity.Components.UI
 
 		public void Setup(int minAmount, int maxAmount, string actionPrefix)
 		{
-			_actionPrefix = actionPrefix;
+			ActionPrefix = actionPrefix;
 			quantitySlider.Setup(minAmount, maxAmount, 1);
 			confirmButton.Button.interactable = maxAmount > 0;
 			UpdateConfirmText(quantitySlider.Value);
@@ -58,7 +58,7 @@ namespace Bodix.Evolunity.Components.UI
 		private void UpdateConfirmText(int amount)
 		{
 			if (confirmButton.Text != null)
-				confirmButton.Text.text = $"{_actionPrefix} ({amount} pcs)";
+				confirmButton.Text.text = $"{ActionPrefix} ({amount} pcs)";
 		}
 	}
 }

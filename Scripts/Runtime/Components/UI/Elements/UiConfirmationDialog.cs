@@ -27,17 +27,17 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			base.Awake();
 
-			AcceptButton.Button.onClick.AddListener(Accept);
-			DeclineButton.Button.onClick.AddListener(Decline);
+			acceptButton.Button.onClick.AddListener(Accept);
+			declineButton.Button.onClick.AddListener(Decline);
 		}
 
 		protected virtual void OnDestroy()
 		{
-			if (AcceptButton != null)
-				AcceptButton.Button.onClick.RemoveListener(Accept);
+			if (acceptButton != null)
+				acceptButton.Button.onClick.RemoveListener(Accept);
 
-			if (DeclineButton != null)
-				DeclineButton.Button.onClick.RemoveListener(Decline);
+			if (declineButton != null)
+				declineButton.Button.onClick.RemoveListener(Decline);
 		}
 
 		public void Show(Action<Result> resultCallback, Action onShowComplete = null, bool instantly = false)

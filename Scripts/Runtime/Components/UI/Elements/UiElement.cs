@@ -10,7 +10,6 @@ namespace Bodix.Evolunity.Components.UI
 {
 	// TODO:
 	// - UiConditionalButton
-	// - UiQuantitySelector
 	// - UiPopup / UiDialog
 	// - UiToast / UiNotification
 	// - UiToggle

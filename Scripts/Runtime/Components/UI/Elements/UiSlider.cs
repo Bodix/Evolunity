@@ -19,24 +19,24 @@ namespace Bodix.Evolunity.Components.UI
 		public Slider Slider => slider;
 		public float Value
 		{
-			get => Slider.value;
-			set => Slider.value = value;
+			get => slider.value;
+			set => slider.value = value;
 		}
 
 		public void SetBoundaries(float minValue, float maxValue)
 		{
-			Slider.minValue = minValue;
-			Slider.maxValue = maxValue;
+			slider.minValue = minValue;
+			slider.maxValue = maxValue;
 		}
 
 		private void OnEnable()
 		{
-			Slider.onValueChanged.AddListener(HandleValueChanged);
+			slider.onValueChanged.AddListener(HandleValueChanged);
 		}
 
 		private void OnDisable()
 		{
-			Slider.onValueChanged.RemoveListener(HandleValueChanged);
+			slider.onValueChanged.RemoveListener(HandleValueChanged);
 		}
 
 		private void HandleValueChanged(float value)
