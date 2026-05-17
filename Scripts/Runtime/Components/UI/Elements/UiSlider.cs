@@ -12,40 +12,40 @@ namespace Bodix.Evolunity.Components.UI
 	public class UiSlider : UiElement
 	{
 		[SerializeField]
-		protected Slider _slider;
+		protected Slider Slider;
 
 		public event Action<float> ValueChanged;
 
 		public float Value
 		{
-			get => _slider.value;
-			set => _slider.value = value;
+			get => Slider.value;
+			set => Slider.value = value;
 		}
 
 		public void SetBoundaries(float minValue, float maxValue)
 		{
-			_slider.minValue = minValue;
-			_slider.maxValue = maxValue;
+			Slider.minValue = minValue;
+			Slider.maxValue = maxValue;
 		}
 
 		public void SetValueWithoutNotify(float value)
 		{
-			_slider.SetValueWithoutNotify(value);
+			Slider.SetValueWithoutNotify(value);
 		}
 
 		public void SetInteractable(bool isInteractable)
 		{
-			_slider.interactable = isInteractable;
+			Slider.interactable = isInteractable;
 		}
 
 		private void OnEnable()
 		{
-			_slider.onValueChanged.AddListener(HandleValueChanged);
+			Slider.onValueChanged.AddListener(HandleValueChanged);
 		}
 
 		private void OnDisable()
 		{
-			_slider.onValueChanged.RemoveListener(HandleValueChanged);
+			Slider.onValueChanged.RemoveListener(HandleValueChanged);
 		}
 
 		private void HandleValueChanged(float value)

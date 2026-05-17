@@ -13,9 +13,9 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		public TimeUpdateMethod UpdateMethod;
 		[SerializeField, ShowIf(nameof(IsTimersUpdate))]
-		protected Timer _timer;
+		protected Timer timer;
 
-		public Timer Timer => _timer;
+		public Timer Timer => timer;
 		public bool IsSubscribedToTimer { get; private set; }
 		public virtual TimerTextHandler TimerTextHandler { protected get; set; } =
 			(text, time) => text.text = ToStringUtility.TimeToMinutesSeconds(time);
@@ -24,13 +24,13 @@ namespace Bodix.Evolunity.Components.UI
 
 		protected virtual void OnEnable()
 		{
-			if (_timer)
-				SubscribeToTimer(_timer);
+			if (timer)
+				SubscribeToTimer(timer);
 		}
 
 		protected virtual void OnDisable()
 		{
-			if (_timer)
+			if (timer)
 				UnsubscribeFromTimer();
 		}
 
@@ -54,15 +54,15 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			if (!IsSubscribedToTimer)
 			{
-				_timer = timer;
-				_timer.Updated += OnTimerUpdated;
+				this.timer = timer;
+				this.timer.Updated += OnTimerUpdated;
 
 				IsSubscribedToTimer = true;
 				UpdateMethod = TimeUpdateMethod.TimerUpdate;
 			}
 			else
 			{
-				Debug.LogError("Already subscribed to timer: " + _timer, this);
+				Debug.LogError("Already subscribed to timer: " + this.timer, this);
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			if (IsSubscribedToTimer)
 			{
-				_timer.Updated -= OnTimerUpdated;
+				timer.Updated -= OnTimerUpdated;
 
 				IsSubscribedToTimer = false;
 			}
@@ -83,7 +83,7 @@ namespace Bodix.Evolunity.Components.UI
 		private void OnTimerUpdated(float deltaTime)
 		{
 			if (UpdateMethod == TimeUpdateMethod.TimerUpdate)
-				UpdateTimerText(_timer.RemainingTime);
+				UpdateTimerText(timer.RemainingTime);
 		}
 
 		private void UpdateTimerText(float time)

@@ -12,11 +12,11 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		[Header("Interactive Elements")]
 		[SerializeField]
-		protected UiSlider _slider;
+		protected UiSlider Slider;
 		[SerializeField]
-		protected UiButton _decreaseButton;
+		protected UiButton DecreaseButton;
 		[SerializeField]
-		protected UiButton _increaseButton;
+		protected UiButton IncreaseButton;
 
 		[Header("Visual Elements")]
 		[SerializeField]
@@ -45,26 +45,26 @@ namespace Bodix.Evolunity.Components.UI
 
 		protected virtual void OnEnable()
 		{
-			if (_slider != null)
-				_slider.ValueChanged += OnSliderValueChanged;
+			if (Slider != null)
+				Slider.ValueChanged += OnSliderValueChanged;
 
-			if (_decreaseButton != null && _decreaseButton.Button != null)
-				_decreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
+			if (DecreaseButton != null && DecreaseButton.Button != null)
+				DecreaseButton.Button.onClick.AddListener(OnDecreaseClicked);
 
-			if (_increaseButton != null && _increaseButton.Button != null)
-				_increaseButton.Button.onClick.AddListener(OnIncreaseClicked);
+			if (IncreaseButton != null && IncreaseButton.Button != null)
+				IncreaseButton.Button.onClick.AddListener(OnIncreaseClicked);
 		}
 
 		protected virtual void OnDisable()
 		{
-			if (_slider != null)
-				_slider.ValueChanged -= OnSliderValueChanged;
+			if (Slider != null)
+				Slider.ValueChanged -= OnSliderValueChanged;
 
-			if (_decreaseButton != null && _decreaseButton.Button != null)
-				_decreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
+			if (DecreaseButton != null && DecreaseButton.Button != null)
+				DecreaseButton.Button.onClick.RemoveListener(OnDecreaseClicked);
 
-			if (_increaseButton != null && _increaseButton.Button != null)
-				_increaseButton.Button.onClick.RemoveListener(OnIncreaseClicked);
+			if (IncreaseButton != null && IncreaseButton.Button != null)
+				IncreaseButton.Button.onClick.RemoveListener(OnIncreaseClicked);
 		}
 
 		public void Setup(int minValue, int maxValue, int startingValue)
@@ -72,8 +72,8 @@ namespace Bodix.Evolunity.Components.UI
 			_minValue = minValue;
 			_maxValue = maxValue;
 
-			if (_slider != null)
-				_slider.SetBoundaries(minValue, maxValue);
+			if (Slider != null)
+				Slider.SetBoundaries(minValue, maxValue);
 
 			Value = startingValue;
 		}
@@ -83,8 +83,8 @@ namespace Bodix.Evolunity.Components.UI
 			_minValue = 0;
 			_maxValue = 0;
 
-			if (_slider != null)
-				_slider.SetBoundaries(0, 0);
+			if (Slider != null)
+				Slider.SetBoundaries(0, 0);
 
 			Value = 0;
 		}
@@ -109,14 +109,14 @@ namespace Bodix.Evolunity.Components.UI
 			if (_amountText != null)
 				_amountText.Text.text = _currentValue.ToString();
 
-			if (_slider != null && !Mathf.Approximately(_slider.Value, _currentValue))
-				_slider.SetValueWithoutNotify(_currentValue);
+			if (Slider != null && !Mathf.Approximately(Slider.Value, _currentValue))
+				Slider.SetValueWithoutNotify(_currentValue);
 
-			if (_decreaseButton != null && _decreaseButton.Button != null)
-				_decreaseButton.Button.interactable = _currentValue > _minValue;
+			if (DecreaseButton != null && DecreaseButton.Button != null)
+				DecreaseButton.Button.interactable = _currentValue > _minValue;
 
-			if (_increaseButton != null && _increaseButton.Button != null)
-				_increaseButton.Button.interactable = _currentValue < _maxValue;
+			if (IncreaseButton != null && IncreaseButton.Button != null)
+				IncreaseButton.Button.interactable = _currentValue < _maxValue;
 		}
 	}
 }

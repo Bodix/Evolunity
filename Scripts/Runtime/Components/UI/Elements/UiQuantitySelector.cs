@@ -55,7 +55,7 @@ namespace Bodix.Evolunity.Components.UI
 		private void UpdateConfirmText(int amount)
 		{
 			if (_confirmButton.Text != null)
-				_confirmButton.Text.text = $"{_actionPrefix} {amount} pcs";
+				_confirmButton.Text.text = $"{_actionPrefix} ({amount} pcs)";
 		}
 	}
 }
