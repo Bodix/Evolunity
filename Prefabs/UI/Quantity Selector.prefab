@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4508060976419647431}
   - component: {fileID: 4508060976419647430}
   m_Layer: 5
-  m_Name: QuantitySelector
+  m_Name: Quantity Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  _slider: {fileID: 0}
+  _slider: {fileID: 3930571703218410285}
   _decreaseButton: {fileID: 0}
   _increaseButton: {fileID: 0}
   _amountText: {fileID: 0}
@@ -209,3 +209,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4508060975649583113}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3930571703218410285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 577564322707661604, guid: c59e9303af19aae48a8616368075b4cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 4508060975649583113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb5b404e7684c8985cf61588c570f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
