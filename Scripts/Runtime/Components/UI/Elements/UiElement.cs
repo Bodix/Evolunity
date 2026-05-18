@@ -47,6 +47,14 @@ namespace Bodix.Evolunity.Components.UI
 				: UiElementState.Hidden;
 		}
 
+		public void Toggle(bool isOn)
+		{
+			if (isOn)
+				Show();
+			else
+				Hide();
+		}
+
 		[ContextMenu(nameof(Show))]
 		public void Show()
 		{
