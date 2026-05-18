@@ -40,11 +40,11 @@ namespace Bodix.Evolunity.Components.UI
 			confirmButton.Button.interactable = maxAmount > 0;
 		}
 
-		public void Clear()
+		public void Clear(string confirmButtonText = "")
 		{
 			quantitySlider.Clear();
 
-			confirmButton.Setup("...", 0);
+			confirmButton.Text.text = confirmButtonText;
 			confirmButton.Button.interactable = false;
 		}
 
