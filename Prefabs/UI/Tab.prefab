@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -348,6 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2092304911852847894, guid: 2712dad81fbccd54d897a26f90f0aa32, type: 3}
+    - {fileID: 1485272828590987666, guid: 2712dad81fbccd54d897a26f90f0aa32, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2712dad81fbccd54d897a26f90f0aa32, type: 3}
 --- !u!1 &7285743567867454339 stripped
 GameObject:
