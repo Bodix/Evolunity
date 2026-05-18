@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Bodix.Evolunity.Components.UI
 {
-	[AddComponentMenu("Evolunity/UI/Tab Pager")]
+	[AddComponentMenu("Evolunity/UI/Tab Group")]
 	public class UiTabsGroup : UiElement
 	{
 		[Serializable]
@@ -19,13 +19,16 @@ namespace Bodix.Evolunity.Components.UI
 		}
 
 		[Tooltip("The group that manages the toggles.")]
-		[SerializeField] private ToggleGroup _toggleGroup;
+		[SerializeField]
+		protected ToggleGroup toggleGroup;
 
 		[Tooltip("List of toggles representing the page tabs.")]
-		[SerializeField] private List<Toggle> _tabsToggles;
+		[SerializeField]
+		protected List<UiToggle> tabsToggles;
 
 		[Tooltip("List of GameObjects representing the actual pages.")]
-		[SerializeField] private List<GameObject> _pages;
+		[SerializeField]
+		protected List<GameObject> pages;
 
 		public PageChangeHandler PageChanged;
 
@@ -45,7 +48,7 @@ namespace Bodix.Evolunity.Components.UI
 
 		public void SetPage(int pageIndex)
 		{
-			if (pageIndex < 0 || pageIndex >= _tabsToggles.Count)
+			if (pageIndex < 0 || pageIndex >= tabsToggles.Count)
 			{
 				Debug.LogWarning("Invalid page index.");
 
@@ -53,35 +56,35 @@ namespace Bodix.Evolunity.Components.UI
 			}
 
 			// Setting isOn to true will automatically trigger the listener and disable others via ToggleGroup.
-			_tabsToggles[pageIndex].isOn = true;
+			tabsToggles[pageIndex].Toggle.isOn = true;
 		}
 
 		private void Initialize()
 		{
-			if (_tabsToggles.Count != _pages.Count)
+			if (tabsToggles.Count != pages.Count)
 			{
 				Debug.LogError("Pagination Setup Failed: The number of toggles must match the number of pages.");
 
 				return;
 			}
 
-			if (_toggleGroup == null)
+			if (toggleGroup == null)
 				Debug.LogWarning("ToggleGroup is not assigned. Toggles may not work as radio buttons.");
 
-			_toggleListeners = new List<UnityAction<bool>>(_tabsToggles.Count);
+			_toggleListeners = new List<UnityAction<bool>>(tabsToggles.Count);
 
-			for (int i = 0; i < _tabsToggles.Count; i++)
+			for (int i = 0; i < tabsToggles.Count; i++)
 			{
-				if (_toggleGroup != null)
-					_tabsToggles[i].group = _toggleGroup;
+				if (toggleGroup != null)
+					tabsToggles[i].Toggle.group = toggleGroup;
 
 				SubscribeToggleListener(i);
 
 				// Initialize the page visibility based on the default toggle state.
-				if (_pages[i] != null)
-					_pages[i].SetActive(_tabsToggles[i].isOn);
+				if (pages[i] != null)
+					pages[i].SetActive(tabsToggles[i].Toggle.isOn);
 
-				if (_tabsToggles[i].isOn)
+				if (tabsToggles[i].Toggle.isOn)
 					PageChanged?.Invoke(i);
 			}
 		}
@@ -90,16 +93,16 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			UnityAction<bool> listener = isOn => OnToggleStateChanged(isOn, index);
 			_toggleListeners.Add(listener);
-			_tabsToggles[index].onValueChanged.AddListener(listener);
+			tabsToggles[index].Toggle.onValueChanged.AddListener(listener);
 		}
 
 		private void OnToggleStateChanged(bool isOn, int pageIndex)
 		{
-			if (pageIndex < 0 || pageIndex >= _pages.Count)
+			if (pageIndex < 0 || pageIndex >= pages.Count)
 				return;
 
-			if (_pages[pageIndex] != null)
-				_pages[pageIndex].SetActive(isOn);
+			if (pages[pageIndex] != null)
+				pages[pageIndex].SetActive(isOn);
 
 			if (isOn)
 				PageChanged?.Invoke(pageIndex);
@@ -111,10 +114,10 @@ namespace Bodix.Evolunity.Components.UI
 			if (_toggleListeners == null)
 				return;
 
-			for (int i = 0; i < _tabsToggles.Count; i++)
-				if (_tabsToggles[i] != null && i < _toggleListeners.Count)
+			for (int i = 0; i < tabsToggles.Count; i++)
+				if (tabsToggles[i] != null && i < _toggleListeners.Count)
 					// Unsubscribes ONLY our specific listeners to avoid breaking other scripts.
-					_tabsToggles[i].onValueChanged.RemoveListener(_toggleListeners[i]);
+					tabsToggles[i].Toggle.onValueChanged.RemoveListener(_toggleListeners[i]);
 		}
 	}
 }
