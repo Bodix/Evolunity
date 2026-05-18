@@ -223,7 +223,7 @@ MonoBehaviour:
   Animations:
     id: 0
   toggle: {fileID: 7285743567867454349}
-  icon: {fileID: 0}
+  icon: {fileID: 804791294742310348}
   text: {fileID: 499713279390237850}
   references:
     version: 1
@@ -372,5 +372,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &804791294742310348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9033298063993959116, guid: 2712dad81fbccd54d897a26f90f0aa32,
+    type: 3}
+  m_PrefabInstance: {fileID: 8536443152261996288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
