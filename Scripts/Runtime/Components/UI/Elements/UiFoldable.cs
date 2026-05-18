@@ -40,6 +40,14 @@ namespace Bodix.Evolunity.Components.UI
 			State = FoldState.Collapsed;
 		}
 
+		public void Toggle(bool isOn)
+		{
+			if (isOn)
+				Expand();
+			else
+				Collapse();
+		}
+
 		[ContextMenu(nameof(Toggle))]
 		public void Toggle()
 		{
