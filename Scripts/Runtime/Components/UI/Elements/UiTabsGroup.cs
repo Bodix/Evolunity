@@ -11,7 +11,7 @@ using UnityEngine.UI;
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Tab Pager")]
-	public class UiTabPager : UiElement
+	public class UiTabsGroup : UiElement
 	{
 		[Serializable]
 		public class PageChangeHandler : UnityEvent<int>
