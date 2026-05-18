@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 196964241}
-  - component: {fileID: 196964242}
   - component: {fileID: 9139624952508714037}
+  - component: {fileID: 196964242}
   m_Layer: 5
   m_Name: Tabs
   m_TagString: Untagged
@@ -37,6 +37,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &9139624952508714037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196964240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 1
 --- !u!114 &196964242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,19 +75,6 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &9139624952508714037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196964240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AllowSwitchOff: 1
 --- !u!1 &1632977847
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  _toggleGroup: {fileID: 9139624952508714037}
-  _tabsToggles: []
-  _pages: []
+  toggleGroup: {fileID: 9139624952508714037}
+  tabsToggles: []
+  pages: []
   PageChanged:
     m_PersistentCalls:
       m_Calls: []
