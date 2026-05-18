@@ -2,6 +2,8 @@
 
 namespace Bodix.Evolunity.Components.UI
 {
+	// TODO: Add all required data from FlexibleLayoutGroup. [#design]
+
 	[Serializable]
 	public class FlexibleLayoutData
 	{
