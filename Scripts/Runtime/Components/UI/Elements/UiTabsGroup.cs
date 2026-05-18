@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Bodix.Evolunity.Components.UI
 {
-	[AddComponentMenu("Evolunity/UI/Tab Group")]
+	[AddComponentMenu("Evolunity/UI/Tabs Group")]
 	public class UiTabsGroup : UiElement
 	{
 		[Serializable]
