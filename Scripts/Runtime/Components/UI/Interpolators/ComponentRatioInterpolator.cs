@@ -53,37 +53,41 @@ namespace Bodix.Evolunity.Components.UI
 		[Button("Save Current To Widest")]
 		protected void SaveCurrentToWidest()
 		{
-			if (Target == null) return;
-
 			RecordUndo(this, "Save Widest Data");
+
 			WidestData = ExtractDataFromTarget();
 		}
 
 		[Button("Save Current To Narrowest")]
 		protected void SaveCurrentToNarrowest()
 		{
-			if (Target == null) return;
-
 			RecordUndo(this, "Save Narrowest Data");
+
 			NarrowestData = ExtractDataFromTarget();
 		}
 
 		[Button("Apply Widest To Current")]
 		protected void ApplyWidestToCurrent()
 		{
-			if (Target == null) return;
-
 			RecordUndo(Target, "Apply Widest Data");
+
 			ApplyDataToTarget(WidestData);
 		}
 
 		[Button("Apply Narrowest To Current")]
 		protected void ApplyNarrowestToCurrent()
 		{
-			if (Target == null) return;
-
 			RecordUndo(Target, "Apply Narrowest Data");
+
 			ApplyDataToTarget(NarrowestData);
+		}
+
+		[Button("Swap Widest And Narrowest")]
+		protected void SwapWidestAndNarrowest()
+		{
+			RecordUndo(Target, "Swap Widest And Narrowest");
+
+			(WidestData, NarrowestData) = (NarrowestData, WidestData);
 		}
 
 		private void RecordUndo(Object target, string actionName)
