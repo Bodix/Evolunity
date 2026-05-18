@@ -12,7 +12,6 @@ namespace Bodix.Evolunity.Components.UI
 	// - UiConditionalButton
 	// - UiPopup / UiDialog
 	// - UiToast / UiNotification
-	// - UiToggle
 	// - UiInteractionBlocker
 	// - UiTooltip
 	// - UiWindow (not UiScreen, UiScreen can be only one at time, UiWindow can be multiple)
