@@ -18,21 +18,28 @@ namespace Bodix.Evolunity.Components.UI
 		{
 		}
 
+		// Defines an event to handle the change of the "any tab is active" state.
+		[Serializable]
+		public class HasActiveTabChangeHandler : UnityEvent<bool>
+		{
+		}
+
 		[Tooltip("The group that manages the toggles.")]
 		[SerializeField]
 		protected ToggleGroup toggleGroup;
-
 		[Tooltip("List of toggles representing the page tabs.")]
 		[SerializeField]
 		protected List<UiToggle> tabsToggles;
-
 		[Tooltip("List of GameObjects representing the actual pages.")]
 		[SerializeField]
 		protected List<GameObject> pages;
 
 		public PageChangeHandler PageChanged;
+		public HasActiveTabChangeHandler HasActiveTabChanged;
 
 		private List<UnityAction<bool>> _toggleListeners;
+
+		private bool _wasAnyTabActive;
 
 		protected override void Awake()
 		{
@@ -87,6 +94,9 @@ namespace Bodix.Evolunity.Components.UI
 				if (tabsToggles[i].Toggle.isOn)
 					PageChanged?.Invoke(i);
 			}
+
+			// Initialize the tracking variable without invoking the event to avoid unexpected behavior on Awake.
+			_wasAnyTabActive = IsAnyTabActive();
 		}
 
 		private void SubscribeToggleListener(int index)
@@ -106,8 +116,31 @@ namespace Bodix.Evolunity.Components.UI
 
 			if (isOn)
 				PageChanged?.Invoke(pageIndex);
+
+			CheckAnyTabActiveState();
+		}
+		
+		private void CheckAnyTabActiveState()
+		{
+			bool isAnyTabActive = IsAnyTabActive();
+			if (isAnyTabActive != _wasAnyTabActive)
+			{
+				_wasAnyTabActive = isAnyTabActive;
+				HasActiveTabChanged?.Invoke(isAnyTabActive);
+			}
 		}
 
+		/// <summary>
+		/// Helper method to determine if at least one tab is currently active.
+		/// </summary>
+		private bool IsAnyTabActive()
+		{
+			foreach (UiToggle toggle in tabsToggles)
+				if (toggle.Toggle.isOn)
+					return true;
+
+			return false;
+		}
 
 		private void UnsubscribeToggleListeners()
 		{
