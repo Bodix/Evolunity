@@ -51,7 +51,7 @@ namespace Bodix.Evolunity.Components.UI
 		protected abstract void ApplyDataToTarget(TData data);
 
 		[Button("Save Current To Widest")]
-		private void SaveCurrentToWidest()
+		protected void SaveCurrentToWidest()
 		{
 			if (Target == null) return;
 
@@ -60,7 +60,7 @@ namespace Bodix.Evolunity.Components.UI
 		}
 
 		[Button("Save Current To Narrowest")]
-		private void SaveCurrentToNarrowest()
+		protected void SaveCurrentToNarrowest()
 		{
 			if (Target == null) return;
 
@@ -69,7 +69,7 @@ namespace Bodix.Evolunity.Components.UI
 		}
 
 		[Button("Apply Widest To Current")]
-		private void ApplyWidestToCurrent()
+		protected void ApplyWidestToCurrent()
 		{
 			if (Target == null) return;
 
@@ -78,7 +78,7 @@ namespace Bodix.Evolunity.Components.UI
 		}
 
 		[Button("Apply Narrowest To Current")]
-		private void ApplyNarrowestToCurrent()
+		protected void ApplyNarrowestToCurrent()
 		{
 			if (Target == null) return;
 
