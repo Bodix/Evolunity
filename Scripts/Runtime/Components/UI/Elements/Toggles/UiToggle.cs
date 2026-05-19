@@ -13,6 +13,6 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		protected Toggle toggle;
 
-		public Toggle Toggle => toggle;
+		public new Toggle Toggle => toggle;
 	}
 }
