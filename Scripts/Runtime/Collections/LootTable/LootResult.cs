@@ -1,4 +1,4 @@
-namespace Bodix.Evolunity.Collections.LootTable
+namespace Bodix.Evolunity.Collections
 {
 	/// <summary>
 	/// Represents the final generated item and its quantity.

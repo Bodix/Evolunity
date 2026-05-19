@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Bodix.Evolunity.Collections.LootTable
+namespace Bodix.Evolunity.Collections
 {
 	[Serializable]
 	public class LootTableEntry<T>

@@ -3,7 +3,7 @@ using System.Text;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Bodix.Evolunity.Collections.LootTable
+namespace Bodix.Evolunity.Collections
 {
 	public abstract class LootTable<T, TEntry> : ScriptableObject where TEntry : LootTableEntry<T>, new()
 	{
@@ -30,6 +30,7 @@ namespace Bodix.Evolunity.Collections.LootTable
 			if (items == null)
 			{
 				Debug.LogError("The elements list is null. Cannot generate loot.");
+
 				return null;
 			}
 
@@ -40,24 +41,28 @@ namespace Bodix.Evolunity.Collections.LootTable
 				if (item == null)
 				{
 					Debug.LogError("Encountered a null element in the loot table.");
+
 					return null;
 				}
 
 				if (item.Item == null)
 				{
 					Debug.LogError("An item reference is missing in the loot table.");
+
 					return null;
 				}
 
 				if (item.Probability < 0f || item.Probability > 1f)
 				{
 					Debug.LogError("Probability must be between 0 and 1.");
+
 					return null;
 				}
 
 				if (item.MinCount < 0 || item.MaxCount < item.MinCount)
 				{
 					Debug.LogError("Invalid min or max count configuration.");
+
 					return null;
 				}
 
