@@ -52,7 +52,8 @@ namespace Bodix.Evolunity.Collections
 
 		public override bool IsValidBase()
 		{
-			if (!base.IsValidBase()) return false;
+			if (!base.IsValidBase())
+				return false;
 
 			if (Item == null)
 			{
