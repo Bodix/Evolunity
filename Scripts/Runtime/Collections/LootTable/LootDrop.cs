@@ -203,11 +203,16 @@ namespace Bodix.Evolunity.Collections
 		}
 	}
 
+	[Serializable]
+	public abstract class WeightedPoolEntry
+	{
+	}
+
 	/// <summary>
 	/// A single entry within a weighted pool.
 	/// </summary>
 	[Serializable]
-	public abstract class WeightedPoolEntry<T>
+	public abstract class WeightedPoolEntry<T> : WeightedPoolEntry
 	{
 		public T Item;
 
