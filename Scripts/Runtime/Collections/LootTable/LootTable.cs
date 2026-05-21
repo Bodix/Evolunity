@@ -18,7 +18,7 @@ namespace Bodix.Evolunity.Collections
 {
 	public abstract class LootTable<T> : ScriptableObject
 	{
-		[SerializeReference, TypeSelector]
+		[SerializeReference, TypeSelector, ReorderableList]
 		protected List<LootDrop> drops = new List<LootDrop>();
 
 		public List<LootResult<T>> GenerateLoot(LootContext context = null)

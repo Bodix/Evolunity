@@ -4,27 +4,23 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Collections
 {
-	/// <summary>
-	/// Absolutely non-generic base class. 
-	/// Required for Unity 2019.4 to properly serialize lists of polymorphic objects.
-	/// </summary>
 	[Serializable]
 	public abstract class LootDrop
 	{
 		[Range(0f, 1f)]
 		public float Probability = 1f;
 
-		[SerializeReference]
+		// Uncomment when it will be needed.
+		// [SerializeReference]
+		[SerializeReference, HideInInspector]
 		public LootCondition Condition;
 
-		/// <summary>
-		/// Validates the base configuration of the drop node.
-		/// </summary>
 		public virtual bool IsValidBase()
 		{
 			if (Probability < 0f || Probability > 1f)
 			{
 				Debug.LogError("[LootDrop] Probability must be between 0 and 1.");
+
 				return false;
 			}
 
@@ -32,10 +28,6 @@ namespace Bodix.Evolunity.Collections
 		}
 	}
 
-	/// <summary>
-	/// Universal generic base class for any loot generator node in the table.
-	/// </summary>
-	[Serializable]
 	public abstract class LootDrop<T> : LootDrop
 	{
 		/// <summary>
@@ -65,12 +57,14 @@ namespace Bodix.Evolunity.Collections
 			if (Item == null)
 			{
 				Debug.LogError("[ItemDrop] Item reference is missing.");
+
 				return false;
 			}
 
 			if (MinCount < 0 || MaxCount < MinCount)
 			{
 				Debug.LogError($"[ItemDrop] Invalid min or max count configuration for item {Item}.");
+
 				return false;
 			}
 
@@ -81,30 +75,10 @@ namespace Bodix.Evolunity.Collections
 		{
 			int count = UnityEngine.Random.Range(MinCount, MaxCount + 1);
 			if (count > 0)
-			{
 				results.Add(new LootResult<T>(Item, count));
-			}
 
 			return true;
 		}
-	}
-
-	/// <summary>
-	/// A single entry within a weighted pool.
-	/// </summary>
-	[Serializable]
-	public abstract class WeightedPoolEntry<T>
-	{
-		public T Item;
-
-		[Min(0f)]
-		public float Weight = 1f;
-
-		[Min(0)]
-		public int MinCount = 1;
-
-		[Min(1)]
-		public int MaxCount = 1;
 	}
 
 	/// <summary>
@@ -128,6 +102,7 @@ namespace Bodix.Evolunity.Collections
 			if (Rolls < 0 || EmptyRollWeight < 0f)
 			{
 				Debug.LogError("[WeightedPoolDrop] Invalid rolls or empty weight configuration.");
+
 				return false;
 			}
 
@@ -137,6 +112,7 @@ namespace Bodix.Evolunity.Collections
 				if (entry == null || entry.Item == null || entry.Weight < 0f || entry.MinCount < 0 || entry.MaxCount < entry.MinCount)
 				{
 					Debug.LogError("[WeightedPoolDrop] Invalid entry configuration encountered in the pool.");
+
 					return false;
 				}
 
@@ -146,6 +122,7 @@ namespace Bodix.Evolunity.Collections
 			if (Rolls > 0 && totalWeight <= 0f)
 			{
 				Debug.LogError("[WeightedPoolDrop] Total weight of the weighted pool is 0. Cannot generate weighted loot.");
+
 				return false;
 			}
 
@@ -157,27 +134,24 @@ namespace Bodix.Evolunity.Collections
 			if (Pool == null || Pool.Count == 0 || Rolls <= 0) return true;
 
 			float totalWeight = EmptyRollWeight;
-			foreach (var entry in Pool)
-			{
+			foreach (TEntry entry in Pool)
 				totalWeight += entry.Weight;
-			}
 
 			for (int i = 0; i < Rolls; i++)
 			{
 				float roll = UnityEngine.Random.Range(0f, totalWeight);
-				if (roll < EmptyRollWeight) continue;
+				if (roll < EmptyRollWeight)
+					continue;
 
 				float currentWeight = EmptyRollWeight;
-				foreach (var entry in Pool)
+				foreach (TEntry entry in Pool)
 				{
 					currentWeight += entry.Weight;
 					if (roll <= currentWeight)
 					{
 						int count = UnityEngine.Random.Range(entry.MinCount, entry.MaxCount + 1);
 						if (count > 0)
-						{
 							results.Add(new LootResult<T>(entry.Item, count));
-						}
 
 						break;
 					}
@@ -186,5 +160,23 @@ namespace Bodix.Evolunity.Collections
 
 			return true;
 		}
+	}
+
+	/// <summary>
+	/// A single entry within a weighted pool.
+	/// </summary>
+	[Serializable]
+	public abstract class WeightedPoolEntry<T>
+	{
+		public T Item;
+
+		[Min(0f)]
+		public float Weight = 1f;
+
+		[Min(0)]
+		public int MinCount = 1;
+
+		[Min(1)]
+		public int MaxCount = 1;
 	}
 }
