@@ -1,13 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Bodix.Evolunity.Attributes;
 using NaughtyAttributes;
 using UnityEngine;
+
+// TODO:
+// 1. Nested Tables: When an item in a table is... another loot table.
+// For example, a “Chest” drops a “Bag of Gold” (a table), which in turn generates gold.
+//
+// 2. Conditional Drops: An item drops only if the player is above level 10,
+// or only at night, or only if a specific quest has been accepted.
+//
+// 3. Pity System (Guarantee): A mechanic from gacha games.
+// If a player has killed a boss 99 times and hasn’t received a rare sword, the chance becomes 100% on the 100th attempt.
 
 namespace Bodix.Evolunity.Collections
 {
 	public abstract class LootTable<T, TEntry> : ScriptableObject where TEntry : LootTableEntry<T>, new()
 	{
-		[SerializeField]
+		[SerializeReference, TypeSelector]
 		protected List<TEntry> items = new List<TEntry>();
 
 		private void OnValidate()

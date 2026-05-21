@@ -13,5 +13,11 @@ namespace Bodix.Evolunity.Collections
 		public int MinCount = 1;
 		[Min(1)]
 		public int MaxCount = 1;
+		
+		// [SerializeReference]
+		// public LootCondition Condition;
 	}
+	
+	// [Serializable]
+	// public abstract class LootCondition { }
 }
