@@ -16,29 +16,14 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Collections
 {
-	public abstract class LootTable<T, TEntry> : ScriptableObject where TEntry : LootTableEntry<T>, new()
+	public abstract class LootTable<T> : ScriptableObject
 	{
 		[SerializeReference, TypeSelector]
-		protected List<TEntry> items = new List<TEntry>();
+		protected List<LootDrop> drops = new List<LootDrop>();
 
-		private void OnValidate()
+		public List<LootResult<T>> GenerateLoot(LootContext context = null)
 		{
-			foreach (TEntry item in items)
-			{
-				// Unity serialization bypasses field initializers when adding a new element to an empty list.
-				// This heuristic detects a newly created default element and initializes it properly.
-				if (item.Probability == 0f && item.MinCount == 0 && item.MaxCount == 0)
-				{
-					item.Probability = 1f;
-					item.MinCount = 1;
-					item.MaxCount = 1;
-				}
-			}
-		}
-
-		public List<LootResult<T>> GenerateLoot()
-		{
-			if (items == null)
+			if (drops == null)
 			{
 				Debug.LogError("The elements list is null. Cannot generate loot.");
 
@@ -47,42 +32,35 @@ namespace Bodix.Evolunity.Collections
 
 			List<LootResult<T>> results = new List<LootResult<T>>();
 
-			foreach (TEntry item in items)
+			foreach (LootDrop drop in drops)
 			{
-				if (item == null)
+				if (drop == null || !drop.IsValidBase())
 				{
-					Debug.LogError("Encountered a null element in the loot table.");
+					Debug.LogError("Encountered an invalid element in the loot table.");
 
 					return null;
 				}
 
-				if (item.Item == null)
-				{
-					Debug.LogError("An item reference is missing in the loot table.");
+				// Evaluates condition via the context.
+				if (drop.Condition != null && !drop.Condition.IsMet(context))
+					continue;
 
-					return null;
-				}
-
-				if (item.Probability < 0f || item.Probability > 1f)
-				{
-					Debug.LogError("Probability must be between 0 and 1.");
-
-					return null;
-				}
-
-				if (item.MinCount < 0 || item.MaxCount < item.MinCount)
-				{
-					Debug.LogError("Invalid min or max count configuration.");
-
-					return null;
-				}
-
+				// Evaluates base node probability.
 				float roll = Random.Range(0f, 1f);
-				if (roll <= item.Probability)
+				if (roll > drop.Probability)
+					continue;
+
+				// Safely casts and generates the specific internal loot.
+				if (drop is LootDrop<T> typedDrop)
 				{
-					int count = Random.Range(item.MinCount, item.MaxCount + 1);
-					if (count > 0)
-						results.Add(new LootResult<T>(item.Item, count));
+					if (!typedDrop.TryGenerate(results, context))
+						return null;
+				}
+				else
+				{
+					Debug.LogError($"Invalid drop type encountered. Expected LootDrop<{typeof(T).Name}>.");
+
+					return null;
 				}
 			}
 
@@ -103,17 +81,16 @@ namespace Bodix.Evolunity.Collections
 
 			if (droppedLoot.Count == 0)
 			{
-				Debug.Log("Loot generated successfully, but no items dropped based on probabilities.");
+				Debug.Log("Generated Loot: None (Empty drop).");
 
 				return;
 			}
 
-			StringBuilder logBuilder = new StringBuilder("Loot generated:\n");
+			StringBuilder sb = new StringBuilder("Generated Loot:\n");
+			foreach (LootResult<T> loot in droppedLoot)
+				sb.AppendLine($"- {loot.Item.ToString()} (x{loot.Count})");
 
-			foreach (LootResult<T> result in droppedLoot)
-				logBuilder.AppendLine($"- {result.Count}x of {result.Item}");
-
-			Debug.Log(logBuilder.ToString());
+			Debug.Log(sb.ToString());
 		}
 	}
 }
