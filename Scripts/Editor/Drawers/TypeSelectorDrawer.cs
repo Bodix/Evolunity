@@ -30,16 +30,21 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 		protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			Rect dropdownButtonRect = new Rect(position);
-			dropdownButtonRect.x += EditorGUIUtility.labelWidth + 2;
-			dropdownButtonRect.width -= EditorGUIUtility.labelWidth + 2;
-			// Used to fix strange bug with property drawing.
-			dropdownButtonRect.height = EditorGUIUtility.singleLineHeight;
+			EditorGUI.PropertyField(position, property, label, true);
 
-			if (EditorGUI.DropdownButton(
-				    dropdownButtonRect,
-				    new GUIContent(GetManagedReferenceValueTypename(property)),
-				    FocusType.Keyboard))
+			GUIContent buttonContent = new GUIContent(GetManagedReferenceValueTypename(property));
+			GUIStyle buttonStyle = EditorStyles.popup;
+			float buttonWidth = buttonStyle.CalcSize(buttonContent).x + 5f;
+			float maxAvailableWidth = position.width - EditorGUIUtility.labelWidth;
+			buttonWidth = Mathf.Min(buttonWidth, Mathf.Max(maxAvailableWidth, 50f));
+			Rect dropdownButtonRect = new Rect(
+				position.xMax - buttonWidth,
+				position.y,
+				buttonWidth,
+				EditorGUIUtility.singleLineHeight
+			);
+
+			if (EditorGUI.DropdownButton(dropdownButtonRect, buttonContent, FocusType.Keyboard, buttonStyle))
 			{
 				Type baseType = property.GetManagedReferenceFieldType();
 				TypeSelectorDropdown dropdown = new TypeSelectorDropdown(
@@ -64,8 +69,6 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 				dropdown.Show(dropdownButtonRect);
 			}
-
-			EditorGUI.PropertyField(position, property, label, true);
 		}
 
 		private string GetManagedReferenceValueTypename(SerializedProperty property)
