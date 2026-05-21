@@ -30,8 +30,6 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 		protected override void OnValidatedGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.PropertyField(position, property, label, true);
-
 			GUIContent buttonContent = new GUIContent(GetManagedReferenceValueTypename(property));
 			GUIStyle buttonStyle = EditorStyles.popup;
 			float buttonWidth = buttonStyle.CalcSize(buttonContent).x + 5f;
@@ -69,6 +67,8 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 				dropdown.Show(dropdownButtonRect);
 			}
+
+			EditorGUI.PropertyField(position, property, label, true);
 		}
 
 		private string GetManagedReferenceValueTypename(SerializedProperty property)
