@@ -26,6 +26,13 @@ namespace Bodix.Evolunity.Collections
 
 			return true;
 		}
+
+		/// <summary>
+		/// Called by the parent loot table to handle default values and validation.
+		/// </summary>
+		public virtual void OnValidate()
+		{
+		}
 	}
 
 	public abstract class LootDrop<T> : LootDrop
@@ -79,6 +86,18 @@ namespace Bodix.Evolunity.Collections
 				results.Add(new LootResult<T>(Item, count));
 
 			return true;
+		}
+
+		public override void OnValidate()
+		{
+			base.OnValidate();
+
+			// Fixes newly added elements in the inspector.
+			if (MinCount == 0 && MaxCount == 0)
+			{
+				MinCount = 1;
+				MaxCount = 1;
+			}
 		}
 	}
 
@@ -162,6 +181,25 @@ namespace Bodix.Evolunity.Collections
 			}
 
 			return true;
+		}
+
+		public override void OnValidate()
+		{
+			base.OnValidate();
+
+			if (Pool == null)
+				return;
+
+			// Fixes newly added nested entries inside the weighted pool.
+			foreach (TEntry entry in Pool)
+			{
+				if (entry != null && entry.Weight == 0f && entry.MinCount == 0 && entry.MaxCount == 0)
+				{
+					entry.Weight = 1f;
+					entry.MinCount = 1;
+					entry.MaxCount = 1;
+				}
+			}
 		}
 	}
 

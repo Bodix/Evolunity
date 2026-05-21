@@ -21,6 +21,15 @@ namespace Bodix.Evolunity.Collections
 		[SerializeReference, TypeSelector, ReorderableList]
 		protected List<LootDrop> drops = new List<LootDrop>();
 
+		private void OnValidate()
+		{
+			if (drops == null)
+				return;
+
+			foreach (LootDrop drop in drops)
+				drop?.OnValidate();
+		}
+
 		public List<LootResult<T>> GenerateLoot(LootContext context = null)
 		{
 			if (drops == null)
