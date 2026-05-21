@@ -43,7 +43,7 @@ namespace Bodix.Evolunity.Collections
 
 			foreach (LootDrop drop in drops)
 			{
-				if (drop == null || !drop.IsValidBase())
+				if (drop == null || !drop.IsValid())
 				{
 					Debug.LogError("Encountered an invalid element in the loot table.");
 

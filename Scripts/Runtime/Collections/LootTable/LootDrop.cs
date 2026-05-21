@@ -15,7 +15,7 @@ namespace Bodix.Evolunity.Collections
 		[SerializeReference, HideInInspector]
 		public LootCondition Condition;
 
-		public virtual bool IsValidBase()
+		public virtual bool IsValid()
 		{
 			if (Probability < 0f || Probability > 1f)
 			{
@@ -57,9 +57,9 @@ namespace Bodix.Evolunity.Collections
 		[Min(1)]
 		public int MaxCount = 1;
 
-		public override bool IsValidBase()
+		public override bool IsValid()
 		{
-			if (!base.IsValidBase())
+			if (!base.IsValid())
 				return false;
 
 			if (Item == null)
@@ -115,9 +115,9 @@ namespace Bodix.Evolunity.Collections
 
 		public List<TEntry> Pool = new List<TEntry>();
 
-		public override bool IsValidBase()
+		public override bool IsValid()
 		{
-			if (!base.IsValidBase())
+			if (!base.IsValid())
 				return false;
 
 			if (Rolls < 0 || EmptyRollWeight < 0f)
