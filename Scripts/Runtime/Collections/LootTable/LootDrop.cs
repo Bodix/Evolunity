@@ -98,7 +98,8 @@ namespace Bodix.Evolunity.Collections
 
 		public override bool IsValidBase()
 		{
-			if (!base.IsValidBase()) return false;
+			if (!base.IsValidBase())
+				return false;
 
 			if (Rolls < 0 || EmptyRollWeight < 0f)
 			{
@@ -108,7 +109,7 @@ namespace Bodix.Evolunity.Collections
 			}
 
 			float totalWeight = EmptyRollWeight;
-			foreach (var entry in Pool)
+			foreach (TEntry entry in Pool)
 			{
 				if (entry == null || entry.Item == null || entry.Weight < 0f || entry.MinCount < 0 || entry.MaxCount < entry.MinCount)
 				{
@@ -132,7 +133,8 @@ namespace Bodix.Evolunity.Collections
 
 		public override bool TryGenerate(List<LootResult<T>> results, LootContext context)
 		{
-			if (Pool == null || Pool.Count == 0 || Rolls <= 0) return true;
+			if (Pool == null || Pool.Count == 0 || Rolls <= 0)
+				return true;
 
 			float totalWeight = EmptyRollWeight;
 			foreach (TEntry entry in Pool)
