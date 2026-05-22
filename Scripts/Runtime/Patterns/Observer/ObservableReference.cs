@@ -8,14 +8,14 @@ namespace Bodix.Evolunity.Patterns
 	/// Wraps an observable property to provide reactivity while ensuring the dependency is never null.
 	/// </summary>
 	[Serializable]
-	public class MutableReference<T> where T : class
+	public class ObservableReference<T> where T : class
 	{
 		private readonly ObservableProperty<T> _property;
 
-		public MutableReference(T initialValue)
+		public ObservableReference(T initialValue)
 		{
 			if (initialValue == null)
-				Debug.LogError($"[MutableReference] Initialization failed: provided initial {typeof(T).Name} is null.");
+				Debug.LogError($"[{nameof(ObservableReference<T>)}] Initialization failed: provided initial {typeof(T).Name} is null.");
 
 			_property = new ObservableProperty<T>(initialValue);
 		}
@@ -33,7 +33,7 @@ namespace Bodix.Evolunity.Patterns
 			{
 				if (value == null)
 				{
-					Debug.LogError($"[MutableReference] Failed to set value: provided {typeof(T).Name} is null.");
+					Debug.LogError($"[{nameof(ObservableReference<T>)}] Failed to set value: provided {typeof(T).Name} is null.");
 
 					return;
 				}
