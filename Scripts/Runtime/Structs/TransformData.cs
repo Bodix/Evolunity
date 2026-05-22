@@ -8,11 +8,11 @@ using UnityEngine;
 namespace Bodix.Evolunity.Structs
 {
 	[Serializable]
-	public readonly struct TransformData
+	public struct TransformData
 	{
-		public readonly Vector3 Position;
-		public readonly Quaternion Rotation;
-		public readonly Vector3 LocalScale;
+		public Vector3 Position;
+		public Quaternion Rotation;
+		public Vector3 LocalScale;
 
 		public TransformData(Vector3 position, Quaternion rotation, Vector3 localScale)
 		{
