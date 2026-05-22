@@ -13,7 +13,7 @@ namespace Bodix.Evolunity.Collections.Editor
 	{
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			// Check if this specific node has "Item" and "Probability" fields (meaning it's an ItemDrop leaf node)
+			// Check if this specific node has "Item" and "Probability" fields (meaning it's an ItemDrop leaf node).
 			SerializedProperty itemProp = property.FindPropertyRelative("Item");
 			SerializedProperty probProp = property.FindPropertyRelative("Probability");
 
@@ -21,55 +21,70 @@ namespace Bodix.Evolunity.Collections.Editor
 			{
 				EditorGUI.BeginProperty(position, label, property);
 				
-				// THIS is the magic fix for the UI crushing issue in lists
-				int oldIndent = EditorGUI.indentLevel;
+				// THIS is the magic fix for the UI crushing issue in lists.
+				int previousIndentLevel = EditorGUI.indentLevel;
 				EditorGUI.indentLevel = 0;
 
 				SerializedProperty minProp = property.FindPropertyRelative("MinCount");
 				SerializedProperty maxProp = property.FindPropertyRelative("MaxCount");
 
-				// Fixed widths for numeric fields and labels
-				float space = 5f;
-				float pLabelW = 15f; float pFieldW = 40f;
-				float mLabelW = 28f; float mFieldW = 35f;
+				if (minProp == null || maxProp == null)
+				{
+					Debug.LogError("UniversalLootDropDrawer: Missing 'MinCount' or 'MaxCount' properties. Early return executed.");
+					EditorGUI.LabelField(position, "Error: Missing properties.");
+					EditorGUI.indentLevel = previousIndentLevel;
+					EditorGUI.EndProperty();
+					return;
+				}
 
-				float fixedWidth = pLabelW + pFieldW + (mLabelW * 2) + (mFieldW * 2) + (space * 5);
-				float itemFieldWidth = Mathf.Max(60f, position.width - fixedWidth);
+				// Fixed widths for numeric fields and labels.
+				float spacing = 5f;
+				float probabilityLabelWidth = 70f; 
+				float probabilityFieldWidth = 40f;
+				float minMaxLabelWidth = 28f; 
+				float minMaxFieldWidth = 35f;
 
-				// Starting rect
-				Rect r = new Rect(position.x, position.y + 1f, pLabelW, EditorGUIUtility.singleLineHeight);
+				// Line 1: Probability (drawn over the default element label space).
+				Rect firstLineRect = new Rect(position.x, position.y, probabilityLabelWidth, EditorGUIUtility.singleLineHeight);
+				EditorGUI.LabelField(firstLineRect, "Probability");
+				
+				firstLineRect.x += probabilityLabelWidth; 
+				firstLineRect.width = probabilityFieldWidth;
+				EditorGUI.PropertyField(firstLineRect, probProp, GUIContent.none);
 
-				// P: [Probability]
-				EditorGUI.LabelField(r, "P:");
-				r.x += pLabelW; r.width = pFieldW;
-				EditorGUI.PropertyField(r, probProp, GUIContent.none);
-				r.x += pFieldW + space;
+				// Line 2: Item reference, Min, Max.
+				float secondLineY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+				float fixedFieldsWidth = (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 2);
+				float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
 
-				// [Object Reference Field]
-				r.width = itemFieldWidth;
-				EditorGUI.PropertyField(r, itemProp, GUIContent.none);
-				r.x += itemFieldWidth + space;
+				Rect secondLineRect = new Rect(position.x, secondLineY, itemReferenceWidth, EditorGUIUtility.singleLineHeight);
 
-				// Min: [MinCount]
-				r.width = mLabelW;
-				EditorGUI.LabelField(r, "Min:");
-				r.x += mLabelW; r.width = mFieldW;
-				EditorGUI.PropertyField(r, minProp, GUIContent.none);
-				r.x += mFieldW + space;
+				// [Object Reference Field].
+				EditorGUI.PropertyField(secondLineRect, itemProp, GUIContent.none);
+				secondLineRect.x += itemReferenceWidth + spacing;
 
-				// Max: [MaxCount]
-				r.width = mLabelW;
-				EditorGUI.LabelField(r, "Max:");
-				r.x += mLabelW; r.width = mFieldW;
-				EditorGUI.PropertyField(r, maxProp, GUIContent.none);
+				// Min: [MinCount].
+				secondLineRect.width = minMaxLabelWidth;
+				EditorGUI.LabelField(secondLineRect, "Min:");
+				secondLineRect.x += minMaxLabelWidth; 
+				secondLineRect.width = minMaxFieldWidth;
+				EditorGUI.PropertyField(secondLineRect, minProp, GUIContent.none);
+				secondLineRect.x += minMaxFieldWidth + spacing;
 
-				// Restore indent
-				EditorGUI.indentLevel = oldIndent;
+				// Max: [MaxCount].
+				secondLineRect.width = minMaxLabelWidth;
+				EditorGUI.LabelField(secondLineRect, "Max:");
+				secondLineRect.x += minMaxLabelWidth; 
+				secondLineRect.width = minMaxFieldWidth;
+				EditorGUI.PropertyField(secondLineRect, maxProp, GUIContent.none);
+
+				// Restore indent.
+				EditorGUI.indentLevel = previousIndentLevel;
 				EditorGUI.EndProperty();
 			}
 			else
 			{
-				// If it's a complex object like WeightedPoolDrop, let Unity draw it normally with foldouts
+				// If it's a complex object like WeightedPoolDrop, let Unity draw it normally with foldouts.
 				EditorGUI.PropertyField(position, property, label, true);
 			}
 		}
@@ -78,10 +93,11 @@ namespace Bodix.Evolunity.Collections.Editor
 		{
 			if (property.FindPropertyRelative("Item") != null && property.FindPropertyRelative("Probability") != null)
 			{
-				return EditorGUIUtility.singleLineHeight + 2f; // Compact height
+				// Compact height calculation.
+				return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing; 
 			}
 			
-			// Default expanded height for complex objects
+			// Default expanded height for complex objects.
 			return EditorGUI.GetPropertyHeight(property, label, true);
 		}
 	}
@@ -96,8 +112,8 @@ namespace Bodix.Evolunity.Collections.Editor
 		{
 			EditorGUI.BeginProperty(position, label, property);
 			
-			// Fix for list indentation crushing
-			int oldIndent = EditorGUI.indentLevel;
+			// THIS is the magic fix for the list indentation crushing.
+			int previousIndentLevel = EditorGUI.indentLevel;
 			EditorGUI.indentLevel = 0;
 
 			SerializedProperty itemProp = property.FindPropertyRelative("Item");
@@ -105,40 +121,55 @@ namespace Bodix.Evolunity.Collections.Editor
 			SerializedProperty minProp = property.FindPropertyRelative("MinCount");
 			SerializedProperty maxProp = property.FindPropertyRelative("MaxCount");
 
-			float space = 5f;
-			float wLabelW = 20f; float wFieldW = 40f;
-			float mLabelW = 28f; float mFieldW = 35f;
+			if (itemProp == null || weightProp == null || minProp == null || maxProp == null)
+			{
+				Debug.LogError("UniversalWeightedEntryDrawer: Missing required properties. Early return executed.");
+				EditorGUI.LabelField(position, "Error: Missing properties.");
+				EditorGUI.indentLevel = previousIndentLevel;
+				EditorGUI.EndProperty();
+				return;
+			}
 
-			float fixedWidth = wLabelW + wFieldW + (mLabelW * 2) + (mFieldW * 2) + (space * 5);
-			float itemFieldWidth = Mathf.Max(60f, position.width - fixedWidth);
+			float spacing = 5f;
+			float weightLabelWidth = 20f; 
+			float weightFieldWidth = 40f;
+			float minMaxLabelWidth = 28f; 
+			float minMaxFieldWidth = 35f;
 
-			Rect r = new Rect(position.x, position.y + 1f, itemFieldWidth, EditorGUIUtility.singleLineHeight);
+			// Adjusted spacing multiplier to 3 since there are 4 drawn blocks.
+			float fixedFieldsWidth = weightLabelWidth + weightFieldWidth + (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 3);
+			float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
 
-			// [Object Reference Field]
-			EditorGUI.PropertyField(r, itemProp, GUIContent.none);
-			r.x += itemFieldWidth + space;
+			Rect currentRect = new Rect(position.x, position.y + 1f, itemReferenceWidth, EditorGUIUtility.singleLineHeight);
 
-			// W: [Weight]
-			r.width = wLabelW;
-			EditorGUI.LabelField(r, "W:");
-			r.x += wLabelW; r.width = wFieldW;
-			EditorGUI.PropertyField(r, weightProp, GUIContent.none);
-			r.x += wFieldW + space;
+			// [Object Reference Field].
+			EditorGUI.PropertyField(currentRect, itemProp, GUIContent.none);
+			currentRect.x += itemReferenceWidth + spacing;
 
-			// Min: [MinCount]
-			r.width = mLabelW;
-			EditorGUI.LabelField(r, "Min:");
-			r.x += mLabelW; r.width = mFieldW;
-			EditorGUI.PropertyField(r, minProp, GUIContent.none);
-			r.x += mFieldW + space;
+			// W: [Weight].
+			currentRect.width = weightLabelWidth;
+			EditorGUI.LabelField(currentRect, "W:");
+			currentRect.x += weightLabelWidth; 
+			currentRect.width = weightFieldWidth;
+			EditorGUI.PropertyField(currentRect, weightProp, GUIContent.none);
+			currentRect.x += weightFieldWidth + spacing;
 
-			// Max: [MaxCount]
-			r.width = mLabelW;
-			EditorGUI.LabelField(r, "Max:");
-			r.x += mLabelW; r.width = mFieldW;
-			EditorGUI.PropertyField(r, maxProp, GUIContent.none);
+			// Min: [MinCount].
+			currentRect.width = minMaxLabelWidth;
+			EditorGUI.LabelField(currentRect, "Min:");
+			currentRect.x += minMaxLabelWidth; 
+			currentRect.width = minMaxFieldWidth;
+			EditorGUI.PropertyField(currentRect, minProp, GUIContent.none);
+			currentRect.x += minMaxFieldWidth + spacing;
 
-			EditorGUI.indentLevel = oldIndent;
+			// Max: [MaxCount].
+			currentRect.width = minMaxLabelWidth;
+			EditorGUI.LabelField(currentRect, "Max:");
+			currentRect.x += minMaxLabelWidth; 
+			currentRect.width = minMaxFieldWidth;
+			EditorGUI.PropertyField(currentRect, maxProp, GUIContent.none);
+
+			EditorGUI.indentLevel = previousIndentLevel;
 			EditorGUI.EndProperty();
 		}
 
