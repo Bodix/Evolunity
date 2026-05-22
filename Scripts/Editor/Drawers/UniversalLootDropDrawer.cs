@@ -13,6 +13,19 @@ namespace Bodix.Evolunity.Collections.Editor
 	{
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
+			// Handle unassigned SerializeReference gracefully.
+			if (property.propertyType == SerializedPropertyType.ManagedReference)
+			{
+				if (string.IsNullOrEmpty(property.managedReferenceFullTypename)
+				    || property.managedReferenceFullTypename.Trim() == "")
+				{
+					// Draw default field to allow the TypeSelector to function correctly.
+					EditorGUI.PropertyField(position, property, label, true);
+
+					return;
+				}
+			}
+
 			EditorGUI.BeginProperty(position, label, property);
 
 			SerializedProperty probProp = property.FindPropertyRelative("Probability");
@@ -120,10 +133,17 @@ namespace Bodix.Evolunity.Collections.Editor
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
+			// Handle unassigned SerializeReference gracefully.
+			if (property.propertyType == SerializedPropertyType.ManagedReference)
+				if (string.IsNullOrEmpty(property.managedReferenceFullTypename)
+				    || property.managedReferenceFullTypename.Trim() == "")
+					return EditorGUI.GetPropertyHeight(property, label, true);
+
 			SerializedProperty probProp = property.FindPropertyRelative("Probability");
 
 			if (probProp == null)
 			{
+				// Fallback height if the property is missing to fit the error label.
 				return EditorGUIUtility.singleLineHeight;
 			}
 
@@ -166,9 +186,20 @@ namespace Bodix.Evolunity.Collections.Editor
 	{
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
+			// Handle unassigned SerializeReference gracefully if used as one.
+			if (property.propertyType == SerializedPropertyType.ManagedReference)
+			{
+				if (string.IsNullOrEmpty(property.managedReferenceFullTypename)
+				    || property.managedReferenceFullTypename.Trim() == "")
+				{
+					EditorGUI.PropertyField(position, property, label, true);
+
+					return;
+				}
+			}
+
 			EditorGUI.BeginProperty(position, label, property);
 
-			// THIS is the magic fix for the list indentation crushing.
 			int previousIndentLevel = EditorGUI.indentLevel;
 			EditorGUI.indentLevel = 0;
 
@@ -192,7 +223,6 @@ namespace Bodix.Evolunity.Collections.Editor
 			float minMaxLabelWidth = 28f;
 			float minMaxFieldWidth = 35f;
 
-			// Adjusted spacing multiplier to 3 since there are 4 drawn blocks.
 			float fixedFieldsWidth = weightLabelWidth + weightFieldWidth + (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 3);
 			float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
 
@@ -231,6 +261,11 @@ namespace Bodix.Evolunity.Collections.Editor
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
+			if (property.propertyType == SerializedPropertyType.ManagedReference)
+				if (string.IsNullOrEmpty(property.managedReferenceFullTypename)
+				    || property.managedReferenceFullTypename.Trim() == "")
+					return EditorGUI.GetPropertyHeight(property, label, true);
+
 			return EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 		}
 	}
