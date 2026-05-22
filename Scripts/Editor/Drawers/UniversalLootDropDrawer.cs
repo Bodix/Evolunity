@@ -167,7 +167,7 @@ namespace Bodix.Evolunity.Collections.Editor
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(position, label, property);
-			
+
 			// THIS is the magic fix for the list indentation crushing.
 			int previousIndentLevel = EditorGUI.indentLevel;
 			EditorGUI.indentLevel = 0;
