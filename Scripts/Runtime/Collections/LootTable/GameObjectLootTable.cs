@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Collections
 {
-	[CreateAssetMenu(fileName = "GameObject Loot Table", menuName = "Loot Tables/GameObject Loot Table", order = 0)]
+	// [CreateAssetMenu(fileName = "GameObject Loot Table", menuName = "Loot Tables/GameObject Loot Table", order = 0)]
 	public class GameObjectLootTable : LootTable<GameObject>
 	{
 	}
