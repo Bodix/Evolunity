@@ -6,22 +6,41 @@ namespace Bodix.Evolunity.Collections.Editor
 	/// <summary>
 	/// Universal drawer for all LootDrops. 
 	/// It draws "leaf" nodes (like ItemDrop) in a single compact line, 
-	/// and complex nodes (like WeightedPoolDrop) using standard drawing.
+	/// and complex nodes (like WeightedPoolDrop) using dynamic property iteration.
 	/// </summary>
 	[CustomPropertyDrawer(typeof(LootDrop), true)]
 	public class UniversalLootDropDrawer : PropertyDrawer
 	{
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			// Check if this specific node has "Item" and "Probability" fields (meaning it's an ItemDrop leaf node).
-			SerializedProperty itemProp = property.FindPropertyRelative("Item");
+			EditorGUI.BeginProperty(position, label, property);
+
 			SerializedProperty probProp = property.FindPropertyRelative("Probability");
 
-			if (itemProp != null && probProp != null)
+			if (probProp == null)
 			{
-				EditorGUI.BeginProperty(position, label, property);
-				
-				// THIS is the magic fix for the UI crushing issue in lists.
+				Debug.LogError("UniversalLootDropDrawer: Missing 'Probability' property. Early return executed.");
+				EditorGUI.LabelField(position, "Error: Missing 'Probability' property.");
+				EditorGUI.EndProperty();
+				return;
+			}
+
+			// Line 1: Probability with a slider (drawn over the default element label space).
+			float probabilityLabelWidth = 70f;
+			float probabilitySliderWidth = 140f;
+
+			Rect firstLineRect = new Rect(position.x, position.y, probabilityLabelWidth, EditorGUIUtility.singleLineHeight);
+			EditorGUI.LabelField(firstLineRect, "Probability");
+
+			firstLineRect.x += probabilityLabelWidth;
+			firstLineRect.width = probabilitySliderWidth;
+			EditorGUI.Slider(firstLineRect, probProp, 0f, 1f, GUIContent.none);
+
+			// Check if this specific node has an "Item" field (meaning it's an ItemDrop leaf node).
+			SerializedProperty itemProp = property.FindPropertyRelative("Item");
+
+			if (itemProp != null)
+			{
 				int previousIndentLevel = EditorGUI.indentLevel;
 				EditorGUI.indentLevel = 0;
 
@@ -37,22 +56,11 @@ namespace Bodix.Evolunity.Collections.Editor
 					return;
 				}
 
-				// Fixed widths for numeric fields and labels.
+				// Line 2: Item reference, Min, Max.
 				float spacing = 5f;
-				float probabilityLabelWidth = 70f; 
-				float probabilityFieldWidth = 40f;
-				float minMaxLabelWidth = 28f; 
+				float minMaxLabelWidth = 28f;
 				float minMaxFieldWidth = 35f;
 
-				// Line 1: Probability (drawn over the default element label space).
-				Rect firstLineRect = new Rect(position.x, position.y, probabilityLabelWidth, EditorGUIUtility.singleLineHeight);
-				EditorGUI.LabelField(firstLineRect, "Probability");
-				
-				firstLineRect.x += probabilityLabelWidth; 
-				firstLineRect.width = probabilityFieldWidth;
-				EditorGUI.PropertyField(firstLineRect, probProp, GUIContent.none);
-
-				// Line 2: Item reference, Min, Max.
 				float secondLineY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 				float fixedFieldsWidth = (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 2);
 				float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
@@ -66,7 +74,7 @@ namespace Bodix.Evolunity.Collections.Editor
 				// Min: [MinCount].
 				secondLineRect.width = minMaxLabelWidth;
 				EditorGUI.LabelField(secondLineRect, "Min:");
-				secondLineRect.x += minMaxLabelWidth; 
+				secondLineRect.x += minMaxLabelWidth;
 				secondLineRect.width = minMaxFieldWidth;
 				EditorGUI.PropertyField(secondLineRect, minProp, GUIContent.none);
 				secondLineRect.x += minMaxFieldWidth + spacing;
@@ -74,31 +82,79 @@ namespace Bodix.Evolunity.Collections.Editor
 				// Max: [MaxCount].
 				secondLineRect.width = minMaxLabelWidth;
 				EditorGUI.LabelField(secondLineRect, "Max:");
-				secondLineRect.x += minMaxLabelWidth; 
+				secondLineRect.x += minMaxLabelWidth;
 				secondLineRect.width = minMaxFieldWidth;
 				EditorGUI.PropertyField(secondLineRect, maxProp, GUIContent.none);
 
 				// Restore indent.
 				EditorGUI.indentLevel = previousIndentLevel;
-				EditorGUI.EndProperty();
 			}
 			else
 			{
-				// If it's a complex object like WeightedPoolDrop, let Unity draw it normally with foldouts.
-				EditorGUI.PropertyField(position, property, label, true);
+				// Complex node (e.g. WeightedPoolDrop). Draw its fields dynamically.
+				float currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+
+				SerializedProperty iterator = property.Copy();
+				SerializedProperty endProperty = iterator.GetEndProperty();
+				bool enterChildren = true;
+
+				while (iterator.NextVisible(enterChildren) && !SerializedProperty.EqualContents(iterator, endProperty))
+				{
+					enterChildren = false; // Only iterate direct children.
+
+					// Skip because it's already drawn on the first line.
+					if (iterator.name == "Probability")
+						continue;
+
+					float propHeight = EditorGUI.GetPropertyHeight(iterator, true);
+					Rect propRect = new Rect(position.x, currentY, position.width, propHeight);
+
+					EditorGUI.PropertyField(propRect, iterator, true);
+
+					currentY += propHeight + EditorGUIUtility.standardVerticalSpacing;
+				}
 			}
+
+			EditorGUI.EndProperty();
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			if (property.FindPropertyRelative("Item") != null && property.FindPropertyRelative("Probability") != null)
+			SerializedProperty probProp = property.FindPropertyRelative("Probability");
+
+			if (probProp == null)
 			{
-				// Compact height calculation.
-				return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing; 
+				return EditorGUIUtility.singleLineHeight;
 			}
-			
-			// Default expanded height for complex objects.
-			return EditorGUI.GetPropertyHeight(property, label, true);
+
+			float totalHeight = EditorGUIUtility.singleLineHeight; // Header line.
+
+			SerializedProperty itemProp = property.FindPropertyRelative("Item");
+
+			if (itemProp != null)
+			{
+				// Compact height calculation for ItemDrop.
+				totalHeight += EditorGUIUtility.standardVerticalSpacing + EditorGUIUtility.singleLineHeight;
+			}
+			else
+			{
+				// Expanded height calculation for complex objects.
+				SerializedProperty iterator = property.Copy();
+				SerializedProperty endProperty = iterator.GetEndProperty();
+				bool enterChildren = true;
+
+				while (iterator.NextVisible(enterChildren) && !SerializedProperty.EqualContents(iterator, endProperty))
+				{
+					enterChildren = false;
+
+					if (iterator.name == "Probability")
+						continue;
+
+					totalHeight += EditorGUIUtility.standardVerticalSpacing + EditorGUI.GetPropertyHeight(iterator, true);
+				}
+			}
+
+			return totalHeight;
 		}
 	}
 
@@ -131,9 +187,9 @@ namespace Bodix.Evolunity.Collections.Editor
 			}
 
 			float spacing = 5f;
-			float weightLabelWidth = 20f; 
+			float weightLabelWidth = 20f;
 			float weightFieldWidth = 40f;
-			float minMaxLabelWidth = 28f; 
+			float minMaxLabelWidth = 28f;
 			float minMaxFieldWidth = 35f;
 
 			// Adjusted spacing multiplier to 3 since there are 4 drawn blocks.
@@ -149,7 +205,7 @@ namespace Bodix.Evolunity.Collections.Editor
 			// W: [Weight].
 			currentRect.width = weightLabelWidth;
 			EditorGUI.LabelField(currentRect, "W:");
-			currentRect.x += weightLabelWidth; 
+			currentRect.x += weightLabelWidth;
 			currentRect.width = weightFieldWidth;
 			EditorGUI.PropertyField(currentRect, weightProp, GUIContent.none);
 			currentRect.x += weightFieldWidth + spacing;
@@ -157,7 +213,7 @@ namespace Bodix.Evolunity.Collections.Editor
 			// Min: [MinCount].
 			currentRect.width = minMaxLabelWidth;
 			EditorGUI.LabelField(currentRect, "Min:");
-			currentRect.x += minMaxLabelWidth; 
+			currentRect.x += minMaxLabelWidth;
 			currentRect.width = minMaxFieldWidth;
 			EditorGUI.PropertyField(currentRect, minProp, GUIContent.none);
 			currentRect.x += minMaxFieldWidth + spacing;
@@ -165,7 +221,7 @@ namespace Bodix.Evolunity.Collections.Editor
 			// Max: [MaxCount].
 			currentRect.width = minMaxLabelWidth;
 			EditorGUI.LabelField(currentRect, "Max:");
-			currentRect.x += minMaxLabelWidth; 
+			currentRect.x += minMaxLabelWidth;
 			currentRect.width = minMaxFieldWidth;
 			EditorGUI.PropertyField(currentRect, maxProp, GUIContent.none);
 
@@ -175,7 +231,7 @@ namespace Bodix.Evolunity.Collections.Editor
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return EditorGUIUtility.singleLineHeight + 2f;
+			return EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 		}
 	}
 }
