@@ -10,7 +10,8 @@ namespace Bodix.Evolunity.Patterns
 	[Serializable]
 	public class ObservableReference<T> where T : class
 	{
-		private readonly ObservableProperty<T> _property;
+		[SerializeField]
+		private ObservableProperty<T> _property;
 
 		public ObservableReference(T initialValue)
 		{
