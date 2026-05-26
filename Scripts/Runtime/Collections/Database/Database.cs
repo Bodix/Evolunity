@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Collections
 {
-	public abstract class Database<T> : ScriptableObject where T : DatabaseEntry
+	public abstract class Database<T> : ScriptableObject where T : DataAsset
 	{
 		[SerializeField]
 		protected List<T> Items = new List<T>();
