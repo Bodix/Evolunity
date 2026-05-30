@@ -97,7 +97,7 @@ namespace Bodix.Evolunity.Collections
 
 			StringBuilder sb = new StringBuilder("Generated Loot:\n");
 			foreach (LootResult<T> loot in droppedLoot)
-				sb.AppendLine($"- {loot.Item.ToString()} (x{loot.Count})");
+				sb.AppendLine($"- {loot}");
 
 			Debug.Log(sb.ToString());
 		}

@@ -16,7 +16,7 @@ namespace Bodix.Evolunity.Collections
 
 		public override string ToString()
 		{
-			return $"{Item.ToString()} (x{Count})";
+			return $"{Item} (x{Count})";
 		}
 	}
 }
