@@ -15,7 +15,8 @@ namespace Bodix.Evolunity.Collections
 	public abstract class DataAsset : ScriptableObject
 	{
 		[Tooltip("Unique string ID in 'namespace:name' format")]
-		[SerializeField] private string _id;
+		[SerializeField] 
+		private string _id;
 
 		public string Id => _id;
 
@@ -29,7 +30,7 @@ namespace Bodix.Evolunity.Collections
 		}
 
 		[Button("Regenerate ID")]
-		private void GenerateId()
+		public void GenerateId()
 		{
 			string expectedName = name.Replace(" ", "_").ToLower();
 			string assetPath = AssetDatabase.GetAssetPath(this);

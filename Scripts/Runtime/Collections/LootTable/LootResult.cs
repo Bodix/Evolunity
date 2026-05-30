@@ -13,5 +13,10 @@ namespace Bodix.Evolunity.Collections
 			Item = item;
 			Count = count;
 		}
+
+		public override string ToString()
+		{
+			return $"{Item.ToString()} (x{Count})";
+		}
 	}
 }
