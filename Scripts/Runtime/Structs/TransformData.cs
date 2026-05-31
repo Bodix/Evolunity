@@ -20,6 +20,8 @@ namespace Bodix.Evolunity.Structs
 			Rotation = rotation;
 			LocalScale = localScale;
 		}
+
+		public static TransformData Default => new TransformData(Vector3.zero, Quaternion.identity, Vector3.one);
 	}
 
 	public static partial class TransformExtensions
