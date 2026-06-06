@@ -2,7 +2,7 @@
 
 namespace Bodix.Evolunity.Components.UI
 {
-	public class FlexibleLayoutAdapter : ComponentRatioInterpolator<FlexibleLayoutGroup, FlexibleLayoutData>
+	public class FlexibleLayoutInterpolator : ComponentRatioInterpolator<FlexibleLayoutGroup, FlexibleLayoutData>
 	{
 		protected override FlexibleLayoutData InterpolateData(FlexibleLayoutData widest, FlexibleLayoutData narrowest, float t)
 		{
