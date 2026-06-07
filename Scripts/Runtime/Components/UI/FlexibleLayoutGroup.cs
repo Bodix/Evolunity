@@ -23,8 +23,8 @@ namespace Bodix.Evolunity.Components.UI
 		public RowSizeMode RowSizeMode = RowSizeMode.Fixed;
 		public int RowCount = 5;
 
-		private float cellSizeX;
-		private float cellSizeY;
+		private float _cellSizeX;
+		private float _cellSizeY;
 
 		// Field to access the private m_CellSize via reflection.
 		private static readonly FieldInfo CellSizeField = typeof(GridLayoutGroup)
@@ -36,7 +36,7 @@ namespace Bodix.Evolunity.Components.UI
 			{
 				int cols = Mathf.Max(1, ColumnCount);
 				float width = rectTransform.rect.size.x - padding.horizontal - spacing.x * (cols - 1);
-				return Mathf.Max(0, width / cols);
+				return Mathf.Round(Mathf.Max(0, width / cols));
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace Bodix.Evolunity.Components.UI
 			{
 				int rows = Mathf.Max(1, RowCount);
 				float height = rectTransform.rect.size.y - padding.vertical - spacing.y * (rows - 1);
-				return Mathf.Max(0, height / rows);
+				return Mathf.Round(Mathf.Max(0, height / rows));
 			}
 		}
 
@@ -55,20 +55,20 @@ namespace Bodix.Evolunity.Components.UI
 			switch (ColumnSizeMode)
 			{
 				case ColumnSizeMode.Fixed:
-					cellSizeX = cellSize.x;
+					_cellSizeX = cellSize.x;
 					break;
 				case ColumnSizeMode.RowSize:
-					cellSizeX = cellSize.y;
+					_cellSizeX = cellSize.y;
 					break;
 				case ColumnSizeMode.Expand:
-					cellSizeX = ExpandedCellWidth;
+					_cellSizeX = ExpandedCellWidth;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 
 			// Apply new size before base method to ensure correct layout calculations.
-			SetCellSizeQuietly(new Vector2(cellSizeX, cellSize.y));
+			SetCellSizeQuietly(new Vector2(_cellSizeX, cellSize.y));
 
 			base.CalculateLayoutInputHorizontal();
 		}
@@ -78,20 +78,20 @@ namespace Bodix.Evolunity.Components.UI
 			switch (RowSizeMode)
 			{
 				case RowSizeMode.Fixed:
-					cellSizeY = cellSize.y;
+					_cellSizeY = cellSize.y;
 					break;
 				case RowSizeMode.ColumnSize:
-					cellSizeY = cellSize.x;
+					_cellSizeY = cellSize.x;
 					break;
 				case RowSizeMode.Expand:
-					cellSizeY = ExpandedCellHeight;
+					_cellSizeY = ExpandedCellHeight;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 
 			// Apply new size before base method to ensure correct layout calculations.
-			SetCellSizeQuietly(new Vector2(cellSize.x, cellSizeY));
+			SetCellSizeQuietly(new Vector2(cellSize.x, _cellSizeY));
 
 			base.CalculateLayoutInputVertical();
 		}
