@@ -4,17 +4,11 @@
 
 using System;
 using System.Reflection;
-using Bodix.Evolunity.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Bodix.Evolunity.Components.UI
 {
-	// TODO:
-	// 1. Fix "RowSize + ColumnSize" case: uncontrollable cellSize.x in Inspector.
-	// 2. Add sync with constraint count.
-	// 3. Add "AspectRatio" mode.
-
 	[AddComponentMenu("Evolunity/UI/Flexible Layout Group")]
 	public class FlexibleLayoutGroup : GridLayoutGroup
 	{
@@ -52,13 +46,18 @@ namespace Bodix.Evolunity.Components.UI
 
 		public override void CalculateLayoutInputHorizontal()
 		{
+			SyncConstraints();
+
+			bool isCircularDependency = ColumnSizeMode == ColumnSizeMode.RowSize && RowSizeMode == RowSizeMode.ColumnSize;
+
 			switch (ColumnSizeMode)
 			{
 				case ColumnSizeMode.Fixed:
 					_cellSizeX = cellSize.x;
 					break;
 				case ColumnSizeMode.RowSize:
-					_cellSizeX = cellSize.y;
+					// Prevent circular dependency by falling back to fixed width.
+					_cellSizeX = isCircularDependency ? cellSize.x : cellSize.y;
 					break;
 				case ColumnSizeMode.Expand:
 					_cellSizeX = ExpandedCellWidth;
@@ -75,13 +74,16 @@ namespace Bodix.Evolunity.Components.UI
 
 		public override void CalculateLayoutInputVertical()
 		{
+			bool isCircularDependency = ColumnSizeMode == ColumnSizeMode.RowSize && RowSizeMode == RowSizeMode.ColumnSize;
+
 			switch (RowSizeMode)
 			{
 				case RowSizeMode.Fixed:
 					_cellSizeY = cellSize.y;
 					break;
 				case RowSizeMode.ColumnSize:
-					_cellSizeY = cellSize.x;
+					// Prevent circular dependency by falling back to fixed height.
+					_cellSizeY = isCircularDependency ? cellSize.y : cellSize.x;
 					break;
 				case RowSizeMode.Expand:
 					_cellSizeY = ExpandedCellHeight;
@@ -100,6 +102,21 @@ namespace Bodix.Evolunity.Components.UI
 		private void SetCellSizeQuietly(Vector2 newSize)
 		{
 			CellSizeField?.SetValue(this, newSize);
+		}
+
+		// Synchronizes internal counts with the base GridLayoutGroup constraints.
+		private void SyncConstraints()
+		{
+			if (ColumnSizeMode != ColumnSizeMode.Fixed)
+			{
+				constraint = Constraint.FixedColumnCount;
+				constraintCount = Mathf.Max(1, ColumnCount);
+			}
+			else if (RowSizeMode != RowSizeMode.Fixed)
+			{
+				constraint = Constraint.FixedRowCount;
+				constraintCount = Mathf.Max(1, RowCount);
+			}
 		}
 	}
 
