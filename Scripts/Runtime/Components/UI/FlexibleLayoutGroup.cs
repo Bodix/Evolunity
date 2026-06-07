@@ -36,7 +36,7 @@ namespace Bodix.Evolunity.Components.UI
 			{
 				int cols = Mathf.Max(1, ColumnCount);
 				float width = rectTransform.rect.size.x - padding.horizontal - spacing.x * (cols - 1);
-				return Mathf.Round(Mathf.Max(0, width / cols));
+				return Mathf.Floor(Mathf.Max(0, width / cols));
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace Bodix.Evolunity.Components.UI
 			{
 				int rows = Mathf.Max(1, RowCount);
 				float height = rectTransform.rect.size.y - padding.vertical - spacing.y * (rows - 1);
-				return Mathf.Round(Mathf.Max(0, height / rows));
+				return Mathf.Floor(Mathf.Max(0, height / rows));
 			}
 		}
 
