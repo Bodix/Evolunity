@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using System.Reflection;
 using Bodix.Evolunity.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,13 +26,32 @@ namespace Bodix.Evolunity.Components.UI
 		private float cellSizeX;
 		private float cellSizeY;
 
-		private float ExpandedCellWidth => (rectTransform.rect.size.x - padding.horizontal - spacing.x * (ColumnCount - 1)) / ColumnCount;
-		private float ExpandedCellHeight => (rectTransform.rect.size.y - padding.vertical - spacing.y * (RowCount - 1)) / RowCount;
+		// Field to access the private m_CellSize via reflection.
+		private static readonly FieldInfo CellSizeField = typeof(GridLayoutGroup)
+			.GetField("m_CellSize", BindingFlags.NonPublic | BindingFlags.Instance);
+
+		private float ExpandedCellWidth
+		{
+			get
+			{
+				int cols = Mathf.Max(1, ColumnCount);
+				float width = rectTransform.rect.size.x - padding.horizontal - spacing.x * (cols - 1);
+				return Mathf.Max(0, width / cols);
+			}
+		}
+
+		private float ExpandedCellHeight
+		{
+			get
+			{
+				int rows = Mathf.Max(1, RowCount);
+				float height = rectTransform.rect.size.y - padding.vertical - spacing.y * (rows - 1);
+				return Mathf.Max(0, height / rows);
+			}
+		}
 
 		public override void CalculateLayoutInputHorizontal()
 		{
-			base.CalculateLayoutInputHorizontal();
-
 			switch (ColumnSizeMode)
 			{
 				case ColumnSizeMode.Fixed:
@@ -46,19 +66,15 @@ namespace Bodix.Evolunity.Components.UI
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
-		}
 
-		public override void SetLayoutHorizontal()
-		{
-			base.SetLayoutHorizontal();
+			// Apply new size before base method to ensure correct layout calculations.
+			SetCellSizeQuietly(new Vector2(cellSizeX, cellSize.y));
 
-			cellSize = cellSize.WithX(cellSizeX);
+			base.CalculateLayoutInputHorizontal();
 		}
 
 		public override void CalculateLayoutInputVertical()
 		{
-			base.CalculateLayoutInputVertical();
-
 			switch (RowSizeMode)
 			{
 				case RowSizeMode.Fixed:
@@ -73,13 +89,17 @@ namespace Bodix.Evolunity.Components.UI
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+
+			// Apply new size before base method to ensure correct layout calculations.
+			SetCellSizeQuietly(new Vector2(cellSize.x, cellSizeY));
+
+			base.CalculateLayoutInputVertical();
 		}
 
-		public override void SetLayoutVertical()
+		// Sets the private field to bypass the property setter and prevent prefab overrides.
+		private void SetCellSizeQuietly(Vector2 newSize)
 		{
-			base.SetLayoutVertical();
-
-			cellSize = cellSize.WithY(cellSizeY);
+			CellSizeField?.SetValue(this, newSize);
 		}
 	}
 
