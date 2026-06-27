@@ -217,6 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5208150120561709513}
+  - component: {fileID: 9203354024029543686}
   - component: {fileID: 5208150120561709512}
   m_Layer: 5
   m_Name: Icon Text Toggle (Horizontal)
@@ -247,6 +248,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9203354024029543686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208150120561709518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057d10d33da840729bc915364d6705ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animations:
+    id: 0
+  toggle: {fileID: 5208150120561709512}
+  icon: {fileID: 5208150120721192900}
+  text: {fileID: 2478666165536604795}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &5208150120561709512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +328,7 @@ GameObject:
   - component: {fileID: 5208150120721192903}
   - component: {fileID: 5208150120721192900}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
