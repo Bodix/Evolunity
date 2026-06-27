@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace Bodix.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Utilities
 {
 	public static class AssetDatabaseHelper
 	{
