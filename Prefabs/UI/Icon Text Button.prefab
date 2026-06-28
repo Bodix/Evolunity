@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6730677634091981783}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -104,7 +104,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6730677634091981783}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6730677634091981783}
-  - component: {fileID: 5235119035151215137}
+  - component: {fileID: 5318044060324145600}
   - component: {fileID: 6730677634091981780}
   - component: {fileID: 6730677634091981778}
   - component: {fileID: 6730677634091981781}
@@ -240,8 +240,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5382071624188799790}
   - {fileID: 5442387774659277757}
+  - {fileID: 5382071624188799790}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,7 +250,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5235119035151215137
+--- !u!114 &5318044060324145600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,12 +259,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6730677634091981782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c184f6237cd346b996f99853b84826a4, type: 3}
+  m_Script: {fileID: 11500000, guid: ddb1aca5faf64e7bbe619e48990b1d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Animations:
     id: 0
   button: {fileID: 6730677634091981780}
+  icon: {fileID: 4166661310677932990}
   text: {fileID: 5382071624188799777}
   references:
     version: 1
