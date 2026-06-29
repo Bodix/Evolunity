@@ -13,7 +13,7 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		private Image _image;
 		[SerializeField]
-		private List<StateSpriteMapping<T>> _stateMappings;
+		private List<IndicatorState<T>> _states;
 
 		public void SetState(T state)
 		{
@@ -24,7 +24,7 @@ namespace Bodix.Evolunity.Components.UI
 				return;
 			}
 
-			foreach (StateSpriteMapping<T> mapping in _stateMappings)
+			foreach (IndicatorState<T> mapping in _states)
 			{
 				if (EqualityComparer<T>.Default.Equals(mapping.State, state))
 				{
@@ -40,7 +40,7 @@ namespace Bodix.Evolunity.Components.UI
 	}
 
 	[Serializable]
-	public struct StateSpriteMapping<T> where T : Enum
+	public struct IndicatorState<T> where T : Enum
 	{
 		public T State;
 		public Sprite Sprite;
