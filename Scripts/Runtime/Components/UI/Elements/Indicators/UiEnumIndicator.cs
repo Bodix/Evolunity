@@ -29,6 +29,7 @@ namespace Bodix.Evolunity.Components.UI
 				if (EqualityComparer<T>.Default.Equals(mapping.State, state))
 				{
 					_image.sprite = mapping.Sprite;
+					_image.color = mapping.Color;
 
 					return;
 				}
@@ -43,5 +44,6 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		public T State;
 		public Sprite Sprite;
+		public Color Color;
 	}
 }
