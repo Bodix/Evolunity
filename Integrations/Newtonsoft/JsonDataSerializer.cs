@@ -2,6 +2,8 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+#if NEWTONSOFT_JSON
+
 using System.IO;
 using Bodix.Evolunity.Collections;
 using Bodix.Evolunity.Services;
@@ -40,3 +42,5 @@ namespace Evolunity.Newtonsoft
 		}
 	}
 }
+
+#endif
