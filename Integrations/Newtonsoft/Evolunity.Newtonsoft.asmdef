@@ -1,0 +1,21 @@
+{
+    "name": "Evolunity.Newtonsoft",
+    "references": [
+        "GUID:654eac4c1ce7d3146b6a35ed4a5384b0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.nuget.newtonsoft-json",
+            "expression": "",
+            "define": "NEWTONSOFT_JSON"
+        }
+    ],
+    "noEngineReferences": false
+}
