@@ -37,8 +37,9 @@ namespace Bodix.Evolunity.Components.UI
 		public PageChangeHandler PageChanged;
 		public HasActiveTabChangeHandler HasActiveTabChanged;
 
-		private List<UnityAction<bool>> _toggleListeners;
+		public IReadOnlyList<UiToggle> TabsToggles => tabsToggles;
 
+		private List<UnityAction<bool>> _toggleListeners;
 		private bool _wasAnyTabActive;
 
 		protected override void Awake()
@@ -119,7 +120,7 @@ namespace Bodix.Evolunity.Components.UI
 
 			CheckAnyTabActiveState();
 		}
-		
+
 		private void CheckAnyTabActiveState()
 		{
 			bool isAnyTabActive = IsAnyTabActive();
