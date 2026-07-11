@@ -12,7 +12,10 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		[SerializeField]
 		protected Toggle toggle;
+		[SerializeField]
+		protected Image background;
 
 		public new Toggle Toggle => toggle;
+		public Image Background => background;
 	}
 }

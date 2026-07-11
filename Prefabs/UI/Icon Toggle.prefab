@@ -129,6 +129,7 @@ MonoBehaviour:
   Animations:
     id: 0
   toggle: {fileID: 1399389120949124237}
+  background: {fileID: 1399389119983878732}
   icon: {fileID: 9033298063993959116}
   references:
     version: 1

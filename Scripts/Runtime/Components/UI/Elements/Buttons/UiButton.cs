@@ -12,7 +12,10 @@ namespace Bodix.Evolunity.Components.UI
 	{
 		[SerializeField]
 		protected Button button;
+		[SerializeField]
+		protected Image background;
 
 		public Button Button => button;
+		public Image Background => background;
 	}
 }
