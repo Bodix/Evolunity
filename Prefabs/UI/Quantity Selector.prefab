@@ -73,6 +73,7 @@ MonoBehaviour:
   Animations:
     id: 0
   button: {fileID: 8213176801309488456}
+  background: {fileID: 6733085492753996020}
   text: {fileID: 7359953594327778749}
   Format: '{0} ({1})'
   references:
@@ -383,6 +384,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6733085492753996020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4128033654256394362, guid: 5b144aedbf8873e4185ab67ea643add9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7221804756077869198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7359953594327778749 stripped
