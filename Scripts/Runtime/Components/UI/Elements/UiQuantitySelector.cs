@@ -44,8 +44,8 @@ namespace Bodix.Evolunity.Components.UI
 			_textFormatter = customFormatter;
 			quantitySlider.Setup(minAmount, maxAmount, 1);
 
-			UpdateConfirmButton(quantitySlider.Value);
 			confirmButton.Button.interactable = maxAmount > 0;
+			UpdateConfirmButton(quantitySlider.Value);
 		}
 
 		public void Clear(string confirmButtonText = "")
