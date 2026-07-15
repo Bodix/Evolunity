@@ -13,12 +13,14 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		protected UiQuantitySlider quantitySlider;
 		[SerializeField]
-		protected UiActionButton confirmButton;
+		protected UiTextButton confirmButton;
 
 		public event Action<int> Confirmed;
 
 		public UiQuantitySlider QuantitySlider => quantitySlider;
 		public UiTextButton ConfirmButton => confirmButton;
+
+		private Func<int, string> _textFormatter;
 
 		private void OnEnable()
 		{
@@ -34,23 +36,29 @@ namespace Bodix.Evolunity.Components.UI
 
 		public void Setup(int minAmount, int maxAmount, string actionName)
 		{
+			Setup(minAmount, maxAmount, amount => $"{actionName} ({amount})");
+		}
+
+		public void Setup(int minAmount, int maxAmount, Func<int, string> customFormatter)
+		{
+			_textFormatter = customFormatter;
 			quantitySlider.Setup(minAmount, maxAmount, 1);
 
-			confirmButton.Setup(actionName, quantitySlider.Value);
+			UpdateConfirmButton(quantitySlider.Value);
 			confirmButton.Button.interactable = maxAmount > 0;
 		}
 
 		public void Clear(string confirmButtonText = "")
 		{
+			_textFormatter = null;
 			quantitySlider.Clear();
-
 			confirmButton.Text.text = confirmButtonText;
-			confirmButton.Button.interactable = false;
 		}
 
 		private void UpdateConfirmButton(int amount)
 		{
-			confirmButton.SetAmount(amount);
+			if (_textFormatter != null)
+				confirmButton.Text.text = _textFormatter.Invoke(amount);
 		}
 
 		private void Confirm()
