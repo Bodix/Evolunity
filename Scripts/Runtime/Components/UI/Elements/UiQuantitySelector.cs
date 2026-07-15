@@ -39,9 +39,11 @@ namespace Bodix.Evolunity.Components.UI
 			Setup(minAmount, maxAmount, amount => ($"{actionName} ({amount})", maxAmount > 0));
 		}
 
-		public void Setup(int minAmount, int maxAmount, Func<int, (string Text, bool IsInteractable)> customFormatter)
+		public void Setup(int minAmount, int maxAmount,
+			Func<int, (string Text, bool IsInteractable)> confirmButtonStateFormatter)
 		{
-			_confirmButtonStateFormatter = customFormatter;
+			_confirmButtonStateFormatter = confirmButtonStateFormatter;
+
 			quantitySlider.Setup(minAmount, maxAmount, 1);
 			UpdateConfirmButton(quantitySlider.Value);
 		}
@@ -49,6 +51,7 @@ namespace Bodix.Evolunity.Components.UI
 		public void Clear(string confirmButtonText = "")
 		{
 			_confirmButtonStateFormatter = null;
+
 			quantitySlider.Clear();
 			confirmButton.Text.text = confirmButtonText;
 			confirmButton.Button.interactable = false;
@@ -59,7 +62,7 @@ namespace Bodix.Evolunity.Components.UI
 			if (_confirmButtonStateFormatter == null)
 				return;
 
-			var state = _confirmButtonStateFormatter(amount);
+			(string Text, bool IsInteractable) state = _confirmButtonStateFormatter(amount);
 			confirmButton.Text.text = state.Text;
 			confirmButton.Button.interactable = state.IsInteractable;
 		}
