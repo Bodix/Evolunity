@@ -14,8 +14,15 @@ using UnityEditor.Build;
 // 1. Stack Trace Logging (Log Depth)
 // By default, Unity appends a full call stack (showing exactly where the code was called from) to every Debug.Log or error.
 // In WebGL, generating these lines places a huge load on the garbage collector and reduces FPS.
-// For Dev/Debug: Enable full logging (ScriptOnly or Full) to understand where the error occurred.
-// For Release: Disable stack traces for regular logs and warnings (None), and keep them enabled only for critical errors.
+// - For Dev/Debug: Enable full logging (ScriptOnly or Full) to understand where the error occurred.
+// - For Release: Disable stack traces for regular logs and warnings (None), and keep them enabled only for critical errors.
+//
+// 2. Decompression Fallback
+// If the server hosting your game isn’t configured properly (doesn’t send the correct HTTP headers for Brotli/Gzip),
+// the game simply won’t run for the user.
+// - For Dev/Debug: You can disable this (false), since compression is generally turned off in those modes.
+// - For Release: You should enable this (true) if you’re using compression.
+// Unity will add a small JavaScript decompressor to the build, which will save the day if the server fails.
 
 namespace Bodix.Evolunity.Editor
 {
