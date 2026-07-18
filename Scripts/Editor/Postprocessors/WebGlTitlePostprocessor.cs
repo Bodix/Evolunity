@@ -13,39 +13,27 @@ namespace Bodix.Evolunity.Editor.Postprocessors
 	public class WebGlTitlePostprocessor : IPostprocessBuildWithReport
 	{
 		public int callbackOrder => 0;
-		private static string SettingsPath => "ProjectSettings/WebGLTitlePostprocessorSettings.txt";
-		private static bool IsEnabled
-		{
-			get
-			{
-				if (File.Exists(SettingsPath))
-				{
-					string content = File.ReadAllText(SettingsPath);
-
-					return content == "true";
-				}
-
-				return true;
-			}
-			set => File.WriteAllText(SettingsPath, value ? "true" : "false");
-		}
 
 		[MenuItem("Tools/WebGL/Remove Web Player from Title")]
 		private static void ToggleAction()
 		{
-			IsEnabled = !IsEnabled;
+			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
+			settings.NicifyTitle = !settings.NicifyTitle;
+			settings.Save();
 		}
 
 		[MenuItem("Tools/WebGL/Remove Web Player from Title", true)]
 		private static bool ToggleActionValidate()
 		{
-			Menu.SetChecked("Tools/WebGL/Remove Web Player from Title", IsEnabled);
+			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
+			Menu.SetChecked("Tools/WebGL/Remove Web Player from Title", settings.NicifyTitle);
 			return true;
 		}
 
 		public void OnPostprocessBuild(BuildReport report)
 		{
-			if (!IsEnabled)
+			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
+			if (!settings.NicifyTitle)
 				return;
 
 			if (report.summary.platform == BuildTarget.WebGL)
