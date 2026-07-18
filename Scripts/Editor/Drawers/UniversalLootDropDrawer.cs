@@ -1,7 +1,12 @@
-﻿using UnityEditor;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using Bodix.Evolunity.Collections;
+using UnityEditor;
 using UnityEngine;
 
-namespace Bodix.Evolunity.Collections.Editor
+namespace Bodix.Evolunity.Editor.Drawers
 {
 	/// <summary>
 	/// Universal drawer for all LootDrops. 

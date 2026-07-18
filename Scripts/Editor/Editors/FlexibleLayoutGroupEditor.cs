@@ -1,4 +1,8 @@
-﻿using Bodix.Evolunity.Components.UI;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using Bodix.Evolunity.Components.UI;
 using UnityEditor;
 using UnityEngine.UI;
 
