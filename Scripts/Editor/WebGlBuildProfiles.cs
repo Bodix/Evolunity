@@ -54,8 +54,8 @@ namespace Bodix.Evolunity.Editor
 #else
 			PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.High);
 #endif
-#pragma warning disable 0618
 
+#pragma warning disable 0618
 #if UNITY_2021_2_OR_NEWER
 			PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.WebGL, Il2CppCompilerConfiguration.Master);
 #else
@@ -79,6 +79,14 @@ namespace Bodix.Evolunity.Editor
 #else
 			PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.Low);
 #endif
+
+#pragma warning disable 0618
+#if UNITY_2021_2_OR_NEWER
+			PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.WebGL, Il2CppCompilerConfiguration.Debug);
+#else
+			PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.WebGL, Il2CppCompilerConfiguration.Debug);
+#endif
+#pragma warning restore 0618
 
 			OnDebugProfileApplied?.Invoke();
 
