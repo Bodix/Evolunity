@@ -21,6 +21,8 @@ namespace Bodix.Evolunity.Editor
 		public static void SetDevelopmentProfile()
 		{
 			EditorUserBuildSettings.development = true;
+			PlayerSettings.stripEngineCode = false;
+			PlayerSettings.WebGL.dataCaching = false;
 			PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
 			PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.None;
 
@@ -38,39 +40,20 @@ namespace Bodix.Evolunity.Editor
 #endif
 #pragma warning restore 0618
 
+#if UNITY_2021_2_OR_NEWER
+			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.ShorterBuildTime;
+#endif
+
 			OnDevelopmentProfileApplied?.Invoke();
 			Debug.Log("\"Development\" WebGL profile applied.");
-		}
-
-		[MenuItem("Build/WebGL Profiles/Set Release (Optimized Build Size)")]
-		public static void SetReleaseProfile()
-		{
-			EditorUserBuildSettings.development = false;
-			PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
-			PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.None;
-
-#if UNITY_2021_2_OR_NEWER
-			PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.WebGL, ManagedStrippingLevel.High);
-#else
-			PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.High);
-#endif
-
-#pragma warning disable 0618
-#if UNITY_2021_2_OR_NEWER
-			PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.WebGL, Il2CppCompilerConfiguration.Master);
-#else
-			PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.WebGL, Il2CppCompilerConfiguration.Master);
-#endif
-#pragma warning restore 0618
-
-			OnReleaseProfileApplied?.Invoke();
-			Debug.Log("\"Release\" WebGL profile applied.");
 		}
 
 		[MenuItem("Build/WebGL Profiles/Set Debug (Slow Build)")]
 		public static void SetDeepDebugProfile()
 		{
 			EditorUserBuildSettings.development = true;
+			PlayerSettings.stripEngineCode = false;
+			PlayerSettings.WebGL.dataCaching = false;
 			PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
 			PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.FullWithStacktrace;
 
@@ -88,9 +71,44 @@ namespace Bodix.Evolunity.Editor
 #endif
 #pragma warning restore 0618
 
+#if UNITY_2021_2_OR_NEWER
+			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.ShorterBuildTime;
+#endif
+
 			OnDebugProfileApplied?.Invoke();
 
 			Debug.Log("\"Debug\" WebGL profile applied. WARNING: Build will take longer!");
+		}
+
+		[MenuItem("Build/WebGL Profiles/Set Release (Optimized Build Size)")]
+		public static void SetReleaseProfile()
+		{
+			EditorUserBuildSettings.development = false;
+			PlayerSettings.stripEngineCode = true;
+			PlayerSettings.WebGL.dataCaching = true;
+			PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
+			PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.None;
+
+#if UNITY_2021_2_OR_NEWER
+			PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.WebGL, ManagedStrippingLevel.High);
+#else
+			PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.High);
+#endif
+
+#pragma warning disable 0618
+#if UNITY_2021_2_OR_NEWER
+			PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.WebGL, Il2CppCompilerConfiguration.Master);
+#else
+			PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.WebGL, Il2CppCompilerConfiguration.Master);
+#endif
+#pragma warning restore 0618
+
+#if UNITY_2021_2_OR_NEWER
+			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.RuntimeSpeed;
+#endif
+
+			OnReleaseProfileApplied?.Invoke();
+			Debug.Log("\"Release\" WebGL profile applied.");
 		}
 	}
 }
