@@ -40,10 +40,6 @@ namespace Bodix.Evolunity.Editor
 #endif
 #pragma warning restore 0618
 
-#if UNITY_2021_2_OR_NEWER
-			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.ShorterBuildTime;
-#endif
-
 			OnDevelopmentProfileApplied?.Invoke();
 			Debug.Log("\"Development\" WebGL profile applied.");
 		}
@@ -70,10 +66,6 @@ namespace Bodix.Evolunity.Editor
 			PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.WebGL, Il2CppCompilerConfiguration.Debug);
 #endif
 #pragma warning restore 0618
-
-#if UNITY_2021_2_OR_NEWER
-			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.ShorterBuildTime;
-#endif
 
 			OnDebugProfileApplied?.Invoke();
 
@@ -102,10 +94,6 @@ namespace Bodix.Evolunity.Editor
 			PlayerSettings.SetIl2CppCompilerConfiguration(BuildTargetGroup.WebGL, Il2CppCompilerConfiguration.Master);
 #endif
 #pragma warning restore 0618
-
-#if UNITY_2021_2_OR_NEWER
-			EditorUserBuildSettings.webGLBuildSubtarget = WebGLBuildSubtarget.RuntimeSpeed;
-#endif
 
 			OnReleaseProfileApplied?.Invoke();
 			Debug.Log("\"Release\" WebGL profile applied.");
