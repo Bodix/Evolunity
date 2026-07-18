@@ -9,6 +9,14 @@ using UnityEngine;
 using UnityEditor.Build;
 #endif
 
+// TODO: Possible improvements. [#design]
+//
+// 1. Stack Trace Logging (Log Depth)
+// By default, Unity appends a full call stack (showing exactly where the code was called from) to every Debug.Log or error.
+// In WebGL, generating these lines places a huge load on the garbage collector and reduces FPS.
+// For Dev/Debug: Enable full logging (ScriptOnly or Full) to understand where the error occurred.
+// For Release: Disable stack traces for regular logs and warnings (None), and keep them enabled only for critical errors.
+
 namespace Bodix.Evolunity.Editor
 {
 	public static class WebGLBuildProfiles
