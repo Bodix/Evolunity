@@ -4,7 +4,7 @@
 
 using UnityEditor;
 
-namespace Bodix.Evolunity.Editor
+namespace Bodix.Evolunity.Editor.Postprocessors
 {
 	public class NamespacePostprocessor : AssetPostprocessor
 	{
