@@ -5,11 +5,41 @@
 using System.Linq;
 using Bodix.Evolunity.Extensions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Bodix.Evolunity.Utilities
 {
 	public static class GameObjectFinder
 	{
+		/// <summary>
+		/// <see cref="GameObject.Find"/> doesn't find inactive objects. This method does it.
+		/// </summary>
+		public static GameObject FindFirstObjectInCurrentScene(string objectName)
+		{
+			return FindFirstObjectInScene(objectName, SceneManager.GetActiveScene());
+		}
+
+		/// <summary>
+		/// <see cref="GameObject.Find"/> doesn't find inactive objects. This method does it.
+		/// </summary>
+		public static GameObject FindFirstObjectInScene(string objectName, Scene scene)
+		{
+			GameObject[] rootObjects = scene.GetRootGameObjects();
+
+			foreach (GameObject root in rootObjects)
+			{
+				if (root.name == objectName)
+					return root;
+
+				Transform[] children = root.GetComponentsInChildren<Transform>(true);
+				foreach (Transform child in children)
+					if (child.name == objectName)
+						return child.gameObject;
+			}
+
+			return null;
+		}
+
 		/// <summary>
 		/// Use <see cref="TransformExtensions.GetIndexedPath"/> to get the indexed path.
 		/// </summary>
