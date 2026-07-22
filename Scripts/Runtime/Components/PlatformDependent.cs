@@ -23,33 +23,16 @@ namespace Bodix.Evolunity.Components
 		[SerializeField]
 		private bool other = true;
 
-		private bool disable;
+		[SerializeField]
+		private bool log = true;
+
+		private bool _isDisable;
 
 		private void Awake()
 		{
-			RuntimePlatform platform = Application.platform;
+			_isDisable = !IsCurrentPlatformEnabled();
 
-			disable =
-				((platform == RuntimePlatform.WindowsPlayer
-					|| platform == RuntimePlatform.WindowsEditor
-					|| platform == RuntimePlatform.OSXPlayer
-					|| platform == RuntimePlatform.OSXEditor
-					|| platform == RuntimePlatform.LinuxPlayer
-					|| platform == RuntimePlatform.LinuxEditor) && !PC) ||
-				(platform == RuntimePlatform.IPhonePlayer && !iOS) ||
-				(platform == RuntimePlatform.Android && !android) ||
-				(platform == RuntimePlatform.WebGLPlayer && !webGL) ||
-				(platform != RuntimePlatform.WindowsPlayer
-					&& platform != RuntimePlatform.WindowsEditor
-					&& platform != RuntimePlatform.OSXPlayer
-					&& platform != RuntimePlatform.OSXEditor
-					&& platform != RuntimePlatform.LinuxPlayer
-					&& platform != RuntimePlatform.LinuxEditor
-					&& platform != RuntimePlatform.IPhonePlayer
-					&& platform != RuntimePlatform.Android
-					&& platform != RuntimePlatform.WebGLPlayer && !other);
-
-			if (disable)
+			if (_isDisable)
 				switch (disableMethod)
 				{
 					case DisableMethod.Destroy:
@@ -61,16 +44,39 @@ namespace Bodix.Evolunity.Components
 				}
 		}
 
+		private bool IsCurrentPlatformEnabled()
+		{
+			// We use a switch statement for a cleaner and more readable platform check.
+			switch (Application.platform)
+			{
+				case RuntimePlatform.WindowsPlayer:
+				case RuntimePlatform.WindowsEditor:
+				case RuntimePlatform.OSXPlayer:
+				case RuntimePlatform.OSXEditor:
+				case RuntimePlatform.LinuxPlayer:
+				case RuntimePlatform.LinuxEditor:
+					return PC;
+				case RuntimePlatform.IPhonePlayer:
+					return iOS;
+				case RuntimePlatform.Android:
+					return android;
+				case RuntimePlatform.WebGLPlayer:
+					return webGL;
+				default:
+					return other;
+			}
+		}
+
 		private void OnDisable()
 		{
-			if (disable && disableMethod == DisableMethod.Disable)
+			if (_isDisable && disableMethod == DisableMethod.Disable && log)
 				Debug.Log("The GameObject \"" + gameObject.name + "\" was disabled by the PlatformDependent component",
 					this);
 		}
 
 		private void OnDestroy()
 		{
-			if (disable && disableMethod == DisableMethod.Destroy)
+			if (_isDisable && disableMethod == DisableMethod.Destroy && log)
 				Debug.Log("The GameObject \"" + gameObject.name + "\" was destroyed by the PlatformDependent component");
 		}
 	}
