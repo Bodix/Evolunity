@@ -8,6 +8,17 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Components
 {
+	/// <summary>
+	/// Synchronizes Transform properties from a target object without using a parent-child hierarchy.
+	/// </summary>
+	/// <remarks>
+	/// Use cases and advantages over <c>transform.SetParent()</c>:
+	/// <br/>- Selective synchronization: Allows copying position without inheriting rotation or scale (e.g., an endless water plane following a swaying ship).
+	/// <br/>- Performance optimization (Rendering): Prevents large environment meshes from rotating, saving Unity from recalculating massive bounding boxes for culling and shadows.
+	/// <br/>- Performance optimization (Transforms): Avoids deep nested hierarchies, preventing unnecessary local-to-world matrix recalculations for child objects when the parent moves.
+	/// <br/>- Architectural clarity: Keeps the scene graph clean and logically organized by preventing the mixing of global environment elements with dynamic gameplay entities.
+	/// <br/>- Lifecycle independence: The follower object is not destroyed or deactivated when the target object is destroyed.
+	/// </remarks>
 	public class TransformCopier : MonoBehaviour
 	{
 		[ShowIf(nameof(ShowTargetField))]
