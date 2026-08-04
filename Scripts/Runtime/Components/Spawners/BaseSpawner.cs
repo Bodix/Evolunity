@@ -72,12 +72,10 @@ namespace Bodix.Evolunity.Components
 
 		public void Spawn()
 		{
-			_buffer.Clear();
-
-			// Validate the spawn point using active checks.
 			if (!IsSpawnPointValid())
 				return;
 
+			_buffer.Clear();
 			for (int i = 0; i < Amount; i++)
 				_buffer.Add(GetClone());
 
