@@ -8,16 +8,16 @@ namespace Bodix.Evolunity.Components
 {
 	public class SimpleSpawner<T> : BaseSpawner<T> where T : Object
 	{
-		public override T GetClone()
+		protected override T CreateClone(Vector3 validPosition)
 		{
 			return Instantiate(
 				Prefab,
-				GetSpawnPosition(),
+				validPosition,
 				transform.rotation,
 				Parent);
 		}
 
-		public override Vector3 GetSpawnPosition()
+		protected override Vector3 GetPotentialSpawnPosition()
 		{
 			return transform.position;
 		}

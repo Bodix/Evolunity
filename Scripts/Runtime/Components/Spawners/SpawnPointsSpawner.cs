@@ -21,12 +21,12 @@ namespace Bodix.Evolunity.Components
 			_spawnPointsSet = new HashSet<Transform>();
 		}
 
-		public override T GetClone()
+		protected override T CreateClone(Vector3 validPosition)
 		{
-			return Instantiate(Prefab, GetSpawnPosition(), Quaternion.identity, Parent);
+			return Instantiate(Prefab, validPosition, Quaternion.identity, Parent);
 		}
 
-		public override Vector3 GetSpawnPosition()
+		protected override Vector3 GetPotentialSpawnPosition()
 		{
 			if (_spawnPointsSet.Count == 0)
 				_spawnPointsSet = new HashSet<Transform>(SpawnPoints.Shuffle());

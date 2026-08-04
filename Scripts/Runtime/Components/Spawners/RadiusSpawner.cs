@@ -13,12 +13,12 @@ namespace Bodix.Evolunity.Components
 		public float MinRadius = 30;
 		public float MaxRadius = 45;
 
-		public override T GetClone()
+		protected override T CreateClone(Vector3 validPosition)
 		{
-			return Instantiate(Prefab, GetSpawnPosition(), Quaternion.identity, Parent);
+			return Instantiate(Prefab, validPosition, Quaternion.identity, Parent);
 		}
 
-		public override Vector3 GetSpawnPosition()
+		protected override Vector3 GetPotentialSpawnPosition()
 		{
 			Vector2 direction = Random.insideUnitCircle.normalized;
 			float distance = Random.Range(MinRadius, MaxRadius);

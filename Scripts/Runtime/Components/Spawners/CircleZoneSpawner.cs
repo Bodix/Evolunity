@@ -11,12 +11,12 @@ namespace Bodix.Evolunity.Components
 		[Space]
 		public float Radius = 10;
 
-		public override T GetClone()
+		protected override T CreateClone(Vector3 validPosition)
 		{
-			return Instantiate(Prefab, GetSpawnPosition(), Quaternion.identity, Parent);
+			return Instantiate(Prefab, validPosition, Quaternion.identity, Parent);
 		}
 
-		public override Vector3 GetSpawnPosition()
+		protected override Vector3 GetPotentialSpawnPosition()
 		{
 			Vector2 position = Random.insideUnitCircle * Radius;
 

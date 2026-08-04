@@ -46,6 +46,13 @@ namespace Bodix.Evolunity.Components
 		public override bool DrawPeriodFieldInInspector => SpawnMethod == SpawnMethod.Periodic;
 		public override bool DrawPeriodProgressInInspector => SpawnMethod == SpawnMethod.Periodic;
 
+		protected abstract T CreateClone(Vector3 validPosition);
+
+		/// <summary>
+		/// This position may be changed by raycast hit position.
+		/// </summary>
+		protected abstract Vector3 GetPotentialSpawnPosition();
+
 		private void Reset()
 		{
 			Parent = transform;
@@ -71,28 +78,25 @@ namespace Bodix.Evolunity.Components
 				Spawn();
 		}
 
-		public abstract T GetClone();
-		public abstract Vector3 GetSpawnPosition();
-
 		public void Spawn()
 		{
-			if (!IsSpawnPointValid())
-				return;
-
 			_buffer.Clear();
-			for (int i = 0; i < Amount; i++)
-				_buffer.Add(GetClone());
 
-			Spawned?.Invoke(_buffer);
+			for (int i = 0; i < Amount; i++)
+				if (TryGetValidSpawnPosition(out Vector3 validPosition))
+					_buffer.Add(CreateClone(validPosition));
+
+			if (_buffer.Count > 0)
+				Spawned?.Invoke(_buffer);
 		}
 
-		private bool IsSpawnPointValid()
+		private bool TryGetValidSpawnPosition(out Vector3 targetPosition)
 		{
+			targetPosition = GetPotentialSpawnPosition();
+
 			// If no checks are enabled, the point is valid by default.
 			if (!IsRaycastCheck && !IsSphereCheck)
 				return true;
-
-			Vector3 targetPosition = GetSpawnPosition();
 
 			if (IsRaycastCheck)
 			{
