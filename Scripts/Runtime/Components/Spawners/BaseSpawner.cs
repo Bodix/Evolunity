@@ -27,11 +27,12 @@ namespace Bodix.Evolunity.Components
 		public float RaycastDistance = 100;
 		[ShowIf(nameof(IsRaycastCheck))]
 		public LayerMask RaycastAllowedLayers = 1;
-		[ShowIf(nameof(IsRaycastCheck))]
+
+		[Header("Sphere Check")]
 		public bool IsSphereCheck = false;
-		[ShowIf(EConditionOperator.And, nameof(IsRaycastCheck), nameof(IsSphereCheck))]
+		[ShowIf(nameof(IsSphereCheck))]
 		public float SphereCheckRadius = 2;
-		[ShowIf(EConditionOperator.And, nameof(IsRaycastCheck), nameof(IsSphereCheck))]
+		[ShowIf(nameof(IsSphereCheck))]
 		public LayerMask SphereCheckDisallowedLayers = 0;
 
 		private readonly List<T> _buffer = new List<T>();
@@ -73,7 +74,8 @@ namespace Bodix.Evolunity.Components
 		{
 			_buffer.Clear();
 
-			if (IsRaycastCheck && !IsSpawnPointValid())
+			// Validate the spawn point using active checks.
+			if (!IsSpawnPointValid())
 				return;
 
 			for (int i = 0; i < Amount; i++)
@@ -84,22 +86,32 @@ namespace Bodix.Evolunity.Components
 
 		private bool IsSpawnPointValid()
 		{
-			if (Physics.Raycast(GetSpawnPosition().WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance))
-			{
-				if (((1 << hit.collider.gameObject.layer) & RaycastAllowedLayers) != 0)
-				{
-					if (IsSphereCheck)
-					{
-						return !Physics.CheckSphere(hit.point, SphereCheckRadius, SphereCheckDisallowedLayers);
-					}
-					else
-					{
-						return true;
-					}
-				}
-			}
+			// If no checks are enabled, the point is valid by default.
+			if (!IsRaycastCheck && !IsSphereCheck)
+				return true;
 
-			return false;
+			Vector3 targetPosition = GetSpawnPosition();
+
+			if (IsRaycastCheck)
+				if (Physics.Raycast(targetPosition.WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance))
+				{
+					// Check if the hit layer is in the allowed layers mask.
+					if (((1 << hit.collider.gameObject.layer) & RaycastAllowedLayers) == 0)
+						return false;
+
+					// Update target position for the sphere check based on the raycast hit.
+					targetPosition = hit.point;
+				}
+				else
+				{
+					return false;
+				}
+
+			if (IsSphereCheck)
+				if (Physics.CheckSphere(targetPosition, SphereCheckRadius, SphereCheckDisallowedLayers))
+					return false;
+
+			return true;
 		}
 	}
 
