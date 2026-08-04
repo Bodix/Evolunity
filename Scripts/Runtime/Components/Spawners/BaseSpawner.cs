@@ -26,7 +26,7 @@ namespace Bodix.Evolunity.Components
 		[ShowIf(nameof(IsRaycastCheck))]
 		public float RaycastDistance = 100;
 		[ShowIf(nameof(IsRaycastCheck))]
-		public LayerCheckMode RaycastMode = LayerCheckMode.Allowed;
+		public LayerCheckMode RaycastLayersMode = LayerCheckMode.Allowed;
 		[ShowIf(nameof(IsRaycastCheck))]
 		public LayerMask RaycastLayers = 1;
 
@@ -35,7 +35,7 @@ namespace Bodix.Evolunity.Components
 		[ShowIf(nameof(IsSphereCheck))]
 		public float SphereCheckRadius = 2;
 		[ShowIf(nameof(IsSphereCheck))]
-		public LayerCheckMode SphereCheckMode = LayerCheckMode.Disallowed;
+		public LayerCheckMode SphereCheckLayersMode = LayerCheckMode.Disallowed;
 		[ShowIf(nameof(IsSphereCheck))]
 		public LayerMask SphereCheckLayers = 0;
 
@@ -102,7 +102,7 @@ namespace Bodix.Evolunity.Components
 			{
 				bool hasHit = Physics.Raycast(targetPosition.WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance);
 
-				if (RaycastMode == LayerCheckMode.Allowed)
+				if (RaycastLayersMode == LayerCheckMode.Allowed)
 				{
 					if (!hasHit || ((1 << hit.collider.gameObject.layer) & RaycastLayers) == 0)
 						return false;
@@ -127,10 +127,10 @@ namespace Bodix.Evolunity.Components
 			{
 				bool hasOverlap = Physics.CheckSphere(targetPosition, SphereCheckRadius, SphereCheckLayers);
 
-				if (SphereCheckMode == LayerCheckMode.Disallowed && hasOverlap)
+				if (SphereCheckLayersMode == LayerCheckMode.Disallowed && hasOverlap)
 					return false;
 
-				if (SphereCheckMode == LayerCheckMode.Allowed && !hasOverlap)
+				if (SphereCheckLayersMode == LayerCheckMode.Allowed && !hasOverlap)
 					return false;
 			}
 
