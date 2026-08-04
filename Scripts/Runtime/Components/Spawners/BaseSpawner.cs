@@ -26,14 +26,18 @@ namespace Bodix.Evolunity.Components
 		[ShowIf(nameof(IsRaycastCheck))]
 		public float RaycastDistance = 100;
 		[ShowIf(nameof(IsRaycastCheck))]
-		public LayerMask RaycastAllowedLayers = 1;
+		public LayerCheckMode RaycastMode = LayerCheckMode.Allowed;
+		[ShowIf(nameof(IsRaycastCheck))]
+		public LayerMask RaycastLayers = 1;
 
 		[Header("Sphere Check")]
 		public bool IsSphereCheck = false;
 		[ShowIf(nameof(IsSphereCheck))]
 		public float SphereCheckRadius = 2;
 		[ShowIf(nameof(IsSphereCheck))]
-		public LayerMask SphereCheckDisallowedLayers = 0;
+		public LayerCheckMode SphereCheckMode = LayerCheckMode.Disallowed;
+		[ShowIf(nameof(IsSphereCheck))]
+		public LayerMask SphereCheckLayers = 0;
 
 		private readonly List<T> _buffer = new List<T>();
 
@@ -91,10 +95,12 @@ namespace Bodix.Evolunity.Components
 			Vector3 targetPosition = GetSpawnPosition();
 
 			if (IsRaycastCheck)
-				if (Physics.Raycast(targetPosition.WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance))
+			{
+				bool hasHit = Physics.Raycast(targetPosition.WithY(RaycastHeight), RaycastDirection, out RaycastHit hit, RaycastDistance);
+
+				if (RaycastMode == LayerCheckMode.Allowed)
 				{
-					// Check if the hit layer is in the allowed layers mask.
-					if (((1 << hit.collider.gameObject.layer) & RaycastAllowedLayers) == 0)
+					if (!hasHit || ((1 << hit.collider.gameObject.layer) & RaycastLayers) == 0)
 						return false;
 
 					// Update target position for the sphere check based on the raycast hit.
@@ -102,15 +108,36 @@ namespace Bodix.Evolunity.Components
 				}
 				else
 				{
-					return false;
+					if (hasHit)
+					{
+						if (((1 << hit.collider.gameObject.layer) & RaycastLayers) != 0)
+							return false;
+
+						// Update target position for the sphere check based on the raycast hit.
+						targetPosition = hit.point;
+					}
 				}
+			}
 
 			if (IsSphereCheck)
-				if (Physics.CheckSphere(targetPosition, SphereCheckRadius, SphereCheckDisallowedLayers))
+			{
+				bool hasOverlap = Physics.CheckSphere(targetPosition, SphereCheckRadius, SphereCheckLayers);
+
+				if (SphereCheckMode == LayerCheckMode.Disallowed && hasOverlap)
 					return false;
+
+				if (SphereCheckMode == LayerCheckMode.Allowed && !hasOverlap)
+					return false;
+			}
 
 			return true;
 		}
+	}
+
+	public enum LayerCheckMode
+	{
+		Allowed,
+		Disallowed
 	}
 
 	public enum SpawnMethod
