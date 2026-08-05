@@ -12,7 +12,7 @@ namespace Bodix.Evolunity.Components
 {
 	public abstract class BaseSpawner<T> : PeriodicBehaviour where T : UnityEngine.Object
 	{
-		public SpawnMethod SpawnMethod = SpawnMethod.Start;
+		public SpawnMethod SpawnMethod = SpawnMethod.OnceAtStart;
 		public T Prefab;
 		public uint Amount = 1;
 		public Transform Parent;
@@ -53,20 +53,20 @@ namespace Bodix.Evolunity.Components
 		/// </summary>
 		protected abstract Vector3 GetPotentialSpawnPosition();
 
-		private void Reset()
+		protected virtual void Reset()
 		{
 			Parent = transform;
 		}
 
-		private void Start()
+		protected virtual void Start()
 		{
-			if (SpawnMethod == SpawnMethod.Start)
+			if (SpawnMethod == SpawnMethod.OnceAtStart)
 				Spawn();
 		}
 
 		protected override void Update()
 		{
-			if (SpawnMethod == SpawnMethod.Update)
+			if (SpawnMethod == SpawnMethod.EveryUpdate)
 				Spawn();
 			else
 				base.Update();
@@ -147,8 +147,8 @@ namespace Bodix.Evolunity.Components
 	public enum SpawnMethod
 	{
 		Manual,
-		Start,
-		Update,
+		OnceAtStart,
+		EveryUpdate,
 		Periodic
 	}
 }
