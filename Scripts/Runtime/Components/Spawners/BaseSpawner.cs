@@ -53,6 +53,11 @@ namespace Bodix.Evolunity.Components
 		/// </summary>
 		protected abstract Vector3 GetPotentialSpawnPosition();
 
+		protected virtual bool IsValidPosition(Vector3 position)
+		{
+			return true;
+		}
+
 		protected virtual void Reset()
 		{
 			Parent = transform;
@@ -93,6 +98,9 @@ namespace Bodix.Evolunity.Components
 		private bool TryGetValidSpawnPosition(out Vector3 targetPosition)
 		{
 			targetPosition = GetPotentialSpawnPosition();
+
+			if (!IsValidPosition(targetPosition))
+				return false;
 
 			// If no checks are enabled, the point is valid by default.
 			if (!IsRaycastCheck && !IsSphereCheck)
