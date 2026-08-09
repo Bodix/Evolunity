@@ -46,18 +46,6 @@ namespace Bodix.Evolunity.Components
 		public override bool DrawPeriodFieldInInspector => SpawnMethod == SpawnMethod.Periodic;
 		public override bool DrawPeriodProgressInInspector => SpawnMethod == SpawnMethod.Periodic;
 
-		protected abstract T CreateClone(Vector3 validPosition);
-
-		/// <summary>
-		/// This position may be changed by raycast hit position.
-		/// </summary>
-		protected abstract Vector3 GetPotentialSpawnPosition();
-
-		protected virtual bool IsValidPosition(Vector3 position)
-		{
-			return true;
-		}
-
 		protected virtual void Reset()
 		{
 			Parent = transform;
@@ -77,14 +65,34 @@ namespace Bodix.Evolunity.Components
 				base.Update();
 		}
 
+		protected abstract T CreateClone(Vector3 validPosition);
+
+		/// <summary>
+		/// This position may be changed by raycast hit position.
+		/// </summary>
+		protected abstract Vector3 GetPotentialSpawnPosition();
+
 		protected override void OnPeriod()
 		{
 			if (SpawnMethod == SpawnMethod.Periodic)
 				Spawn();
 		}
 
+		protected virtual bool IsValidPosition(Vector3 position)
+		{
+			return true;
+		}
+
+		protected virtual bool CanSpawn()
+		{
+			return true;
+		}
+
 		public void Spawn()
 		{
+			if (!CanSpawn())
+				return;
+
 			_buffer.Clear();
 
 			for (int i = 0; i < Amount; i++)
