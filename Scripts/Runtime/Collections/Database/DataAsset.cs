@@ -3,6 +3,7 @@
 // All Rights Reserved.
 
 using System.IO;
+using System.Text.RegularExpressions;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Bodix.Evolunity.Collections
 	public abstract class DataAsset : ScriptableObject
 	{
 		[Tooltip("Unique string ID in 'namespace:name' format")]
-		[SerializeField] 
+		[SerializeField]
 		private string _id;
 
 		public string Id => _id;
@@ -24,20 +25,19 @@ namespace Bodix.Evolunity.Collections
 		protected virtual void OnValidate()
 		{
 			if (string.IsNullOrWhiteSpace(_id))
-			{
 				GenerateId();
-			}
 		}
 
 		[Button("Regenerate ID")]
 		public void GenerateId()
 		{
-			string expectedName = name.Replace(" ", "_").ToLower();
+			string expectedName = ReplaceNonAlphanumerics(name.ToLower());
 			string assetPath = AssetDatabase.GetAssetPath(this);
 
 			if (!string.IsNullOrEmpty(assetPath))
 			{
 				string parentFolder = Path.GetFileName(Path.GetDirectoryName(assetPath))?.ToLower();
+				parentFolder = ReplaceNonAlphanumerics(parentFolder ?? string.Empty);
 
 				_id = $"{parentFolder}:{expectedName}";
 			}
@@ -47,6 +47,14 @@ namespace Bodix.Evolunity.Collections
 			}
 
 			EditorUtility.SetDirty(this);
+		}
+
+		/// <summary>
+		/// Replace any non-alphanumeric characters with an underscore.
+		/// </summary>
+		private string ReplaceNonAlphanumerics(string text)
+		{
+			return Regex.Replace(text, "[^a-z0-9]+", "_").Trim('_');
 		}
 #endif
 	}
