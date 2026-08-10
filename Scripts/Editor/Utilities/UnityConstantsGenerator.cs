@@ -159,9 +159,7 @@ namespace Bodix.Evolunity.Editor.Utilities
 				}
 
 				writer.WriteLine("\t}");
-
 				writer.WriteLine("}");
-				writer.WriteLine();
 			}
 
 			AssetDatabase.Refresh();
