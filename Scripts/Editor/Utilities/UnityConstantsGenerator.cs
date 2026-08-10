@@ -57,45 +57,45 @@ namespace Bodix.Evolunity.Editor.Utilities
 				writer.WriteLine("{");
 
 				// Tags.
-				writer.WriteLine("    public static class Tag");
-				writer.WriteLine("    {");
+				writer.WriteLine("\tpublic static class Tag");
+				writer.WriteLine("\t{");
 				foreach (string tag in InternalEditorUtility.tags)
 				{
-					writer.WriteLine("        /// <summary>");
-					writer.WriteLine("        /// Name of tag '{0}'.", tag);
-					writer.WriteLine("        /// </summary>");
-					writer.WriteLine("        public const string {0} = \"{1}\";", MakeSafeForCode(tag), tag);
+					writer.WriteLine("\t\t/// <summary>");
+					writer.WriteLine("\t\t/// Name of tag '{0}'.", tag);
+					writer.WriteLine("\t\t/// </summary>");
+					writer.WriteLine("\t\tpublic const string {0} = \"{1}\";", MakeSafeForCode(tag), tag);
 				}
 
-				writer.WriteLine("    }");
+				writer.WriteLine("\t}");
 				writer.WriteLine();
 
 				// Sorting layers.
-				writer.WriteLine("    public static class SortingLayer");
-				writer.WriteLine("    {");
+				writer.WriteLine("\tpublic static class SortingLayer");
+				writer.WriteLine("\t{");
 				foreach (SortingLayer layer in SortingLayer.layers)
 				{
-					writer.WriteLine("        /// <summary>");
-					writer.WriteLine("        /// ID of sorting layer '{0}'.", layer.name);
-					writer.WriteLine("        /// </summary>");
-					writer.WriteLine("        public const int {0} = {1};", MakeSafeForCode(layer.name), layer.id);
+					writer.WriteLine("\t\t/// <summary>");
+					writer.WriteLine("\t\t/// ID of sorting layer '{0}'.", layer.name);
+					writer.WriteLine("\t\t/// </summary>");
+					writer.WriteLine("\t\tpublic const int {0} = {1};", MakeSafeForCode(layer.name), layer.id);
 				}
 
-				writer.WriteLine("    }");
+				writer.WriteLine("\t}");
 				writer.WriteLine();
 
 				// Layers.
-				writer.WriteLine("    public static class Layer");
-				writer.WriteLine("    {");
+				writer.WriteLine("\tpublic static class Layer");
+				writer.WriteLine("\t{");
 				for (int i = 0; i < 32; i++)
 				{
 					string layer = InternalEditorUtility.GetLayerName(i);
 					if (!string.IsNullOrEmpty(layer))
 					{
-						writer.WriteLine("        /// <summary>");
-						writer.WriteLine("        /// Index of layer '{0}'.", layer);
-						writer.WriteLine("        /// </summary>");
-						writer.WriteLine("        public const int {0} = {1};", MakeSafeForCode(layer), i);
+						writer.WriteLine("\t\t/// <summary>");
+						writer.WriteLine("\t\t/// Index of layer '{0}'.", layer);
+						writer.WriteLine("\t\t/// </summary>");
+						writer.WriteLine("\t\tpublic const int {0} = {1};", MakeSafeForCode(layer), i);
 					}
 				}
 
@@ -106,19 +106,19 @@ namespace Bodix.Evolunity.Editor.Utilities
 					string layer = InternalEditorUtility.GetLayerName(i);
 					if (!string.IsNullOrEmpty(layer))
 					{
-						writer.WriteLine("        /// <summary>");
-						writer.WriteLine("        /// Bitmask of layer '{0}'.", layer);
-						writer.WriteLine("        /// </summary>");
-						writer.WriteLine("        public const int {0}Mask = 1 << {1};", MakeSafeForCode(layer), i);
+						writer.WriteLine("\t\t/// <summary>");
+						writer.WriteLine("\t\t/// Bitmask of layer '{0}'.", layer);
+						writer.WriteLine("\t\t/// </summary>");
+						writer.WriteLine("\t\tpublic const int {0}Mask = 1 << {1};", MakeSafeForCode(layer), i);
 					}
 				}
 
-				writer.WriteLine("    }");
+				writer.WriteLine("\t}");
 				writer.WriteLine();
 
 				// Scenes.
-				writer.WriteLine("    public static class Scene");
-				writer.WriteLine("    {");
+				writer.WriteLine("\tpublic static class Scene");
+				writer.WriteLine("\t{");
 				int sceneIndex = 0;
 				foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
 				{
@@ -127,20 +127,20 @@ namespace Bodix.Evolunity.Editor.Utilities
 
 					string sceneName = Path.GetFileNameWithoutExtension(scene.path);
 
-					writer.WriteLine("        /// <summary>");
-					writer.WriteLine("        /// ID of scene '{0}'.", sceneName);
-					writer.WriteLine("        /// </summary>");
-					writer.WriteLine("        public const int {0} = {1};", MakeSafeForCode(sceneName), sceneIndex);
+					writer.WriteLine("\t\t/// <summary>");
+					writer.WriteLine("\t\t/// ID of scene '{0}'.", sceneName);
+					writer.WriteLine("\t\t/// </summary>");
+					writer.WriteLine("\t\tpublic const int {0} = {1};", MakeSafeForCode(sceneName), sceneIndex);
 
 					sceneIndex++;
 				}
 
-				writer.WriteLine("    }");
+				writer.WriteLine("\t}");
 				writer.WriteLine();
 
 				// Input axes.
-				writer.WriteLine("    public static class Axis");
-				writer.WriteLine("    {");
+				writer.WriteLine("\tpublic static class Axis");
+				writer.WriteLine("\t{");
 				HashSet<string> axes = new HashSet<string>();
 				SerializedObject inputManagerProp =
 					new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0]);
@@ -150,15 +150,15 @@ namespace Bodix.Evolunity.Editor.Utilities
 					string variableName = MakeSafeForCode(name);
 					if (!axes.Contains(variableName))
 					{
-						writer.WriteLine("        /// <summary>");
-						writer.WriteLine("        /// Input axis '{0}'.", name);
-						writer.WriteLine("        /// </summary>");
-						writer.WriteLine("        public const string {0} = \"{1}\";", variableName, name);
+						writer.WriteLine("\t\t/// <summary>");
+						writer.WriteLine("\t\t/// Input axis '{0}'.", name);
+						writer.WriteLine("\t\t/// </summary>");
+						writer.WriteLine("\t\tpublic const string {0} = \"{1}\";", variableName, name);
 						axes.Add(variableName);
 					}
 				}
 
-				writer.WriteLine("    }");
+				writer.WriteLine("\t}");
 
 				writer.WriteLine("}");
 				writer.WriteLine();
