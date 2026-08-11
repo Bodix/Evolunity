@@ -12,7 +12,7 @@ namespace Bodix.Evolunity.Editor.Generators
 {
 	public static class DataAssetsIdGenerator
 	{
-		[MenuItem("Tools/Configs/Generate All DataAssets IDs")]
+		[MenuItem("Tools/Evolunity/Generate/Generate All DataAssets IDs")]
 		public static void GenerateAll()
 		{
 			string[] guids = AssetDatabase.FindAssets($"t:{nameof(DataAsset)}");

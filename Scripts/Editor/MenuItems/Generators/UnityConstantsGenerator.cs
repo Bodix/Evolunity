@@ -18,7 +18,7 @@ namespace Bodix.Evolunity.Editor.Generators
 		public const string FileName = "UnityConstants.cs";
 
 		[MenuItem("Assets/Generate " + FileName, priority = 800)]
-		[MenuItem("Tools/Evolunity/Generate " + FileName)]
+		[MenuItem("Tools/Evolunity/Generate/Generate " + FileName)]
 		public static void Generate()
 		{
 			// Try to find an existing file in the project.

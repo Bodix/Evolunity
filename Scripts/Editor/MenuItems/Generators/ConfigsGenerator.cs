@@ -16,7 +16,7 @@ namespace Bodix.Evolunity.Editor.Generators
 {
 	public static class ConfigsGenerator
 	{
-		[MenuItem("Tools/Generate Config Catalog")]
+		[MenuItem("Tools/Evolunity/Generate/Generate ConfigCatalog.cs")]
 		public static void Generate()
 		{
 			ConfigsGeneratorSettings settings = GetSettings();
