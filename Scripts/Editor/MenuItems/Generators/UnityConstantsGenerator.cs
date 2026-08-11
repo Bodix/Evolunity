@@ -53,6 +53,7 @@ namespace Bodix.Evolunity.Editor.Generators
 				writer.WriteLine("// Don't change this file, because modifications are not saved if the code is regenerated.");
 				writer.WriteLine("// --------------------------------");
 				writer.WriteLine();
+				writer.WriteLine("// ReSharper disable once CheckNamespace");
 				writer.WriteLine("namespace " + Path.GetFileNameWithoutExtension(FileName));
 				writer.WriteLine("{");
 
