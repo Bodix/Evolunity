@@ -35,6 +35,10 @@ namespace Bodix.Evolunity.Components.UI
 
 		protected override void Awake()
 		{
+			// Disable the object before base.Awake so its initial state becomes Hidden
+			// to suppress warning from base class and activate animations when Show method will be invoked.
+			gameObject.SetActive(false);
+
 			base.Awake();
 
 			acceptButton.Button.onClick.AddListener(Accept);
@@ -55,9 +59,6 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			ApplyPayload(payload);
 			SetResultCallback(resultCallback);
-			// To suppress warning from base class and activate animations.
-			if (IsShown)
-				HideInstantly();
 
 			base.Show(instantly, onShowComplete);
 		}
@@ -65,9 +66,6 @@ namespace Bodix.Evolunity.Components.UI
 		public void Show(Action<Result> resultCallback, Action onShowComplete = null, bool instantly = false)
 		{
 			SetResultCallback(resultCallback);
-			// To suppress warning from base class and activate animations.
-			if (IsShown)
-				HideInstantly();
 
 			base.Show(instantly, onShowComplete);
 		}
