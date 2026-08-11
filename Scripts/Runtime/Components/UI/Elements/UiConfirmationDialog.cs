@@ -22,8 +22,11 @@ namespace Bodix.Evolunity.Components.UI
 		protected UiIconTextButton acceptButton;
 		[SerializeField]
 		protected UiIconTextButton declineButton;
+		[SerializeField]
+		protected UiButton backgroundButton;
 
 		protected Action<Result> ResultCallback;
+		private bool _hideOnBackgroundClick;
 
 		public event Action Accepted;
 		public event Action Declined;
@@ -32,6 +35,7 @@ namespace Bodix.Evolunity.Components.UI
 		public TMP_Text MessageText => messageText;
 		public UiButton AcceptButton => acceptButton;
 		public UiButton DeclineButton => declineButton;
+		public UiButton BackgroundButton => backgroundButton;
 
 		protected override void Awake()
 		{
@@ -43,6 +47,7 @@ namespace Bodix.Evolunity.Components.UI
 
 			acceptButton.Button.onClick.AddListener(Accept);
 			declineButton.Button.onClick.AddListener(Decline);
+			backgroundButton.Button.onClick.AddListener(HideByBackgroundClick);
 		}
 
 		protected virtual void OnDestroy()
@@ -52,6 +57,9 @@ namespace Bodix.Evolunity.Components.UI
 
 			if (declineButton != null)
 				declineButton.Button.onClick.RemoveListener(Decline);
+
+			if (backgroundButton != null)
+				backgroundButton.Button.onClick.RemoveListener(HideByBackgroundClick);
 		}
 
 		public void Show(UiConfirmationDialogPayload payload, Action<Result> resultCallback,
@@ -95,6 +103,8 @@ namespace Bodix.Evolunity.Components.UI
 			if (payload == null)
 				return;
 
+			_hideOnBackgroundClick = payload.HideOnBackgroundClick;
+
 			if (titleText != null && !string.IsNullOrEmpty(payload.Title))
 				titleText.text = payload.Title;
 
@@ -106,6 +116,12 @@ namespace Bodix.Evolunity.Components.UI
 
 			if (declineButton.Text != null && !string.IsNullOrEmpty(payload.DeclineButtonText))
 				declineButton.Text.text = payload.DeclineButtonText;
+		}
+
+		private void HideByBackgroundClick()
+		{
+			if (_hideOnBackgroundClick)
+				Hide(Result.Hide);
 		}
 
 		protected void Accept()
