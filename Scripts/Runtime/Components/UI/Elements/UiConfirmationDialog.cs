@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI
@@ -10,16 +11,25 @@ namespace Bodix.Evolunity.Components.UI
 	[AddComponentMenu("Evolunity/UI/Confirmation Dialog")]
 	public class UiConfirmationDialog : UiElement
 	{
+		[Header("Texts")]
 		[SerializeField]
-		protected UiButton acceptButton;
+		protected TMP_Text titleText;
 		[SerializeField]
-		protected UiButton declineButton;
+		protected TMP_Text messageText;
+
+		[Header("Buttons")]
+		[SerializeField]
+		protected UiIconTextButton acceptButton;
+		[SerializeField]
+		protected UiIconTextButton declineButton;
 
 		protected Action<Result> ResultCallback;
 
 		public event Action Accepted;
 		public event Action Declined;
 
+		public TMP_Text TitleText => titleText;
+		public TMP_Text MessageText => messageText;
 		public UiButton AcceptButton => acceptButton;
 		public UiButton DeclineButton => declineButton;
 
@@ -38,6 +48,15 @@ namespace Bodix.Evolunity.Components.UI
 
 			if (declineButton != null)
 				declineButton.Button.onClick.RemoveListener(Decline);
+		}
+
+		public void Show(UiConfirmationDialogPayload payload, Action<Result> resultCallback,
+			Action onShowComplete = null, bool instantly = false)
+		{
+			ApplyPayload(payload);
+			SetResultCallback(resultCallback);
+
+			base.Show(instantly, onShowComplete);
 		}
 
 		public void Show(Action<Result> resultCallback, Action onShowComplete = null, bool instantly = false)
@@ -65,6 +84,24 @@ namespace Bodix.Evolunity.Components.UI
 		protected sealed override void Hide(bool instantly, Action onComplete)
 		{
 			Hide(Result.Hide, onComplete, instantly);
+		}
+
+		protected virtual void ApplyPayload(UiConfirmationDialogPayload payload)
+		{
+			if (payload == null)
+				return;
+
+			if (titleText != null && !string.IsNullOrEmpty(payload.Title))
+				titleText.text = payload.Title;
+
+			if (messageText != null && !string.IsNullOrEmpty(payload.Message))
+				messageText.text = payload.Message;
+
+			if (acceptButton.Text != null && !string.IsNullOrEmpty(payload.ConfirmButtonText))
+				acceptButton.Text.text = payload.ConfirmButtonText;
+
+			if (declineButton.Text != null && !string.IsNullOrEmpty(payload.CancelButtonText))
+				declineButton.Text.text = payload.CancelButtonText;
 		}
 
 		protected void Accept()
