@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI
 {
@@ -9,6 +10,8 @@ namespace Bodix.Evolunity.Components.UI
 		public string AcceptButtonText;
 		public string DeclineButtonText;
 		public bool HideOnBackgroundClick = false;
+		public Sprite AcceptIcon;
+		public Sprite DeclineIcon;
 
 		public bool Equals(UiConfirmationDialogPayload other)
 		{
@@ -18,7 +21,9 @@ namespace Bodix.Evolunity.Components.UI
 			return Title == other.Title
 				&& Message == other.Message
 				&& AcceptButtonText == other.AcceptButtonText
-				&& DeclineButtonText == other.DeclineButtonText;
+				&& DeclineButtonText == other.DeclineButtonText
+				&& AcceptIcon == other.AcceptIcon
+				&& DeclineIcon == other.DeclineIcon;
 		}
 	}
 }
