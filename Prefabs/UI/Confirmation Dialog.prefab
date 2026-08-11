@@ -191,8 +191,8 @@ MonoBehaviour:
     id: 0
   titleText: {fileID: 7553010542975185219}
   messageText: {fileID: 2730424248375824710}
-  acceptButton: {fileID: 0}
-  declineButton: {fileID: 0}
+  acceptButton: {fileID: 4248975222996891949}
+  declineButton: {fileID: 6617842708772097431}
   references:
     version: 1
     00000000:
@@ -576,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 170
+      value: 176.795
       objectReference: {fileID: 0}
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
@@ -721,6 +721,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1693720088581022368}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6617842708772097431 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5500585726272974647, guid: 5ef2f7ac90ef2b74983228a87a880677,
+    type: 3}
+  m_PrefabInstance: {fileID: 1693720088581022368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb1aca5faf64e7bbe619e48990b1d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8548225610894267930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -936,3 +948,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8548225610894267930}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4248975222996891949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5500585726272974647, guid: 5ef2f7ac90ef2b74983228a87a880677,
+    type: 3}
+  m_PrefabInstance: {fileID: 8548225610894267930}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb1aca5faf64e7bbe619e48990b1d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
