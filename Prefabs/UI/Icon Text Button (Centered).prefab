@@ -60,6 +60,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2957060551924191728, guid: a15d6d347cd13e645bab69b8b323c943,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382071624188799777, guid: a15d6d347cd13e645bab69b8b323c943,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5382071624188799790, guid: a15d6d347cd13e645bab69b8b323c943,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -103,6 +113,11 @@ PrefabInstance:
     - target: {fileID: 5442387774659277757, guid: a15d6d347cd13e645bab69b8b323c943,
         type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442387774659277757, guid: a15d6d347cd13e645bab69b8b323c943,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5442387774659277757, guid: a15d6d347cd13e645bab69b8b323c943,
