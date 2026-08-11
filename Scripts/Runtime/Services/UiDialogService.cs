@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Services
 {
-	public class DialogService : MonoBehaviour
+	public class UiDialogService : MonoBehaviour
 	{
 		[SerializeField]
 		protected UiConfirmationDialog confirmationDialogPrefab;

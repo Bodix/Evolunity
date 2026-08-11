@@ -55,6 +55,9 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			ApplyPayload(payload);
 			SetResultCallback(resultCallback);
+			// To suppress warning from base class and activate animations.
+			if (IsShown)
+				HideInstantly();
 
 			base.Show(instantly, onShowComplete);
 		}
@@ -62,6 +65,9 @@ namespace Bodix.Evolunity.Components.UI
 		public void Show(Action<Result> resultCallback, Action onShowComplete = null, bool instantly = false)
 		{
 			SetResultCallback(resultCallback);
+			// To suppress warning from base class and activate animations.
+			if (IsShown)
+				HideInstantly();
 
 			base.Show(instantly, onShowComplete);
 		}
@@ -97,11 +103,11 @@ namespace Bodix.Evolunity.Components.UI
 			if (messageText != null && !string.IsNullOrEmpty(payload.Message))
 				messageText.text = payload.Message;
 
-			if (acceptButton.Text != null && !string.IsNullOrEmpty(payload.ConfirmButtonText))
-				acceptButton.Text.text = payload.ConfirmButtonText;
+			if (acceptButton.Text != null && !string.IsNullOrEmpty(payload.AcceptButtonText))
+				acceptButton.Text.text = payload.AcceptButtonText;
 
-			if (declineButton.Text != null && !string.IsNullOrEmpty(payload.CancelButtonText))
-				declineButton.Text.text = payload.CancelButtonText;
+			if (declineButton.Text != null && !string.IsNullOrEmpty(payload.DeclineButtonText))
+				declineButton.Text.text = payload.DeclineButtonText;
 		}
 
 		protected void Accept()

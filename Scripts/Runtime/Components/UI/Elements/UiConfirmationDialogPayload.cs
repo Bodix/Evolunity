@@ -4,7 +4,7 @@
 	{
 		public string Title;
 		public string Message;
-		public string ConfirmButtonText;
-		public string CancelButtonText;
+		public string AcceptButtonText;
+		public string DeclineButtonText;
 	}
 }
