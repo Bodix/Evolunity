@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Bodix.Evolunity.Editor.Utilities
+namespace Bodix.Evolunity.Editor.Generators
 {
 	// TODO: Fix '_' character in constant names.
 
