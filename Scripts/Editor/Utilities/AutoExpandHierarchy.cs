@@ -13,17 +13,17 @@ namespace Bodix.Evolunity.Editor.Utilities
 	// TODO: Add UI for adding GameObject's to expand.
 
 	// Use it as follows:
-	[InitializeOnLoad]
-	public static class EditorBootstrap
-	{
-		static EditorBootstrap()
-		{
-			AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
-			AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
-			AutoExpandHierarchy.GameObjectsToExpand.Add("Player");
-			AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
-		}
-	}
+	// [InitializeOnLoad]
+	// public static class EditorBootstrap
+	// {
+	// 	static EditorBootstrap()
+	// 	{
+	// 		AutoExpandHierarchy.GameObjectsToExpand.Add("Logic");
+	// 		AutoExpandHierarchy.GameObjectsToExpand.Add("Environment");
+	// 		AutoExpandHierarchy.GameObjectsToExpand.Add("Player");
+	// 		AutoExpandHierarchy.GameObjectsToExpand.Add("UI");
+	// 	}
+	// }
 
 	[InitializeOnLoad]
 	public static class AutoExpandHierarchy
