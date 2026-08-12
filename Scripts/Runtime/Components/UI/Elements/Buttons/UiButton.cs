@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Button")]
-	public class UiButton : UiElement
+	public class UiButton : UiElement, IInteractable
 	{
 		[SerializeField]
 		protected Button button;
