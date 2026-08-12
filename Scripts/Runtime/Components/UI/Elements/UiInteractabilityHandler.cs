@@ -11,15 +11,12 @@ namespace Bodix.Evolunity.Components.UI
 		{
 			_interactable = GetComponent<IInteractable>();
 
+			_interactable.InteractabilityChanged += HandleInteractabilityChange;
+
 			HandleInteractabilityChange(_interactable.IsInteractable);
 		}
 
-		protected virtual void OnEnable()
-		{
-			_interactable.InteractabilityChanged += HandleInteractabilityChange;
-		}
-
-		protected virtual void OnDisable()
+		protected virtual void OnDestroy()
 		{
 			_interactable.InteractabilityChanged -= HandleInteractabilityChange;
 		}
