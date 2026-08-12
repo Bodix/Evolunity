@@ -8,7 +8,7 @@ namespace Bodix.Evolunity.Components.UI
 	/// It simply adds an event when the interactivity state (<see cref="Button.interactable"/>) changes.
 	/// </summary>
 	[AddComponentMenu("")]
-	internal class ObservableButton : Button
+	public class ObservableButton : Button
 	{
 		public event Action<bool> InteractabilityChanged;
 
