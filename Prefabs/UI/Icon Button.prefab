@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1718367374549817256}
   - component: {fileID: 989446950223280379}
-  - component: {fileID: 1718367374549817259}
+  - component: {fileID: 4684962333605005559}
   m_Layer: 5
   m_Name: Icon Button
   m_TagString: Untagged
@@ -127,14 +127,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  button: {fileID: 1718367374549817259}
+  button: {fileID: 4684962333605005559}
   background: {fileID: 3620610015475580855}
   icon: {fileID: 1869227858}
   references:
     version: 1
     00000000:
       type: {class: , ns: , asm: }
---- !u!114 &1718367374549817259
+--- !u!114 &4684962333605005559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1718367374549817257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 27d651374c884d6c817c64eec532f092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:

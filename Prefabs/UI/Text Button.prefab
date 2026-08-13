@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567835276812258757}
   - component: {fileID: 3618784524008499}
-  - component: {fileID: 1567835276812258758}
+  - component: {fileID: 364556071697133295}
   m_Layer: 5
   m_Name: Text Button
   m_TagString: Untagged
@@ -188,14 +188,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animations:
     id: 0
-  button: {fileID: 1567835276812258758}
+  button: {fileID: 364556071697133295}
   background: {fileID: 4128033654256394362}
   text: {fileID: 151662120234859827}
   references:
     version: 1
     00000000:
       type: {class: , ns: , asm: }
---- !u!114 &1567835276812258758
+--- !u!114 &364556071697133295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1567835276812258756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 27d651374c884d6c817c64eec532f092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
