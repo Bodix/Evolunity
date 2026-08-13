@@ -14,7 +14,7 @@ namespace Bodix.Evolunity.Collections
 	}
 
 	[Serializable]
-	public class NestedGameObjectItemDrop : NestedTableDrop<GameObject>
+	public class GameObjectNestedTableDrop : NestedTableDrop<GameObject>
 	{
 	}
 
