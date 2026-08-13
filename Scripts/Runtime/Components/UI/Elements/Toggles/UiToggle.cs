@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 namespace Bodix.Evolunity.Components.UI
 {
+	// TODO: Implement IInteractable interface like in UiButton. [#design]
+	
 	[AddComponentMenu("Evolunity/UI/Toggle")]
 	public class UiToggle : UiElement
 	{
