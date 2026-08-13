@@ -14,12 +14,17 @@ namespace Bodix.Evolunity.Collections
 	}
 
 	[Serializable]
-	public class GameObjectWeightedEntry : WeightedPoolEntry<GameObject>
+	public class NestedGameObjectItemDrop : NestedTableDrop<GameObject>
 	{
 	}
 
 	[Serializable]
 	public class GameObjectWeightedPoolDrop : WeightedPoolDrop<GameObject, GameObjectWeightedEntry>
+	{
+	}
+
+	[Serializable]
+	public class GameObjectWeightedEntry : WeightedPoolEntry<GameObject>
 	{
 	}
 }
