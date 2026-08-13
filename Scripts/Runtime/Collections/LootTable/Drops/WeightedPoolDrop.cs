@@ -25,7 +25,7 @@ namespace Bodix.Evolunity.Collections
 
 			if (Rolls < 0 || EmptyRollWeight < 0f)
 			{
-				Debug.LogError("[WeightedPoolDrop] Invalid rolls or empty weight configuration.");
+				Debug.LogError($"[{nameof(WeightedPoolDrop<T, TEntry>)}] Invalid rolls or empty weight configuration.");
 
 				return false;
 			}
@@ -35,7 +35,7 @@ namespace Bodix.Evolunity.Collections
 			{
 				if (entry == null || entry.Item == null || entry.Weight < 0f || entry.MinCount < 0 || entry.MaxCount < entry.MinCount)
 				{
-					Debug.LogError("[WeightedPoolDrop] Invalid entry configuration encountered in the pool.");
+					Debug.LogError($"[{nameof(WeightedPoolDrop<T, TEntry>)}] Invalid entry configuration encountered in the pool.");
 
 					return false;
 				}
@@ -45,7 +45,7 @@ namespace Bodix.Evolunity.Collections
 
 			if (Rolls > 0 && totalWeight <= 0f)
 			{
-				Debug.LogError("[WeightedPoolDrop] Total weight of the weighted pool is 0. Cannot generate weighted loot.");
+				Debug.LogError($"[{nameof(WeightedPoolDrop<T, TEntry>)}] Total weight of the weighted pool is 0. Cannot generate weighted loot.");
 
 				return false;
 			}

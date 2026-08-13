@@ -22,14 +22,14 @@ namespace Bodix.Evolunity.Collections
 
 			if (Item == null)
 			{
-				Debug.LogError("[ItemDrop] Item reference is missing.");
+				Debug.LogError($"[{nameof(ItemDrop<T>)}] Item reference is missing.");
 
 				return false;
 			}
 
 			if (MinCount < 0 || MaxCount < MinCount)
 			{
-				Debug.LogError($"[ItemDrop] Invalid min or max count configuration for item {Item}.");
+				Debug.LogError($"[{nameof(ItemDrop<T>)}] Invalid min or max count configuration for item {Item}.");
 
 				return false;
 			}

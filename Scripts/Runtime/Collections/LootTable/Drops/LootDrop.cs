@@ -19,7 +19,7 @@ namespace Bodix.Evolunity.Collections
 		{
 			if (Probability < 0f || Probability > 1f)
 			{
-				Debug.LogError("[LootDrop] Probability must be between 0 and 1.");
+				Debug.LogError($"[{nameof(LootDrop)}] Probability must be between 0 and 1.");
 
 				return false;
 			}
