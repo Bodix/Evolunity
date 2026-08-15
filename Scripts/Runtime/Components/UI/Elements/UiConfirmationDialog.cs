@@ -88,12 +88,16 @@ namespace Bodix.Evolunity.Components.UI
 
 		/// <summary>
 		/// Hides the dialog on back button press.
+		/// We return Result.Hide instead of Result.Decline to distinguish
+		/// a contextual dismissal (like pressing Esc) from
+		/// a deliberate, explicit user choice (clicking Decline).
 		/// </summary>
 		public virtual bool OnBackPressed()
 		{
 			if (gameObject.activeSelf)
 			{
-				// Dismiss the dialog using Hide result to match background click behavior.
+				// Dismiss the dialog using Hide result to match background click behavior
+				// and avoid triggering false business logic.
 				Hide(Result.Hide);
 
 				return true;
@@ -159,6 +163,8 @@ namespace Bodix.Evolunity.Components.UI
 
 		private void HideByBackgroundClick()
 		{
+			// Background clicks act as a soft dismissal.
+			// We use Result.Hide to avoid triggering business logic tied to an explicit Decline action.
 			if (_hideOnBackgroundClick)
 				Hide(Result.Hide);
 		}
@@ -191,7 +197,14 @@ namespace Bodix.Evolunity.Components.UI
 		public enum Result
 		{
 			Accept,
+			/// <summary>
+			/// Represents an explicit, deliberate user choice to decline.
+			/// </summary>
 			Decline,
+			/// <summary>
+			/// Represents a contextual dismissal (like pressing Esc or clicking the background).
+			/// Used to gracefully close the dialog without triggering specific decline logic.
+			/// </summary>
 			Hide
 		}
 	}
