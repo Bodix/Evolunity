@@ -3,13 +3,14 @@
 // All Rights Reserved
 
 using System;
+using Bodix.Evolunity.Services;
 using TMPro;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Confirmation Dialog")]
-	public class UiConfirmationDialog : UiElement
+	public class UiConfirmationDialog : UiElement, IBackHandler
 	{
 		[Header("Texts")]
 		[SerializeField]
@@ -36,6 +37,28 @@ namespace Bodix.Evolunity.Components.UI
 		public UiButton AcceptButton => acceptButton;
 		public UiButton DeclineButton => declineButton;
 		public UiButton BackgroundButton => backgroundButton;
+		
+		protected IBackNavigationService BackNavigationService;
+
+		public virtual void Construct(IBackNavigationService backNavigationService)
+		{
+			BackNavigationService = backNavigationService;
+		}
+
+		/// <summary>
+		/// Declines and hides the dialog on back button press.
+		/// </summary>
+		public virtual bool OnBackPressed()
+		{
+			if (gameObject.activeSelf)
+			{
+				Decline();
+		
+				return true;
+			}
+	
+			return false;
+		}
 
 		protected override void Awake()
 		{
@@ -48,6 +71,16 @@ namespace Bodix.Evolunity.Components.UI
 			acceptButton.Button.onClick.AddListener(Accept);
 			declineButton.Button.onClick.AddListener(Decline);
 			backgroundButton.Button.onClick.AddListener(HideByBackgroundClick);
+		}
+		
+		protected virtual void OnEnable()
+		{
+			BackNavigationService?.Register(this);
+		}
+
+		protected virtual void OnDisable()
+		{
+			BackNavigationService?.Unregister(this);
 		}
 
 		protected virtual void OnDestroy()
