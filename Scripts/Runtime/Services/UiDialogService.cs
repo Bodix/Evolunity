@@ -25,7 +25,7 @@ namespace Bodix.Evolunity.Services
 		{
 			if (IsDuplicateRequest(payload))
 			{
-				Debug.Log("An attempt to open a duplicate dialog box was blocked.");
+				Debug.LogWarning("An attempt to open a duplicate dialog box was blocked.");
 
 				return;
 			}
