@@ -20,7 +20,8 @@ namespace Bodix.Evolunity.Services
 		private readonly Queue<UiDialogRequest> _dialogQueue = new Queue<UiDialogRequest>();
 		private UiDialogRequest _activeRequest;
 
-		public void ShowConfirmationDialog(UiConfirmationDialogPayload payload, Action<UiConfirmationDialog.Result> onResult)
+		public void ShowConfirmationDialog(UiConfirmationDialogPayload payload,
+			Action<UiConfirmationDialog.Result> onResult)
 		{
 			if (IsDuplicateRequest(payload))
 			{
@@ -29,12 +30,11 @@ namespace Bodix.Evolunity.Services
 				return;
 			}
 
-			UiDialogRequest request = new UiDialogRequest
+			_dialogQueue.Enqueue(new UiDialogRequest
 			{
 				Payload = payload,
 				OnResultCallback = onResult
-			};
-			_dialogQueue.Enqueue(request);
+			});
 
 			ProcessQueue();
 		}
@@ -55,14 +55,13 @@ namespace Bodix.Evolunity.Services
 			_activeRequest = _dialogQueue.Dequeue();
 
 			UiConfirmationDialog dialog = Instantiate(confirmationDialogPrefab, dialogsParent);
-
 			dialog.Show(_activeRequest.Payload, result =>
 			{
 				_activeRequest.OnResultCallback?.Invoke(result);
 
 				Destroy(dialog.gameObject);
-
 				_activeRequest = null;
+
 				ProcessQueue();
 			});
 		}
