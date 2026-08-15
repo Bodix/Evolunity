@@ -7,7 +7,7 @@ namespace Bodix.Evolunity.Services
 	/// <summary>
 	/// Defines an interface for handling back navigation events.
 	/// </summary>
-	public interface IBackHandler
+	public interface IBackNavigationHandler
 	{
 		/// <summary>
 		/// Invoked when the back action is performed.

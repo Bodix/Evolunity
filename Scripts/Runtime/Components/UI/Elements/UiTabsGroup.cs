@@ -13,7 +13,7 @@ using UnityEngine.UI;
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Tabs Group")]
-	public class UiTabsGroup : UiElement, IBackHandler
+	public class UiTabsGroup : UiElement, IBackNavigationHandler
 	{
 		[Serializable]
 		public class PageChangeHandler : UnityEvent<int>

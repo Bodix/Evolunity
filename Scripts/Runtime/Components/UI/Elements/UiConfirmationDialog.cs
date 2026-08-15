@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Confirmation Dialog")]
-	public class UiConfirmationDialog : UiElement, IBackHandler
+	public class UiConfirmationDialog : UiElement, IBackNavigationHandler
 	{
 		[Header("Texts")]
 		[SerializeField]
@@ -37,21 +37,6 @@ namespace Bodix.Evolunity.Components.UI
 		public UiButton AcceptButton => acceptButton;
 		public UiButton DeclineButton => declineButton;
 		public UiButton BackgroundButton => backgroundButton;
-
-		/// <summary>
-		/// Declines and hides the dialog on back button press.
-		/// </summary>
-		public virtual bool OnBackPressed()
-		{
-			if (gameObject.activeSelf)
-			{
-				Decline();
-
-				return true;
-			}
-
-			return false;
-		}
 
 		protected override void Awake()
 		{
@@ -99,6 +84,22 @@ namespace Bodix.Evolunity.Components.UI
 			InvokeAndClearResultCallback(result);
 
 			base.Hide(instantly, onHideComplete);
+		}
+
+		/// <summary>
+		/// Hides the dialog on back button press.
+		/// </summary>
+		public virtual bool OnBackPressed()
+		{
+			if (gameObject.activeSelf)
+			{
+				// Dismiss the dialog using Hide result to match background click behavior.
+				Hide(Result.Hide);
+
+				return true;
+			}
+
+			return false;
 		}
 
 		protected sealed override void Show(bool instantly, Action onComplete)

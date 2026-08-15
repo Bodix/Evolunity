@@ -13,8 +13,8 @@ namespace Bodix.Evolunity.Services
 		/// </summary>
 		event Action QuitRequested;
 
-		void Register(IBackHandler handler);
+		void Register(IBackNavigationHandler handler);
 
-		void Unregister(IBackHandler handler);
+		void Unregister(IBackNavigationHandler handler);
 	}
 }
