@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Bodix.Evolunity.Services;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,7 +13,7 @@ using UnityEngine.UI;
 namespace Bodix.Evolunity.Components.UI
 {
 	[AddComponentMenu("Evolunity/UI/Tabs Group")]
-	public class UiTabsGroup : UiElement
+	public class UiTabsGroup : UiElement, IBackHandler
 	{
 		[Serializable]
 		public class PageChangeHandler : UnityEvent<int>
@@ -65,6 +67,28 @@ namespace Bodix.Evolunity.Components.UI
 
 			// Setting isOn to true will automatically trigger the listener and disable others via ToggleGroup.
 			tabsToggles[pageIndex].Toggle.isOn = true;
+		}
+
+		/// <summary>
+		/// Deselects all tabs if the toggle group allows it.
+		/// </summary>
+		public virtual bool OnBackPressed()
+		{
+			if (toggleGroup != null && toggleGroup.allowSwitchOff)
+			{
+				bool handled = false;
+
+				foreach (UiToggle tab in tabsToggles.Where(tab => tab.Toggle.isOn))
+				{
+					tab.Toggle.isOn = false;
+
+					handled = true;
+				}
+
+				return handled;
+			}
+
+			return false;
 		}
 
 		private void Initialize()

@@ -46,10 +46,10 @@ namespace Bodix.Evolunity.Components.UI
 			if (gameObject.activeSelf)
 			{
 				Decline();
-		
+
 				return true;
 			}
-	
+
 			return false;
 		}
 
