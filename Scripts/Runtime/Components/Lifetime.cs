@@ -13,6 +13,8 @@ namespace Bodix.Evolunity.Components
 		[Tooltip("Time in seconds before the object is turned off.")]
 		public float Duration = 5f;
 
+		private Coroutine _timerCoroutine;
+
 		private void Start()
 		{
 			BeginLifetime();
@@ -20,15 +22,31 @@ namespace Bodix.Evolunity.Components
 
 		public void BeginLifetime()
 		{
-			Delay.ForSeconds(Duration, Die, this);
+			StopLifetime();
+
+			_timerCoroutine = Delay.ForSeconds(Duration, Die, this);
 		}
 
 		/// <summary>
-		/// Handles the end of the object's lifetime.
+		/// Call this if the object is destroyed or pooled before the time runs out.
+		/// </summary>
+		public void StopLifetime()
+		{
+			if (_timerCoroutine != null)
+			{
+				StopCoroutine(_timerCoroutine);
+
+				_timerCoroutine = null;
+			}
+		}
+
+		/// <summary>
 		/// Override this method in a derived class to implement object pooling.
 		/// </summary>
 		protected virtual void Die()
 		{
+			_timerCoroutine = null;
+
 			Destroy(gameObject);
 		}
 	}
