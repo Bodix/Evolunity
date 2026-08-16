@@ -16,6 +16,12 @@ namespace Bodix.Evolunity.Components
 
 		protected virtual bool HideButtonInInspector => false;
 
+		protected virtual void OnDisable()
+		{
+			HideButton();
+			_uiButton.onClick.RemoveListener(InvokeTrigger);
+		}
+
 		protected override void EnterTrigger(Collider other)
 		{
 			ShowButton();
