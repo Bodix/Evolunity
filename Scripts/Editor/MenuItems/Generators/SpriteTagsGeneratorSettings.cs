@@ -16,7 +16,6 @@ namespace Bodix.Evolunity.Editor.Generators
 		public string OutputPath = "Assets/Game/Scripts/Generated/SpriteTags.cs";
 		public string GeneratedNamespace = "ProjectNamespace.Generated";
 		public string ClassName = "SpriteTags";
-		
 		[Tooltip("Target TMP_SpriteAsset to generate tags from. If empty, it will use the selected asset in the Project window.")]
 		public TMP_SpriteAsset TargetAsset;
 	}
