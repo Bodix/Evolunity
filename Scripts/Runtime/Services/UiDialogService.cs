@@ -19,6 +19,16 @@ namespace Bodix.Evolunity.Services
 
 		private readonly Queue<UiDialogRequest> _dialogQueue = new Queue<UiDialogRequest>();
 		private UiDialogRequest _activeRequest;
+		private IInstantiator _instantiator;
+
+		/// <summary>
+		/// Sets the instantiator used to create dialogs.
+		/// Call this from your composition root to enable dependency injection.
+		/// </summary>
+		public void SetInstantiator(IInstantiator instantiator)
+		{
+			_instantiator = instantiator;
+		}
 
 		public void ShowConfirmationDialog(UiConfirmationDialogPayload payload,
 			Action<UiConfirmationDialog.Result> onResult)
@@ -54,7 +64,10 @@ namespace Bodix.Evolunity.Services
 
 			_activeRequest = _dialogQueue.Dequeue();
 
-			UiConfirmationDialog dialog = Instantiate(confirmationDialogPrefab, dialogsParent);
+			UiConfirmationDialog dialog = _instantiator != null
+				? _instantiator.Instantiate(confirmationDialogPrefab, dialogsParent)
+				: Instantiate(confirmationDialogPrefab, dialogsParent);
+
 			dialog.Show(_activeRequest.Payload, result =>
 			{
 				_activeRequest.OnResultCallback?.Invoke(result);
