@@ -10,6 +10,9 @@ namespace Bodix.Evolunity.Components.UI
 		public string AcceptButtonText;
 		public string DeclineButtonText;
 		public bool HideOnBackgroundClick = false;
+		
+		public bool ShowAcceptIcon = true;
+		public bool ShowDeclineIcon = true;
 		public Sprite AcceptIcon;
 		public Sprite DeclineIcon;
 
@@ -22,6 +25,9 @@ namespace Bodix.Evolunity.Components.UI
 				&& Message == other.Message
 				&& AcceptButtonText == other.AcceptButtonText
 				&& DeclineButtonText == other.DeclineButtonText
+				&& HideOnBackgroundClick == other.HideOnBackgroundClick
+				&& ShowAcceptIcon == other.ShowAcceptIcon
+				&& ShowDeclineIcon == other.ShowDeclineIcon
 				&& AcceptIcon == other.AcceptIcon
 				&& DeclineIcon == other.DeclineIcon;
 		}

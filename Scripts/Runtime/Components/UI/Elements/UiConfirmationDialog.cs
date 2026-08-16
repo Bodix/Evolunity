@@ -139,26 +139,22 @@ namespace Bodix.Evolunity.Components.UI
 				declineButton.Text.text = payload.DeclineButtonText;
 
 			if (acceptButton.Icon != null)
+			{
 				if (payload.AcceptIcon != null)
-				{
 					acceptButton.Icon.sprite = payload.AcceptIcon;
-					acceptButton.Icon.gameObject.SetActive(true);
-				}
-				else
-				{
-					acceptButton.Icon.gameObject.SetActive(false);
-				}
+
+				bool showAcceptIcon = payload.ShowAcceptIcon && acceptButton.Icon.sprite != null;
+				acceptButton.Icon.gameObject.SetActive(showAcceptIcon);
+			}
 
 			if (declineButton.Icon != null)
+			{
 				if (payload.DeclineIcon != null)
-				{
 					declineButton.Icon.sprite = payload.DeclineIcon;
-					declineButton.Icon.gameObject.SetActive(true);
-				}
-				else
-				{
-					declineButton.Icon.gameObject.SetActive(false);
-				}
+
+				bool showDeclineIcon = payload.ShowDeclineIcon && declineButton.Icon.sprite != null;
+				declineButton.Icon.gameObject.SetActive(showDeclineIcon);
+			}
 		}
 
 		private void HideByBackgroundClick()
