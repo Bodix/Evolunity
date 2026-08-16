@@ -391,12 +391,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 84.35
+  m_fontSize: 84
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 84
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -525,12 +525,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 42
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 50
+  m_fontSizeMax: 42
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -787,7 +787,12 @@ PrefabInstance:
     - target: {fileID: 5704803809575906774, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_fontSize
-      value: 42.15
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704803809575906774, guid: 5ef2f7ac90ef2b74983228a87a880677,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
@@ -812,7 +817,7 @@ PrefabInstance:
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 160.45999
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
@@ -949,11 +954,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8546628419802050042, guid: 5ef2f7ac90ef2b74983228a87a880677,
-        type: 3}
-      propertyPath: m_Spacing
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ef2f7ac90ef2b74983228a87a880677, type: 3}
 --- !u!224 &5724668455534346112 stripped
@@ -1040,7 +1040,12 @@ PrefabInstance:
     - target: {fileID: 5704803809575906774, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_fontSize
-      value: 42.15
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704803809575906774, guid: 5ef2f7ac90ef2b74983228a87a880677,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
@@ -1065,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 160
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 5704803809575906777, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
@@ -1200,11 +1205,6 @@ PrefabInstance:
     - target: {fileID: 6662845328072486999, guid: 5ef2f7ac90ef2b74983228a87a880677,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8546628419802050042, guid: 5ef2f7ac90ef2b74983228a87a880677,
-        type: 3}
-      propertyPath: m_Spacing
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
