@@ -19,28 +19,33 @@ namespace Bodix.Evolunity.Components
 		protected virtual void OnDisable()
 		{
 			HideButton();
-			_uiButton.onClick.RemoveListener(InvokeTrigger);
 		}
 
 		protected override void EnterTrigger(Collider other)
 		{
 			ShowButton();
-			_uiButton.onClick.AddListener(InvokeTrigger);
 		}
 
 		protected override void ExitTrigger(Collider other)
 		{
 			HideButton();
-			_uiButton.onClick.RemoveListener(InvokeTrigger);
 		}
 
 		protected virtual void ShowButton()
 		{
+			if (!_uiButton)
+				return;
+
+			_uiButton.onClick.AddListener(InvokeTrigger);
 			_uiButton.gameObject.SetActive(true);
 		}
 
 		protected virtual void HideButton()
 		{
+			if (!_uiButton)
+				return;
+
+			_uiButton.onClick.RemoveListener(InvokeTrigger);
 			_uiButton.gameObject.SetActive(false);
 		}
 	}
