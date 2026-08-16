@@ -8,7 +8,7 @@ namespace Bodix.Evolunity.Components
 	{
 		protected abstract UiDialogService UiDialogService { get; }
 		protected virtual string TitleText { get; } = "Exit";
-		protected virtual string MessageText { get; } = "Are you sure you want to exit?";
+		protected virtual string MessageText { get; } = "Are you sure you want to exit the game?";
 		protected virtual string AcceptButtonText { get; set; } = "Yes, exit";
 		protected virtual string DeclineButtonText { get; set; } = "No, stay";
 
