@@ -110,7 +110,23 @@ namespace Bodix.Evolunity.Components
 
 			foreach (RaycastHit hit in filteredHits)
 			{
-				Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
+				Vector3 actualHitPoint = hit.point;
+
+				// https://discussions.unity.com/t/spherecastall-returns-0-0-0-for-all-raycasthit-points/638063
+				// https://stackoverflow.com/questions/55014423/raycasthit-point-always-returns-0-0-0
+				//
+				// From docs:
+				// Notes: For colliders that overlap the sphere at the start of the sweep,
+				// RaycastHit.normal is set opposite to the direction of the sweep,
+				// RaycastHit.distance is set to zero, and the zero vector gets returned in RaycastHit.point.
+				// You might want to check whether this is the case in your particular query
+				// and perform additional queries to refine the result. Passing a zero radius results
+				// in undefined output and doesn't always behave the same as Physics.Raycast.
+				// https://docs.unity3d.com/ScriptReference/Physics.SphereCastAll.html
+				if (hit.point == Vector3.zero && hit.distance == 0f)
+					actualHitPoint = hit.collider.ClosestPoint(transform.position);
+
+				Vector3 position = actualHitPoint + hit.normal * HitOffsetAlongNormal;
 				GameObject hitEffect = Instantiate(hitEffectPrefab, position,
 					Quaternion.FromToRotation(Vector3.up, hit.normal));
 				Destroy(hitEffect, HitEffectLifetime);
