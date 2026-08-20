@@ -10,9 +10,9 @@ namespace Bodix.Evolunity.Utilities
 {
 	public static class Delay
 	{
-		public static Coroutine ForOneFrame(Action onComplete)
+		public static Coroutine ForOneFrame(Action onComplete, MonoBehaviour coroutineOwner = null)
 		{
-			return ForFrames(1, onComplete);
+			return ForFrames(1, onComplete, coroutineOwner);
 		}
 
 		public static Coroutine ForFrames(int frames, Action onComplete, MonoBehaviour coroutineOwner = null)
