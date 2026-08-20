@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Bodix.Evolunity.Extensions;
 using NaughtyAttributes;
 using UnityEngine;
@@ -38,7 +37,7 @@ namespace Bodix.Evolunity.Components
 		public float StartEffectLifetime = 1.5f;
 		public float HitEffectLifetime = 3.5f;
 
-		private List<Collider> _ignoredColliders;
+		private HashSet<Collider> _ignoredColliders;
 		private RaycastHit[] _hitsBuffer;
 		private GameObject _childEffect;
 
@@ -50,7 +49,7 @@ namespace Bodix.Evolunity.Components
 		{
 			Rigidbody = GetComponent<Rigidbody>();
 			_hitsBuffer = new RaycastHit[HitsBufferSize];
-			_ignoredColliders = new List<Collider>();
+			_ignoredColliders = new HashSet<Collider>();
 
 			Destroy(gameObject, ProjectileLifetime);
 		}
@@ -101,16 +100,18 @@ namespace Bodix.Evolunity.Components
 			_ignoredColliders.Remove(collider);
 		}
 
-		private void OnHit(IEnumerable<RaycastHit> hits)
+		private void OnHit(int hitsCount)
 		{
-			IEnumerable<RaycastHit> filteredHits = hits.Where(x => !_ignoredColliders.Contains(x.collider)).ToArray();
+			bool hasValidHit = false;
 
-			if (filteredHits.IsNullOrEmpty())
-				return;
-
-			foreach (RaycastHit hit in filteredHits)
+			for (int i = 0; i < hitsCount; i++)
 			{
-				Vector3 actualHitPoint = hit.point;
+				RaycastHit hit = _hitsBuffer[i];
+
+				if (_ignoredColliders.Contains(hit.collider))
+					continue;
+
+				hasValidHit = true;
 
 				// https://discussions.unity.com/t/spherecastall-returns-0-0-0-for-all-raycasthit-points/638063
 				// https://stackoverflow.com/questions/55014423/raycasthit-point-always-returns-0-0-0
@@ -124,15 +125,18 @@ namespace Bodix.Evolunity.Components
 				// in undefined output and doesn't always behave the same as Physics.Raycast.
 				// https://docs.unity3d.com/ScriptReference/Physics.SphereCastAll.html
 				if (hit.point == Vector3.zero && hit.distance == 0f)
-					actualHitPoint = hit.collider.ClosestPoint(transform.position);
+					hit.point = hit.collider.ClosestPoint(transform.position);
 
-				Vector3 position = actualHitPoint + hit.normal * HitOffsetAlongNormal;
+				Vector3 position = hit.point + hit.normal * HitOffsetAlongNormal;
 				GameObject hitEffect = Instantiate(hitEffectPrefab, position,
 					Quaternion.FromToRotation(Vector3.up, hit.normal));
 				Destroy(hitEffect, HitEffectLifetime);
 
 				Hit?.Invoke(hit);
 			}
+
+			if (!hasValidHit)
+				return;
 
 			DetachAndDelayedDestroyTrails();
 			Destroy(gameObject);
@@ -145,7 +149,7 @@ namespace Bodix.Evolunity.Components
 			if (startEffectPrefab)
 			{
 				GameObject startEffect = Instantiate(startEffectPrefab,
-					transform.position + transform.TransformVector(StartEffectLocalOffset), transform.rotation);
+					transform.TransformPoint(StartEffectLocalOffset), transform.rotation);
 
 				Destroy(startEffect, StartEffectLifetime);
 			}
@@ -153,19 +157,26 @@ namespace Bodix.Evolunity.Components
 
 		private void AlignRotationWithVelocity()
 		{
-			if (Rigidbody.velocity.magnitude != 0)
+			if (Rigidbody.velocity.sqrMagnitude > 0f)
 				transform.rotation = Quaternion.LookRotation(Rigidbody.velocity);
 		}
 
 		private void CheckHit()
 		{
-			Vector3 direction = Rigidbody.velocity.normalized;
-			float velocityMagnitudeDelta = Rigidbody.velocity.magnitude * Time.fixedDeltaTime;
+			Vector3 velocity = Rigidbody.velocity;
+			float speed = velocity.magnitude;
 
-			int hitsCount;
-			if ((hitsCount = Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
-				    _hitsBuffer, velocityMagnitudeDelta, LayerMask)) > 0)
-				OnHit(_hitsBuffer.Take(hitsCount));
+			if (speed == 0f)
+				return;
+
+			Vector3 direction = velocity / speed;
+			float distance = speed * Time.fixedDeltaTime;
+
+			int hitsCount = Physics.SphereCastNonAlloc(transform.position, ColliderRadius, direction,
+				_hitsBuffer, distance, LayerMask);
+
+			if (hitsCount > 0)
+				OnHit(hitsCount);
 		}
 
 		// TODO: Improve reliability of this method. [#bug]
@@ -173,20 +184,21 @@ namespace Bodix.Evolunity.Components
 		private void DetachAndDelayedDestroyTrails()
 		{
 			ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
-			if (particles.Length > 1)
-				// Skipping component at index 0 because it is on the parent.
-				for (int i = 1; i < particles.Length; i++)
+
+			foreach (ParticleSystem possibleTrail in particles)
+			{
+				// Skip the component if it is on the parent.
+				if (possibleTrail.gameObject == gameObject)
+					continue;
+
+				// Optimized string comparison without memory allocations.
+				if (possibleTrail.gameObject.name.IndexOf("trail", StringComparison.OrdinalIgnoreCase) >= 0)
 				{
-					ParticleSystem possibleTrail = particles[i];
+					possibleTrail.transform.SetParent(null);
 
-					// TODO: Fix string comparison. [#optimization]
-					if (possibleTrail.gameObject.name.ToLower().Contains("trail"))
-					{
-						possibleTrail.transform.SetParent(null);
-
-						Destroy(possibleTrail.gameObject, ChildEffectLifetime);
-					}
+					Destroy(possibleTrail.gameObject, ChildEffectLifetime);
 				}
+			}
 		}
 
 		private void OnDrawGizmosSelected()
