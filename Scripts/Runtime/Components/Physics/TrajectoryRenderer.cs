@@ -18,7 +18,7 @@ namespace Bodix.Evolunity.Components
 		[SerializeField]
 		private LayerMask _collisionMask;
 		[SerializeField]
-		private GameObject _hitIndicator;
+		private GameObject _hitCrosshair;
 
 		private LineRenderer _lineRenderer;
 		private Vector3[] _points;
@@ -52,11 +52,11 @@ namespace Bodix.Evolunity.Components
 					currentPositionCount = i + 1;
 					hitDetected = true;
 
-					if (_hitIndicator)
+					if (_hitCrosshair)
 					{
-						_hitIndicator.transform.position = hit.point;
-						_hitIndicator.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-						_hitIndicator.SetActive(true);
+						_hitCrosshair.transform.position = hit.point;
+						_hitCrosshair.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+						_hitCrosshair.SetActive(true);
 					}
 
 					break;
@@ -66,8 +66,8 @@ namespace Bodix.Evolunity.Components
 				currentPositionCount++;
 			}
 
-			if (_hitIndicator && !hitDetected)
-				_hitIndicator.SetActive(false);
+			if (_hitCrosshair && !hitDetected)
+				_hitCrosshair.SetActive(false);
 
 			_lineRenderer.positionCount = currentPositionCount;
 			_lineRenderer.SetPositions(_points);
@@ -77,8 +77,8 @@ namespace Bodix.Evolunity.Components
 		{
 			gameObject.SetActive(false);
 
-			if (_hitIndicator)
-				_hitIndicator.SetActive(false);
+			if (_hitCrosshair)
+				_hitCrosshair.SetActive(false);
 		}
 	}
 }
