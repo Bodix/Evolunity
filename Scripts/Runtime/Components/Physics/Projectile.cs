@@ -13,7 +13,10 @@ namespace Bodix.Evolunity.Components
 		public bool PushOnStart = true;
 		public float DefaultPushSpeed = 100f;
 		public float ColliderRadius = 0.5f;
-		// This is an offset that moves the hit effect slightly away from the point of hit to reduce clipping of the hit effect.
+		/// <summary>
+		/// This is an offset that moves the hit effect slightly away from the point of hit
+		/// to reduce clipping of the hit effect.
+		/// </summary>
 		public float HitOffsetAlongNormal = 0.15f;
 		public Vector3 StartEffectLocalOffset = Vector3.zero;
 		public LayerMask LayerMask = 1; // 1 = Default
@@ -77,7 +80,7 @@ namespace Bodix.Evolunity.Components
 		public void Push(Vector3 direction, float speed)
 		{
 			Rigidbody.rotation = Quaternion.LookRotation(direction);
-			Rigidbody.AddForce(direction * speed);
+			Rigidbody.velocity = direction * speed;
 		}
 
 		public void PushForward(float speed)
