@@ -19,7 +19,12 @@ namespace Bodix.Evolunity.Components
 		/// Tracks all objects that are currently within this specific trigger.
 		/// </summary>
 		private readonly HashSet<Collider> _collidersInside = new HashSet<Collider>();
-		private MultiSourceActivationTracker _tracker;
+		/// <summary>
+		/// Manages the shared activation state of the target UI button.
+		/// It ensures the button remains active when multiple triggers overlap,
+		/// preventing one trigger from hiding the button while another is still using it.
+		/// </summary>
+		private MultiSourceActivationTracker _buttonActivationTracker;
 
 		protected virtual bool HideButtonInInspector => false;
 
@@ -57,11 +62,11 @@ namespace Bodix.Evolunity.Components
 
 			_uiButton.onClick.AddListener(InvokeTrigger);
 
-			if (!_tracker)
-				if (!_uiButton.TryGetComponent(out _tracker))
-					_tracker = _uiButton.gameObject.AddComponent<MultiSourceActivationTracker>();
+			if (!_buttonActivationTracker)
+				if (!_uiButton.TryGetComponent(out _buttonActivationTracker))
+					_buttonActivationTracker = _uiButton.gameObject.AddComponent<MultiSourceActivationTracker>();
 
-			_tracker.AddRequest(this);
+			_buttonActivationTracker.AddRequest(this);
 		}
 
 		protected virtual void HideButton()
@@ -71,8 +76,8 @@ namespace Bodix.Evolunity.Components
 
 			_uiButton.onClick.RemoveListener(InvokeTrigger);
 
-			if (_tracker)
-				_tracker.RemoveRequest(this);
+			if (_buttonActivationTracker)
+				_buttonActivationTracker.RemoveRequest(this);
 		}
 	}
 }
