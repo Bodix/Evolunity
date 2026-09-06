@@ -36,7 +36,7 @@ namespace Bodix.Evolunity.Components.UI
 			fillImage.rectTransform.anchorMax = new Vector2(normalizedValue, fillImage.rectTransform.anchorMax.y);
 		}
 
-		private void UpdateFillImageParameterless()
+		protected void UpdateFillImageParameterless()
 		{
 			UpdateFillImage(NormalizedValue);
 		}
