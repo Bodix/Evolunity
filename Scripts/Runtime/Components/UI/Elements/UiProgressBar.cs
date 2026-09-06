@@ -14,7 +14,7 @@ namespace Bodix.Evolunity.Components.UI
 		[SerializeField]
 		protected Image fillImage;
 
-		[Range(0, 1), OnValueChanged(nameof(UpdateFillImage))]
+		[Range(0, 1), OnValueChanged(nameof(UpdateFillImageParameterless))]
 		[SerializeField]
 		private float _normalizedValue;
 
@@ -36,7 +36,7 @@ namespace Bodix.Evolunity.Components.UI
 			fillImage.rectTransform.anchorMax = new Vector2(normalizedValue, fillImage.rectTransform.anchorMax.y);
 		}
 
-		private void UpdateFillImage()
+		private void UpdateFillImageParameterless()
 		{
 			UpdateFillImage(NormalizedValue);
 		}
