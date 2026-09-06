@@ -30,7 +30,7 @@ namespace Bodix.Evolunity.Components.UI
 			}
 		}
 
-		public void UpdateFillImage()
+		public virtual void UpdateFillImage()
 		{
 			// IMPORTANT: Using anchors instead of "fillAmount" to add possibility to work with Sliced image type.
 			fillImage.rectTransform.anchorMax = new Vector2(_normalizedValue, fillImage.rectTransform.anchorMax.y);
