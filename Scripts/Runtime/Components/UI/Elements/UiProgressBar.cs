@@ -26,14 +26,14 @@ namespace Bodix.Evolunity.Components.UI
 			{
 				_normalizedValue = Mathf.Clamp01(value);
 
-				UpdateFillImage();
+				UpdateFillImage(_normalizedValue);
 			}
 		}
 
-		public virtual void UpdateFillImage()
+		public virtual void UpdateFillImage(float normalizedValue)
 		{
 			// IMPORTANT: Using anchors instead of "fillAmount" to add possibility to work with Sliced image type.
-			fillImage.rectTransform.anchorMax = new Vector2(_normalizedValue, fillImage.rectTransform.anchorMax.y);
+			fillImage.rectTransform.anchorMax = new Vector2(normalizedValue, fillImage.rectTransform.anchorMax.y);
 		}
 	}
 }
