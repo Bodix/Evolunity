@@ -11,6 +11,9 @@ namespace Bodix.Evolunity.Components
 	[RequireComponent(typeof(LineRenderer))]
 	public class TrajectoryRenderer : MonoBehaviour
 	{
+		private static readonly int BaseColorPropertyId = Shader.PropertyToID("_BaseColor");
+		private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
+
 		[SerializeField]
 		private int _segmentCount = 30;
 		[SerializeField]
@@ -24,6 +27,8 @@ namespace Bodix.Evolunity.Components
 		private Vector3[] _points;
 		private GradientColorKey[] _originalColorKeys;
 		private GradientAlphaKey[] _originalAlphaKeys;
+		private MaterialPropertyBlock _propertyBlock;
+		private Color _originalMaterialColor = Color.white;
 		private bool _hasColorOverride;
 		private Color _overrideColor;
 
@@ -61,6 +66,7 @@ namespace Bodix.Evolunity.Components
 			Gradient gradient = new Gradient();
 			gradient.SetKeys(colorKeys, _originalAlphaKeys);
 			_lineRenderer.colorGradient = gradient;
+			ApplyMaterialColor(color);
 			_hasColorOverride = true;
 			_overrideColor = color;
 		}
@@ -75,6 +81,7 @@ namespace Bodix.Evolunity.Components
 			Gradient gradient = new Gradient();
 			gradient.SetKeys(_originalColorKeys, _originalAlphaKeys);
 			_lineRenderer.colorGradient = gradient;
+			ApplyMaterialColor(_originalMaterialColor);
 			_hasColorOverride = false;
 		}
 
@@ -130,6 +137,14 @@ namespace Bodix.Evolunity.Components
 			_lineRenderer.SetPositions(_points);
 		}
 
+		private void ApplyMaterialColor(Color color)
+		{
+			_lineRenderer.GetPropertyBlock(_propertyBlock);
+			_propertyBlock.SetColor(BaseColorPropertyId, color);
+			_propertyBlock.SetColor(ColorPropertyId, color);
+			_lineRenderer.SetPropertyBlock(_propertyBlock);
+		}
+
 		private void EnsureInitialized()
 		{
 			if (!_lineRenderer)
@@ -138,11 +153,23 @@ namespace Bodix.Evolunity.Components
 			if (_points == null || _points.Length != _segmentCount)
 				_points = new Vector3[_segmentCount];
 
+			if (_propertyBlock == null)
+				_propertyBlock = new MaterialPropertyBlock();
+
 			if (_originalColorKeys == null)
 			{
 				Gradient gradient = _lineRenderer.colorGradient;
 				_originalColorKeys = gradient.colorKeys;
 				_originalAlphaKeys = gradient.alphaKeys;
+
+				Material sharedMaterial = _lineRenderer.sharedMaterial;
+				if (sharedMaterial)
+				{
+					if (sharedMaterial.HasProperty(BaseColorPropertyId))
+						_originalMaterialColor = sharedMaterial.GetColor(BaseColorPropertyId);
+					else if (sharedMaterial.HasProperty(ColorPropertyId))
+						_originalMaterialColor = sharedMaterial.GetColor(ColorPropertyId);
+				}
 			}
 		}
 	}
