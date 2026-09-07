@@ -10,6 +10,9 @@ namespace Bodix.Evolunity.Extensions
 {
 	public static class MaterialExtensions
 	{
+		private static readonly int BaseColorPropertyId = Shader.PropertyToID("_BaseColor");
+		private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
+
 		/// https://github.com/Unity-Technologies/UnityCsReference/blob/master/Editor/Mono/Inspector/StandardShaderGUI.cs
 		/// SetupMaterialWithBlendMode() method.
 		public static void SetupRenderingMode(this Material material, RenderingMode renderingMode,
@@ -69,6 +72,20 @@ namespace Bodix.Evolunity.Extensions
 		public static MaterialRenderingProperties GetRenderingProperties(this Material material)
 		{
 			return new MaterialRenderingProperties(material);
+		}
+
+		public static Color GetMainColor(this Material material)
+		{
+			if (!material)
+				return Color.white;
+
+			if (material.HasProperty(BaseColorPropertyId))
+				return material.GetColor(BaseColorPropertyId);
+
+			if (material.HasProperty(ColorPropertyId))
+				return material.GetColor(ColorPropertyId);
+
+			return Color.white;
 		}
 	}
 

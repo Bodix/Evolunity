@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using Bodix.Evolunity.Extensions;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components
@@ -11,9 +12,6 @@ namespace Bodix.Evolunity.Components
 	[RequireComponent(typeof(LineRenderer))]
 	public class TrajectoryRenderer : MonoBehaviour
 	{
-		private static readonly int BaseColorPropertyId = Shader.PropertyToID("_BaseColor");
-		private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
-
 		[SerializeField]
 		private int _segmentCount = 30;
 		[SerializeField]
@@ -21,14 +19,10 @@ namespace Bodix.Evolunity.Components
 		[SerializeField]
 		private LayerMask _collisionMask;
 		[SerializeField]
-		private GameObject _hitCrosshair;
+		private MeshRenderer _hitCrosshair;
 
 		private LineRenderer _lineRenderer;
 		private Vector3[] _points;
-		private GradientColorKey[] _originalColorKeys;
-		private GradientAlphaKey[] _originalAlphaKeys;
-		private MaterialPropertyBlock _propertyBlock;
-		private Color _originalMaterialColor = Color.white;
 		private bool _hasColorOverride;
 		private Color _overrideColor;
 
@@ -56,17 +50,11 @@ namespace Bodix.Evolunity.Components
 			if (_hasColorOverride && _overrideColor == color)
 				return;
 
-			GradientColorKey[] colorKeys = new GradientColorKey[_originalColorKeys.Length];
-			for (int i = 0; i < _originalColorKeys.Length; i++)
-			{
-				GradientColorKey original = _originalColorKeys[i];
-				colorKeys[i] = new GradientColorKey(color, original.time);
-			}
+			_lineRenderer.SetMainColor(color);
 
-			Gradient gradient = new Gradient();
-			gradient.SetKeys(colorKeys, _originalAlphaKeys);
-			_lineRenderer.colorGradient = gradient;
-			ApplyMaterialColor(color);
+			if (_hitCrosshair)
+				_hitCrosshair.SetMainColor(color.WithAlpha(_hitCrosshair.sharedMaterial.GetMainColor().a));
+
 			_hasColorOverride = true;
 			_overrideColor = color;
 		}
@@ -78,10 +66,11 @@ namespace Bodix.Evolunity.Components
 
 			EnsureInitialized();
 
-			Gradient gradient = new Gradient();
-			gradient.SetKeys(_originalColorKeys, _originalAlphaKeys);
-			_lineRenderer.colorGradient = gradient;
-			ApplyMaterialColor(_originalMaterialColor);
+			_lineRenderer.SetMainColor(_lineRenderer.sharedMaterial.GetMainColor());
+
+			if (_hitCrosshair)
+				_hitCrosshair.SetMainColor(_hitCrosshair.sharedMaterial.GetMainColor());
+
 			_hasColorOverride = false;
 		}
 
@@ -89,9 +78,7 @@ namespace Bodix.Evolunity.Components
 		{
 			gameObject.SetActive(false);
 			ResetColor();
-
-			if (_hitCrosshair)
-				_hitCrosshair.SetActive(false);
+			SetHitCrosshairActive(false);
 		}
 
 		private void ApplyTrajectory(Vector3 startPoint, Vector3 initialVelocity)
@@ -115,14 +102,7 @@ namespace Bodix.Evolunity.Components
 					_points[i] = hit.point;
 					currentPositionCount = i + 1;
 					hitDetected = true;
-
-					if (_hitCrosshair)
-					{
-						_hitCrosshair.transform.position = hit.point;
-						_hitCrosshair.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-						_hitCrosshair.SetActive(true);
-					}
-
+					ShowHitCrosshair(hit);
 					break;
 				}
 
@@ -130,19 +110,33 @@ namespace Bodix.Evolunity.Components
 				currentPositionCount++;
 			}
 
-			if (_hitCrosshair && !hitDetected)
-				_hitCrosshair.SetActive(false);
+			if (!hitDetected)
+				SetHitCrosshairActive(false);
 
 			_lineRenderer.positionCount = currentPositionCount;
 			_lineRenderer.SetPositions(_points);
 		}
 
-		private void ApplyMaterialColor(Color color)
+		private void ShowHitCrosshair(RaycastHit hit)
 		{
-			_lineRenderer.GetPropertyBlock(_propertyBlock);
-			_propertyBlock.SetColor(BaseColorPropertyId, color);
-			_propertyBlock.SetColor(ColorPropertyId, color);
-			_lineRenderer.SetPropertyBlock(_propertyBlock);
+			if (!_hitCrosshair)
+				return;
+
+			Transform root = GetHitCrosshairRoot();
+			root.SetPositionAndRotation(hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+			root.gameObject.SetActive(true);
+		}
+
+		private void SetHitCrosshairActive(bool isActive)
+		{
+			if (_hitCrosshair)
+				GetHitCrosshairRoot().gameObject.SetActive(isActive);
+		}
+
+		private Transform GetHitCrosshairRoot()
+		{
+			Transform parent = _hitCrosshair.transform.parent;
+			return parent && parent != transform ? parent : _hitCrosshair.transform;
 		}
 
 		private void EnsureInitialized()
@@ -152,25 +146,6 @@ namespace Bodix.Evolunity.Components
 
 			if (_points == null || _points.Length != _segmentCount)
 				_points = new Vector3[_segmentCount];
-
-			if (_propertyBlock == null)
-				_propertyBlock = new MaterialPropertyBlock();
-
-			if (_originalColorKeys == null)
-			{
-				Gradient gradient = _lineRenderer.colorGradient;
-				_originalColorKeys = gradient.colorKeys;
-				_originalAlphaKeys = gradient.alphaKeys;
-
-				Material sharedMaterial = _lineRenderer.sharedMaterial;
-				if (sharedMaterial)
-				{
-					if (sharedMaterial.HasProperty(BaseColorPropertyId))
-						_originalMaterialColor = sharedMaterial.GetColor(BaseColorPropertyId);
-					else if (sharedMaterial.HasProperty(ColorPropertyId))
-						_originalMaterialColor = sharedMaterial.GetColor(ColorPropertyId);
-				}
-			}
 		}
 	}
 }
