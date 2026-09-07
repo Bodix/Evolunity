@@ -23,6 +23,9 @@ namespace Bodix.Evolunity.Components
 
 		private LineRenderer _lineRenderer;
 		private Vector3[] _points;
+		private Vector3 _hitCrosshairLocalPosition;
+		private Quaternion _hitCrosshairLocalRotation;
+		private bool _hitCrosshairPoseCached;
 		private bool _hasColorOverride;
 		private Color _overrideColor;
 
@@ -78,7 +81,7 @@ namespace Bodix.Evolunity.Components
 		{
 			gameObject.SetActive(false);
 			ResetColor();
-			SetHitCrosshairActive(false);
+			HideHitCrosshair();
 		}
 
 		private void ApplyTrajectory(Vector3 startPoint, Vector3 initialVelocity)
@@ -111,7 +114,7 @@ namespace Bodix.Evolunity.Components
 			}
 
 			if (!hitDetected)
-				SetHitCrosshairActive(false);
+				HideHitCrosshair();
 
 			_lineRenderer.positionCount = currentPositionCount;
 			_lineRenderer.SetPositions(_points);
@@ -122,21 +125,17 @@ namespace Bodix.Evolunity.Components
 			if (!_hitCrosshair)
 				return;
 
-			Transform root = GetHitCrosshairRoot();
-			root.SetPositionAndRotation(hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-			root.gameObject.SetActive(true);
+			Quaternion surfaceRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+			_hitCrosshair.transform.SetPositionAndRotation(
+				hit.point + surfaceRotation * _hitCrosshairLocalPosition,
+				surfaceRotation * _hitCrosshairLocalRotation);
+			_hitCrosshair.enabled = true;
 		}
 
-		private void SetHitCrosshairActive(bool isActive)
+		private void HideHitCrosshair()
 		{
 			if (_hitCrosshair)
-				GetHitCrosshairRoot().gameObject.SetActive(isActive);
-		}
-
-		private Transform GetHitCrosshairRoot()
-		{
-			Transform parent = _hitCrosshair.transform.parent;
-			return parent && parent != transform ? parent : _hitCrosshair.transform;
+				_hitCrosshair.enabled = false;
 		}
 
 		private void EnsureInitialized()
@@ -146,6 +145,13 @@ namespace Bodix.Evolunity.Components
 
 			if (_points == null || _points.Length != _segmentCount)
 				_points = new Vector3[_segmentCount];
+
+			if (_hitCrosshair && !_hitCrosshairPoseCached)
+			{
+				_hitCrosshairLocalPosition = _hitCrosshair.transform.localPosition;
+				_hitCrosshairLocalRotation = _hitCrosshair.transform.localRotation;
+				_hitCrosshairPoseCached = true;
+			}
 		}
 	}
 }
