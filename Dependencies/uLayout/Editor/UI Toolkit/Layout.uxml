@@ -1,0 +1,23 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/uLayout/Editor/UI%20Toolkit/ulayout.uss?fileID=7433441132597879392&amp;guid=4b06b7a5f630e34479f26b83ea4e5859&amp;type=3#ulayout"/>
+    <ui:VisualElement style="flex-grow: 0;">
+        <ui:VisualElement name="LayoutContainer" class="section-container" style="flex-grow: 1;">
+            <ui:Label text="Layout" name="LayoutLabel" class="section-header"/>
+            <ui:VisualElement name="LayoutContent" class="section-content" style="flex-grow: 1;">
+                <uie:PropertyField name="PaddingField"/>
+                <ui:EnumField label="Direction" value="Row" type="Poke.UI.Layout+LayoutDirection, uLayout" name="DirectionField"/>
+                <ui:EnumField label="Justify Content" value="Start" type="Poke.UI.Layout+Justification, uLayout" name="JustifyField"/>
+                <ui:EnumField label="Align Content" value="Start" type="Poke.UI.Layout+Alignment, uLayout" name="AlignField"/>
+                <ui:FloatField label="Inner Spacing" value="0" name="InnerSpacingField" enabled="true"/>
+                <ui:Toggle label="Ignore Child Scale" name="IgnoreScaleField"/>
+                <ui:Toggle label="Overflow Wrap" name="WrapField"/>
+                <ui:FloatField label="Line Spacing" value="0" name="LineSpacingField"/>
+                <ui:EnumField label="Align Items" value="Center" type="Poke.UI.Layout+Alignment, uLayout" name="AlignItemsField" tooltip="Alignment of items within their respective lines"/>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(255, 255, 255, 0.051); margin-left: 3px; margin-top: 6px; margin-right: 3px; margin-bottom: 3px; padding-top: 4px; padding-left: 4px; padding-bottom: 4px; padding-right: 1px; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;">
+                    <ui:Label text="Label" name="InfoLabel" enabled="false" style="white-space: normal; padding-left: 2px;"/>
+                    <ui:Button text="Refresh Child Cache" name="RefreshCacheButton" style="margin-left: 0; margin-right: 3px; margin-top: 3px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
