@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Evolunity for Unity
+// Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
+// All Rights Reserved
+
+using System;
 
 namespace Bodix.Evolunity.Patterns
 {
@@ -6,5 +10,6 @@ namespace Bodix.Evolunity.Patterns
 	{
 		void Subscribe<T>(Action<T> handler);
 		void Unsubscribe<T>(Action<T> handler);
+		void Publish<T>(T message);
 	}
 }
