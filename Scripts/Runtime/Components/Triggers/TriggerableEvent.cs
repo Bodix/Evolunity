@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using Bodix.Evolunity.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -10,6 +11,7 @@ using UnityEngine.Serialization;
 namespace Bodix.Evolunity.Components
 {
 	[Serializable]
+	[TypeSelectorName("Unity Event")]
 	public struct TriggerableEvent : ITriggerable
 	{
 		[SerializeField, FormerlySerializedAs("Event")]

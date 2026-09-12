@@ -3,11 +3,13 @@
 // All Rights Reserved
 
 using System;
+using Bodix.Evolunity.Attributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components
 {
 	[Serializable]
+	[TypeSelectorName("Unity Object")]
 	public struct TriggerableUnityObject : ITriggerable
 	{
 		[SerializeField, InterfaceType(typeof(ITriggerable))]
