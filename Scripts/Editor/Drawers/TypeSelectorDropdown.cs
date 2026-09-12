@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 		private class TypeSelectorDropdownItem : AdvancedDropdownItem
 		{
-			public TypeSelectorDropdownItem(Type type) : base(type != null ? ObjectNames.NicifyVariableName(type.Name) : "Null")
+			public TypeSelectorDropdownItem(Type type) : base(type != null ? TypeSelectorUtility.GetDisplayName(type) : "Null")
 			{
 				Type = type;
 			}

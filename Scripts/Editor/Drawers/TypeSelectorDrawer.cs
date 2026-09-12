@@ -75,7 +75,7 @@ namespace Bodix.Evolunity.Editor.Drawers
 		{
 			Type type = property.GetManagedReferenceValueType();
 
-			return type == null ? "<NULL>" : ObjectNames.NicifyVariableName(type.Name);
+			return type == null ? "<NULL>" : TypeSelectorUtility.GetDisplayName(type);
 		}
 	}
 }
