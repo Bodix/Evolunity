@@ -11,7 +11,7 @@ namespace Bodix.Evolunity.Components
 	[AddComponentMenu("Evolunity/Triggers/Trigger")]
 	public class Trigger : AbstractTrigger
 	{
-		[SerializeReference, TypeSelector, HideIf(nameof(HideTriggerableInInspector))]
+		[SerializeField, SerializeReference, TypeSelector, HideIf(nameof(HideTriggerableInInspector))]
 		protected ITriggerable _triggerable;
 
 		protected virtual bool HideTriggerableInInspector => false;
