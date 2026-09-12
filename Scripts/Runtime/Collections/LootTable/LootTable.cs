@@ -15,7 +15,9 @@ namespace Bodix.Evolunity.Collections
 {
 	public abstract class LootTable<T> : ScriptableObject
 	{
-		[SerializeReference, TypeSelector, ReorderableList]
+		// SerializeReference only tells Unity how to store the field, not whether to store it,
+		// so a non-public field still needs SerializeField on top of it.
+		[SerializeField, SerializeReference, TypeSelector, ReorderableList]
 		protected List<LootDrop> drops = new List<LootDrop>();
 
 		private void OnValidate()
