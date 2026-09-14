@@ -3,6 +3,10 @@
     "version": "4.0.0",
     "description": "Well-designed package with useful scripting tools for Unity development",
     "displayName": "Evolunity",
+    "dependencies": {
+        "net.perfectcore.perfectcore": "1.0.0",
+        "net.perfectcore.perfectui": "1.0.0"
+    },
     "unity": "2019.3",
     "author": {
         "name": "Bodix",
