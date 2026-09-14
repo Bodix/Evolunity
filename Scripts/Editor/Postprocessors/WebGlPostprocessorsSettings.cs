@@ -1,9 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Editor.Postprocessors
 {
-	[System.Serializable]
+	[Serializable]
 	public class WebGlPostprocessorsSettings
 	{
 		public bool NicifyTitle = true;

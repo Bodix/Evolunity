@@ -3,7 +3,6 @@
 // All Rights Reserved
 
 #if NEWTONSOFT_JSON
-
 using System;
 using Bodix.Evolunity.Collections;
 using Bodix.Evolunity.Services;

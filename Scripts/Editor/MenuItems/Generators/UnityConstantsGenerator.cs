@@ -24,14 +24,12 @@ namespace Bodix.Evolunity.Editor.Generators
 			// Try to find an existing file in the project.
 			string filePath = string.Empty;
 			foreach (string file in Directory.GetFiles(Application.dataPath, "*.cs", SearchOption.AllDirectories))
-			{
 				if (Path.GetFileName(file) == FileName)
 				{
 					filePath = file;
 
 					break;
 				}
-			}
 
 			// If no such file exists already, use the save panel to get a folder in which the file will be placed.
 			if (string.IsNullOrEmpty(filePath))

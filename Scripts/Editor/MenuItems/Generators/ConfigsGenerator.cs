@@ -107,7 +107,7 @@ namespace Bodix.Evolunity.Editor.Generators
 			sb.AppendLine("\t\t{");
 
 			// Generate constructor assignments.
-			foreach (var item in processedConfigs)
+			foreach ((DataAsset config, string fieldName) item in processedConfigs)
 			{
 				string typeName = item.config.GetType().Name;
 				sb.AppendLine($"\t\t\t{item.fieldName} = configsService.GetConfig<{typeName}>(\"{item.config.Id}\");");

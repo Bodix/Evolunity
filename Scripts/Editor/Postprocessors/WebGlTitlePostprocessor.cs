@@ -14,22 +14,6 @@ namespace Bodix.Evolunity.Editor.Postprocessors
 	{
 		public int callbackOrder => 0;
 
-		[MenuItem("Tools/WebGL/Remove Web Player from Title")]
-		private static void ToggleAction()
-		{
-			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
-			settings.NicifyTitle = !settings.NicifyTitle;
-			settings.Save();
-		}
-
-		[MenuItem("Tools/WebGL/Remove Web Player from Title", true)]
-		private static bool ToggleActionValidate()
-		{
-			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
-			Menu.SetChecked("Tools/WebGL/Remove Web Player from Title", settings.NicifyTitle);
-			return true;
-		}
-
 		public void OnPostprocessBuild(BuildReport report)
 		{
 			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
@@ -51,6 +35,22 @@ namespace Bodix.Evolunity.Editor.Postprocessors
 					File.WriteAllText(indexPath, html);
 				}
 			}
+		}
+
+		[MenuItem("Tools/WebGL/Remove Web Player from Title")]
+		private static void ToggleAction()
+		{
+			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
+			settings.NicifyTitle = !settings.NicifyTitle;
+			settings.Save();
+		}
+
+		[MenuItem("Tools/WebGL/Remove Web Player from Title", true)]
+		private static bool ToggleActionValidate()
+		{
+			WebGlPostprocessorsSettings settings = WebGlPostprocessorsSettings.Load();
+			Menu.SetChecked("Tools/WebGL/Remove Web Player from Title", settings.NicifyTitle);
+			return true;
 		}
 	}
 }
