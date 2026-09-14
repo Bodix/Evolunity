@@ -4,8 +4,7 @@
         "UnityInterfaceSupport",
         "Unity.TextMeshPro",
         "PerfectCore",
-        "PerfectCore.NaughtyAttributes",
-        "PerfectCore.PerfectUI"
+        "PerfectCore.NaughtyAttributes"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
