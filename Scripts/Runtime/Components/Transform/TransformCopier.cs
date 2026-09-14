@@ -3,7 +3,7 @@
 // All Rights Reserved
 
 using System;
-using NaughtyAttributes;
+using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components

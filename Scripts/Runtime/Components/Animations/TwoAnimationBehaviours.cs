@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using PerfectCore;
 
 namespace Bodix.Evolunity.Components
 {

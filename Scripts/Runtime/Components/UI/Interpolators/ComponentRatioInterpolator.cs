@@ -1,4 +1,4 @@
-﻿using NaughtyAttributes;
+﻿using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI

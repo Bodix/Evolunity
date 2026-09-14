@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using Bodix.Evolunity.Components;
-using NaughtyAttributes.Editor;
+using PerfectCore.NaughtyAttributes.Editor;
 using UnityEditor;
 using UnityEngine;
 

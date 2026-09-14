@@ -5,7 +5,7 @@
 using System;
 using System.Collections;
 using Bodix.Evolunity.Utilities;
-using NaughtyAttributes;
+using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components

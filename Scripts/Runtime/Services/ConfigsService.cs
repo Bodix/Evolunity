@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using Bodix.Evolunity.Collections;
+using PerfectCore;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Services

@@ -2,8 +2,8 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
-using Bodix.Evolunity.Attributes;
-using NaughtyAttributes;
+using PerfectCore;
+using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components

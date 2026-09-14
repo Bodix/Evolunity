@@ -1,5 +1,5 @@
-﻿using Bodix.Evolunity.Components.UI;
-using Bodix.Evolunity.Services;
+﻿using PerfectCore;
+using PerfectCore.PerfectUI;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bodix.Evolunity.Extensions;
 using Bodix.Evolunity.Utilities.Gizmos;
-using NaughtyAttributes;
+using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components

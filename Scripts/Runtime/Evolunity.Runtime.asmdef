@@ -1,9 +1,11 @@
 {
     "name": "Evolunity.Runtime",
     "references": [
-        "NaughtyAttributes.Core",
         "UnityInterfaceSupport",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "PerfectCore",
+        "PerfectCore.NaughtyAttributes",
+        "PerfectCore.PerfectUI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

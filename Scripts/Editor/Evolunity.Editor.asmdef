@@ -2,8 +2,10 @@
     "name": "Evolunity.Editor",
     "references": [
         "Evolunity.Runtime",
-        "NaughtyAttributes.Editor",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "PerfectCore.NaughtyAttributes.Editor",
+        "PerfectCore",
+        "PerfectCore.Editor"
     ],
     "includePlatforms": [
         "Editor"

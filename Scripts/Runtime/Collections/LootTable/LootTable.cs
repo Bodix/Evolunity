@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using Bodix.Evolunity.Attributes;
-using NaughtyAttributes;
+using PerfectCore;
+using PerfectCore.NaughtyAttributes;
 using UnityEngine;
 
 // TODO:
