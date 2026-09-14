@@ -1,10 +1,11 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 namespace Bodix.Evolunity.Utilities
 {
 	public static class AssetDatabaseHelper
 	{
-		public static T FindFirstAssetByType<T>() where T : UnityEngine.Object
+		public static T FindFirstAssetByType<T>() where T : Object
 		{
 #if UNITY_EDITOR
 			string typeName = typeof(T).Name;

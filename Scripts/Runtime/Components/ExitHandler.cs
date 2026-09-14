@@ -20,7 +20,7 @@ namespace Bodix.Evolunity.Components
 				Title = TitleText,
 				Message = MessageText,
 				AcceptButtonText = AcceptButtonText,
-				DeclineButtonText = DeclineButtonText,
+				DeclineButtonText = DeclineButtonText
 			}, result =>
 			{
 				if (result == UiConfirmationDialog.Result.Accept)

@@ -1,4 +1,5 @@
 ﻿using PerfectCore.NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components.UI
@@ -93,8 +94,8 @@ namespace Bodix.Evolunity.Components.UI
 		private void RecordUndo(Object target, string actionName)
 		{
 #if UNITY_EDITOR
-			UnityEditor.Undo.RecordObject(target, actionName);
-			UnityEditor.EditorUtility.SetDirty(target);
+			Undo.RecordObject(target, actionName);
+			EditorUtility.SetDirty(target);
 #endif
 		}
 	}

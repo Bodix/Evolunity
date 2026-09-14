@@ -3,7 +3,6 @@
 // All Rights Reserved
 
 using System;
-using Bodix.Evolunity.Attributes;
 using PerfectCore;
 using UnityEngine;
 using UnityEngine.Events;

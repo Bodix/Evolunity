@@ -1,5 +1,4 @@
 using System;
-using Bodix.Evolunity.Attributes;
 using PerfectCore;
 using UnityEngine;
 

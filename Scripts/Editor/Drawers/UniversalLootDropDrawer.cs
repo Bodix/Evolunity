@@ -80,7 +80,7 @@ namespace Bodix.Evolunity.Editor.Drawers
 				float minMaxFieldWidth = 35f;
 
 				float secondLineY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-				float fixedFieldsWidth = (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 2);
+				float fixedFieldsWidth = minMaxLabelWidth * 2 + minMaxFieldWidth * 2 + spacing * 2;
 				float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
 
 				Rect secondLineRect = new Rect(position.x, secondLineY, itemReferenceWidth, EditorGUIUtility.singleLineHeight);
@@ -228,7 +228,7 @@ namespace Bodix.Evolunity.Editor.Drawers
 			float minMaxLabelWidth = 28f;
 			float minMaxFieldWidth = 35f;
 
-			float fixedFieldsWidth = weightLabelWidth + weightFieldWidth + (minMaxLabelWidth * 2) + (minMaxFieldWidth * 2) + (spacing * 3);
+			float fixedFieldsWidth = weightLabelWidth + weightFieldWidth + minMaxLabelWidth * 2 + minMaxFieldWidth * 2 + spacing * 3;
 			float itemReferenceWidth = Mathf.Max(60f, position.width - fixedFieldsWidth);
 
 			Rect currentRect = new Rect(position.x, position.y + 1f, itemReferenceWidth, EditorGUIUtility.singleLineHeight);
