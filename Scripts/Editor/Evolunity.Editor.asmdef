@@ -3,9 +3,9 @@
     "references": [
         "Evolunity.Runtime",
         "Unity.TextMeshPro",
-        "PerfectCore.NaughtyAttributes.Editor",
-        "PerfectCore",
-        "PerfectCore.Editor"
+        "PerfectCore.PerfectFoundation.NaughtyAttributes.Editor",
+        "PerfectCore.PerfectFoundation",
+        "PerfectCore.PerfectFoundation.Editor"
     ],
     "includePlatforms": [
         "Editor"

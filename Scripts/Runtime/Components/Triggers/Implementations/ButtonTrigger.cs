@@ -3,7 +3,7 @@
 // All Rights Reserved
 
 using System.Collections.Generic;
-using PerfectCore.NaughtyAttributes;
+using PerfectCore.PerfectFoundation.NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 

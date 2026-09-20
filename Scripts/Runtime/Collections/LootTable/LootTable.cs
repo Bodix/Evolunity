@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using PerfectCore;
-using PerfectCore.NaughtyAttributes;
+using PerfectCore.PerfectFoundation;
+using PerfectCore.PerfectFoundation.NaughtyAttributes;
 using UnityEngine;
 
 // TODO:

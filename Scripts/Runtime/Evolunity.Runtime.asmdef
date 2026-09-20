@@ -3,8 +3,8 @@
     "references": [
         "UnityInterfaceSupport",
         "Unity.TextMeshPro",
-        "PerfectCore",
-        "PerfectCore.NaughtyAttributes"
+        "PerfectCore.PerfectFoundation",
+        "PerfectCore.PerfectFoundation.NaughtyAttributes"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

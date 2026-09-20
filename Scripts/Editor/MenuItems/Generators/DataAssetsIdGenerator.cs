@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using PerfectCore;
+using PerfectCore.PerfectFoundation;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,5 +1,5 @@
 using System;
-using PerfectCore;
+using PerfectCore.PerfectFoundation;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Collections

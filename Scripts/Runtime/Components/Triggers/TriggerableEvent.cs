@@ -3,7 +3,7 @@
 // All Rights Reserved
 
 using System;
-using PerfectCore;
+using PerfectCore.PerfectFoundation;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;

@@ -3,7 +3,7 @@
 // All Rights Reserved
 
 using Bodix.Evolunity.Attributes;
-using PerfectCore.Editor;
+using PerfectCore.PerfectFoundation.Editor;
 using UnityEditor;
 using UnityEngine;
 

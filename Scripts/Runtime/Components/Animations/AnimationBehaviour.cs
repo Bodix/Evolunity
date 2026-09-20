@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections;
-using PerfectCore;
+using PerfectCore.PerfectFoundation;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Components
