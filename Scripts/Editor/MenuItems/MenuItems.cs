@@ -3,6 +3,7 @@
 // All Rights Reserved
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Bodix.Evolunity.Editor.Utilities;
 using UnityEditor;
@@ -126,6 +127,43 @@ namespace Bodix.Evolunity.Editor
 			AssetDatabase.ForceReserializeAssets();
 
 			Debug.Log("All assets were successfully reserialized.");
+		}
+
+		[MenuItem("Assets/Reserialize Selected Assets")]
+		[MenuItem("Tools/Evolunity/Reserialize Selected Assets")]
+		public static void ReserializeSelectedAssets()
+		{
+			HashSet<string> assetPaths = new HashSet<string>();
+
+			foreach (string guid in Selection.assetGUIDs)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+
+				// A root folder ("Assets", "Packages" or a package folder) has no meta file of its own.
+				if (!IsRootFolder(path))
+					assetPaths.Add(path);
+
+				// A folder is reserialized together with everything inside it.
+				if (AssetDatabase.IsValidFolder(path))
+					foreach (string nestedGuid in AssetDatabase.FindAssets(string.Empty, new[] { path }))
+						assetPaths.Add(AssetDatabase.GUIDToAssetPath(nestedGuid));
+			}
+
+			AssetDatabase.ForceReserializeAssets(assetPaths);
+
+			Debug.Log($"{assetPaths.Count} assets were successfully reserialized.");
+		}
+
+		[MenuItem("Assets/Reserialize Selected Assets", true)]
+		[MenuItem("Tools/Evolunity/Reserialize Selected Assets", true)]
+		private static bool CanReserializeSelectedAssets()
+		{
+			return Selection.assetGUIDs.Length > 0;
+		}
+
+		private static bool IsRootFolder(string path)
+		{
+			return path == "Assets" || path == "Packages" || (path.StartsWith("Packages/") && path.Split('/').Length == 2);
 		}
 	}
 }
