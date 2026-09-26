@@ -35,7 +35,19 @@ namespace Bodix.Evolunity.Extensions
 
 		public static bool IsError(this UnityWebRequest webRequest)
 		{
+#if UNITY_2020_1_OR_NEWER
+			switch (webRequest.result)
+			{
+				case UnityWebRequest.Result.ConnectionError:
+				case UnityWebRequest.Result.ProtocolError:
+				case UnityWebRequest.Result.DataProcessingError:
+					return true;
+				default:
+					return false;
+			}
+#else
 			return webRequest.isNetworkError || webRequest.isHttpError;
+#endif
 		}
 	}
 }
