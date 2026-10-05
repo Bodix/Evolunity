@@ -93,19 +93,19 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `BinarySerializer` - Utility for serializing objects.
 - `StringEncryptor` - Utility for encrypting strings.
 - `Enum` - Utility for parsing and working with enums.
-- `MathUtilities` - Math utilities.
-- `RegexPatterns` - Set of default regular expression patterns.
+- `MathUtility` - Math utilities.
+- `RegexPattern` - Set of default regular expression patterns.
 - `Validate` - Utility for validating various things.
 - `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
 
 ### Unity components
 
 - `PeriodicBehaviour` - Calls the given function periodically.
-- `Spawner` - Spawns objects one-time or periodically. Based on `PeriodicBehaviour`.
+- `BaseSpawner` - Spawns objects one-time or periodically. Based on `PeriodicBehaviour`.
 - `InputReader` - Reads click, drag and zoom (cross-platform).
 - `LongPressReader` - Reads long press (cross-platform).
 - `GifImage` - Plays an array of sprites like a gif.
-- `FPSCounter` - Counts FPS and outputs it to the `Text` component.
+- `FpsCounter` - Counts FPS and outputs it to the `Text` component.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
 - `PlatformDependent` - Destroys/disable the object if the platform specified in it does not match the current one.
 - `DontDestroyOnLoad` - Makes GameObject persistent.
@@ -119,7 +119,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `LayerDrawer` - Property drawer for `LayerAttribute` that shows a popup with layers (not mask).
 - `Define` - Defines management.
 - `EditorConsole` - Utility for working with the Editor console.
-- `OpenInFileManager` - Utility to open the given path in the file manager.
+- `FileExplorer` - Utility to open the given path in the file manager.
 
 ### Structs
 
@@ -155,7 +155,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
   - `Rect`
   - `RectTransform`
   - `Renderer`
-  - `Texture`
+  - `Texture2D`
   - `ToggleGroup`
   - `Transform`
   - `UnityWebRequest`

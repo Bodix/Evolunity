@@ -5,13 +5,6 @@
 The `Content` block in `README.md` is out of date. Below is a draft of a new block, made from the current code. Check each item against the code and move it to `README.md` by hand.
 
 - [ ] Check each item of the draft and move it to `README.md`.
-- [ ] Fix the old names in `README.md`:
-    - `MathUtilities` → `MathUtility`
-    - `RegexPatterns` → `RegexPattern`
-    - `OpenInFileManager` → `FileExplorer`
-    - `FPSCounter` → `FpsCounter` (marked `[Obsolete]` in the code)
-    - `Spawner` → `BaseSpawner<T>` and four spawners based on it
-    - `Texture` in the extension methods list → `Texture2D`
 
 ## Draft of the new Content block
 
