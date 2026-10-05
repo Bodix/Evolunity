@@ -1,7 +1,6 @@
 # 🌿 Evolunity
 
-![Unity version](https://img.shields.io/badge/unity-2022.3%2B-blue?logo=unity)
-[![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
+![Unity version](https://img.shields.io/badge/unity-2022.3%2B-blue?logo=unity) [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
 
 Well-designed package with useful scripting tools for Unity development.
 
@@ -12,37 +11,37 @@ Well-designed package with useful scripting tools for Unity development.
 ```csharp
 // Calls the function in the next frame.
 Delay.ForOneFrame(() => Debug.Log("Hello in the next frame"));
-// Calls the function after a N of seconds.
+// Calls the function after N seconds.
 Delay.ForSeconds(3, () => Debug.Log("Hello after three seconds"));
-// Calls the function after a N of frames.
+// Calls the function after N frames.
 Delay.ForFrames(300, () => Debug.Log("Hello after three hundred frames"));
 
-// Calls the function periodically every N seconds.
+// Calls the function every N seconds.
 Repeat.EverySeconds(1, () => Debug.Log("Hello every second"));
-// Calls the function periodically every N frames.
+// Calls the function every N frames.
 Repeat.EveryFrames(10, () => Debug.Log("Hello every ten frames"));
-// Calls the function periodically every frame.
-// Analogous to "Update", but you can use it not only from MonoBehaviour classes.
+// Calls the function every frame.
+// Works like "Update", but you can use it outside of MonoBehaviour classes.
 Repeat.EveryFrame(() => Debug.Log("Hello every frame"));
 
-// Starts a static coroutine. You can use this outside of MonoBehaviour.
+// Starts a static coroutine. You can use it outside of MonoBehaviour.
 StaticCoroutine.Start(SomeCoroutine());
 
-// You can cache a coroutine instance and stop it at any time.
+// You can cache a coroutine and stop it at any time.
 Coroutine delayCoroutine = Delay.ForSeconds(60, () => Debug.Log("Delay coroutine"));
 Coroutine repeatCoroutine = Repeat.EverySeconds(60, () => Debug.Log("Repeat coroutine"));
 Coroutine staticCoroutine = StaticCoroutine.Start(SomeCoroutine());
-// To stop a cached coroutine instance use StaticCoroutine.Stop method.
+// To stop a cached coroutine use StaticCoroutine.Stop method.
 // See the description of the StaticCoroutine.Stop method for details.
 StaticCoroutine.Stop(delayCoroutine);
 StaticCoroutine.Stop(repeatCoroutine);
 StaticCoroutine.Stop(staticCoroutine);
 
-// You can specify the MonoBehaviour instance on which to execute the coroutine.
+// You can specify the MonoBehaviour that runs the coroutine.
 ExampleBehaviour exampleBehaviour = GetComponent<ExampleBehaviour>();
 Coroutine delayCoroutine2 = Delay.ForSeconds(60, () => Debug.Log("Delay coroutine"), exampleBehaviour);
 Coroutine repeatCoroutine2 = Repeat.EverySeconds(60, () => Debug.Log("Repeat coroutine"), this);
-// In this case, you can stop the coroutine as usual.
+// In this case, stop the coroutine as usual.
 exampleBehaviour.StopCoroutine(delayCoroutine2);
 this.StopCoroutine(repeatCoroutine2);
 ```
@@ -58,13 +57,13 @@ GameObject[] objects =
 };
 
 // Output the array to the console.
-// Output: Cone (UnityEngine.GameObject), Sphere (UnityEngine.GameObject), Cube (UnityEngine.GameObject)
+// Output: Cube (UnityEngine.GameObject), Sphere (UnityEngine.GameObject), Cone (UnityEngine.GameObject)
 Debug.Log(objects.AsString());
-// Output the array to the console by specifying the string selector and separator.
-// Output: Cone : Sphere : Cube
+// Output the array to the console by specifying the string selector and a separator.
+// Output: Cube : Sphere : Cone
 Debug.Log(objects.AsString(item => item.name, " : "));
 
-// Get random object from the array.
+// Get a random object from the array.
 GameObject randomObj = objects.Random();
 
 // Shuffle the array.
@@ -73,12 +72,12 @@ objects = objects.Shuffle().ToArray();
 // Remove duplicates from the array.
 objects = objects.RemoveDuplicates().ToArray();
 
-// ForEach as extension method.
+// ForEach as an extension method.
 objects.ForEach(Debug.Log);
-objects.ForEach((x, index) => Debug.Log(index + " : " + x.name + ", "));
-// ForEach as extension method with lazy execution.
+objects.ForEach((x, index) => Debug.Log(index + " : " + x.name));
+// ForEach as extension method with lazy execution. The action runs only when the result is enumerated.
 objects.ForEachLazy(Debug.Log);
-objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
+objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 ```
 
 > Cheatsheet still WIP
@@ -94,7 +93,6 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `BinarySerializer` - Utility for serializing objects.
 - `StringEncryptor` - Utility for encrypting strings.
 - `Enum` - Utility for parsing and working with enums.
-- `Angle` - Utility for working with angles.
 - `MathUtilities` - Math utilities.
 - `RegexPatterns` - Set of default regular expression patterns.
 - `Validate` - Utility for validating various things.
@@ -108,7 +106,6 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `LongPressReader` - Reads long press (cross-platform).
 - `GifImage` - Plays an array of sprites like a gif.
 - `FPSCounter` - Counts FPS and outputs it to the `Text` component.
-- `Comment` - Contains a comment to the GameObject.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
 - `PlatformDependent` - Destroys/disable the object if the platform specified in it does not match the current one.
 - `DontDestroyOnLoad` - Makes GameObject persistent.
@@ -119,9 +116,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `UnityConstantsGenerator` - Tool for generating static classes with tags, layers, scenes, and input axes.
 - `CameraScreenshot` - Tool for taking screenshot from the main camera.
 - `MenuItems` - Useful menu items.
-- `Config` - Editor window with different project settings (e.g., target frame rate).
 - `LayerDrawer` - Property drawer for `LayerAttribute` that shows a popup with layers (not mask).
-- `TypeSelectorDrawer` - Property drawer for `TypeSelectorAttribute` that allows you to select a derived class or interface implementation. Target type requirements see in `TypeSelectorAttribute` documentation. Use together with `SerializeReferenceAttribute`.
 - `Define` - Defines management.
 - `EditorConsole` - Utility for working with the Editor console.
 - `OpenInFileManager` - Utility to open the given path in the file manager.
