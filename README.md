@@ -1,6 +1,6 @@
 # 🌿 Evolunity
 
-![Unity version](https://img.shields.io/badge/unity-2019.3%2B-blue?logo=unity)
+![Unity version](https://img.shields.io/badge/unity-2022.3%2B-blue?logo=unity)
 [![License](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)](#license)
 
 Well-designed package with useful scripting tools for Unity development.
@@ -121,8 +121,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 - `MenuItems` - Useful menu items.
 - `Config` - Editor window with different project settings (e.g., target frame rate).
 - `LayerDrawer` - Property drawer for `LayerAttribute` that shows a popup with layers (not mask).
-- `TypeSelectorDrawer` - Property drawer for `TypeSelectorAttribute` that allows you to select a derived class or
-  interface implementation. Target type requirements see in `TypeSelectorAttribute` documentation. Use together with `SerializeReferenceAttribute`.
+- `TypeSelectorDrawer` - Property drawer for `TypeSelectorAttribute` that allows you to select a derived class or interface implementation. Target type requirements see in `TypeSelectorAttribute` documentation. Use together with `SerializeReferenceAttribute`.
 - `Define` - Defines management.
 - `EditorConsole` - Utility for working with the Editor console.
 - `OpenInFileManager` - Utility to open the given path in the file manager.
@@ -169,8 +168,8 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name + ", "));
 
 ## Dependencies
 
-- [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes)
-- [UnityInterfaceSupport](https://github.com/TheDudeFromCI/Unity-Interface-Support)
+- [Perfect Foundation](https://github.com/Bodix/PerfectFoundation) - The shared foundation of Perfect Core packages. Install it separately, see [Install](#install). It also brings [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes).
+- [UnityInterfaceSupport](https://github.com/TheDudeFromCI/Unity-Interface-Support) - Bundled with Evolunity.
 
 ## Warning
 
@@ -178,17 +177,23 @@ Evolunity may receive breaking changes, so be sure to make a backup before updat
 
 ## Install
 
-Use the following URL in the **Package Manager**:
+**Evolunity** depends on **Perfect Foundation**. Install **Perfect Foundation** first, then **Evolunity**.
 
-`https://github.com/Bodix/Evolunity.git`
+1. Install Perfect Foundation in one of two ways:
+    - From GitHub: use the following URL in the **Package Manager**: `https://github.com/Bodix/PerfectFoundation.git`
+    - From the Asset Store *(coming soon)*: **Window → Package Manager → My Assets → Perfect Foundation → Install**.
 
-  [Manual](https://docs.unity3d.com/2019.3/Documentation/Manual/upm-ui-giturl.html)
+2. Install Evolunity: use the following URL in the **Package Manager**: `https://github.com/Bodix/Evolunity.git`
+
+[Manual](https://docs.unity3d.com/2022.3/Documentation/Manual/upm-ui-giturl.html)
 
 ## Requirements
 
-1. Unity 2019.3+
+1. Unity 2022.3+
 
-2. Git *(Must be added to the **PATH** environment variable)*
+2. [Perfect Foundation](https://github.com/Bodix/PerfectFoundation) 1.0.0+
+
+3. Git *(Must be added to the **PATH** environment variable)*
 
 ## License
 
