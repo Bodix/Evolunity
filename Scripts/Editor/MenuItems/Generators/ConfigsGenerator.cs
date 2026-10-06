@@ -24,7 +24,10 @@ namespace Bodix.Evolunity.Editor.Generators
 			if (settings == null)
 				return;
 
-			string[] guids = AssetDatabase.FindAssets($"t:{nameof(DataAsset)}");
+			string filter = $"t:{nameof(DataAsset)}";
+			string[] guids = settings.SearchFolders != null && settings.SearchFolders.Length > 0
+				? AssetDatabase.FindAssets(filter, settings.SearchFolders)
+				: AssetDatabase.FindAssets(filter);
 			List<DataAsset> configs = new List<DataAsset>();
 
 			foreach (string guid in guids)

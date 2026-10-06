@@ -16,5 +16,7 @@ namespace Bodix.Evolunity.Editor.Generators
 		public string GeneratedNamespace = "ProjectNamespace.Generated";
 		public string ServiceNamespace = "ProjectNamespace.Services";
 		public string ServiceClassName = "ConfigService";
+		[Tooltip("Folders to search for configs. Empty — the whole project, packages included.")]
+		public string[] SearchFolders = { "Assets" };
 	}
 }
