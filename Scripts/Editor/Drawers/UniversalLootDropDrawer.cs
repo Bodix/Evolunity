@@ -2,6 +2,7 @@
 // Copyright © 2020 Bogdan Nikolayev <bodix321@gmail.com>
 // All Rights Reserved
 
+using System.Linq;
 using Bodix.Evolunity.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -12,10 +13,30 @@ namespace Bodix.Evolunity.Editor.Drawers
 	/// Universal drawer for all LootDrops. 
 	/// It draws "leaf" nodes (like ItemDrop) in a single compact line, 
 	/// and complex nodes (like WeightedPoolDrop) using dynamic property iteration.
+	/// The condition is always the last row. It is hidden while the project has no condition types.
 	/// </summary>
 	[CustomPropertyDrawer(typeof(LootDrop), true)]
 	public class UniversalLootDropDrawer : PropertyDrawer
 	{
+		private const string ConditionPropertyName = nameof(LootDrop.Condition);
+
+		private static bool? _hasConditionTypes;
+
+		/// <summary>
+		/// True when the project has at least one concrete <see cref="LootCondition"/> type.
+		/// Without them the condition row is only noise. The cache resets on a domain reload, as does the TypeCache.
+		/// </summary>
+		private static bool HasConditionTypes
+		{
+			get
+			{
+				_hasConditionTypes ??= TypeCache.GetTypesDerivedFrom<LootCondition>()
+					.Any(type => !type.IsAbstract && !type.IsGenericType);
+
+				return _hasConditionTypes.Value;
+			}
+		}
+
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			// Handle unassigned SerializeReference gracefully.
@@ -53,6 +74,9 @@ namespace Bodix.Evolunity.Editor.Drawers
 			firstLineRect.x += probabilityLabelWidth;
 			firstLineRect.width = probabilitySliderWidth;
 			EditorGUI.Slider(firstLineRect, probProp, 0f, 1f, GUIContent.none);
+
+			// Y of the row below the drop fields, where the condition goes.
+			float conditionY;
 
 			// Check if this specific node has an "Item" field (meaning it's an ItemDrop leaf node).
 			SerializedProperty itemProp = property.FindPropertyRelative("Item");
@@ -106,6 +130,8 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 				// Restore indent.
 				EditorGUI.indentLevel = previousIndentLevel;
+
+				conditionY = secondLineY + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 			}
 			else
 			{
@@ -120,8 +146,8 @@ namespace Bodix.Evolunity.Editor.Drawers
 				{
 					enterChildren = false; // Only iterate direct children.
 
-					// Skip because it's already drawn on the first line.
-					if (iterator.name == "Probability")
+					// Skip because it's already drawn on the first line or goes to the last row.
+					if (iterator.name == "Probability" || iterator.name == ConditionPropertyName)
 						continue;
 
 					float propHeight = EditorGUI.GetPropertyHeight(iterator, true);
@@ -131,6 +157,17 @@ namespace Bodix.Evolunity.Editor.Drawers
 
 					currentY += propHeight + EditorGUIUtility.standardVerticalSpacing;
 				}
+
+				conditionY = currentY;
+			}
+
+			// Last row: Condition.
+			SerializedProperty conditionProp = property.FindPropertyRelative(ConditionPropertyName);
+
+			if (ShouldDrawCondition(conditionProp))
+			{
+				Rect conditionRect = new Rect(position.x, conditionY, position.width, EditorGUI.GetPropertyHeight(conditionProp, true));
+				EditorGUI.PropertyField(conditionRect, conditionProp, true);
 			}
 
 			EditorGUI.EndProperty();
@@ -172,14 +209,28 @@ namespace Bodix.Evolunity.Editor.Drawers
 				{
 					enterChildren = false;
 
-					if (iterator.name == "Probability")
+					if (iterator.name == "Probability" || iterator.name == ConditionPropertyName)
 						continue;
 
 					totalHeight += EditorGUIUtility.standardVerticalSpacing + EditorGUI.GetPropertyHeight(iterator, true);
 				}
 			}
 
+			SerializedProperty conditionProp = property.FindPropertyRelative(ConditionPropertyName);
+
+			if (ShouldDrawCondition(conditionProp))
+				totalHeight += EditorGUIUtility.standardVerticalSpacing + EditorGUI.GetPropertyHeight(conditionProp, true);
+
 			return totalHeight;
+		}
+
+		/// <summary>
+		/// A condition that is already set is always shown, even if its type is gone.
+		/// </summary>
+		private static bool ShouldDrawCondition(SerializedProperty conditionProp)
+		{
+			return conditionProp != null
+			       && (HasConditionTypes || !string.IsNullOrEmpty(conditionProp.managedReferenceFullTypename));
 		}
 	}
 

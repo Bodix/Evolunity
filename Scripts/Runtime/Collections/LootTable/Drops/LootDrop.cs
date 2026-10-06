@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PerfectCore.PerfectFoundation;
 using UnityEngine;
 
 namespace Bodix.Evolunity.Collections
@@ -10,9 +11,11 @@ namespace Bodix.Evolunity.Collections
 		[Range(0f, 1f)]
 		public float Probability = 1f;
 
-		// Uncomment when it will be needed.
-		// [SerializeReference]
-		[SerializeReference, HideInInspector]
+		/// <summary>
+		/// Optional. When it is not met for the context passed to <see cref="LootTable{T}.GenerateLoot"/>,
+		/// the drop is skipped and its probability is not rolled. Null — the drop always takes part.
+		/// </summary>
+		[SerializeReference, TypeSelector]
 		public LootCondition Condition;
 
 		public virtual bool IsValid()

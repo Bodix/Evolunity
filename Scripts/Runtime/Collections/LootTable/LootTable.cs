@@ -5,10 +5,7 @@ using PerfectCore.PerfectFoundation.NaughtyAttributes;
 using UnityEngine;
 
 // TODO:
-// 1. Conditional Drops: An item drops only if the player is above level 10,
-// or only at night, or only if a specific quest has been accepted.
-//
-// 2. Pity System (Guarantee): A mechanic from gacha games.
+// Pity System (Guarantee): A mechanic from gacha games.
 // If a player has killed a boss 99 times and hasn’t received a rare sword, the chance becomes 100% on the 100th attempt.
 
 namespace Bodix.Evolunity.Collections
@@ -78,6 +75,7 @@ namespace Bodix.Evolunity.Collections
 		[Button("Test Generate Loot")]
 		protected void TestGenerateLoot()
 		{
+			// There is no context here, so conditions get null.
 			List<LootResult<T>> droppedLoot = GenerateLoot();
 
 			if (droppedLoot == null)

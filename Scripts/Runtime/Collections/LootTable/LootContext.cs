@@ -3,21 +3,23 @@
 namespace Bodix.Evolunity.Collections
 {
 	/// <summary>
-	/// Context for loot generation, used for conditional drops in the future.
+	/// Data that loot conditions check: the player level, the place in the world, the time of day and so on.
+	/// It is empty. Derive your own context and pass it to <see cref="LootTable{T}.GenerateLoot"/>.
 	/// </summary>
 	public class LootContext
 	{
-		// Future properties like player level, time of day, active quests, etc.
 	}
 
 	/// <summary>
-	/// Base class for all loot conditions.
+	/// Base class for all loot conditions. A public, non-abstract, [Serializable] derived class
+	/// appears in the Condition dropdown of every drop.
 	/// </summary>
 	[Serializable]
 	public abstract class LootCondition
 	{
 		/// <summary>
 		/// Evaluates if the condition is met based on the provided context.
+		/// The context can be null, for example from the "Test Generate Loot" button.
 		/// </summary>
 		public abstract bool IsMet(LootContext context);
 	}
