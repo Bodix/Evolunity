@@ -86,26 +86,28 @@ public class ResourceLootTable : LootTable<ResourceData> { }
 
 У каждого узла есть поле `Condition`. Если условие не выполнено, узел пропускается: шанс не бросается, предметы не выпадают. Пустое поле — узел участвует всегда.
 
-* **Контекст.** Условие проверяет `LootContext`, который вы передаёте в `GenerateLoot(context)`. Вложенная таблица получает тот же контекст.
-* **Свои данные.** Базовый `LootContext` пустой. Создайте наследника с нужными полями: уровень игрока, место в мире, время суток. Затем создайте наследников `LootCondition`, которые эти поля проверяют.
-* **Выбор в инспекторе.** Класс условия должен быть публичным, не абстрактным и с атрибутом `[Serializable]`. Тогда он появится в выпадающем списке поля `Condition`. Пока в проекте нет ни одного такого класса, поле скрыто.
-* **Кнопка «Test Generate Loot»** передаёт контекст `null`. Условие само решает, что делать без контекста. Обычно оно считается невыполненным.
+* **Условия общие.** Поле имеет тип `ICondition` из Perfect Foundation. Те же условия работают и в других системах, не только в луте.
+* **Контекст.** Это любой объект, который вы передаёте в `GenerateLoot(context)`: игрок, место в мире, время суток. Вложенная таблица получает тот же контекст.
+* **Своё условие.** Унаследуйте его от `Condition<TContext>`. Если контекст другого типа или `null`, такое условие не выполнено.
+* **Логика.** Готовые условия «All of», «Any of» и «Not» из Perfect Foundation собирают другие условия в одно. Пустое условие ничего не ограничивает.
+* **Выбор в инспекторе.** Класс условия должен быть публичным, не абстрактным и с атрибутом `[Serializable]`. Тогда он появится в выпадающем списке поля `Condition`. Пока в проекте нет ни одного своего условия, поле скрыто: логическим условиям нечего собирать.
+* **Кнопка «Test Generate Loot»** передаёт контекст `null`. Условие само решает, что делать без контекста. `Condition<TContext>` считает его невыполненным.
 
 ```csharp
-public class PlayerContext : LootContext
+public class PlayerContext
 {
     public int Level;
 }
 
 [Serializable]
 [TypeSelectorName("Player level")]
-public class MinLevelCondition : LootCondition
+public class MinLevelCondition : Condition<PlayerContext>
 {
     public int MinLevel = 10;
 
-    public override bool IsMet(LootContext context)
+    public override bool IsMet(PlayerContext context)
     {
-        return context is PlayerContext player && player.Level >= MinLevel;
+        return context.Level >= MinLevel;
     }
 }
 
@@ -113,7 +115,7 @@ public class MinLevelCondition : LootCondition
 List<LootResult<GameObject>> loot = table.GenerateLoot(new PlayerContext { Level = 12 });
 ```
 
-Условия можно вкладывать друг в друга: «все из», «любое из», «не». Для этого сделайте условие со списком `[SerializeReference, TypeSelector] List<LootCondition>`.
+`LootContext` и `LootCondition` устарели. Они остались, чтобы старый код компилировался.
 
 ---
 

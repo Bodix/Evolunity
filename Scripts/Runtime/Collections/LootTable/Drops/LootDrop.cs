@@ -16,7 +16,7 @@ namespace Bodix.Evolunity.Collections
 		/// the drop is skipped and its probability is not rolled. Null — the drop always takes part.
 		/// </summary>
 		[SerializeReference, TypeSelector]
-		public LootCondition Condition;
+		public ICondition Condition;
 
 		public virtual bool IsValid()
 		{
@@ -43,6 +43,6 @@ namespace Bodix.Evolunity.Collections
 		/// <summary>
 		/// Generates the specific internal loot safely and adds it to the results list.
 		/// </summary>
-		public abstract bool TryGenerate(List<LootResult<T>> results, LootContext context);
+		public abstract bool TryGenerate(List<LootResult<T>> results, object context);
 	}
 }

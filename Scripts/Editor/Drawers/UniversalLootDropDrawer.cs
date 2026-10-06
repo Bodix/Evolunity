@@ -4,6 +4,7 @@
 
 using System.Linq;
 using Bodix.Evolunity.Collections;
+using PerfectCore.PerfectFoundation;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,15 +24,16 @@ namespace Bodix.Evolunity.Editor.Drawers
 		private static bool? _hasConditionTypes;
 
 		/// <summary>
-		/// True when the project has at least one concrete <see cref="LootCondition"/> type.
-		/// Without them the condition row is only noise. The cache resets on a domain reload, as does the TypeCache.
+		/// True when the project has at least one concrete <see cref="ICondition"/> type of its own.
+		/// The logic conditions from Perfect Foundation (All of, Any of, Not) do not count: alone they have nothing to combine.
+		/// Without condition types the row is only noise. The cache resets on a domain reload, as does the TypeCache.
 		/// </summary>
 		private static bool HasConditionTypes
 		{
 			get
 			{
-				_hasConditionTypes ??= TypeCache.GetTypesDerivedFrom<LootCondition>()
-					.Any(type => !type.IsAbstract && !type.IsGenericType);
+				_hasConditionTypes ??= TypeCache.GetTypesDerivedFrom<ICondition>()
+					.Any(type => !type.IsAbstract && !type.IsGenericType && type.Assembly != typeof(ICondition).Assembly);
 
 				return _hasConditionTypes.Value;
 			}

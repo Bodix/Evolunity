@@ -83,7 +83,7 @@ namespace Bodix.Evolunity.Components
 		public void Push(Vector3 direction, float speed)
 		{
 			Rigidbody.rotation = Quaternion.LookRotation(direction);
-			Rigidbody.velocity = direction * speed;
+			Rigidbody.linearVelocity = direction * speed;
 		}
 
 		public void PushForward(float speed)
@@ -163,13 +163,13 @@ namespace Bodix.Evolunity.Components
 
 		private void AlignRotationWithVelocity()
 		{
-			if (Rigidbody.velocity.sqrMagnitude > 0f)
-				transform.rotation = Quaternion.LookRotation(Rigidbody.velocity);
+			if (Rigidbody.linearVelocity.sqrMagnitude > 0f)
+				transform.rotation = Quaternion.LookRotation(Rigidbody.linearVelocity);
 		}
 
 		private void CheckHit()
 		{
-			Vector3 velocity = Rigidbody.velocity;
+			Vector3 velocity = Rigidbody.linearVelocity;
 			float speed = velocity.magnitude;
 
 			if (speed == 0f)

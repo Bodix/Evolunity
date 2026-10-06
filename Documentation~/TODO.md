@@ -168,7 +168,7 @@ Most menu items are in **Tools → Evolunity**.
 
 ### Collections
 
-- `LootTable<T>` - Loot table asset. Drops: a single item (`ItemDrop`), a weighted pool (`WeightedPoolDrop`) and a nested table (`NestedTableDrop`). Any drop can have a condition (`LootCondition`) that checks your own `LootContext`. `GameObjectLootTable` is a ready example. See the [loot table guide](Scripts/Runtime/Collections/LootTable/README.md) (in Russian).
+- `LootTable<T>` - Loot table asset. Drops: a single item (`ItemDrop`), a weighted pool (`WeightedPoolDrop`) and a nested table (`NestedTableDrop`). Any drop can have a condition (`ICondition` from Perfect Foundation) that checks the context passed to `GenerateLoot`. `GameObjectLootTable` is a ready example. See the [loot table guide](Scripts/Runtime/Collections/LootTable/README.md) (in Russian).
 - `WeightedPool` - Picks random entries by weight. `PickDistinct` picks several different entries.
 - `WeightQueue<T>` - Queue where the number of copies of each item depends on its weight.
 - `ObservableList<T>` - Serializable list with change events.

@@ -37,7 +37,7 @@ namespace Bodix.Evolunity.Collections
 			return true;
 		}
 
-		public override bool TryGenerate(List<LootResult<T>> results, LootContext context)
+		public override bool TryGenerate(List<LootResult<T>> results, object context)
 		{
 			int count = UnityEngine.Random.Range(MinCount, MaxCount + 1);
 			if (count > 0)

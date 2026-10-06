@@ -26,7 +26,12 @@ namespace Bodix.Evolunity.Collections
 				drop?.OnValidate();
 		}
 
-		public List<LootResult<T>> GenerateLoot(LootContext context = null)
+		/// <summary>
+		/// Rolls every drop from top to bottom. The context is any object that drop conditions need,
+		/// such as the player or the place in the world. Nested tables get the same context.
+		/// Returns null when the table is broken. The error is already logged.
+		/// </summary>
+		public List<LootResult<T>> GenerateLoot(object context = null)
 		{
 			if (drops == null)
 			{

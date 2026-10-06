@@ -53,7 +53,7 @@ namespace Bodix.Evolunity.Collections
 			return true;
 		}
 
-		public override bool TryGenerate(List<LootResult<T>> results, LootContext context)
+		public override bool TryGenerate(List<LootResult<T>> results, object context)
 		{
 			for (int i = 0; i < Rolls; i++)
 			{

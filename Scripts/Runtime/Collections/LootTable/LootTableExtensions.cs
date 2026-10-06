@@ -17,7 +17,7 @@ namespace Bodix.Evolunity.Collections
 		// Use a build preprocessor script to detect and prevent cross-boundary hard references at compile time (Fail Fast principle).
 		/*
 		public static List<LootResult<T>> GenerateResolvedLoot<T>(this LootTable<T> table,
-			ConfigService configService, LootContext context = null) where T : DataAsset
+			ConfigService configService, object context = null) where T : DataAsset
 		{
 			List<LootResult<T>> rawLoot = table.GenerateLoot(context);
 
