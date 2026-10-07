@@ -51,6 +51,18 @@ namespace Bodix.Evolunity.Components
 
 		public Rigidbody Rigidbody { get; private set; }
 
+		// Unity 6 renamed `Rigidbody.velocity` to `Rigidbody.linearVelocity`.
+		private Vector3 Velocity
+		{
+#if UNITY_6000_0_OR_NEWER
+			get => Rigidbody.linearVelocity;
+			set => Rigidbody.linearVelocity = value;
+#else
+			get => Rigidbody.velocity;
+			set => Rigidbody.velocity = value;
+#endif
+		}
+
 		private void Awake()
 		{
 			Rigidbody = GetComponent<Rigidbody>();
@@ -83,7 +95,7 @@ namespace Bodix.Evolunity.Components
 		public void Push(Vector3 direction, float speed)
 		{
 			Rigidbody.rotation = Quaternion.LookRotation(direction);
-			Rigidbody.linearVelocity = direction * speed;
+			Velocity = direction * speed;
 		}
 
 		public void PushForward(float speed)
@@ -163,13 +175,13 @@ namespace Bodix.Evolunity.Components
 
 		private void AlignRotationWithVelocity()
 		{
-			if (Rigidbody.linearVelocity.sqrMagnitude > 0f)
-				transform.rotation = Quaternion.LookRotation(Rigidbody.linearVelocity);
+			if (Velocity.sqrMagnitude > 0f)
+				transform.rotation = Quaternion.LookRotation(Velocity);
 		}
 
 		private void CheckHit()
 		{
-			Vector3 velocity = Rigidbody.linearVelocity;
+			Vector3 velocity = Velocity;
 			float speed = velocity.magnitude;
 
 			if (speed == 0f)
