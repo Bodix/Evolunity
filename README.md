@@ -115,7 +115,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 ### Editor
 
 - `UnityConstantsGenerator` - Tool for generating static classes with tags, layers, scenes, and input axes.
-- `ConfigsGenerator` - Tool for generating a `ConfigCatalog` class with a field for every `DataAsset`. `ConfigsGeneratorSettings` sets the output path, namespaces, service class and search folders. By default it searches only `Assets`, so package samples stay out of the catalog.
+- `ConfigsGenerator` - Tool for generating a `ConfigCatalog` class with a field for every `DataAsset`. `ConfigsGeneratorSettings` sets the output path, namespaces, service class and search folders. By default it searches only `Assets`, so package samples stay out of the catalog. Assets with a label from `ExcludeLabels` are skipped too. Use it for configs made by generators: they appear and disappear on every generation, so code should not depend on them by name.
 - `CameraScreenshot` - Tool for taking screenshot from the main camera.
 - `MenuItems` - Useful menu items.
 - `LayerDrawer` - Property drawer for `LayerAttribute` that shows a popup with layers (not mask).

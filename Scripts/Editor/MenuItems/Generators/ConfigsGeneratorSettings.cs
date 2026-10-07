@@ -18,5 +18,8 @@ namespace Bodix.Evolunity.Editor.Generators
 		public string ServiceClassName = "ConfigService";
 		[Tooltip("Folders to search for configs. Empty — the whole project, packages included.")]
 		public string[] SearchFolders = { "Assets" };
+		[Tooltip("Assets with any of these labels are skipped. For example, configs made by generators: " +
+			"they come and go on every generation, and code should not depend on them by name.")]
+		public string[] ExcludeLabels = { };
 	}
 }

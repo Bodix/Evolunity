@@ -35,11 +35,19 @@ namespace Bodix.Evolunity.Editor.Generators
 				string path = AssetDatabase.GUIDToAssetPath(guid);
 				DataAsset asset = AssetDatabase.LoadAssetAtPath<DataAsset>(path);
 
-				if (asset != null && !string.IsNullOrWhiteSpace(asset.Id))
+				if (asset != null && !string.IsNullOrWhiteSpace(asset.Id) && !HasExcludedLabel(asset, settings))
 					configs.Add(asset);
 			}
 
 			GenerateFile(configs, settings);
+		}
+
+		private static bool HasExcludedLabel(DataAsset asset, ConfigsGeneratorSettings settings)
+		{
+			if (settings.ExcludeLabels == null || settings.ExcludeLabels.Length == 0)
+				return false;
+
+			return AssetDatabase.GetLabels(asset).Any(label => settings.ExcludeLabels.Contains(label));
 		}
 
 		private static ConfigsGeneratorSettings GetSettings()
