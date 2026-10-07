@@ -25,6 +25,7 @@ The `Content` block in `README.md` is out of date. Below is a draft of a new blo
 - `MathUtility` - Points on a circle, a sphere and a phyllotaxis spiral. Angle normalization.
 - `RegexPattern` - Common regular expressions: URL, email, hex color, IP address, HTML tag, text in brackets.
 - `Validate` - Checks internet reachability, URLs and IP addresses.
+- `AtomicFile` - Writes a file through a temporary file, so a crash never leaves it half-written. Keeps the previous version as a backup.
 - `DevLogs` - `Debug.Log` that works only in the Editor and in development builds.
 - `GameObjectFinder` - Finds objects by name, including inactive ones, or by an indexed path.
 - `ScreenSize` - Screen size in world units.
@@ -44,7 +45,7 @@ Most components are in the **Add Component → Evolunity** menu.
 
 #### General
 
-- `PeriodicBehaviour` - Calls a function every N seconds. Base class for spawners and sensors.
+- `PeriodicBehaviour` - Calls a function every N seconds. Base class for spawners and sensors. `RestartTimer` starts the period over.
 - `DelayedEvent` - Invokes a `UnityEvent` after a delay in frames or seconds.
 - `Initializer` - Calls `Initialize()` on the given `IInitializable` objects in `Awake` or `Start`.
 - `Lifetime` - Destroys the GameObject after a set time. Override `Die()` to use a pool instead.

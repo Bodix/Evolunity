@@ -96,6 +96,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `MathUtility` - Math utilities.
 - `RegexPattern` - Set of default regular expression patterns.
 - `Validate` - Utility for validating various things.
+- `AtomicFile` - Writes a file through a temporary file, so a crash never leaves it half-written. Keeps the previous version as a backup.
 - `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
 
 ### Unity components

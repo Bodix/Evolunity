@@ -90,8 +90,11 @@ namespace Bodix.Evolunity.Components
 			OnPeriodCallback?.Invoke();
 		}
 
+		/// <summary>
+		/// Starts the period over, for example after the work was done for another reason.
+		/// </summary>
 		[ContextMenu("Restart")]
-		private void RestartTimer()
+		public void RestartTimer()
 		{
 			timer = 0;
 		}
