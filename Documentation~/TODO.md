@@ -165,12 +165,10 @@ Most menu items are in **Tools → Evolunity**.
 - `LastActiveSceneCache` - Saves the active scene path to `EditorPrefs` before Play Mode starts.
 - `LayerDrawer` - Shows a layer popup for `int` fields with `[Layer]`.
 - `RangeDrawer` - Draws `FloatRange` and `IntRange` as min and max fields in one line.
-- `PeriodicBehaviourEditor`, `UniversalLootDropDrawer` - Inspectors for `PeriodicBehaviour` and loot tables.
+- `PeriodicBehaviourEditor` - Inspector for `PeriodicBehaviour`.
 
 ### Collections
 
-- `LootTable<T>` - Loot table asset. Drops: a single item (`ItemDrop`), a weighted pool (`WeightedPoolDrop`) and a nested table (`NestedTableDrop`). Any drop can have a condition (`ICondition` from Perfect Foundation) that checks the context passed to `GenerateLoot`. `GameObjectLootTable` is a ready example. See the [loot table guide](Scripts/Runtime/Collections/LootTable/README.md) (in Russian).
-- `WeightedPool` - Picks random entries by weight. `PickDistinct` picks several different entries.
 - `WeightQueue<T>` - Queue where the number of copies of each item depends on its weight.
 - `ObservableList<T>` - Serializable list with change events.
 - `RingBuffer<T>` - Fixed-size buffer indexed by tick.
