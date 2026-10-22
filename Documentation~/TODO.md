@@ -48,7 +48,7 @@ Most components are in the **Add Component → Evolunity** menu.
 - `PeriodicBehaviour` - Calls a function every N seconds. Base class for spawners and sensors. `RestartTimer` starts the period over.
 - `DelayedEvent` - Invokes a `UnityEvent` after a delay in frames or seconds.
 - `Initializer` - Calls `Initialize()` on the given `IInitializable` objects in `Awake` or `Start`.
-- `Lifetime` - Destroys the GameObject after a set time. Override `Die()` to use a pool instead.
+- `Lifetime` - Destroys the GameObject after a set time. Tells the time left and raises `Expired` when the time runs out. Override `Die()` to use a pool instead.
 - `DevelopmentOnly` - Destroys or disables the GameObject if the *DEVELOPMENT* define is not set.
 - `PlatformDependent` - Destroys or disables the GameObject on platforms that are not selected.
 - `DontDestroyOnLoad` - Keeps the GameObject when a new scene loads.
