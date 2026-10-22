@@ -71,7 +71,8 @@ namespace Bodix.Evolunity.Components
 
 		private IEnumerator DistanceCheckForReenable(Collider collider)
 		{
-			while (collider)
+			// The trigger can be destroyed while it waits, for example with its chunk of the world.
+			while (collider && this)
 			{
 				if (Vector3.Distance(collider.transform.position, transform.position) > ReenableThresholdDistance)
 				{

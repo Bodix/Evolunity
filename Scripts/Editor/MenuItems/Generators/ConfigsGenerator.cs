@@ -141,6 +141,9 @@ namespace Bodix.Evolunity.Editor.Generators
 
 		private static string FormatIdentifier(string name)
 		{
+			// An apostrophe does not split words: "Captain's" becomes "Captains".
+			name = Regex.Replace(name, "['’]", string.Empty);
+
 			// Replace any non-alphanumeric characters with a space.
 			string cleanName = Regex.Replace(name, @"[^a-zA-Z0-9_]", " ");
 			string[] parts = cleanName.Split(new[] { ' ', '-', '_' }, StringSplitOptions.RemoveEmptyEntries);
