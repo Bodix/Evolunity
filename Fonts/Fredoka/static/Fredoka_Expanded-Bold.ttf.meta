@@ -8,10 +8,13 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Fredoka Expanded
   fontNames:
   - Fredoka Expanded
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8f2e0d332ef998d418084c547ffac0a0, type: 3}
+  - {fileID: 12800000, guid: 8c515cf6486980447999320451389b70, type: 3}
+  - {fileID: 12800000, guid: 2773faccaf3d54147bd2d0ac69551834, type: 3}
+  - {fileID: 12800000, guid: 0f7ea40532438514ea7e67cc480a01d3, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

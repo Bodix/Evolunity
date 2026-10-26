@@ -8,10 +8,12 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Fredoka SemiCondensed
   fontNames:
   - Fredoka SemiCondensed
   fallbackFontReferences:
+  - {fileID: 12800000, guid: 15e290291bd2ea54c8b87f21d3f8f69d, type: 3}
+  - {fileID: 12800000, guid: c863ce574b7267843a91c269aa467899, type: 3}
+  - {fileID: 12800000, guid: 4c2e484e00bcd394ba3e349a03701af4, type: 3}
   - {fileID: 12800000, guid: b0ab15039d5cfc94d8ad08b839d51ca0, type: 3}
   customCharacters: 
   fontRenderingMode: 0
