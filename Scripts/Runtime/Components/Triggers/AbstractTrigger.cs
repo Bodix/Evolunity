@@ -72,9 +72,9 @@ namespace Bodix.Evolunity.Components
 		private IEnumerator DistanceCheckForReenable(Collider collider)
 		{
 			// The trigger can be destroyed while it waits, for example with its chunk of the world.
-			while (collider && this)
+			while (this)
 			{
-				if (Vector3.Distance(collider.transform.position, transform.position) > ReenableThresholdDistance)
+				if (CanReenable(collider))
 				{
 					gameObject.SetActive(true);
 
@@ -83,6 +83,17 @@ namespace Bodix.Evolunity.Components
 
 				yield return new WaitForSeconds(1f / DistanceCheckRate);
 			}
+		}
+
+		// The object that entered can be gone. Then nobody holds the trigger.
+		protected virtual bool CanReenable(Collider entered)
+		{
+			return !entered || IsFarFrom(entered.transform);
+		}
+
+		protected bool IsFarFrom(Transform target)
+		{
+			return Vector3.Distance(target.position, transform.position) > ReenableThresholdDistance;
 		}
 
 		private void OnTriggerStay(Collider other)
