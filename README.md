@@ -107,6 +107,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `LongPressReader` - Reads long press (cross-platform).
 - `GifImage` - Plays an array of sprites like a gif.
 - `FpsCounter` - Counts FPS and outputs it to the `Text` component.
+- `UiCompass` - Turns a UI image to the world north as the camera sees it, e.g. the card of a compass on a HUD.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
 - `PlatformDependent` - Destroys/disable the object if the platform specified in it does not match the current one.
 - `DontDestroyOnLoad` - Makes GameObject persistent.
