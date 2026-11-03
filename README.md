@@ -98,6 +98,8 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `Validate` - Utility for validating various things.
 - `AtomicFile` - Writes a file through a temporary file, so a crash never leaves it half-written. Keeps the previous version as a backup.
 - `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
+- `ScreenEdge` - Places a marker on the screen over a point of the world or, when the point is outside the screen, at the edge of the screen in its direction.
+- `DistanceText` - Converts distance to text.
 
 ### Unity components
 
@@ -108,6 +110,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `GifImage` - Plays an array of sprites like a gif.
 - `FpsCounter` - Counts FPS and outputs it to the `Text` component.
 - `UiCompass` - Turns a UI image to the world north as the camera sees it, e.g. the card of a compass on a HUD.
+- `ScreenMarkers` - Base class for markers on the screen over points of the world, one for each target, e.g. quest targets on a HUD. Places the markers with `ScreenEdge`.
 - `DevelopmentOnly` - Destroys/disable the object if the *DEVELOPMENT* define is not set in the project settings.
 - `PlatformDependent` - Destroys/disable the object if the platform specified in it does not match the current one.
 - `DontDestroyOnLoad` - Makes GameObject persistent.
