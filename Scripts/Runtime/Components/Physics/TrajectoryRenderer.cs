@@ -16,6 +16,9 @@ namespace Bodix.Evolunity.Components
 		private int _segmentCount = 30;
 		[SerializeField]
 		private float _timeStep = 0.1f;
+		[SerializeField, Min(1), Tooltip("How many straight pieces of the path are checked against colliders. " +
+			"Fewer pieces are cheaper but cut the arc more.")]
+		private int _castCount = 29;
 		[SerializeField]
 		private LayerMask _collisionMask;
 		[SerializeField]
@@ -28,6 +31,17 @@ namespace Bodix.Evolunity.Components
 		private bool _hitCrosshairPoseCached;
 		private bool _hasColorOverride;
 		private Color _overrideColor;
+
+		/// <summary>
+		/// A flat floor the path stops at, like a sea surface. The path finds it by a formula, not by casts, so the floor
+		/// needs no collider in the collision mask. Negative infinity means no floor.
+		/// </summary>
+		public float FloorHeight { get; set; } = float.NegativeInfinity;
+
+		/// <summary>
+		/// Where the drawn path ends: at the first collider it meets, at the floor or at its last point.
+		/// </summary>
+		public Vector3 EndPoint => _points[_points.Length - 1];
 
 		private void Awake()
 		{
@@ -90,44 +104,89 @@ namespace Bodix.Evolunity.Components
 			gameObject.SetActive(true);
 
 			Vector3 gravity = Physics.gravity;
-			int currentPositionCount = 1;
-			bool hitDetected = false;
+			bool reachesFloor = TryGetFloorTime(startPoint, initialVelocity, gravity, out float endTime);
 
-			_points[0] = startPoint;
-			for (int i = 1; i < _points.Length; i++)
+			if (!reachesFloor)
+				endTime = (_points.Length - 1) * _timeStep;
+
+			bool hitDetected = TryCast(startPoint, initialVelocity, gravity, ref endTime, out RaycastHit hit);
+			int lastIndex = _points.Length - 1;
+
+			for (int i = 0; i <= lastIndex; i++)
+				_points[i] = PointAt(startPoint, initialVelocity, gravity, endTime * i / lastIndex);
+
+			if (hitDetected)
 			{
-				float time = i * _timeStep;
-				Vector3 nextPoint = startPoint + initialVelocity * time + gravity * (0.5f * time * time);
-				Vector3 previousPoint = _points[i - 1];
-
-				if (Physics.Linecast(previousPoint, nextPoint, out RaycastHit hit, _collisionMask))
-				{
-					_points[i] = hit.point;
-					currentPositionCount = i + 1;
-					hitDetected = true;
-					ShowHitCrosshair(hit);
-					break;
-				}
-
-				_points[i] = nextPoint;
-				currentPositionCount++;
+				_points[lastIndex] = hit.point;
+				ShowHitCrosshair(hit.point, hit.normal);
+			}
+			else if (reachesFloor)
+			{
+				ShowHitCrosshair(_points[lastIndex], Vector3.up);
+			}
+			else
+			{
+				HideHitCrosshair();
 			}
 
-			if (!hitDetected)
-				HideHitCrosshair();
-
-			_lineRenderer.positionCount = currentPositionCount;
+			_lineRenderer.positionCount = _points.Length;
 			_lineRenderer.SetPositions(_points);
 		}
 
-		private void ShowHitCrosshair(RaycastHit hit)
+		private bool TryGetFloorTime(Vector3 startPoint, Vector3 initialVelocity, Vector3 gravity, out float time)
+		{
+			float height = startPoint.y - FloorHeight;
+			time = 0f;
+
+			if (float.IsInfinity(height) || height < 0f || gravity.y >= 0f)
+				return false;
+
+			// startPoint.y + initialVelocity.y * time + gravity.y * time² / 2 = FloorHeight
+			float vertical = initialVelocity.y;
+			time = (-vertical - Mathf.Sqrt(vertical * vertical - 2f * gravity.y * height)) / gravity.y;
+			return true;
+		}
+
+		/// <summary>
+		/// Checks the path against colliders piece by piece. A hit cuts the path short.
+		/// </summary>
+		private bool TryCast(Vector3 startPoint, Vector3 initialVelocity, Vector3 gravity, ref float endTime,
+			out RaycastHit hit)
+		{
+			float pieceTime = endTime / _castCount;
+			Vector3 previousPoint = startPoint;
+
+			for (int i = 1; i <= _castCount; i++)
+			{
+				Vector3 nextPoint = PointAt(startPoint, initialVelocity, gravity, i * pieceTime);
+
+				if (Physics.Linecast(previousPoint, nextPoint, out hit, _collisionMask))
+				{
+					float pieceLength = Vector3.Distance(previousPoint, nextPoint);
+					endTime = (i - 1 + hit.distance / pieceLength) * pieceTime;
+					return true;
+				}
+
+				previousPoint = nextPoint;
+			}
+
+			hit = default;
+			return false;
+		}
+
+		private static Vector3 PointAt(Vector3 startPoint, Vector3 initialVelocity, Vector3 gravity, float time)
+		{
+			return startPoint + initialVelocity * time + gravity * (0.5f * time * time);
+		}
+
+		private void ShowHitCrosshair(Vector3 point, Vector3 normal)
 		{
 			if (!_hitCrosshair)
 				return;
 
-			Quaternion surfaceRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+			Quaternion surfaceRotation = Quaternion.FromToRotation(Vector3.up, normal);
 			_hitCrosshair.transform.SetPositionAndRotation(
-				hit.point + surfaceRotation * _hitCrosshairLocalPosition,
+				point + surfaceRotation * _hitCrosshairLocalPosition,
 				surfaceRotation * _hitCrosshairLocalRotation);
 			_hitCrosshair.enabled = true;
 		}
