@@ -7,8 +7,6 @@ using UnityEngine;
 
 namespace Bodix.Evolunity.Components
 {
-	// TODO: Refactoring. [#refactoring]
-
 	[RequireComponent(typeof(LineRenderer))]
 	public class TrajectoryRenderer : MonoBehaviour
 	{
@@ -48,57 +46,10 @@ namespace Bodix.Evolunity.Components
 			EnsureInitialized();
 		}
 
+		/// <summary>
+		/// Draws the path. Its color stays as it is: <see cref="SetColor"/> and <see cref="ResetColor"/> change it.
+		/// </summary>
 		public void DrawTrajectory(Vector3 startPoint, Vector3 initialVelocity)
-		{
-			ApplyTrajectory(startPoint, initialVelocity);
-			ResetColor();
-		}
-
-		public void DrawTrajectory(Vector3 startPoint, Vector3 initialVelocity, Color color)
-		{
-			ApplyTrajectory(startPoint, initialVelocity);
-			SetColor(color);
-		}
-
-		public void SetColor(Color color)
-		{
-			EnsureInitialized();
-
-			if (_hasColorOverride && _overrideColor == color)
-				return;
-
-			_lineRenderer.SetMainColor(color);
-
-			if (_hitCrosshair)
-				_hitCrosshair.SetMainColor(color.WithAlpha(_hitCrosshair.sharedMaterial.GetMainColor().a));
-
-			_hasColorOverride = true;
-			_overrideColor = color;
-		}
-
-		public void ResetColor()
-		{
-			if (!_hasColorOverride)
-				return;
-
-			EnsureInitialized();
-
-			_lineRenderer.SetMainColor(_lineRenderer.sharedMaterial.GetMainColor());
-
-			if (_hitCrosshair)
-				_hitCrosshair.SetMainColor(_hitCrosshair.sharedMaterial.GetMainColor());
-
-			_hasColorOverride = false;
-		}
-
-		public void HideTrajectory()
-		{
-			gameObject.SetActive(false);
-			ResetColor();
-			HideHitCrosshair();
-		}
-
-		private void ApplyTrajectory(Vector3 startPoint, Vector3 initialVelocity)
 		{
 			EnsureInitialized();
 			gameObject.SetActive(true);
@@ -131,6 +82,44 @@ namespace Bodix.Evolunity.Components
 
 			_lineRenderer.positionCount = _points.Length;
 			_lineRenderer.SetPositions(_points);
+		}
+
+		public void HideTrajectory()
+		{
+			gameObject.SetActive(false);
+			ResetColor();
+			HideHitCrosshair();
+		}
+
+		public void SetColor(Color color)
+		{
+			EnsureInitialized();
+
+			if (_hasColorOverride && _overrideColor == color)
+				return;
+
+			_lineRenderer.SetMainColor(color);
+
+			if (_hitCrosshair)
+				_hitCrosshair.SetMainColor(color.WithAlpha(_hitCrosshair.sharedMaterial.GetMainColor().a));
+
+			_hasColorOverride = true;
+			_overrideColor = color;
+		}
+
+		public void ResetColor()
+		{
+			if (!_hasColorOverride)
+				return;
+
+			EnsureInitialized();
+
+			_lineRenderer.SetMainColor(_lineRenderer.sharedMaterial.GetMainColor());
+
+			if (_hitCrosshair)
+				_hitCrosshair.SetMainColor(_hitCrosshair.sharedMaterial.GetMainColor());
+
+			_hasColorOverride = false;
 		}
 
 		private bool TryGetFloorTime(Vector3 startPoint, Vector3 initialVelocity, Vector3 gravity, out float time)
