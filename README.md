@@ -99,6 +99,7 @@ objects.ForEachLazy((x, index) => Debug.Log(index + " : " + x.name));
 - `AtomicFile` - Writes a file through a temporary file, so a crash never leaves it half-written. Keeps the previous version as a backup.
 - `WrappedCoroutine` - Coroutine, which contains useful data and functions for the job.
 - `ScreenEdge` - Places a marker on the screen over a point of the world or, when the point is outside the screen, at the edge of the screen in its direction.
+- `ScreenPoint` - Places a marker on the screen right over a point of the world, e.g. a name over a unit. A point outside the screen leaves the marker outside too.
 - `DistanceText` - Converts distance to text.
 
 ### Unity components
