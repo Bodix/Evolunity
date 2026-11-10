@@ -131,7 +131,6 @@ All spawners are based on `BaseSpawner<T>`. They spawn once, periodically or eve
 
 #### UI
 
-- `SafeArea` - Fits a `RectTransform` into the screen safe area.
 - `GifImage` - Plays an array of sprites like a GIF.
 - `ImageAspectRatioFitter` - Sets the `AspectRatioFitter` ratio from the image sprite.
 - `DisableButtonAfterClick` - Makes a button non-interactable after the first click.
