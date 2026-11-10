@@ -75,7 +75,7 @@ namespace Bodix.Evolunity.Components.UI
 
 				TTarget target = _targets[i];
 				Vector3 position = PositionOf(target) + Vector3.up * _heightAboveTarget;
-				ScreenEdge.Place(view, container, (RectTransform)marker.transform, position, _edgeMargin, _bottomMargin);
+				ScreenUtility.PlaceMarkerClampedToEdges(view, container, (RectTransform)marker.transform, position, _edgeMargin, _bottomMargin);
 				Show(marker, target);
 			}
 		}

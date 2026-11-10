@@ -34,7 +34,7 @@ namespace Bodix.Evolunity.Components
 		public void Fit()
 		{
 			_initialScale = transform.localScale;
-			Vector2 screenWorldSize = ScreenSize.GetWorldSize();
+			Vector2 screenWorldSize = ScreenUtility.GetWorldSize();
 
 			switch (Mode)
 			{

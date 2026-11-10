@@ -28,7 +28,7 @@ The `Content` block in `README.md` is out of date. Below is a draft of a new blo
 - `AtomicFile` - Writes a file through a temporary file, so a crash never leaves it half-written. Keeps the previous version as a backup.
 - `DevLogs` - `Debug.Log` that works only in the Editor and in development builds.
 - `GameObjectFinder` - Finds objects by name, including inactive ones, or by an indexed path.
-- `ScreenSize` - Screen size in world units.
+- `ScreenUtility` - Places a marker on the screen over a point of the world: right over it, e.g. a name over a unit, or clamped to the edge of the screen when the point is outside. Gives the size of the screen in world units.
 - `AspectRatio` - Common aspect ratios: widest phones, tablets, Full HD.
 - `PathUtility` - Changes file names in paths and fixes slashes.
 - `Animation` - Coroutines that fade a 3D object in or out through its materials.
